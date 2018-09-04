@@ -18,7 +18,7 @@ BOOL __fastcall TFit_Shrine(int i)
   {
     if ( dung_map[v4][v3] == themes[i].ttval )
     {
-      if ( nTrapTable[dPiece[v4 - 1][v3 + 111]]
+      if ( nTrapTable[dPiece[v4][v3 - 1]]
         && !nSolidTable[dPiece[v4 - 1][v3]]
         && !nSolidTable[dPiece[v4 + 1][v3]]
         && dung_map[v4 - 1][v3] == themes[i].ttval
@@ -30,9 +30,9 @@ BOOL __fastcall TFit_Shrine(int i)
       }
       if ( !v2
         && nTrapTable[dPiece[v4 - 1][v3]]
-        && !nSolidTable[dPiece[v4 - 1][v3 + 111]]
+        && !nSolidTable[dPiece[v4][v3 - 1]]
         && !nSolidTable[dPiece[v4][v3 + 1]]
-        && dung_map[v4 - 1][v3 + 111] == themes[i].ttval
+        && dung_map[v4][v3 - 1] == themes[i].ttval
         && dung_map[v4][v3 + 1] == themes[i].ttval
         && !dungeon[39][112 * (v4 - 1) + 39 + v3]
         && !dObject[v4 - 1][v3 + 1] )
@@ -185,7 +185,7 @@ BOOL __fastcall CheckThemeRoom(int tv)
           return 0;
         if ( dung_map[l + 1][k] != tv && !nSolidTable[dPiece[l + 1][k]] )
           return 0;
-        if ( dung_map[l - 1][k + 111] != tv && !nSolidTable[dPiece[l - 1][k + 111]] )
+        if ( dung_map[l][k - 1] != tv && !nSolidTable[dPiece[l][k - 1]] )
           return 0;
         if ( dung_map[l][k + 1] != tv && !nSolidTable[dPiece[l][k + 1]] )
           return 0;

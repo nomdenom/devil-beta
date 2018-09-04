@@ -572,7 +572,7 @@ void __cdecl DRLG_L1Shadows()
     {
       v6 = BSTYPES[dungeon[j][i]];
       v8 = BSTYPES[dungeon[j - 1][i]];
-      v7 = BSTYPES[dungeon[j - 1][i + 39]];
+      v7 = BSTYPES[dungeon[j][i - 1]];
       v9 = BSTYPES[dungeon[j][i - 2]];
       for ( k = 0; k < 37; ++k )
       {
@@ -589,8 +589,8 @@ void __cdecl DRLG_L1Shadows()
           {
             if ( SPATS[k][4] && !dflags[j][i - 2] )
               dungeon[j][i - 2] = SPATS[k][4];
-            if ( SPATS[k][5] && !dflags[j - 1][i + 39] )
-              dungeon[j - 1][i + 39] = SPATS[k][5];
+            if ( SPATS[k][5] && !dflags[j][i - 1] )
+              dungeon[j][i - 1] = SPATS[k][5];
             if ( SPATS[k][6] )
             {
               if ( !dflags[j - 1][i] )
@@ -1407,14 +1407,14 @@ void __cdecl L5tileFix()
         dungeon[l][k + 1] = 16;
       if ( dungeon[l][k] == 13 && dungeon[l][k + 1] == 16 )
         dungeon[l][k + 1] = 17;
-      if ( dungeon[l][k] == 6 && dungeon[l - 1][k + 39] == 22 )
-        dungeon[l - 1][k + 39] = 7;
-      if ( dungeon[l][k] == 6 && dungeon[l - 1][k + 39] == 22 )
-        dungeon[l - 1][k + 39] = 24;
-      if ( dungeon[l][k] == 7 && dungeon[l - 1][k + 39] == 24 )
-        dungeon[l - 1][k + 39] = 21;
-      if ( dungeon[l][k] == 18 && dungeon[l - 1][k + 39] == 24 )
-        dungeon[l - 1][k + 39] = 21;
+      if ( dungeon[l][k] == 6 && dungeon[l][k - 1] == 22 )
+        dungeon[l][k - 1] = 7;
+      if ( dungeon[l][k] == 6 && dungeon[l][k - 1] == 22 )
+        dungeon[l][k - 1] = 24;
+      if ( dungeon[l][k] == 7 && dungeon[l][k - 1] == 24 )
+        dungeon[l][k - 1] = 21;
+      if ( dungeon[l][k] == 18 && dungeon[l][k - 1] == 24 )
+        dungeon[l][k - 1] = 21;
     }
   }
   for ( m = 0; m < 40; ++m )
@@ -1462,10 +1462,10 @@ void __cdecl DRLG_L5Subs()
             }
             if ( v1 == 89 )
             {
-              if ( L5BTYPES[dungeon[j - 1][i + 39]] != 79 || dflags[j - 1][i + 39] )
+              if ( L5BTYPES[dungeon[j][i - 1]] != 79 || dflags[j][i - 1] )
                 v1 = 79;
               else
-                dungeon[j - 1][i + 39] = 90;
+                dungeon[j][i - 1] = 90;
             }
             if ( v1 == 91 )
             {
@@ -1802,7 +1802,7 @@ void __cdecl DRLG_L5TransFix()
     v0 = 16;
     for ( j = 0; j < 40; ++j )
     {
-      if ( dungeon[j][i] == 23 && dungeon[j - 1][i + 39] == 18 )
+      if ( dungeon[j][i] == 23 && dungeon[j][i - 1] == 18 )
       {
         dung_map[v0 + 1][v3] = dung_map[v0][v3];
         dung_map[v0 + 1][v3 + 1] = dung_map[v0][v3];

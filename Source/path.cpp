@@ -104,10 +104,10 @@ BOOL __fastcall path_solid_pieces(PATHNODE *pPath, int dx, int dy)
       v4 = !nSolidTable[dPiece[dx][dy + 1]] && !nSolidTable[dPiece[dx - 1][dy]];
       break;
     case 7:
-      v4 = !nSolidTable[dPiece[dx - 1][dy + 111]] && !nSolidTable[dPiece[dx - 1][dy]];
+      v4 = !nSolidTable[dPiece[dx][dy - 1]] && !nSolidTable[dPiece[dx - 1][dy]];
       break;
     case 8:
-      v4 = !nSolidTable[dPiece[dx + 1][dy]] && !nSolidTable[dPiece[dx - 1][dy + 111]];
+      v4 = !nSolidTable[dPiece[dx + 1][dy]] && !nSolidTable[dPiece[dx][dy - 1]];
       break;
     default:
       return v4;

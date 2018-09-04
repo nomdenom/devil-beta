@@ -225,7 +225,7 @@ void __cdecl DRLG_L2Shadows()
     {
       v4 = BSTYPESL2[dungeon[j][i]];
       v6 = BSTYPESL2[dungeon[j - 1][i]];
-      v5 = BSTYPESL2[dungeon[j - 1][i + 39]];
+      v5 = BSTYPESL2[dungeon[j][i - 1]];
       v7 = BSTYPESL2[dungeon[j][i - 2]];
       for ( k = 0; k < 2; ++k )
       {
@@ -243,7 +243,7 @@ void __cdecl DRLG_L2Shadows()
             if ( SPATSL2[k][4] )
               dungeon[j][i - 2] = SPATSL2[k][4];
             if ( SPATSL2[k][5] )
-              dungeon[j - 1][i + 39] = SPATSL2[k][5];
+              dungeon[j][i - 1] = SPATSL2[k][5];
             if ( SPATSL2[k][6] )
               dungeon[j - 1][i] = SPATSL2[k][6];
           }
@@ -376,7 +376,7 @@ void __fastcall CreateDoorType(int nX, int nY)
     v2 = 1;
   if ( predungeon[nX + 1][nY] == 68 )// IDX
     v2 = 1;
-  if ( predungeon[nX - 1][nY + 39] == 68 )
+  if ( predungeon[nX][nY - 1] == 68 )
     v2 = 1;
   if ( predungeon[nX][nY + 1] == 68 )
     v2 = 1;
@@ -902,12 +902,12 @@ void __fastcall DL2_KnockWalls(int x1, int y1, int x2, int y2)
 
   for ( i = x1 + 1; i < x2; ++i )
   {
-    if ( predungeon[i - 1][y1 + 39] == 46 && predungeon[i][y1 + 1] == 46 )
+    if ( predungeon[i][y1 - 1] == 46 && predungeon[i][y1 + 1] == 46 )
       predungeon[i][y1] = 46;
-    if ( predungeon[i - 1][y2 + 39] == 46 && predungeon[i][y2 + 1] == 46 )
+    if ( predungeon[i][y2 - 1] == 46 && predungeon[i][y2 + 1] == 46 )
       predungeon[i][y2] = 46;
-    if ( predungeon[i - 1][y1 + 39] == 68 )
-      predungeon[i - 1][y1 + 39] = 35;
+    if ( predungeon[i][y1 - 1] == 68 )
+      predungeon[i][y1 - 1] = 35;
     if ( predungeon[i][y2 + 1] == 68 )
       predungeon[i][y2 + 1] = 35;
   }
@@ -1320,8 +1320,8 @@ BOOL __cdecl CreateDungeon()
           predungeon[i + 1][j] = 35;
         if ( predungeon[i + 1][j + 1] == 32 )
           predungeon[i + 1][j + 1] = 35;
-        if ( predungeon[i - 1][j + 39] == 32 )
-          predungeon[i - 1][j + 39] = 35;
+        if ( predungeon[i][j - 1] == 32 )
+          predungeon[i][j - 1] = 35;
         if ( predungeon[i][j + 1] == 32 )
           predungeon[i][j + 1] = 35;
       }
@@ -1493,7 +1493,7 @@ void __cdecl DRLG_L2TransFix()
     v0 = 16;
     for ( j = 0; j < 40; ++j )
     {
-      if ( dungeon[j][i] == 14 && dungeon[j - 1][i + 39] == 10 )
+      if ( dungeon[j][i] == 14 && dungeon[j][i - 1] == 10 )
       {
         dung_map[v0 + 1][v3] = dung_map[v0][v3];
         dung_map[v0 + 1][v3 + 1] = dung_map[v0][v3];
