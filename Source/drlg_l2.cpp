@@ -224,9 +224,9 @@ void __cdecl DRLG_L2Shadows()
     for ( j = 1; j < 40; ++j )
     {
       v4 = BSTYPESL2[dungeon[j][i]];
-      v6 = BSTYPESL2[dungeon[0][8 * (5 * j - 5) + i]];
+      v6 = BSTYPESL2[dungeon[j - 1][i]];
       v5 = BSTYPESL2[dungeon[j - 1][i + 39]];
-      v7 = BSTYPESL2[dungeon[-1][8 * (5 * j - 5) + 39 + i]];
+      v7 = BSTYPESL2[dungeon[j][i - 2]];
       for ( k = 0; k < 2; ++k )
       {
         if ( SPATSL2[k][0] == v4 )
@@ -241,11 +241,11 @@ void __cdecl DRLG_L2Shadows()
           if ( v3 == 1 )
           {
             if ( SPATSL2[k][4] )
-              dungeon[-1][8 * (5 * j - 5) + 39 + i] = SPATSL2[k][4];
+              dungeon[j][i - 2] = SPATSL2[k][4];
             if ( SPATSL2[k][5] )
               dungeon[j - 1][i + 39] = SPATSL2[k][5];
             if ( SPATSL2[k][6] )
-              dungeon[0][8 * (5 * j - 5) + i] = SPATSL2[k][6];
+              dungeon[j - 1][i] = SPATSL2[k][6];
           }
         }
       }
@@ -372,9 +372,9 @@ void __fastcall CreateDoorType(int nX, int nY)
   signed int v2; // [esp+18h] [ebp-4h]
 
   v2 = 0;
-  if ( predungeon[0][8 * (5 * nX - 5) + nY] == 68 )// IDX
+  if ( predungeon[nX - 1][nY] == 68 )// IDX
     v2 = 1;
-  if ( predungeon[0][8 * (5 * nX + 5) + nY] == 68 )// IDX
+  if ( predungeon[nX + 1][nY] == 68 )// IDX
     v2 = 1;
   if ( predungeon[nX - 1][nY + 39] == 68 )
     v2 = 1;
@@ -828,12 +828,12 @@ void __cdecl L2TileFix()
         dungeon[j][i + 1] = 1;
       if ( dungeon[j][i] == 3 && dungeon[j][i + 1] == 1 )
         dungeon[j][i + 1] = 3;
-      if ( dungeon[j][i] == 3 && dungeon[0][8 * (5 * j + 5) + i] == 7 )
-        dungeon[0][8 * (5 * j + 5) + i] = 3;
-      if ( dungeon[j][i] == 2 && dungeon[0][8 * (5 * j + 5) + i] == 3 )
-        dungeon[0][8 * (5 * j + 5) + i] = 2;
-      if ( dungeon[j][i] == 11 && dungeon[0][8 * (5 * j + 5) + i] == 14 )
-        dungeon[0][8 * (5 * j + 5) + i] = 16;
+      if ( dungeon[j][i] == 3 && dungeon[j + 1][i] == 7 )
+        dungeon[j + 1][i] = 3;
+      if ( dungeon[j][i] == 2 && dungeon[j + 1][i] == 3 )
+        dungeon[j + 1][i] = 2;
+      if ( dungeon[j][i] == 11 && dungeon[j + 1][i] == 14 )
+        dungeon[j + 1][i] = 16;
     }
   }
 }
@@ -913,14 +913,14 @@ void __fastcall DL2_KnockWalls(int x1, int y1, int x2, int y2)
   }
   for ( j = y1 + 1; j < y2; ++j )
   {
-    if ( predungeon[0][8 * (5 * x1 - 5) + j] == 46 && predungeon[0][8 * (5 * x1 + 5) + j] == 46 )
+    if ( predungeon[x1 - 1][j] == 46 && predungeon[x1 + 1][j] == 46 )
       predungeon[x1][j] = 46;
-    if ( predungeon[0][8 * (5 * x2 - 5) + j] == 46 && predungeon[0][8 * (5 * x2 + 5) + j] == 46 )
+    if ( predungeon[x2 - 1][j] == 46 && predungeon[x2 + 1][j] == 46 )
       predungeon[x2][j] = 46;
-    if ( predungeon[0][8 * (5 * x1 - 5) + j] == 68 )
-      predungeon[0][8 * (5 * x1 - 5) + j] = 35;
-    if ( predungeon[0][8 * (5 * x2 + 5) + j] == 68 )
-      predungeon[0][8 * (5 * x2 + 5) + j] = 35;
+    if ( predungeon[x1 - 1][j] == 68 )
+      predungeon[x1 - 1][j] = 35;
+    if ( predungeon[x2 + 1][j] == 68 )
+      predungeon[x2 + 1][j] = 35;
   }
 }
 
@@ -968,48 +968,48 @@ BOOL __cdecl DL2_FillVoids()
       y1f = 0;
       x2f = 0;
       x1f = 0;
-      if ( predungeon[0][8 * (5 * v2 - 5) + v26] != 32 || predungeon[0][8 * (5 * v2 + 5) + v26] != 46 )
+      if ( predungeon[v2 - 1][v26] != 32 || predungeon[v2 + 1][v26] != 46 )
       {
-        if ( predungeon[0][8 * (5 * v2 + 5) + v26] != 32 || predungeon[0][8 * (5 * v2 - 5) + v26] != 46 )
+        if ( predungeon[v2 + 1][v26] != 32 || predungeon[v2 - 1][v26] != 46 )
         {
           if ( predungeon[v2][v0] != 32 || predungeon[v2][v26 + 1] != 46 )
           {
             if ( predungeon[v2][v26 + 1] == 32
               && predungeon[v2][v0] == 46
-              && predungeon[0][8 * (5 * v2 - 5) + v0] == 46
-              && predungeon[0][8 * (5 * v2 + 5) + v0] == 46
-              && predungeon[0][8 * (5 * v2 - 5) + 1 + v26] == 32
-              && predungeon[0][8 * (5 * v2 + 5) + 1 + v26] == 32 )
+              && predungeon[v2 - 1][v0] == 46
+              && predungeon[v2 + 1][v0] == 46
+              && predungeon[v2 - 1][v26 + 1] == 32
+              && predungeon[v2 + 1][v26 + 1] == 32 )
             {
               x2f = 1;
               x1f = 1;
               y2f = 1;
             }
           }
-          else if ( predungeon[0][8 * (5 * v2 - 5) + 1 + v26] == 46
-                 && predungeon[0][8 * (5 * v2 + 5) + 1 + v26] == 46
-                 && predungeon[0][8 * (5 * v2 - 5) + v0] == 32
-                 && predungeon[0][8 * (5 * v2 + 5) + v0] == 32 )
+          else if ( predungeon[v2 - 1][v26 + 1] == 46
+                 && predungeon[v2 + 1][v26 + 1] == 46
+                 && predungeon[v2 - 1][v0] == 32
+                 && predungeon[v2 + 1][v0] == 32 )
           {
             x2f = 1;
             x1f = 1;
             y1f = 1;
           }
         }
-        else if ( predungeon[0][8 * (5 * v2 - 5) + v0] == 46
-               && predungeon[0][8 * (5 * v2 - 5) + 1 + v26] == 46
-               && predungeon[0][8 * (5 * v2 + 5) + v0] == 32
-               && predungeon[0][8 * (5 * v2 + 5) + 1 + v26] == 32 )
+        else if ( predungeon[v2 - 1][v0] == 46
+               && predungeon[v2 - 1][v26 + 1] == 46
+               && predungeon[v2 + 1][v0] == 32
+               && predungeon[v2 + 1][v26 + 1] == 32 )
         {
           y2f = 1;
           y1f = 1;
           x2f = 1;
         }
       }
-      else if ( predungeon[0][8 * (5 * v2 + 5) + v0] == 46
-             && predungeon[0][8 * (5 * v2 + 5) + 1 + v26] == 46
-             && predungeon[0][8 * (5 * v2 - 5) + v0] == 32
-             && predungeon[0][8 * (5 * v2 - 5) + 1 + v26] == 32 )
+      else if ( predungeon[v2 + 1][v0] == 46
+             && predungeon[v2 + 1][v26 + 1] == 46
+             && predungeon[v2 - 1][v0] == 32
+             && predungeon[v2 - 1][v26 + 1] == 32 )
       {
         y2f = 1;
         y1f = 1;
@@ -1308,18 +1308,18 @@ BOOL __cdecl CreateDungeon()
       if ( predungeon[i][j] == 44 )
       {
         predungeon[i][j] = 46;
-        if ( predungeon[-1][8 * (5 * i - 5) + 39 + j] == 32 )
-          predungeon[-1][8 * (5 * i - 5) + 39 + j] = 35;
-        if ( predungeon[0][8 * (5 * i - 5) + j] == 32 )
-          predungeon[0][8 * (5 * i - 5) + j] = 35;
-        if ( predungeon[0][8 * (5 * i - 5) + 1 + j] == 32 )
-          predungeon[0][8 * (5 * i - 5) + 1 + j] = 35;
-        if ( predungeon[-1][8 * (5 * i + 5) + 39 + j] == 32 )
-          predungeon[-1][8 * (5 * i + 5) + 39 + j] = 35;
-        if ( predungeon[0][8 * (5 * i + 5) + j] == 32 )
-          predungeon[0][8 * (5 * i + 5) + j] = 35;
-        if ( predungeon[0][8 * (5 * i + 5) + 1 + j] == 32 )
-          predungeon[0][8 * (5 * i + 5) + 1 + j] = 35;
+        if ( predungeon[i][j - 2] == 32 )
+          predungeon[i][j - 2] = 35;
+        if ( predungeon[i - 1][j] == 32 )
+          predungeon[i - 1][j] = 35;
+        if ( predungeon[i - 1][j + 1] == 32 )
+          predungeon[i - 1][j + 1] = 35;
+        if ( predungeon[i + 2][j - 2] == 32 )
+          predungeon[i + 2][j - 2] = 35;
+        if ( predungeon[i + 1][j] == 32 )
+          predungeon[i + 1][j] = 35;
+        if ( predungeon[i + 1][j + 1] == 32 )
+          predungeon[i + 1][j + 1] = 35;
         if ( predungeon[i - 1][j + 39] == 32 )
           predungeon[i - 1][j + 39] = 35;
         if ( predungeon[i][j + 1] == 32 )
@@ -1498,7 +1498,7 @@ void __cdecl DRLG_L2TransFix()
         dung_map[v0 + 1][v3] = dung_map[v0][v3];
         dung_map[v0 + 1][v3 + 1] = dung_map[v0][v3];
       }
-      if ( dungeon[j][i] == 15 && dungeon[0][8 * (5 * j + 5) + i] == 11 )
+      if ( dungeon[j][i] == 15 && dungeon[j + 1][i] == 11 )
       {
         dung_map[v0][v3 + 1] = dung_map[v0][v3];
         dung_map[v0 + 1][v3 + 1] = dung_map[v0][v3];
@@ -1535,11 +1535,11 @@ void __cdecl L2DirtFix()
   {
     for ( j = 0; j < 40; ++j )
     {
-      if ( dungeon[j][i] == 13 && dungeon[0][8 * (5 * j + 5) + i] != 11 )
+      if ( dungeon[j][i] == 13 && dungeon[j + 1][i] != 11 )
         dungeon[j][i] = -110;
-      if ( dungeon[j][i] == 11 && dungeon[0][8 * (5 * j + 5) + i] != 11 )
+      if ( dungeon[j][i] == 11 && dungeon[j + 1][i] != 11 )
         dungeon[j][i] = -112;
-      if ( dungeon[j][i] == 15 && dungeon[0][8 * (5 * j + 5) + i] != 11 )
+      if ( dungeon[j][i] == 15 && dungeon[j + 1][i] != 11 )
         dungeon[j][i] = -108;
       if ( dungeon[j][i] == 10 && dungeon[j][i + 1] != 10 )
         dungeon[j][i] = -113;
