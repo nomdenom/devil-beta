@@ -1,19 +1,20 @@
 //----- (00437B50) --------------------------------------------------------
-void __fastcall SetLightFX(int *x, int *y, __int16 *s_r, __int16 *s_g, int *s_b, int *d_r, int *d_g, int *d_b)
+// NOTE: Argument types differ from PSX
+void __fastcall SetLightFX(int *x, int *y, int *s_r, int *s_g, int *s_b, int *d_r, int *d_g, int *d_b)
 {
-  int v8; // ST14_4
-  int v9; // ST14_4
+  int orig_r; // ST14_4
+  int orig_b; // ST14_4
 
   *d_g = 0;
   *d_b = 0;
-  v8 = *(_DWORD *)s_r;
-  *(_DWORD *)s_r = 7 - *(_DWORD *)s_g;
-  *(_DWORD *)s_g = v8;
-  v9 = *s_b;
+  orig_r = *s_r;
+  *s_r = 7 - *s_g;
+  *s_g = orig_r;
+  orig_b = *s_b;
   *s_b = 7 - *d_r;
-  *d_r = v9;
-  *x = *(_DWORD *)s_r - *s_b;
-  *y = *(_DWORD *)s_g - *d_r;
+  *d_r = orig_b;
+  *x = *s_r - *s_b;
+  *y = *s_g - *d_r;
   if ( *x < 0 )
   {
     *x += 8;
@@ -27,16 +28,15 @@ void __fastcall SetLightFX(int *x, int *y, __int16 *s_r, __int16 *s_g, int *s_b,
 }
 
 //----- (00437C0F) --------------------------------------------------------
+// Partial PSX
 void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
 {
-  int nx; // [esp+Ch] [ebp-54h]
-  int ny; // [esp+10h] [ebp-50h]
-  signed int v6; // [esp+18h] [ebp-48h]
-  signed int v7; // [esp+18h] [ebp-48h]
-  signed int v8; // [esp+18h] [ebp-48h]
-  signed int v9; // [esp+18h] [ebp-48h]
-  int v10; // [esp+1Ch] [ebp-44h]
-  int v11; // [esp+20h] [ebp-40h]
+  int y; // [esp+Ch] [ebp-54h]
+  int x; // [esp+10h] [ebp-50h]
+  int v6; // [esp+18h] [ebp-48h]
+  int radius_block; // [esp+18h] [ebp-48h] MAPDST
+  int max_x2; // [esp+1Ch] [ebp-44h]
+  int max_y; // [esp+20h] [ebp-40h]
   int i; // [esp+24h] [ebp-3Ch]
   int k; // [esp+24h] [ebp-3Ch]
   int m; // [esp+24h] [ebp-3Ch]
@@ -45,203 +45,206 @@ void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
   signed int l; // [esp+28h] [ebp-38h]
   signed int n; // [esp+28h] [ebp-38h]
   signed int jj; // [esp+28h] [ebp-38h]
-  int v20; // [esp+2Ch] [ebp-34h]
+  int max_y2; // [esp+2Ch] [ebp-34h]
   int s_g; // [esp+30h] [ebp-30h]
   int d_r; // [esp+34h] [ebp-2Ch]
   int s_b; // [esp+38h] [ebp-28h]
-  int v24; // [esp+3Ch] [ebp-24h]
-  int v25; // [esp+40h] [ebp-20h]
+  int max_x; // [esp+3Ch] [ebp-24h]
+  int v; // [esp+40h] [ebp-20h]
   int d_b; // [esp+44h] [ebp-1Ch]
   int d_g; // [esp+48h] [ebp-18h]
-  int v28; // [esp+4Ch] [ebp-14h]
-  int y; // [esp+50h] [ebp-10h]
+  int temp_y; // [esp+4Ch] [ebp-14h]
+  int yoff; // [esp+50h] [ebp-10h]
   int s_r; // [esp+54h] [ebp-Ch]
-  int x; // [esp+58h] [ebp-8h]
-  int v32; // [esp+5Ch] [ebp-4h]
+  int xoff; // [esp+58h] [ebp-8h]
+  int xyoff; // [esp+5Ch] [ebp-4h]
 
-  nx = nYPos;
-  ny = nXPos;
-  x = 0;
-  y = 0;
+  y = nYPos;
+  x = nXPos;
+  xoff = 0;
+  yoff = 0;
   s_b = 0;
   d_r = 0;
   d_g = 0;
   d_b = 0;
   if ( Lnum >= 0 )
   {
-    x = LightList[Lnum]._xoff;
-    y = LightList[Lnum]._yoff;
-    if ( x < 0 )
+    xoff = LightList[Lnum]._xoff;
+    yoff = LightList[Lnum]._yoff;
+    if ( xoff < 0 )
     {
-      x += 8;
-      ny = nXPos - 1;
+      xoff += 8;
+      x = nXPos - 1;
     }
-    if ( y < 0 )
+    if ( yoff < 0 )
     {
-      y += 8;
-      nx = nYPos - 1;
+      yoff += 8;
+      y = nYPos - 1;
     }
   }
-  s_r = x;
-  s_g = y;
-  if ( ny - 15 >= 0 )
-    v11 = 15;
+  s_r = xoff;
+  s_g = yoff;
+  if ( x - 15 >= 0 )
+    max_y = 15;
   else
-    v11 = ny + 1;
-  if ( ny + 15 <= 112 )
-    v20 = 15;
+    max_y = x + 1;
+  if ( x + 15 <= 112 )
+    max_y2 = 15;
   else
-    v20 = 112 - ny;
-  if ( nx - 15 >= 0 )
-    v24 = 15;
+    max_y2 = 112 - x;
+  if ( y - 15 >= 0 )
+    max_x = 15;
   else
-    v24 = nx + 1;
-  if ( nx + 15 <= 112 )
-    v10 = 15;
+    max_x = y + 1;
+  if ( y + 15 <= 112 )
+    max_x2 = 15;
   else
-    v10 = 112 - nx;
-  dTransVal[ny][nx] = 0;
-  v32 = x + 8 * y;
-  for ( i = 0; i < v24; ++i )
+    max_x2 = 112 - y;
+  dTransVal[x][y] = 0;
+  xyoff = xoff + 8 * yoff;
+  for ( i = 0; i < max_x; ++i )
   {
-    for ( j = 1; j < v20; ++j )
+    for ( j = 1; j < max_y2; ++j )
     {
-      v25 = (unsigned __int8)dung_map_rgba[0][v32][i][j];
-      if ( v25 < 128 )
+      v = dung_map_rgba[0][xyoff][i][j];
+      if ( v < 128 )
       {
-        v28 = nx + i;
-        v6 = (unsigned __int8)dung_map_radius[nRadius][v25];
-        if ( dTransVal[j + ny][nx + i] > v6 )
-          dTransVal[j + ny][v28] = v6;
+        temp_y = y + i;
+        v6 = dung_map_radius[nRadius][v];
+        if ( dTransVal[j + x][y + i] > v6 )
+          dTransVal[j + x][temp_y] = v6;
       }
     }
   }
-  SetLightFX(&x, &y, (__int16 *)&s_r, (__int16 *)&s_g, &s_b, &d_r, &d_g, &d_b);
-  v32 = x + 8 * y;
-  for ( k = 0; k < v10; ++k )
+  SetLightFX(&xoff, &yoff, &s_r, &s_g, &s_b, &d_r, &d_g, &d_b);
+  xyoff = xoff + 8 * yoff;
+  for ( k = 0; k < max_x2; ++k )
   {
-    for ( l = 1; l < v20; ++l )
+    for ( l = 1; l < max_y2; ++l )
     {
-      v25 = (unsigned __int8)dung_map_rgba[0][v32][d_b + k][l + d_g];
-      if ( v25 < 128 )
+      v = dung_map_rgba[0][xyoff][d_b + k][l + d_g];
+      if ( v < 128 )
       {
-        v28 = nx - l;
-        v7 = (unsigned __int8)dung_map_radius[nRadius][v25];
-        if ( dTransVal[k + ny][nx - l] > v7 )
-          dTransVal[k + ny][v28] = v7;
+        temp_y = y - l;
+        radius_block = dung_map_radius[nRadius][v];
+        if ( dTransVal[k + x][y - l] > radius_block )
+          dTransVal[k + x][temp_y] = radius_block;
       }
     }
   }
-  SetLightFX(&x, &y, (__int16 *)&s_r, (__int16 *)&s_g, &s_b, &d_r, &d_g, &d_b);
-  v32 = x + 8 * y;
-  for ( m = 0; m < v10; ++m )
+  SetLightFX(&xoff, &yoff, &s_r, &s_g, &s_b, &d_r, &d_g, &d_b);
+  xyoff = xoff + 8 * yoff;
+  for ( m = 0; m < max_x2; ++m )
   {
-    for ( n = 1; n < v11; ++n )
+    for ( n = 1; n < max_y; ++n )
     {
-      v25 = (unsigned __int8)dung_map_rgba[0][v32][d_b + m][n + d_g];
-      if ( v25 < 128 )
+      v = dung_map_rgba[0][xyoff][d_b + m][n + d_g];
+      if ( v < 128 )
       {
-        v28 = nx - m;
-        v8 = (unsigned __int8)dung_map_radius[nRadius][v25];
-        if ( dTransVal[ny - n][nx - m] > v8 )
-          dTransVal[ny - n][v28] = v8;
+        temp_y = y - m;
+        radius_block = dung_map_radius[nRadius][v];
+        if ( dTransVal[x - n][y - m] > radius_block )
+          dTransVal[x - n][temp_y] = radius_block;
       }
     }
   }
-  SetLightFX(&x, &y, (__int16 *)&s_r, (__int16 *)&s_g, &s_b, &d_r, &d_g, &d_b);
-  v32 = x + 8 * y;
-  for ( ii = 0; ii < v24; ++ii )
+  SetLightFX(&xoff, &yoff, &s_r, &s_g, &s_b, &d_r, &d_g, &d_b);
+  xyoff = xoff + 8 * yoff;
+  for ( ii = 0; ii < max_x; ++ii )
   {
-    for ( jj = 1; jj < v11; ++jj )
+    for ( jj = 1; jj < max_y; ++jj )
     {
-      v25 = (unsigned __int8)dung_map_rgba[0][v32][d_b + ii][jj + d_g];
-      if ( v25 < 128 )
+      v = dung_map_rgba[0][xyoff][d_b + ii][jj + d_g];
+      if ( v < 128 )
       {
-        v28 = nx + jj;
-        v9 = (unsigned __int8)dung_map_radius[nRadius][v25];
-        if ( dTransVal[ny - ii][nx + jj] > v9 )
-          dTransVal[ny - ii][v28] = v9;
+        temp_y = y + jj;
+        radius_block = dung_map_radius[nRadius][v];
+        if ( dTransVal[x - ii][y + jj] > radius_block )
+          dTransVal[x - ii][temp_y] = radius_block;
       }
     }
   }
 }
 
 //----- (0043812B) --------------------------------------------------------
+// PSX
 void __fastcall DoUnLight(int nXPos, int nYPos, int nRadius)
 {
-  int v3; // [esp+14h] [ebp-18h]
-  int v4; // [esp+18h] [ebp-14h]
+  int max_x; // [esp+14h] [ebp-18h]
+  int x; // [esp+18h] [ebp-14h]
   int i; // [esp+1Ch] [ebp-10h]
   int j; // [esp+20h] [ebp-Ch]
-  int v7; // [esp+24h] [ebp-8h]
-  int v8; // [esp+28h] [ebp-4h]
-  int nRadiusa; // [esp+34h] [ebp+8h]
+  int max_y; // [esp+24h] [ebp-8h]
+  int y; // [esp+28h] [ebp-4h]
+  int radius; // [esp+34h] [ebp+8h]
 
-  nRadiusa = nRadius + 1;
-  v4 = nYPos - nRadiusa;
-  v3 = nRadiusa + nYPos;
-  v8 = nXPos - nRadiusa;
-  v7 = nRadiusa + nXPos;
-  if ( nYPos - nRadiusa < 0 )
-    v4 = 0;
-  if ( v3 > 112 )
-    v3 = 112;
-  if ( v8 < 0 )
-    v8 = 0;
-  if ( v7 > 112 )
-    v7 = 112;
-  for ( i = v4; v3 > i; ++i )
+  radius = nRadius + 1;
+  x = nYPos - radius;
+  max_x = radius + nYPos;
+  y = nXPos - radius;
+  max_y = radius + nXPos;
+  if ( nYPos - radius < 0 )
+    x = 0;
+  if ( max_x > 112 )
+    max_x = 112;
+  if ( y < 0 )
+    y = 0;
+  if ( max_y > 112 )
+    max_y = 112;
+  for ( i = x; max_x > i; ++i )
   {
-    for ( j = v8; v7 > j; ++j )
+    for ( j = y; max_y > j; ++j )
       dTransVal[j][i] = dTransVal2[j][i];
   }
 }
 
 //----- (0043821D) --------------------------------------------------------
+// PSX
 void __fastcall DoUnVision(int nXPos, int nYPos, int nRadius)
 {
-  int v3; // [esp+14h] [ebp-18h]
-  int v4; // [esp+18h] [ebp-14h]
+  int y2; // [esp+14h] [ebp-18h]
+  int y1; // [esp+18h] [ebp-14h]
   int j; // [esp+1Ch] [ebp-10h]
   int i; // [esp+20h] [ebp-Ch]
-  int v7; // [esp+24h] [ebp-8h]
-  int v8; // [esp+28h] [ebp-4h]
-  int nRadiusa; // [esp+34h] [ebp+8h]
+  int x2; // [esp+24h] [ebp-8h]
+  int x1; // [esp+28h] [ebp-4h]
+  int radius; // [esp+34h] [ebp+8h]
 
-  nRadiusa = nRadius + 1;
-  v4 = nYPos - nRadiusa;
-  v3 = nYPos + nRadiusa;
-  v8 = nXPos - nRadiusa;
-  v7 = nXPos + nRadiusa;
-  if ( nYPos - nRadiusa < 0 )
-    v4 = 0;
-  if ( v3 > 112 )
-    v3 = 112;
-  if ( v8 < 0 )
-    v8 = 0;
-  if ( v7 > 112 )
-    v7 = 112;
-  for ( i = v8; v7 > i; ++i )
+  radius = nRadius + 1;
+  y1 = nYPos - radius;
+  y2 = nYPos + radius;
+  x1 = nXPos - radius;
+  x2 = nXPos + radius;
+  if ( nYPos - radius < 0 )
+    y1 = 0;
+  if ( y2 > 112 )
+    y2 = 112;
+  if ( x1 < 0 )
+    x1 = 0;
+  if ( x2 > 112 )
+    x2 = 112;
+  for ( i = x1; x2 > i; ++i )
   {
-    for ( j = v4; v3 > j; ++j )
+    for ( j = y1; y2 > j; ++j )
       dFlags[i][j] &= 0xBDu;
   }
 }
 
 //----- (00438312) --------------------------------------------------------
+// PSX
 void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doautomap, int visible)
 {
-  int v7; // [esp+18h] [ebp-30h]
-  int v8; // [esp+1Ch] [ebp-2Ch]
-  signed int i; // [esp+20h] [ebp-28h]
-  signed int j; // [esp+24h] [ebp-24h]
-  signed int v11; // [esp+28h] [ebp-20h]
-  int k; // [esp+2Ch] [ebp-1Ch]
-  signed int v13; // [esp+30h] [ebp-18h]
-  int v14; // [esp+34h] [ebp-14h]
-  signed int v15; // [esp+3Ch] [ebp-Ch]
-  int y; // [esp+40h] [ebp-8h]
-  signed int v17; // [esp+44h] [ebp-4h]
+  int nCrawlX; // [esp+18h] [ebp-30h]
+  int nBlockerFlag; // [esp+1Ch] [ebp-2Ch]
+  signed int v; // [esp+20h] [ebp-28h]
+  signed int i; // [esp+24h] [ebp-24h]
+  signed int x2adj; // [esp+28h] [ebp-20h]
+  int j; // [esp+2Ch] [ebp-1Ch]
+  signed int x1adj; // [esp+30h] [ebp-18h]
+  int nLineLen; // [esp+34h] [ebp-14h]
+  signed int y2adj; // [esp+3Ch] [ebp-Ch]
+  int nCrawlY; // [esp+40h] [ebp-8h]
+  signed int y1adj; // [esp+44h] [ebp-4h]
 
   if ( nXPos >= 0 && nXPos <= 112 && nYPos >= 0 && nYPos <= 112 )
   {
@@ -255,77 +258,78 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doau
       dFlags[nXPos][nYPos] |= 0x40u;
     dFlags[nXPos][nYPos] |= 2u;
   }
-  for ( i = 0; i < 4; ++i )
+  for ( v = 0; v < 4; ++v )
   {
-    for ( j = 0; j < 23; ++j )
+    for ( i = 0; i < 23; ++i )
     {
-      v8 = 0;
-      v14 = 2 * (nRadius - RadiusAdj[j]);
-      for ( k = 0; k < v14 && !v8; k += 2 )
+      nBlockerFlag = 0;
+      nLineLen = 2 * (nRadius - RadiusAdj[i]);
+      for ( j = 0; j < nLineLen && !nBlockerFlag; j += 2 )
       {
-        v13 = 0;
-        v11 = 0;
-        v17 = 0;
-        v15 = 0;
-        switch ( i )
+        x1adj = 0;
+        x2adj = 0;
+        y1adj = 0;
+        y2adj = 0;
+        switch ( v )
         {
           case 0:
-            v7 = nXPos + vCrawlTable[j][k];
-            y = nYPos + vCrawlTable[j][k + 1];
-            if ( (signed int)vCrawlTable[j][k] > 0 && (signed int)vCrawlTable[j][k + 1] > 0 )
+            nCrawlX = nXPos + vCrawlTable[i][j];
+            nCrawlY = nYPos + vCrawlTable[i][j + 1];
+            if ( (signed int)vCrawlTable[i][j] > 0 && (signed int)vCrawlTable[i][j + 1] > 0 )
             {
-              v13 = -1;
-              v15 = -1;
+              x1adj = -1;
+              y2adj = -1;
             }
             break;
           case 1:
-            v7 = nXPos - vCrawlTable[j][k];
-            y = nYPos - vCrawlTable[j][k + 1];
-            if ( (signed int)vCrawlTable[j][k] > 0 && (signed int)vCrawlTable[j][k + 1] > 0 )
+            nCrawlX = nXPos - vCrawlTable[i][j];
+            nCrawlY = nYPos - vCrawlTable[i][j + 1];
+            if ( (signed int)vCrawlTable[i][j] > 0 && (signed int)vCrawlTable[i][j + 1] > 0 )
             {
-              v17 = 1;
-              v11 = 1;
+              y1adj = 1;
+              x2adj = 1;
             }
             break;
           case 2:
-            v7 = nXPos + vCrawlTable[j][k];
-            y = nYPos - vCrawlTable[j][k + 1];
-            if ( (signed int)vCrawlTable[j][k] > 0 && (signed int)vCrawlTable[j][k + 1] > 0 )
+            nCrawlX = nXPos + vCrawlTable[i][j];
+            nCrawlY = nYPos - vCrawlTable[i][j + 1];
+            if ( (signed int)vCrawlTable[i][j] > 0 && (signed int)vCrawlTable[i][j + 1] > 0 )
             {
-              v13 = -1;
-              v15 = 1;
+              x1adj = -1;
+              y2adj = 1;
             }
             break;
           case 3:
-            v7 = nXPos - vCrawlTable[j][k];
-            y = nYPos + vCrawlTable[j][k + 1];
-            if ( (signed int)vCrawlTable[j][k] > 0 && (signed int)vCrawlTable[j][k + 1] > 0 )
+            nCrawlX = nXPos - vCrawlTable[i][j];
+            nCrawlY = nYPos + vCrawlTable[i][j + 1];
+            if ( (signed int)vCrawlTable[i][j] > 0 && (signed int)vCrawlTable[i][j + 1] > 0 )
             {
-              v17 = -1;
-              v11 = 1;
+              y1adj = -1;
+              x2adj = 1;
             }
             break;
           default:
             break;
         }
-        if ( v7 >= 0 && v7 <= 112 && y >= 0 && y <= 112 )
+        if ( nCrawlX >= 0 && nCrawlX <= 112 && nCrawlY >= 0 && nCrawlY <= 112 )
         {
-          v8 = (unsigned __int8)nBlockTable[dPiece[v7][y]];
-          if ( !nBlockTable[dPiece[v13 + v7][v17 + y]] || !nBlockTable[dPiece[v11 + v7][v15 + y]] )
+          nBlockerFlag = (unsigned __int8)nBlockTable[dPiece[nCrawlX][nCrawlY]];
+          if ( !nBlockTable[dPiece[x1adj + nCrawlX][y1adj + nCrawlY]]
+            || !nBlockTable[dPiece[x2adj + nCrawlX][y2adj + nCrawlY]] )
           {
             if ( doautomap )
             {
-              if ( dFlags[v7][y] >= 0 )
-                SetAutomapView(v7, y);
-              dFlags[v7][y] |= 0x80u;
+              if ( dFlags[nCrawlX][nCrawlY] >= 0 )
+                SetAutomapView(nCrawlX, nCrawlY);
+              dFlags[nCrawlX][nCrawlY] |= 0x80u;
             }
             if ( visible )
-              dFlags[v7][y] |= 0x40u;
-            dFlags[v7][y] |= 2u;
-            if ( !v8 )
+              dFlags[nCrawlX][nCrawlY] |= 0x40u;
+            dFlags[nCrawlX][nCrawlY] |= 2u;
+            if ( !nBlockerFlag )
             {
-              if ( dung_map[v7][y] )
-                TransList[dung_map[v7][y]] = 1;
+              if ( dung_map[nCrawlX][nCrawlY] )
+                TransList[dung_map[nCrawlX][nCrawlY]] = 1;
             }
           }
         }
@@ -594,6 +598,7 @@ void __cdecl InitLightMax()
 }
 
 //----- (004391FE) --------------------------------------------------------
+// PSX
 void __cdecl InitLighting()
 {
   signed int i; // [esp+Ch] [ebp-4h]
@@ -606,26 +611,27 @@ void __cdecl InitLighting()
 }
 
 //----- (00439259) --------------------------------------------------------
+// PSX
 int __fastcall AddLight(int x, int y, int r)
 {
-  int v4; // [esp+14h] [ebp-4h]
+  int lid; // [esp+14h] [ebp-4h]
 
   if ( lightflag )
     return -1;
-  v4 = -1;
+  lid = -1;
   if ( numlights < 32 )
   {
-    v4 = lightactive[numlights++];
-    LightList[v4]._lx = x;
-    LightList[v4]._ly = y;
-    LightList[v4]._lradius = r;
-    LightList[v4]._xoff = 0;
-    LightList[v4]._yoff = 0;
-    LightList[v4]._ldel = 0;
-    LightList[v4]._lunflag = 0;
+    lid = lightactive[numlights++];
+    LightList[lid]._lx = x;
+    LightList[lid]._ly = y;
+    LightList[lid]._lradius = r;
+    LightList[lid]._xoff = 0;
+    LightList[lid]._yoff = 0;
+    LightList[lid]._ldel = 0;
+    LightList[lid]._lunflag = 0;
     dolighting = 1;
   }
-  return v4;
+  return lid;
 }
 
 //----- (00439359) --------------------------------------------------------
@@ -699,14 +705,13 @@ void __fastcall ChangeLight(int i, int x, int y, int r)
 }
 
 //----- (00439776) --------------------------------------------------------
+// PSX
 void __cdecl ProcessLightList()
 {
-  BYTE v0; // ST1C_1
-  int i; // [esp+Ch] [ebp-Ch]
+  BYTE temp_; // ST1C_1
+  int i; // [esp+Ch] [ebp-Ch] MAPDST
   int j; // [esp+Ch] [ebp-Ch]
-  int v3; // [esp+Ch] [ebp-Ch]
-  int Lnum; // [esp+10h] [ebp-8h]
-  int Lnuma; // [esp+10h] [ebp-8h]
+  int temp; // [esp+10h] [ebp-8h] MAPDST
 
   if ( !lightflag )
   {
@@ -714,33 +719,33 @@ void __cdecl ProcessLightList()
     {
       for ( i = 0; i < numlights; ++i )
       {
-        Lnum = lightactive[i];
-        if ( LightList[Lnum]._ldel )
-          DoUnLight(LightList[Lnum]._lx, LightList[Lnum]._ly, LightList[Lnum]._lradius);
-        if ( LightList[Lnum]._lunflag )
+        temp = lightactive[i];
+        if ( LightList[temp]._ldel )
+          DoUnLight(LightList[temp]._lx, LightList[temp]._ly, LightList[temp]._lradius);
+        if ( LightList[temp]._lunflag )
         {
-          DoUnLight(LightList[Lnum]._lunx, LightList[Lnum]._luny, LightList[Lnum]._lunr);
-          LightList[Lnum]._lunflag = 0;
+          DoUnLight(LightList[temp]._lunx, LightList[temp]._luny, LightList[temp]._lunr);
+          LightList[temp]._lunflag = 0;
         }
       }
-      for ( j = 0; j < numlights; ++j )
+      for ( i = 0; i < numlights; ++i )
       {
-        Lnuma = lightactive[j];
-        if ( !LightList[Lnuma]._ldel )
-          DoLighting(LightList[Lnuma]._lx, LightList[Lnuma]._ly, LightList[Lnuma]._lradius, Lnuma);
+        temp = lightactive[i];
+        if ( !LightList[temp]._ldel )
+          DoLighting(LightList[temp]._lx, LightList[temp]._ly, LightList[temp]._lradius, temp);
       }
-      v3 = 0;
-      while ( v3 < numlights )
+      j = 0;
+      while ( j < numlights )
       {
-        if ( LightList[lightactive[v3]]._ldel )
+        if ( LightList[lightactive[j]]._ldel )
         {
-          v0 = lightactive[--numlights];
-          lightactive[numlights] = lightactive[v3];
-          lightactive[v3] = v0;
+          temp_ = lightactive[--numlights];
+          lightactive[numlights] = lightactive[j];
+          lightactive[j] = temp_;
         }
         else
         {
-          ++v3;
+          ++j;
         }
       }
     }
@@ -767,23 +772,24 @@ void __cdecl InitVision()
 }
 
 //----- (00439A2F) --------------------------------------------------------
+// PSX
 int __fastcall AddVision(int x, int y, int r, bool mine)
 {
-  int v5; // [esp+14h] [ebp-4h]
+  int vid; // [esp+14h] [ebp-4h]
 
   if ( numvision < 32 )
   {
     VisionList[numvision]._lx = x;
     VisionList[numvision]._ly = y;
     VisionList[numvision]._lradius = r;
-    v5 = visionid++;
-    VisionList[numvision]._lid = v5;
+    vid = visionid++;
+    VisionList[numvision]._lid = vid;
     VisionList[numvision]._ldel = 0;
     VisionList[numvision]._lunflag = 0;
     VisionList[numvision++]._lflags = mine != 0;
     dovision = 1;
   }
-  return v5;
+  return vid;
 }
 
 //----- (00439BBA) --------------------------------------------------------
@@ -826,13 +832,11 @@ void __fastcall ChangeVisionXY(int id, int x, int y)
 }
 
 //----- (00439EE4) --------------------------------------------------------
+// PSX
 void __cdecl ProcessVisionList()
 {
-  int i; // [esp+Ch] [ebp-8h]
-  signed int j; // [esp+Ch] [ebp-8h]
-  int k; // [esp+Ch] [ebp-8h]
-  int l; // [esp+Ch] [ebp-8h]
-  signed int v4; // [esp+10h] [ebp-4h]
+  int i; // [esp+Ch] [ebp-8h] MAPDST
+  signed int delflag; // [esp+10h] [ebp-4h]
 
   if ( dovision )
   {
@@ -846,32 +850,32 @@ void __cdecl ProcessVisionList()
         VisionList[i]._lunflag = 0;
       }
     }
-    for ( j = 0; TransVal > j; ++j )
-      TransList[j] = 0;
-    for ( k = 0; k < numvision; ++k )
+    for ( i = 0; TransVal > i; ++i )
+      TransList[i] = 0;
+    for ( i = 0; i < numvision; ++i )
     {
-      if ( !VisionList[k]._ldel )
+      if ( !VisionList[i]._ldel )
         DoVision(
-          VisionList[k]._lx,
-          VisionList[k]._ly,
-          VisionList[k]._lradius,
-          VisionList[k]._lflags & 1,
-          VisionList[k]._lflags & 1);
+          VisionList[i]._lx,
+          VisionList[i]._ly,
+          VisionList[i]._lradius,
+          VisionList[i]._lflags & 1,
+          VisionList[i]._lflags & 1);
     }
     do
     {
-      v4 = 0;
-      for ( l = 0; l < numvision; ++l )
+      delflag = 0;
+      for ( i = 0; i < numvision; ++i )
       {
-        if ( VisionList[l]._ldel )
+        if ( VisionList[i]._ldel )
         {
-          if ( --numvision > 0 && l != numvision )
-            qmemcpy(&VisionList[l], &VisionList[numvision], sizeof(LightListStruct));
-          v4 = 1;
+          if ( --numvision > 0 && i != numvision )
+            qmemcpy(&VisionList[i], &VisionList[numvision], sizeof(LightListStruct));
+          delflag = 1;
         }
       }
     }
-    while ( v4 );
+    while ( delflag );
   }
   dovision = 0;
 }

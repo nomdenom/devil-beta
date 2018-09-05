@@ -446,11 +446,9 @@ void __fastcall pfile_unused_sub_43780C(int a1, void *a2, int size, int size_64)
 {
   char *v4; // edx
   char *v5; // ecx
-  void *pbSrcDst; // [esp+Ch] [ebp-1Ch]
   CHAR Buffer[16]; // [esp+14h] [ebp-14h]
   DWORD nSize; // [esp+24h] [ebp-4h]
 
-  pbSrcDst = a2;
   if ( !a1 )
     assertion_failed(482, "C:\\Diablo\\Direct\\pfile.cpp");
   if ( !a2 )
@@ -466,46 +464,42 @@ void __fastcall pfile_unused_sub_43780C(int a1, void *a2, int size, int size_64)
   Buffer[15] = 0;
   nSize = 16;
   GetComputerNameA(Buffer, &nSize);
-  codec_encode(pbSrcDst, size, size_64, Buffer);
+  codec_encode(a2, size, size_64, Buffer);
   mpqapi_write_file(v5, v4, (int)FileName);
   empty_fn_4();
 }
 
 //----- (00437919) --------------------------------------------------------
-void *__fastcall pfile_unused_sub_437919(int *a1, int a2)
+void __fastcall pfile_unused_sub_437919(int *a1, int *size)
 {
-  int *v3; // [esp+Ch] [ebp-2Ch]
-  int *v4; // [esp+10h] [ebp-28h]
-  int v5; // [esp+14h] [ebp-24h]
+  int v4; // [esp+14h] [ebp-24h]
   CHAR Buffer[16]; // [esp+18h] [ebp-20h]
-  void *v7; // [esp+28h] [ebp-10h]
+  void *v6; // [esp+28h] [ebp-10h]
   void *pbSrcDst; // [esp+2Ch] [ebp-Ch]
-  int v9; // [esp+30h] [ebp-8h]
+  int v8; // [esp+30h] [ebp-8h]
   DWORD nSize; // [esp+34h] [ebp-4h]
 
-  v3 = (int *)a2;
-  v4 = a1;
   if ( !a1 )
     assertion_failed(501, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( !a2 )
+  if ( !size )
     assertion_failed(502, "C:\\Diablo\\Direct\\pfile.cpp");
   if ( gbMaxPlayers != 1 )
     assertion_failed(503, "C:\\Diablo\\Direct\\pfile.cpp");
-  v7 = pfile_open_save_archive(a1, a2);
-  if ( !v7 )
+  v6 = pfile_open_save_archive(a1, (int)size);
+  if ( !v6 )
     TermMsg("Unable to open save file archive");
-  if ( !SFileOpenFile(v4, &v9) )
+  if ( !SFileOpenFile(a1, &v8) )
     TermMsg("Unable to open save file");
-  *v3 = SFileGetFileSize(v9, 0);
-  if ( !*v3 )
+  *size = SFileGetFileSize(v8, 0);
+  if ( !*size )
     TermMsg("Invalid save file");
-  pbSrcDst = DiabloAllocPtr(*v3, 516, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( !SFileReadFile(v9, (int)pbSrcDst, *v3, (int)&v5, 0) )
+  pbSrcDst = DiabloAllocPtr(*size, 516, "C:\\Diablo\\Direct\\pfile.cpp");
+  if ( !SFileReadFile(v8, (int)pbSrcDst, *size, (int)&v4, 0) )
     TermMsg("Unable to read save file");
-  if ( *v3 != v5 )
+  if ( *size != v4 )
     assertion_failed(521, "C:\\Diablo\\Direct\\pfile.cpp");
-  SFileCloseFile(v9);
-  SFileCloseArchive(v7);
+  SFileCloseFile(v8);
+  SFileCloseArchive(v6);
   strcpy(Buffer, "xgr1");
   *(_DWORD *)&Buffer[5] = 0;
   *(_DWORD *)&Buffer[9] = 0;
@@ -513,23 +507,20 @@ void *__fastcall pfile_unused_sub_437919(int *a1, int a2)
   Buffer[15] = 0;
   nSize = 16;
   GetComputerNameA(Buffer, &nSize);
-  *v3 = codec_decode(pbSrcDst, *v3, Buffer);
-  if ( !*v3 )
+  *size = codec_decode(pbSrcDst, *size, Buffer);
+  if ( !*size )
     TermMsg("Invalid save file");
-  return pbSrcDst;
 }
 
 //----- (00437AE8) --------------------------------------------------------
-void __fastcall pfile_update(bool force_save)
+void __fastcall pfile_update(BOOL force_save)
 {
-  BOOL v1; // [esp+Ch] [ebp-8h]
   DWORD v2; // [esp+10h] [ebp-4h]
 
-  v1 = force_save;
   if ( gbMaxPlayers != 1 )
   {
     v2 = GetTickCount();
-    if ( v1 || (signed int)(v2 - dword_4C9230) > 15000 )
+    if ( force_save || (signed int)(v2 - dword_4C9230) > 15000 )
     {
       dword_4C9230 = v2;
       pfile_write_hero();
