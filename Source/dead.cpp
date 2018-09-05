@@ -22,8 +22,8 @@ void __cdecl InitDead()
       for ( k = 0; k < 8; ++k )
         dead[v9]._deadData[k] = Monsters[j].Anims[4].Frames[k];
       dead[v9]._deadFrame = Monsters[j].Anims[4].Rate;
-      dead[v9].flags_1 = Monsters[j].flags_1;
-      dead[v9].flags_2 = Monsters[j].flags_2;
+      dead[v9]._deadWidth = Monsters[j].flags_1;
+      dead[v9]._deadWidth2 = Monsters[j].flags_2;
       dead[v9]._deadtrans = 0;
       Monsters[j].mdeadval = v9 + 1;
       mtypes[Monsters[j].mtype] = v9++ + 1;
@@ -32,15 +32,15 @@ void __cdecl InitDead()
   for ( l = 0; l < 8; ++l )
     dead[v9]._deadData[l] = misfiledata[16].mAnimData[0];
   dead[v9]._deadFrame = 8;
-  dead[v9].flags_1 = 128;
-  dead[v9].flags_2 = 32;
+  dead[v9]._deadWidth = 128;
+  dead[v9]._deadWidth2 = 32;
   dead[v9]._deadtrans = 0;
   spurtndx = v9++ + 1;
   for ( m = 0; m < 8; ++m )
     dead[v9]._deadData[m] = misfiledata[18].mAnimData[0];
   dead[v9]._deadFrame = 12;
-  dead[v9].flags_1 = 128;
-  dead[v9].flags_2 = 32;
+  dead[v9]._deadWidth = 128;
+  dead[v9]._deadWidth2 = 32;
   dead[v9]._deadtrans = 0;
   stonendx = v9++ + 1;
   for ( n = 0; n < nummonsters; ++n )
@@ -51,8 +51,8 @@ void __cdecl InitDead()
       for ( ii = 0; ii < 8; ++ii )
         dead[v9]._deadData[ii] = monster[v8].MType->Anims[4].Frames[ii];
       dead[v9]._deadFrame = monster[v8].MType->Anims[4].Rate;
-      dead[v9].flags_1 = monster[v8].MType->flags_1;
-      dead[v9].flags_2 = monster[v8].MType->flags_2;
+      dead[v9]._deadWidth = monster[v8].MType->flags_1;
+      dead[v9]._deadWidth2 = monster[v8].MType->flags_2;
       dead[v9]._deadtrans = monster[v8]._uniqtrans + 4;
       monster[v8]._udeadval = v9++ + 1;
     }

@@ -1766,10 +1766,10 @@ void __cdecl CheckChrBtns()
           if ( MaxStats[v0][i] > plr[myplr]._pBaseVit )
           {
 LABEL_16:
-            if ( attribute_inc_rects[i].x <= MouseX
-              && MouseX <= attribute_inc_rects[i].x + attribute_inc_rects[i].w
-              && attribute_inc_rects[i].y <= MouseY
-              && attribute_inc_rects[i].h + attribute_inc_rects[i].y >= MouseY )
+            if ( attribute_inc_rects[i][0] <= MouseX
+              && MouseX <= attribute_inc_rects[i][0] + attribute_inc_rects[i][2]
+              && attribute_inc_rects[i][1] <= MouseY
+              && attribute_inc_rects[i][3] + attribute_inc_rects[i][1] >= MouseY )
             {
               chrbtn[i] = 1;
               chrbtnactive = 1;
@@ -1794,10 +1794,10 @@ void __cdecl ReleaseChrBtns()
     if ( chrbtn[i] )
     {
       chrbtn[i] = 0;
-      if ( attribute_inc_rects[i].x <= MouseX
-        && attribute_inc_rects[i].x + attribute_inc_rects[i].w >= MouseX
-        && attribute_inc_rects[i].y <= MouseY
-        && attribute_inc_rects[i].h + attribute_inc_rects[i].y >= MouseY )
+      if ( attribute_inc_rects[i][0] <= MouseX
+        && attribute_inc_rects[i][0] + attribute_inc_rects[i][2] >= MouseX
+        && attribute_inc_rects[i][1] <= MouseY
+        && attribute_inc_rects[i][3] + attribute_inc_rects[i][1] >= MouseY )
       {
         switch ( i )
         {

@@ -131,7 +131,7 @@ void __fastcall PrintSString(int x, int y, unsigned __int8 cjustflag, char *str,
   int v20; // [esp+38h] [ebp-24h]
   char v21[32]; // [esp+3Ch] [ebp-20h]
 
-  v17 = SStringY[y] + *(&stext + 39 * y + 1);
+  v17 = SStringY[y] + stext[y]._syoff;
   if ( stextsize )
     v13 = 96;
   else
@@ -282,48 +282,48 @@ void __fastcall ClearSText(int s, int e)
 
   for ( i = s; i < e; ++i )
   {
-    *(&stext + 39 * i) = 0;
-    *(&stext + 39 * i + 1) = 0;
-    *((_BYTE *)&stext + 156 * i + 8) = 0;
-    *(&stext + 39 * i + 34) = 0;
-    *((_BYTE *)&stext + 156 * i + 140) = 0;
-    *(&stext + 39 * i + 36) = 0;
-    *(&stext + 39 * i + 37) = 0;
-    *(&stext + 39 * i + 38) = -1;
+    stext[i]._sx = 0;
+    stext[i]._syoff = 0;
+    stext[i]._sstr[0] = 0;
+    stext[i]._sjust = 0;
+    stext[i]._sclr = 0;
+    stext[i]._sline = 0;
+    stext[i]._ssel = 0;
+    stext[i]._sval = -1;
   }
 }
 
 //----- (0042ECB2) --------------------------------------------------------
 void __fastcall AddSLine(int y)
 {
-  *(&stext + 39 * y) = 0;
-  *(&stext + 39 * y + 1) = 0;
-  *((_BYTE *)&stext + 156 * y + 8) = 0;
-  *(&stext + 39 * y + 36) = 1;
+  stext[y]._sx = 0;
+  stext[y]._syoff = 0;
+  stext[y]._sstr[0] = 0;
+  stext[y]._sline = 1;
 }
 
 //----- (0042ED25) --------------------------------------------------------
 void __fastcall AddSTextVal(int y, int val)
 {
-  *(&stext + 39 * y + 38) = val;
+  stext[y]._sval = val;
 }
 
 //----- (0042ED55) --------------------------------------------------------
 void __fastcall OffsetSTextY(int y, int yo)
 {
-  *(&stext + 39 * y + 1) = yo;
+  stext[y]._syoff = yo;
 }
 
 //----- (0042ED85) --------------------------------------------------------
 void __fastcall AddSText(int x, int y, unsigned __int8 j, char *str, int clr, int sel)
 {
-  *(&stext + 39 * y) = x;
-  *(&stext + 39 * y + 1) = 0;
-  strcpy((char *)&stext + 156 * y + 8, str);
-  *(&stext + 39 * y + 34) = j;
-  *((_BYTE *)&stext + 156 * y + 140) = clr;
-  *(&stext + 39 * y + 36) = 0;
-  *(&stext + 39 * y + 37) = sel;
+  stext[y]._sx = x;
+  stext[y]._syoff = 0;
+  strcpy(stext[y]._sstr, str);
+  stext[y]._sjust = j;
+  stext[y]._sclr = clr;
+  stext[y]._sline = 0;
+  stext[y]._ssel = sel;
 }
 
 //----- (0042EE50) --------------------------------------------------------
@@ -370,7 +370,7 @@ void __fastcall S_ScrollSBuy(int idx)
       ++idx;
     }
   }
-  if ( !*(&stext + 39 * stextsel + 37) && stextsel != 22 )
+  if ( !stext[stextsel]._ssel && stextsel != 22 )
     stextsel = stextdown;
 }
 
@@ -491,7 +491,7 @@ void __fastcall S_ScrollSPBuy(int idx)
     }
     ++v1;
   }
-  if ( !*(&stext + 39 * stextsel + 37) && stextsel != 22 )
+  if ( !stext[stextsel]._ssel && stextsel != 22 )
     stextsel = stextdown;
 }
 
@@ -787,7 +787,7 @@ void __fastcall S_ScrollWBuy(int idx)
       ++v1;
     }
   }
-  if ( !*(&stext + 39 * stextsel + 37) && stextsel != 22 )
+  if ( !stext[stextsel]._ssel && stextsel != 22 )
     stextsel = stextdown;
 }
 
@@ -1134,7 +1134,7 @@ void __fastcall S_ScrollHBuy(int idx)
       ++v1;
     }
   }
-  if ( !*(&stext + 39 * stextsel + 37) && stextsel != 22 )
+  if ( !stext[stextsel]._ssel && stextsel != 22 )
     stextsel = stextdown;
 }
 
@@ -1357,7 +1357,7 @@ void __fastcall StartStore(char s)
     default:
       break;
   }
-  for ( i = 0; i < 24 && !*(&stext + 39 * i + 37); ++i )
+  for ( i = 0; i < 24 && !stext[i]._ssel; ++i )
     ;
   if ( i == 24 )
     stextsel = -1;
@@ -1404,16 +1404,10 @@ void __cdecl DrawSText()
   }
   for ( y = 0; y < 24; ++y )
   {
-    if ( *(&stext + 39 * y + 36) )
+    if ( stext[y]._sline )
       DrawSLine(y);
-    if ( *((_BYTE *)&stext + 156 * y + 8) )
-      PrintSString(
-        *(&stext + 39 * y),
-        y,
-        *(&stext + 39 * y + 34),
-        (char *)&stext + 156 * y + 8,
-        *((_BYTE *)&stext + 156 * y + 140),
-        *(&stext + 39 * y + 38));
+    if ( stext[y]._sstr[0] )
+      PrintSString(stext[y]._sx, y, stext[y]._sjust, stext[y]._sstr, stext[y]._sclr, stext[y]._sval);
   }
   if ( stextscrl )
     DrawSArrows(4, 20);
@@ -1497,7 +1491,7 @@ void __cdecl STextUp()
       else
       {
         --stextsel;
-        while ( !*(&stext + 39 * stextsel + 37) )
+        while ( !stext[stextsel]._ssel )
         {
           if ( stextsel )
             --stextsel;
@@ -1512,7 +1506,7 @@ void __cdecl STextUp()
         --stextsel;
       else
         stextsel = 23;
-      while ( !*(&stext + 39 * stextsel + 37) )
+      while ( !stext[stextsel]._ssel )
       {
         if ( stextsel )
           --stextsel;
@@ -1539,7 +1533,7 @@ void __cdecl STextDown()
       else
       {
         ++stextsel;
-        while ( !*(&stext + 39 * stextsel + 37) )
+        while ( !stext[stextsel]._ssel )
         {
           if ( stextsel == 23 )
             stextsel = 0;
@@ -1554,7 +1548,7 @@ void __cdecl STextDown()
         stextsel = 0;
       else
         ++stextsel;
-      while ( !*(&stext + 39 * stextsel + 37) )
+      while ( !stext[stextsel]._ssel )
       {
         if ( stextsel == 23 )
           stextsel = 0;
@@ -2601,18 +2595,18 @@ void __cdecl CheckStoreBtn()
     {
       if ( v0 == 23 )
         v0 = 22;
-      if ( stextscrl && v0 < 21 && !*(&stext + 39 * v0 + 37) )
+      if ( stextscrl && v0 < 21 && !stext[v0]._ssel )
       {
-        if ( *(&stext + 39 * (v0 - 2) + 37) )
+        if ( stext[v0 - 2]._ssel )
         {
           v0 -= 2;
         }
-        else if ( *(&stext + 39 * (v0 - 1) + 37) )
+        else if ( stext[v0 - 1]._ssel )
         {
           --v0;
         }
       }
-      if ( *(&stext + 39 * v0 + 37) || stextscrl && v0 == 22 )
+      if ( stext[v0]._ssel || stextscrl && v0 == 22 )
       {
         stextsel = v0;
         STextEnter();

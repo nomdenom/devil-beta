@@ -161,16 +161,16 @@ void __fastcall town_draw_clipped_town(void *unused, int x, int y, int sx, int s
   }
   if ( dFlags[x][y] & 0x10 )
   {
-    v18 = -(dMonster[x - 1][y + 111] + 1);
-    screen_xa = sx - towner[-(dMonster[x - 1][y + 111] + 1)]._tAnimWidth2;
+    v18 = -(dMonster[x][y - 1] + 1);
+    screen_xa = sx - towner[-(dMonster[x][y - 1] + 1)]._tAnimWidth2;
     if ( pcursmonst == v18 )
       CelDrawHdrClrHL(
         166,
         screen_xa,
         sy,
-        (char *)towner[-(dMonster[x - 1][y + 111] + 1)]._tAnimData,
-        towner[-(dMonster[x - 1][y + 111] + 1)]._tAnimFrame,
-        towner[-(dMonster[x - 1][y + 111] + 1)]._tAnimWidth,
+        (char *)towner[-(dMonster[x][y - 1] + 1)]._tAnimData,
+        towner[-(dMonster[x][y - 1] + 1)]._tAnimFrame,
+        towner[-(dMonster[x][y - 1] + 1)]._tAnimWidth,
         0,
         8);
     Cel2DrawHdrOnly(
@@ -207,7 +207,7 @@ void __fastcall town_draw_clipped_town(void *unused, int x, int y, int sx, int s
   }
   if ( dFlags[x][y] & 0x20 )
   {
-    v16 = -(char)(dPlayer[x - 1][y + 111] + 1);
+    v16 = -(char)(dPlayer[x][y - 1] + 1);
     screen_xc = sx + plr[v16]._pxoff - plr[v16]._pAnimWidth2;
     screen_y = sy + plr[v16]._pyoff;
     if ( v16 == pcursplr )
@@ -431,16 +431,16 @@ void __fastcall town_draw_clipped_town_2(int x, int y, int a3, int a4, int a5, i
   }
   if ( dFlags[y][a3] & 0x10 )
   {
-    v20 = -(dMonster[y - 1][a3 + 111] + 1);
-    screen_xa = sx - towner[-(dMonster[y - 1][a3 + 111] + 1)]._tAnimWidth2;
+    v20 = -(dMonster[y][a3 - 1] + 1);
+    screen_xa = sx - towner[-(dMonster[y][a3 - 1] + 1)]._tAnimWidth2;
     if ( pcursmonst == v20 )
       CelDrawHdrClrHL(
         166,
         screen_xa,
         sy,
-        (char *)towner[-(dMonster[y - 1][a3 + 111] + 1)]._tAnimData,
-        towner[-(dMonster[y - 1][a3 + 111] + 1)]._tAnimFrame,
-        towner[-(dMonster[y - 1][a3 + 111] + 1)]._tAnimWidth,
+        (char *)towner[-(dMonster[y][a3 - 1] + 1)]._tAnimData,
+        towner[-(dMonster[y][a3 - 1] + 1)]._tAnimFrame,
+        towner[-(dMonster[y][a3 - 1] + 1)]._tAnimWidth,
         a5,
         8);
     Cel2DrawHdrOnly(
@@ -477,7 +477,7 @@ void __fastcall town_draw_clipped_town_2(int x, int y, int a3, int a4, int a5, i
   }
   if ( dFlags[y][a3] & 0x20 )
   {
-    v18 = -(char)(dPlayer[y - 1][a3 + 111] + 1);
+    v18 = -(char)(dPlayer[y][a3 - 1] + 1);
     screen_xc = sx + plr[v18]._pxoff - plr[v18]._pAnimWidth2;
     screen_y = sy + plr[v18]._pyoff;
     if ( v18 == pcursplr )
@@ -724,16 +724,16 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
   }
   if ( dFlags[x][y] & 0x10 )
   {
-    v20 = -(dMonster[x - 1][y + 111] + 1);
-    screen_xa = sx - towner[-(dMonster[x - 1][y + 111] + 1)]._tAnimWidth2;
+    v20 = -(dMonster[x][y - 1] + 1);
+    screen_xa = sx - towner[-(dMonster[x][y - 1] + 1)]._tAnimWidth2;
     if ( pcursmonst == v20 )
       CelDecodeClr(
         166,
         screen_xa,
         sy,
-        (char *)towner[-(dMonster[x - 1][y + 111] + 1)]._tAnimData,
-        towner[-(dMonster[x - 1][y + 111] + 1)]._tAnimFrame,
-        towner[-(dMonster[x - 1][y + 111] + 1)]._tAnimWidth,
+        (char *)towner[-(dMonster[x][y - 1] + 1)]._tAnimData,
+        towner[-(dMonster[x][y - 1] + 1)]._tAnimFrame,
+        towner[-(dMonster[x][y - 1] + 1)]._tAnimWidth,
         0,
         dir);
     if ( !towner[v20]._tAnimData )
@@ -774,7 +774,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
   }
   if ( dFlags[x][y] & 0x20 )
   {
-    v18 = -(char)(dPlayer[x - 1][y + 111] + 1);
+    v18 = -(char)(dPlayer[x][y - 1] + 1);
     screen_xc = sx + plr[v18]._pxoff - plr[v18]._pAnimWidth2;
     screen_y = sy + plr[v18]._pyoff;
     if ( v18 == pcursplr )

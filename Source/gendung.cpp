@@ -417,50 +417,50 @@ void __fastcall DRLG_CopyTrans(int sx, int sy, int dx, int dy)
 }
 
 //----- (00412801) --------------------------------------------------------
-void __fastcall DRLG_ListTrans(int num, RECT8 *List)
+void __fastcall DRLG_ListTrans(int num, unsigned __int8 *List)
 {
   unsigned __int8 x1; // ST2C_1
   unsigned __int8 *v3; // ST14_4
   unsigned __int8 v4; // ST20_1
   unsigned __int8 v5; // ST28_1
   unsigned __int8 v6; // ST1C_1
-  RECT8 *v7; // [esp+Ch] [ebp-1Ch]
+  unsigned __int8 *v7; // [esp+Ch] [ebp-1Ch]
   int i; // [esp+1Ch] [ebp-Ch]
 
   v7 = List;
   for ( i = 0; num > i; ++i )
   {
-    x1 = v7->x.x;
-    v3 = (unsigned __int8 *)v7 + 1;
+    x1 = *v7;
+    v3 = v7 + 1;
     v4 = *v3++;
     v5 = *v3++;
     v6 = *v3;
-    v7 = (RECT8 *)(v3 + 1);
+    v7 = v3 + 1;
     DRLG_RectTrans(x1, v4, v5, v6);
   }
 }
 
 //----- (00412883) --------------------------------------------------------
-void __fastcall DRLG_AreaTrans(int num, RECT8 *List)
+void __fastcall DRLG_AreaTrans(int num, unsigned __int8 *List)
 {
   unsigned __int8 x1; // ST2C_1
   unsigned __int8 *v3; // ST14_4
-  unsigned __int8 v4; // ST20_1
-  unsigned __int8 v5; // ST28_1
-  unsigned __int8 v6; // ST1C_1
-  RECT8 *v7; // [esp+Ch] [ebp-1Ch]
+  unsigned __int8 y1; // ST20_1
+  unsigned __int8 x2; // ST28_1
+  unsigned __int8 y2; // ST1C_1
+  unsigned __int8 *p; // [esp+Ch] [ebp-1Ch]
   int i; // [esp+1Ch] [ebp-Ch]
 
-  v7 = List;
+  p = List;
   for ( i = 0; i < num; ++i )
   {
-    x1 = v7->x.x;
-    v3 = (unsigned __int8 *)v7 + 1;
-    v4 = *v3++;
-    v5 = *v3++;
-    v6 = *v3;
-    v7 = (RECT8 *)(v3 + 1);
-    DRLG_RectTrans(x1, v4, v5, v6);
+    x1 = *p;
+    v3 = p + 1;
+    y1 = *v3++;
+    x2 = *v3++;
+    y2 = *v3;
+    p = v3 + 1;
+    DRLG_RectTrans(x1, y1, x2, y2);
     --TransVal;
   }
   ++TransVal;

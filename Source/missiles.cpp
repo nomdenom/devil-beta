@@ -33,9 +33,9 @@ int __fastcall FindClosest(int sx, int sy, int rad)
   {
     v3 = CrawlNum[i];
     v5 = v3 + 1;
-    for ( j = *(&CrawlTable.n_1 + v3); j > 0; --j )
+    for ( j = (unsigned __int8)CrawlTable[v3]; j > 0; --j )
     {
-      v9 = dMonster[sx + *((char *)&CrawlTable.n_1 + v5)][sy + *(&CrawlTable.delta_1[0].x + v5)];
+      v9 = dMonster[sx + CrawlTable[v5]][sy + CrawlTable[v5 + 1]];
       if ( v9 > 0 )
         return v9 - 1;
       v5 += 2;
@@ -2725,24 +2725,24 @@ void __fastcall AddStone(int mi, int sx, int sy, int dx, int dy, int midir, int 
   int v9; // ST14_4
   signed int i; // [esp+18h] [ebp-28h]
   int v12; // [esp+1Ch] [ebp-24h]
-  int v13[6]; // [esp+20h] [ebp-20h]
+  int CrawlNum[6]; // [esp+20h] [ebp-20h]
   int j; // [esp+38h] [ebp-8h]
   int v15; // [esp+3Ch] [ebp-4h]
 
-  v13[0] = 0;
-  v13[1] = 3;
-  v13[2] = 12;
-  v13[3] = 45;
-  v13[4] = 94;
-  v13[5] = 159;
+  CrawlNum[0] = 0;
+  CrawlNum[1] = 3;
+  CrawlNum[2] = 12;
+  CrawlNum[3] = 45;
+  CrawlNum[4] = 94;
+  CrawlNum[5] = 159;
   missile[mi]._misource = id;
   for ( i = 0; i < 6; ++i )
   {
-    v9 = v13[i];
+    v9 = CrawlNum[i];
     v12 = v9 + 1;
-    for ( j = *(&CrawlTable.n_1 + v9); j > 0; --j )
+    for ( j = (unsigned __int8)CrawlTable[v9]; j > 0; --j )
     {
-      v15 = dMonster[dx + *((char *)&CrawlTable.n_1 + v12)][dy + *(&CrawlTable.delta_1[0].x + v12)];
+      v15 = dMonster[dx + CrawlTable[v12]][dy + CrawlTable[v12 + 1]];
       if ( v15 <= 0 )
         v15 = -(v15 + 1);
       else
@@ -2761,8 +2761,8 @@ void __fastcall AddStone(int mi, int sx, int sy, int dx, int dy, int midir, int 
   }
   if ( j == -99 )
   {
-    missile[mi]._mix = dx + *((char *)&CrawlTable.n_1 + v12);
-    missile[mi]._miy = dy + *(&CrawlTable.delta_1[0].x + v12);
+    missile[mi]._mix = dx + CrawlTable[v12];
+    missile[mi]._miy = dy + CrawlTable[v12 + 1];
     missile[mi]._misx = missile[mi]._mix;
     missile[mi]._misy = missile[mi]._miy;
     missile[mi]._mirange = 16 * plr[id]._pLevel;
@@ -4015,12 +4015,12 @@ void __fastcall MI_Chain(int i)
   {
     v2 = v11[j];
     v8 = v2 + 1;
-    for ( k = *(&CrawlTable.n_1 + v2); k > 0; --k )
+    for ( k = (unsigned __int8)CrawlTable[v2]; k > 0; --k )
     {
-      if ( dMonster[x1 + *((char *)&CrawlTable.n_1 + v8)][y1 + *(&CrawlTable.delta_1[0].x + v8)] > 0 )
+      if ( dMonster[x1 + CrawlTable[v8]][y1 + CrawlTable[v8 + 1]] > 0 )
       {
-        v3 = GetDirection(x1, y1, x1 + *((char *)&CrawlTable.n_1 + v8), y1 + *(&CrawlTable.delta_1[0].x + v8));
-        AddMissile(x1, y1, x1 + *((char *)&CrawlTable.n_1 + v8), y1 + *(&CrawlTable.delta_1[0].x + v8), v3, 7, 0, id, 1);
+        v3 = GetDirection(x1, y1, x1 + CrawlTable[v8], y1 + CrawlTable[v8 + 1]);
+        AddMissile(x1, y1, x1 + CrawlTable[v8], y1 + CrawlTable[v8 + 1], v3, 7, 0, id, 1);
       }
       v8 += 2;
     }

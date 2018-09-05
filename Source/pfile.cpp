@@ -51,11 +51,9 @@ void __fastcall pfile_436A75_reverse_name(int pnum)
 //----- (00436B28) --------------------------------------------------------
 int __fastcall pfile_get_save_num_from_name(char *name)
 {
-  const char *v2; // [esp+Ch] [ebp-8h]
   unsigned int i; // [esp+10h] [ebp-4h]
 
-  v2 = name;
-  for ( i = 0; i < 0x14 && _strcmpi(hero_names[i], v2); ++i )
+  for ( i = 0; i < 0x14 && _strcmpi(hero_names[i], name); ++i )
     ;
   return i;
 }
@@ -74,21 +72,19 @@ void __cdecl pfile_write_hero()
 }
 
 //----- (00436BF3) --------------------------------------------------------
-void __fastcall pfile_encode_hero(unsigned int a1, void *a2)
+void __fastcall pfile_encode_hero(unsigned int save_num, PkPlayerStruct *pPack)
 {
   int dwBytes; // ST24_4
   char *v3; // edx
   char *v4; // ecx
-  const void *v5; // [esp+Ch] [ebp-128h]
   char Buffer[16]; // [esp+18h] [ebp-11Ch]
   void *pbSrcDst; // [esp+28h] [ebp-10Ch]
   char a2a; // [esp+2Ch] [ebp-108h]
   int nSize; // [esp+130h] [ebp-4h]
 
-  v5 = a2;
-  if ( a1 >= 0x14 )
+  if ( save_num >= 0x14 )
     assertion_failed(258, "C:\\Diablo\\Direct\\pfile.cpp");
-  pfile_436D33(a1, &a2a);
+  pfile_436D33(save_num, &a2a);
   strcpy(Buffer, "xgr1");
   *(_DWORD *)&Buffer[5] = 0;
   *(_DWORD *)&Buffer[9] = 0;
@@ -98,7 +94,7 @@ void __fastcall pfile_encode_hero(unsigned int a1, void *a2)
   GetComputerNameA(Buffer, (LPDWORD)&nSize);
   dwBytes = codec_get_encoded_len(982);
   pbSrcDst = DiabloAllocPtr(dwBytes, 269, "C:\\Diablo\\Direct\\pfile.cpp");
-  memcpy(pbSrcDst, v5, 0x3D6u);
+  memcpy(pbSrcDst, pPack, 0x3D6u);
   codec_encode(pbSrcDst, 982, dwBytes, Buffer);
   mpqapi_write_file(v4, v3, (int)FileName);
   empty_fn_4();
@@ -276,29 +272,29 @@ bool __stdcall pfile_ui_save_create(_uiheroinfo *heroinfo)
   bool (__stdcall *v1)(int, char *); // ecx
   char v3; // al
   PkPlayerStruct pPack; // [esp+Ch] [ebp-3DCh]
-  unsigned int i; // [esp+3E4h] [ebp-4h]
+  unsigned int a1; // [esp+3E4h] [ebp-4h]
 
   if ( !heroinfo->name[0] )
     assertion_failed(384, "C:\\Diablo\\Direct\\pfile.cpp");
-  i = pfile_get_save_num_from_name(heroinfo->name);
-  if ( i == 20 )
+  a1 = pfile_get_save_num_from_name(heroinfo->name);
+  if ( a1 == 20 )
   {
-    for ( i = 0; i < 0x14 && hero_names[i][0]; ++i )
+    for ( a1 = 0; a1 < 0x14 && hero_names[a1][0]; ++a1 )
       ;
   }
-  if ( i == 20 )
+  if ( a1 == 20 )
     return 0;
-  pfile_4C922C_count = i;
+  pfile_4C922C_count = a1;
   mpqapi_remove_hash_entries(v1);
   pfile_4C922C_count = 20;
-  strncpy(hero_names[i], heroinfo->name, 0x20u);
-  hero_names[i][31] = 0;
+  strncpy(hero_names[a1], heroinfo->name, 0x20u);
+  hero_names[a1][31] = 0;
   v3 = pfile_get_player_class(heroinfo->heroclass);
   CreatePlayer(0, v3);
   strncpy(plr[0]._pName, heroinfo->name, 0x20u);
   plr[0]._pName[31] = 0;
   PackPlayer(&pPack, 0);
-  pfile_encode_hero(i, &pPack);
+  pfile_encode_hero(a1, &pPack);
   game_2_ui_player(plr, heroinfo);
   return 1;
 }

@@ -29,8 +29,8 @@ void __fastcall SetLightFX(int *x, int *y, __int16 *s_r, __int16 *s_g, int *s_b,
 //----- (00437C0F) --------------------------------------------------------
 void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
 {
-  int v4; // [esp+Ch] [ebp-54h]
-  int v5; // [esp+10h] [ebp-50h]
+  int nx; // [esp+Ch] [ebp-54h]
+  int ny; // [esp+10h] [ebp-50h]
   signed int v6; // [esp+18h] [ebp-48h]
   signed int v7; // [esp+18h] [ebp-48h]
   signed int v8; // [esp+18h] [ebp-48h]
@@ -59,8 +59,8 @@ void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
   int x; // [esp+58h] [ebp-8h]
   int v32; // [esp+5Ch] [ebp-4h]
 
-  v4 = nYPos;
-  v5 = nXPos;
+  nx = nYPos;
+  ny = nXPos;
   x = 0;
   y = 0;
   s_b = 0;
@@ -74,33 +74,33 @@ void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
     if ( x < 0 )
     {
       x += 8;
-      v5 = nXPos - 1;
+      ny = nXPos - 1;
     }
     if ( y < 0 )
     {
       y += 8;
-      v4 = nYPos - 1;
+      nx = nYPos - 1;
     }
   }
   s_r = x;
   s_g = y;
-  if ( v5 - 15 >= 0 )
+  if ( ny - 15 >= 0 )
     v11 = 15;
   else
-    v11 = v5 + 1;
-  if ( v5 + 15 <= 112 )
+    v11 = ny + 1;
+  if ( ny + 15 <= 112 )
     v20 = 15;
   else
-    v20 = 112 - v5;
-  if ( v4 - 15 >= 0 )
+    v20 = 112 - ny;
+  if ( nx - 15 >= 0 )
     v24 = 15;
   else
-    v24 = v4 + 1;
-  if ( v4 + 15 <= 112 )
+    v24 = nx + 1;
+  if ( nx + 15 <= 112 )
     v10 = 15;
   else
-    v10 = 112 - v4;
-  dTransVal[v5][v4] = 0;
+    v10 = 112 - nx;
+  dTransVal[ny][nx] = 0;
   v32 = x + 8 * y;
   for ( i = 0; i < v24; ++i )
   {
@@ -109,10 +109,10 @@ void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
       v25 = (unsigned __int8)dung_map_rgba[0][v32][i][j];
       if ( v25 < 128 )
       {
-        v28 = v4 + i;
+        v28 = nx + i;
         v6 = (unsigned __int8)dung_map_radius[nRadius][v25];
-        if ( dTransVal[j + v5][v4 + i] > v6 )
-          dTransVal[j + v5][v28] = v6;
+        if ( dTransVal[j + ny][nx + i] > v6 )
+          dTransVal[j + ny][v28] = v6;
       }
     }
   }
@@ -125,10 +125,10 @@ void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
       v25 = (unsigned __int8)dung_map_rgba[0][v32][d_b + k][l + d_g];
       if ( v25 < 128 )
       {
-        v28 = v4 - l;
+        v28 = nx - l;
         v7 = (unsigned __int8)dung_map_radius[nRadius][v25];
-        if ( dTransVal[k + v5][v4 - l] > v7 )
-          dTransVal[k + v5][v28] = v7;
+        if ( dTransVal[k + ny][nx - l] > v7 )
+          dTransVal[k + ny][v28] = v7;
       }
     }
   }
@@ -141,10 +141,10 @@ void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
       v25 = (unsigned __int8)dung_map_rgba[0][v32][d_b + m][n + d_g];
       if ( v25 < 128 )
       {
-        v28 = v4 - m;
+        v28 = nx - m;
         v8 = (unsigned __int8)dung_map_radius[nRadius][v25];
-        if ( dTransVal[v5 - n][v4 - m] > v8 )
-          dTransVal[v5 - n][v28] = v8;
+        if ( dTransVal[ny - n][nx - m] > v8 )
+          dTransVal[ny - n][v28] = v8;
       }
     }
   }
@@ -157,10 +157,10 @@ void __fastcall DoLighting(int nXPos, int nYPos, int nRadius, int Lnum)
       v25 = (unsigned __int8)dung_map_rgba[0][v32][d_b + ii][jj + d_g];
       if ( v25 < 128 )
       {
-        v28 = v4 + jj;
+        v28 = nx + jj;
         v9 = (unsigned __int8)dung_map_radius[nRadius][v25];
-        if ( dTransVal[v5 - ii][v4 + jj] > v9 )
-          dTransVal[v5 - ii][v28] = v9;
+        if ( dTransVal[ny - ii][nx + jj] > v9 )
+          dTransVal[ny - ii][v28] = v9;
       }
     }
   }
@@ -231,8 +231,6 @@ void __fastcall DoUnVision(int nXPos, int nYPos, int nRadius)
 //----- (00438312) --------------------------------------------------------
 void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doautomap, int visible)
 {
-  int v5; // [esp+10h] [ebp-38h]
-  int x; // [esp+14h] [ebp-34h]
   int v7; // [esp+18h] [ebp-30h]
   int v8; // [esp+1Ch] [ebp-2Ch]
   signed int i; // [esp+20h] [ebp-28h]
@@ -245,19 +243,17 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doau
   int y; // [esp+40h] [ebp-8h]
   signed int v17; // [esp+44h] [ebp-4h]
 
-  v5 = nYPos;
-  x = nXPos;
   if ( nXPos >= 0 && nXPos <= 112 && nYPos >= 0 && nYPos <= 112 )
   {
     if ( doautomap )
     {
       if ( dFlags[nXPos][nYPos] >= 0 )
         SetAutomapView(nXPos, nXPos);
-      dFlags[x][v5] |= 0x80u;
+      dFlags[nXPos][nYPos] |= 0x80u;
     }
     if ( visible )
-      dFlags[x][v5] |= 0x40u;
-    dFlags[x][v5] |= 2u;
+      dFlags[nXPos][nYPos] |= 0x40u;
+    dFlags[nXPos][nYPos] |= 2u;
   }
   for ( i = 0; i < 4; ++i )
   {
@@ -274,8 +270,8 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doau
         switch ( i )
         {
           case 0:
-            v7 = x + vCrawlTable[j][k];
-            y = v5 + vCrawlTable[j][k + 1];
+            v7 = nXPos + vCrawlTable[j][k];
+            y = nYPos + vCrawlTable[j][k + 1];
             if ( (signed int)vCrawlTable[j][k] > 0 && (signed int)vCrawlTable[j][k + 1] > 0 )
             {
               v13 = -1;
@@ -283,8 +279,8 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doau
             }
             break;
           case 1:
-            v7 = x - vCrawlTable[j][k];
-            y = v5 - vCrawlTable[j][k + 1];
+            v7 = nXPos - vCrawlTable[j][k];
+            y = nYPos - vCrawlTable[j][k + 1];
             if ( (signed int)vCrawlTable[j][k] > 0 && (signed int)vCrawlTable[j][k + 1] > 0 )
             {
               v17 = 1;
@@ -292,8 +288,8 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doau
             }
             break;
           case 2:
-            v7 = x + vCrawlTable[j][k];
-            y = v5 - vCrawlTable[j][k + 1];
+            v7 = nXPos + vCrawlTable[j][k];
+            y = nYPos - vCrawlTable[j][k + 1];
             if ( (signed int)vCrawlTable[j][k] > 0 && (signed int)vCrawlTable[j][k + 1] > 0 )
             {
               v13 = -1;
@@ -301,8 +297,8 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doau
             }
             break;
           case 3:
-            v7 = x - vCrawlTable[j][k];
-            y = v5 + vCrawlTable[j][k + 1];
+            v7 = nXPos - vCrawlTable[j][k];
+            y = nYPos + vCrawlTable[j][k + 1];
             if ( (signed int)vCrawlTable[j][k] > 0 && (signed int)vCrawlTable[j][k + 1] > 0 )
             {
               v17 = -1;
@@ -384,7 +380,7 @@ void __cdecl MakeLightTable()
   signed int i5; // [esp+68h] [ebp-24h]
   double v35; // [esp+6Ch] [ebp-20h]
   double v36; // [esp+6Ch] [ebp-20h]
-  BYTE *v37; // [esp+7Ch] [ebp-10h]
+  BYTE *pLightTbl_; // [esp+7Ch] [ebp-10h]
   int v38; // [esp+84h] [ebp-8h]
   unsigned __int8 v39; // [esp+88h] [ebp-4h]
   unsigned __int8 v40; // [esp+88h] [ebp-4h]
@@ -393,7 +389,7 @@ void __cdecl MakeLightTable()
   if ( pLightTbl )
     assertion_failed(603, "C:\\Diablo\\Direct\\LIGHTING.CPP");
   pLightTbl = (BYTE *)DiabloAllocPtr(6912, 604, "C:\\Diablo\\Direct\\LIGHTING.CPP");
-  v37 = pLightTbl;
+  pLightTbl_ = pLightTbl;
   v38 = 0;
   if ( light4flag )
     v7 = 3;
@@ -401,7 +397,7 @@ void __cdecl MakeLightTable()
     v7 = 15;
   for ( i = 0; v7 > i; ++i )
   {
-    *v37++ = 0;
+    *pLightTbl_++ = 0;
     for ( j = 0; j < 8; ++j )
     {
       v24 = v38 + 16 * j;
@@ -409,7 +405,7 @@ void __cdecl MakeLightTable()
       for ( k = 0; k < 16; ++k )
       {
         if ( k || j )
-          *v37++ = v24;
+          *pLightTbl_++ = v24;
         if ( v24 >= (signed int)v39 )
         {
           v39 = 0;
@@ -427,7 +423,7 @@ void __cdecl MakeLightTable()
       v40 = 8 * l + 7;
       for ( m = 0; m < 8; ++m )
       {
-        *v37++ = v25;
+        *pLightTbl_++ = v25;
         if ( v25 >= (signed int)v40 )
         {
           v40 = 0;
@@ -445,7 +441,7 @@ void __cdecl MakeLightTable()
       v41 = 16 * n + 15;
       for ( ii = 0; ii < 16; ++ii )
       {
-        *v37++ = v26;
+        *pLightTbl_++ = v26;
         if ( v26 >= (signed int)v41 )
         {
           v41 = 0;
@@ -468,46 +464,46 @@ void __cdecl MakeLightTable()
       ++v38;
   }
   for ( jj = 0; jj < 256; ++jj )
-    *v37++ = 0;
+    *pLightTbl_++ = 0;
   ptr = LoadFileInMem("PlrGFX\\Infra.TRN", 0, 647, "C:\\Diablo\\Direct\\LIGHTING.CPP");
   v30 = ptr;
   for ( kk = 0; kk < 256; ++kk )
-    *v37++ = *v30++;
+    *pLightTbl_++ = *v30++;
   mem_free_dbg(ptr, 650, "C:\\Diablo\\Direct\\LIGHTING.CPP");
   ptra = LoadFileInMem("PlrGFX\\Stone.TRN", 0, 653, "C:\\Diablo\\Direct\\LIGHTING.CPP");
   v31 = ptra;
   for ( ll = 0; ll < 256; ++ll )
-    *v37++ = *v31++;
+    *pLightTbl_++ = *v31++;
   mem_free_dbg(ptra, 656, "C:\\Diablo\\Direct\\LIGHTING.CPP");
   for ( mm = 0; mm < 8; ++mm )
   {
     for ( nn = -30; (signed int)nn < 239; ++nn )
     {
       if ( mm || nn != 226 )
-        *v37++ = nn;
+        *pLightTbl_++ = nn;
       else
-        *v37++ = 0;
+        *pLightTbl_++ = 0;
     }
-    *v37 = 0;
-    v0 = v37 + 1;
+    *pLightTbl_ = 0;
+    v0 = pLightTbl_ + 1;
     *v0++ = 0;
     *v0 = 0;
-    v37 = v0 + 1;
+    pLightTbl_ = v0 + 1;
   }
   for ( i1 = 0; i1 < 4; ++i1 )
   {
     v28 = -32;
     for ( i2 = 224; i2 < 239; i2 += 2 )
     {
-      *v37++ = v28;
+      *pLightTbl_++ = v28;
       v28 += 2;
     }
   }
   for ( i3 = 0; i3 < 6; ++i3 )
   {
     for ( i4 = -32; (signed int)i4 < 239; ++i4 )
-      *v37++ = i4;
-    *v37++ = 0;
+      *pLightTbl_++ = i4;
+    *pLightTbl_++ = 0;
   }
   for ( i5 = 0; i5 < 16; ++i5 )
   {

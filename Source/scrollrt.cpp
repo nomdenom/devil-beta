@@ -600,8 +600,8 @@ void __fastcall scrollrt_draw_clipped_dungeon(char *a1, int sx, int sy, int a4, 
   v23 = dArch[sx][sy];
   v22 = dung_map[sx][sy];
   v26 = dMonster[sx][sy];
-  v24 = dPlayer[sx - 1][sy + 111];
-  v16 = dMonster[sx - 1][sy + 111];
+  v24 = dPlayer[sx][sy - 1];
+  v16 = dMonster[sx][sy - 1];
   if ( visiondebug && v28 & 0x40 )
     Cel2DecodeHdrOnly(a1, pSquareCel, 1, 64, 0, 8);
   if ( MissilePreFlag && v28 & 1 )
@@ -612,19 +612,19 @@ void __fastcall scrollrt_draw_clipped_dungeon(char *a1, int sx, int sy, int a4, 
     {
       v14 = &dead[(v25 & 0x1F) - 1];
       v15 = (unsigned __int8)(v25 & 0xE0) >> 5;
-      screen_x = a4 - dead[(v25 & 0x1F) - 1].flags_2;
+      screen_x = a4 - dead[(v25 & 0x1F) - 1]._deadWidth2;
       if ( dead[(v25 & 0x1F) - 1]._deadtrans )
         Cel2DrawHdrLightRed(
           screen_x,
           a5,
           (char *)v14->_deadData[v15],
           v14->_deadFrame,
-          v14->flags_1,
+          v14->_deadWidth,
           0,
           8,
           v14->_deadtrans);
       else
-        Cel2DecodeHdrLight(screen_x, a5, (char *)v14->_deadData[v15], v14->_deadFrame, v14->flags_1, 0, 8);
+        Cel2DecodeHdrLight(screen_x, a5, (char *)v14->_deadData[v15], v14->_deadFrame, v14->_deadWidth, 0, 8);
     }
     if ( v29 )
       DrawClippedObject(sx, sy, a4, a5, 1, 0, 8);
@@ -1096,8 +1096,8 @@ void __fastcall scrollrt_draw_clipped_dungeon_2(char *buffer, int x, int y, int 
   v25 = dArch[x][y];
   v24 = dung_map[x][y];
   v28 = dMonster[x][y];
-  v26 = dPlayer[x - 1][y + 111];
-  v18 = dMonster[x - 1][y + 111];
+  v26 = dPlayer[x][y - 1];
+  v18 = dMonster[x][y - 1];
   if ( visiondebug && v30 & 0x40 )
     Cel2DecodeHdrOnly(buffer, pSquareCel, 1, 64, a5, 8);
   if ( MissilePreFlag && v30 & 1 )
@@ -1108,19 +1108,19 @@ void __fastcall scrollrt_draw_clipped_dungeon_2(char *buffer, int x, int y, int 
     {
       v16 = &dead[(v27 & 0x1F) - 1];
       v17 = (unsigned __int8)(v27 & 0xE0) >> 5;
-      screen_x = sx - dead[(v27 & 0x1F) - 1].flags_2;
+      screen_x = sx - dead[(v27 & 0x1F) - 1]._deadWidth2;
       if ( dead[(v27 & 0x1F) - 1]._deadtrans )
         Cel2DrawHdrLightRed(
           screen_x,
           sy,
           (char *)v16->_deadData[v17],
           v16->_deadFrame,
-          v16->flags_1,
+          v16->_deadWidth,
           a5,
           8,
           v16->_deadtrans);
       else
-        Cel2DecodeHdrLight(screen_x, sy, (char *)v16->_deadData[v17], v16->_deadFrame, v16->flags_1, a5, 8);
+        Cel2DecodeHdrLight(screen_x, sy, (char *)v16->_deadData[v17], v16->_deadFrame, v16->_deadWidth, a5, 8);
     }
     if ( v31 )
       DrawClippedObject(x, y, sx, sy, 1, a5, 8);
@@ -1510,8 +1510,8 @@ void __fastcall scrollrt_draw_dungeon(char *buffer, int x, int y, int a4, int a5
   v25 = dArch[x][y];
   v24 = dung_map[x][y];
   v28 = dMonster[x][y];
-  v26 = dPlayer[x - 1][y + 111];
-  v18 = dMonster[x - 1][y + 111];
+  v26 = dPlayer[x][y - 1];
+  v18 = dMonster[x][y - 1];
   if ( visiondebug && v30 & 0x40 )
     CelDecodeHdrOnly(buffer, pSquareCel, 1, 64, 0, a5);
   if ( MissilePreFlag && v30 & 1 )
@@ -1522,19 +1522,19 @@ void __fastcall scrollrt_draw_dungeon(char *buffer, int x, int y, int a4, int a5
     {
       v16 = &dead[(v27 & 0x1F) - 1];
       v17 = (unsigned __int8)(v27 & 0xE0) >> 5;
-      screen_x = sx - dead[(v27 & 0x1F) - 1].flags_2;
+      screen_x = sx - dead[(v27 & 0x1F) - 1]._deadWidth2;
       if ( dead[(v27 & 0x1F) - 1]._deadtrans )
         CelDrawHdrLightRed(
           screen_x,
           sy,
           (char *)v16->_deadData[v17],
           v16->_deadFrame,
-          v16->flags_1,
+          v16->_deadWidth,
           0,
           a5,
           v16->_deadtrans);
       else
-        CelDecodeHdrLightOnly(screen_x, sy, (char *)v16->_deadData[v17], v16->_deadFrame, v16->flags_1, 0, a5);
+        CelDecodeHdrLightOnly(screen_x, sy, (char *)v16->_deadData[v17], v16->_deadFrame, v16->_deadWidth, 0, a5);
     }
     if ( v31 )
       DrawObject(x, y, sx, sy, 1, 0, a5);

@@ -2,6 +2,8 @@
 require 'fileutils'
 require 'pathname'
 
+require_relative 'idx'
+
 OUTDIR = Pathname.new("Source")
 
 FileUtils.mkdir_p OUTDIR
@@ -104,7 +106,9 @@ ARGF.each_line do |l|
     if outf
         if l =~ /^(\s*)(.*)\/\/\s*REPLACE:\s*(.*)$/
             l = $1 + $3
-            puts "REPLACE: #{$2} => #{$3}"
+            $stderr.puts "REPLACE: #{$2} => #{$3}"
+        else
+            l = rewrite_line_idx l
         end
         outf.puts l
     end

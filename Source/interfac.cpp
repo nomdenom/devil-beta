@@ -19,8 +19,8 @@ void __cdecl DrawCutscene()
   CelDecodeOnly(64, 639, sgpBackCel, 1, 640);
   for ( i = 0; i < sgdwProgress; ++i )
     DrawProgress(
-      i + progress_bar_screen_pos[progress_id].x + 64,
-      progress_bar_screen_pos[progress_id].y + 160,
+      i + progress_bar_screen_pos[progress_id][0] + 64,
+      progress_bar_screen_pos[progress_id][1] + 160,
       progress_id);
   drawpanflag = 255;
   scrollrt_draw_game_screen(1);

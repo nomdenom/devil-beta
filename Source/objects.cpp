@@ -820,7 +820,7 @@ void __fastcall AddL1Door(int i, int x, int y, _object_id ot)
   if ( ot == 1 )
   {
     object[i]._oVar1 = dPiece[x][y];
-    v4 = dPiece[x - 1][y + 111];
+    v4 = dPiece[x][y - 1];
   }
   else
   {
@@ -1795,7 +1795,7 @@ void __fastcall OperateL1LDoor(int pnum, int oi, unsigned __int8 sendflag)
         ObjSetMicro(v8, dy, object[oi]._oVar1);
         if ( object[oi]._oVar2 == 50 )
         {
-          if ( dPiece[v8 - 1][dy + 111] == 396 )
+          if ( dPiece[v8][dy - 1] == 396 )
             ObjSetMicro(v8, dy - 1, 412);
           else
             ObjSetMicro(v8, dy - 1, object[oi]._oVar2);

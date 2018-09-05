@@ -89,10 +89,10 @@ void __cdecl LoadSetMap()
       LoadPreL1Dungeon("Levels\\L1Data\\SklKng1.DUN", 84, 46);
       LoadL1Dungeon("Levels\\L1Data\\SklKng2.DUN", 84, 46);
       LoadPalette("Levels\\L1Data\\L1_2.pal");
-      DRLG_AreaTrans(3, &QSRects);
-      DRLG_ListTrans(2, &unk_4C9008);
-      DRLG_AreaTrans(5, &List);
-      DRLG_ListTrans(7, &unk_4C9028);
+      DRLG_AreaTrans(3, SkelKingTrans1);
+      DRLG_ListTrans(2, SkelKingTrans2);
+      DRLG_AreaTrans(5, SkelKingTrans3);
+      DRLG_ListTrans(7, SkelKingTrans4);
       AddL1Objs(0, 0, 112, 112);
       AddSKingObjs();
       InitSKingTriggers();
@@ -101,9 +101,9 @@ void __cdecl LoadSetMap()
       LoadPreL2Dungeon("Levels\\L2Data\\Bonecha2.DUN", 69, 39);
       LoadL2Dungeon("Levels\\L2Data\\Bonecha1.DUN", 69, 39);
       LoadPalette("Levels\\L2Data\\L2_2.pal");
-      DRLG_ListTrans(5, &unk_4C9048);
-      DRLG_AreaTrans(2, &stru_4C9060);
-      DRLG_ListTrans(9, &unk_4C9068);
+      DRLG_ListTrans(5, SkelChamTrans1);
+      DRLG_AreaTrans(2, SkelChamTrans2);
+      DRLG_ListTrans(9, SkelChamTrans3);
       AddL2Objs(0, 0, 112, 112);
       AddSChamObjs();
       InitSChambTriggers();
