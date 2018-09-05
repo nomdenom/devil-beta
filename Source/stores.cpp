@@ -76,40 +76,29 @@ void __cdecl DrawSTextBack()
 
   CelDecodeOnly(408, 487, pSTextBoxCels, 1, 271);
   v0 = gpBuffer + 372123;
-  v1 = 148;
-  do
+  for (v1 = 148; v1; --v1)
   {
-    v2 = 132;
-    do
+    for (v2 = 132; v2; --v2)
     {
       *v0 = 0;
       v0 += 2;
-      --v2;
     }
-    while ( v2 );
     *v0 = 0;
     v3 = (int)(v0 - 1032);
-    v4 = 132;
-    do
+    for (v4 = 132; v4; --v4)
     {
       v5 = (_BYTE *)(v3 + 1);
       *v5 = 0;
       v3 = (int)(v5 + 1);
-      --v4;
     }
-    while ( v4 );
     v0 = (char *)(v3 - 1032);
-    --v1;
   }
-  while ( v1 );
-  v6 = 132;
-  do
+  
+  for (v6 = 132; v6; --v6)
   {
     *v0 = 0;
     v0 += 2;
-    --v6;
   }
-  while ( v6 );
   *v0 = 0;
 }
 
@@ -222,8 +211,7 @@ void __fastcall DrawSLine(int y)
   }
   v1 = &gpBuffer[v8];
   v2 = &gpBuffer[v7];
-  v3 = 3;
-  do
+  for (v3 = 3; v3; --v3)
   {
     qmemcpy(v2, v1, 4 * v10);
     v5 = &v1[4 * v10];
@@ -231,9 +219,7 @@ void __fastcall DrawSLine(int y)
     *(_WORD *)v4 = *(_WORD *)v5;
     v1 = &v5[v6 + 2];
     v2 = &v4[v6 + 2];
-    --v3;
   }
-  while ( v3 );
 }
 
 //----- (0042E9BA) --------------------------------------------------------

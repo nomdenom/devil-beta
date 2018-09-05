@@ -65,31 +65,22 @@ void __cdecl DrawDiabloMsg()
     screen_y += 12;
   }
   v0 = gpBuffer + 278979;
-  v1 = 27;
-  do
+  for (v1 = 27; v1; --v1)
   {
-    v2 = 189;
-    do
+    for (v2 = 189; v2; --v2)
     {
       *v0 = 0;
       v0 += 2;
-      --v2;
     }
-    while ( v2 );
     v3 = (int)(v0 - 1146);
-    v4 = 189;
-    do
+    for (v4 = 189; v4; --v4)
     {
       v5 = (_BYTE *)(v3 + 1);
       *v5 = 0;
       v3 = (int)(v5 + 1);
-      --v4;
     }
-    while ( v4 );
     v0 = (char *)(v3 - 1146);
-    --v1;
   }
-  while ( v1 );
   switch ( msgflag )
   {
     case 1:

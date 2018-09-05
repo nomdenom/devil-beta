@@ -79,40 +79,29 @@ void __cdecl DrawQTextBack()
 
   CelDecodeOnly(88, 487, pTextBoxCels, 1, 591);
   v0 = gpBuffer + 371803;
-  v1 = 148;
-  do
+  for (v1 = 148; v1; --v1)
   {
-    v2 = 292;
-    do
+    for (v2 = 292; v2; --v2)
     {
       *v0 = 0;
       v0 += 2;
-      --v2;
     }
-    while ( v2 );
     *v0 = 0;
     v3 = (int)(v0 - 1352);
-    v4 = 292;
-    do
+    for (v4 = 292; v4; --v4)
     {
       v5 = (_BYTE *)(v3 + 1);
       *v5 = 0;
       v3 = (int)(v5 + 1);
-      --v4;
     }
-    while ( v4 );
     v0 = (char *)(v3 - 1352);
-    --v1;
   }
-  while ( v1 );
-  v6 = 292;
-  do
+  
+  for (v6 = 292; v6; --v6)
   {
     *v0 = 0;
     v0 += 2;
-    --v6;
   }
-  while ( v6 );
   *v0 = 0;
 }
 

@@ -220,14 +220,11 @@ void __fastcall DrawView(int StartX, int StartY)
   if ( leveltype == 4 )
   {
     v2 = gpBuffer + 122944;
-    v3 = 352;
-    do
+    for (v3 = 352; v3; --v3)
     {
       memset(v2, 0, 0x280u);
       v2 += 768;
-      --v3;
     }
-    while ( v3 );
   }
   if ( zoomflag )
     DrawGame(StartX, y);
@@ -1973,8 +1970,7 @@ LABEL_8:
   v8 = &gpBuffer[v18];
   v9 = &gpBuffer[v23];
   v10 = &gpBuffer[v18 + 768];
-  v11 = 176;
-  do
+  for (v11 = 176; v11; --v11)
   {
     v12 = v22;
     do
@@ -1992,9 +1988,7 @@ LABEL_8:
     v14 = 2 * (v22 + 768);
     v10 -= v14;
     v8 -= v14;
-    --v11;
   }
-  while ( v11 );
 }
 
 //----- (0048D0B8) --------------------------------------------------------
@@ -2004,14 +1998,11 @@ void __cdecl ClearScreenBuffer()
   signed int v1; // edx
 
   v0 = gpBuffer + 122944;
-  v1 = 480;
-  do
+  for (v1 = 480; v1; --v1)
   {
     memset(v0, 0, 0x280u);
     v0 += 768;
-    --v1;
   }
-  while ( v1 );
 }
 
 //----- (0048D386) --------------------------------------------------------
@@ -2140,15 +2131,12 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
             {
               v11 = gpBuffer + 397325;
               v12 = &surface_[scrollrt_648EEC_off5];
-              v13 = 28;
-              do
+              for (v13 = 28; v13; --v13)
               {
                 qmemcpy(v12, v11, 0xE8u);
                 v11 += 768;
                 v12 += scrollrt_4DC21C_soff + 640;
-                --v13;
               }
-              while ( v13 );
             }
             if ( draw_desc )
             {
@@ -2192,101 +2180,77 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
             {
               v22 = gpBuffer + 428785;
               v23 = &surface_[scrollrt_648EDC_off1];
-              v24 = 60;
-              do
+              for (v24 = 60; v24; --v24)
               {
                 qmemcpy(v23, v22, 0x120u);
                 v22 += 768;
                 v23 += scrollrt_4DC21C_soff + 640;
-                --v24;
               }
-              while ( v24 );
             }
             if ( draw_sbar )
             {
               v25 = gpBuffer + 393741;
               v26 = &surface_[scrollrt_648EC0_off3];
-              v27 = 72;
-              do
+              for (v27 = 72; v27; --v27)
               {
                 qmemcpy(v26, v25, 0x58u);
                 v25 += 768;
                 v26 += scrollrt_4DC21C_soff + 640;
-                --v27;
               }
-              while ( v27 );
               v28 = gpBuffer + 442997;
               v29 = &surface_[scrollrt_648EB8_off4];
-              v30 = 56;
-              do
+              for (v30 = 56; v30; --v30)
               {
                 qmemcpy(v29, v28, 0x38u);
                 v28 += 768;
                 v29 += scrollrt_4DC21C_soff + 640;
-                --v30;
               }
-              while ( v30 );
             }
             if ( draw_mana )
             {
               v31 = gpBuffer + 393376;
               v32 = &surface_[scrollrt_648ED4_off2];
-              v33 = 72;
-              do
+              for (v33 = 72; v33; --v33)
               {
                 qmemcpy(v32, v31, 0x58u);
                 v31 += 768;
                 v32 += scrollrt_4DC21C_soff + 640;
-                --v33;
               }
-              while ( v33 );
             }
             if ( drawbtnflag )
             {
               v34 = gpBuffer + 397131;
               v35 = &surface_[scrollrt_648EE0_off6];
-              v36 = 119;
-              do
+              for (v36 = 119; v36; --v36)
               {
                 qmemcpy(v35, v34, 0x48u);
                 v34 += 768;
                 v35 += scrollrt_4DC21C_soff + 640;
-                --v36;
               }
-              while ( v36 );
               v37 = gpBuffer + 397678;
               v38 = &surface_[scrollrt_647730_off7];
-              v39 = 42;
-              do
+              for (v39 = 42; v39; --v39)
               {
                 qmemcpy(v38, v37, 0x48u);
                 v37 += 768;
                 v38 += scrollrt_4DC21C_soff + 640;
-                --v39;
               }
-              while ( v39 );
               v40 = gpBuffer + 463255;
               v41 = &surface_[scrollrt_648EC4_off8];
-              v42 = 32;
-              do
+              for (v42 = 32; v42; --v42)
               {
                 qmemcpy(v41, v40, 0x24u);
                 v40 += 768;
                 v41 += scrollrt_4DC21C_soff + 640;
-                --v42;
               }
-              while ( v42 );
               v43 = gpBuffer + 463695;
               v44 = &surface_[scrollrt_648ECC_off9];
-              v45 = 32;
-              do
+              for (v45 = 32; v45; --v45)
               {
                 qmemcpy(v44, v43, 0x24u);
                 v43 += 768;
                 v44 += scrollrt_4DC21C_soff + 640;
-                --v45;
               }
-              while ( v45 );
             }
           }
           error_codea = lpDDSPrimary->lpVtbl->Unlock(lpDDSPrimary, 0);

@@ -19,18 +19,15 @@ void __fastcall town_clear_upper_buf(int a1)
     v1 = (unsigned int)&v4[4 * v3 - 832 + v2];
     if ( !v2 )
     {
-      v5 = 2;
       v6 = 15;
-      do
+      for (v5 = 2; v5 != 32; v5 += 2)
       {
         if ( v1 < screen_buf_end )
           break;
         v7 = (char *)(v5 + v1);
         memset(v7, 0, 4 * v6);
         v1 = (unsigned int)&v7[4 * v6-- - 832 + v5];
-        v5 += 2;
       }
-      while ( v5 != 32 );
       return;
     }
     v2 -= 2;
@@ -70,9 +67,8 @@ void __fastcall town_clear_low_buf(int y_related)
       break;
     v2 -= 2;
   }
-  v6 = 2;
   v7 = 15;
-  do
+  for (v6 = 2; v6 != 32; v6 += 2)
   {
     if ( v1 < screen_buf_end )
     {
@@ -86,9 +82,7 @@ void __fastcall town_clear_low_buf(int y_related)
     }
     v1 = v8 - 832;
     --v7;
-    v6 += 2;
   }
-  while ( v6 != 32 );
 }
 
 //----- (0044A643) --------------------------------------------------------
@@ -1214,8 +1208,7 @@ void __fastcall T_DrawZoom(int x, int y)
   v8 = &gpBuffer[v18];
   v9 = &gpBuffer[v23];
   v10 = &gpBuffer[v18 + 768];
-  v11 = 176;
-  do
+  for (v11 = 176; v11; --v11)
   {
     v12 = v22;
     do
@@ -1233,9 +1226,7 @@ void __fastcall T_DrawZoom(int x, int y)
     v14 = 2 * (v22 + 768);
     v10 -= v14;
     v8 -= v14;
-    --v11;
   }
-  while ( v11 );
 }
 
 //----- (0044D6BD) --------------------------------------------------------

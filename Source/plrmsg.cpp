@@ -126,8 +126,7 @@ void __fastcall PrintPlrMsg(int no, int x, int y, char *str, int just)
 
   v6 = x;
   v7 = no;
-  v13 = 0;
-  do
+  for (v13 = 0; v13 != 3; v13++)
   {
     if ( !*str )
       break;
@@ -159,8 +158,6 @@ LABEL_10:
       No += fontkern[v8] + 1;
     }
     v6 += 10;
-    ++v13;
   }
-  while ( v13 != 3 );
 }
 

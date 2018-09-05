@@ -39,8 +39,7 @@ void __fastcall InvDrawSlotBack(int X, int Y, int W, int H)
   char v8; // al
 
   v4 = &gpBuffer[X + screen_y_times_768[Y]];
-  v5 = (unsigned __int16)H;
-  do
+  for (v5 = (unsigned __int16)H; v5; --v5)
   {
     v6 = (unsigned __int16)W;
     do
@@ -65,9 +64,7 @@ LABEL_9:
     }
     while ( v6 );
     v4 = &v4[-(unsigned __int16)W - 768];
-    --v5;
   }
-  while ( v5 );
 }
 
 //----- (0044F0D9) --------------------------------------------------------

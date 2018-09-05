@@ -8,15 +8,12 @@ void __fastcall InitMonsterTRN(int monst, int special)
   signed int v7; // [esp+1Ch] [ebp-8h]
 
   v2 = Monsters[monst].trans_file;
-  v3 = 256;
-  do
+  for (v3 = 256; v3; --v3)
   {
     if ( *v2 == -1 )
       *v2 = 0;
     ++v2;
-    --v3;
   }
-  while ( v3 );
   if ( special )
     v7 = 6;
   else
@@ -533,8 +530,7 @@ void __fastcall PlaceGroup(int mtype, int num, unsigned __int8 leaderf, int lead
 
   num_ = num;
   Xadded_count = 0;
-  Xtries2 = 0;
-  do
+  for (Xtries2 = 0; Xtries2 < 10; Xtries2++)
   {
     while ( Xadded_count )
     {
@@ -598,9 +594,7 @@ void __fastcall PlaceGroup(int mtype, int num, unsigned __int8 leaderf, int lead
     }
     if ( Xadded_count >= num_ )
       break;
-    ++Xtries2;
   }
-  while ( Xtries2 < 10 );
   if ( leaderf & 2 )
     monster[leader].packsize = Xadded_count;
 }

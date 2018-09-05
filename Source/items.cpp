@@ -2764,40 +2764,29 @@ void __cdecl DrawUBack()
 
   CelDecodeOnly(88, 487, pSTextBoxCels, 1, 271);
   v0 = gpBuffer + 371803;
-  v1 = 148;
-  do
+  for (v1 = 148; v1; --v1)
   {
-    v2 = 132;
-    do
+    for (v2 = 132; v2; --v2)
     {
       *v0 = 0;
       v0 += 2;
-      --v2;
     }
-    while ( v2 );
     *v0 = 0;
     v3 = (int)(v0 - 1032);
-    v4 = 132;
-    do
+    for (v4 = 132; v4; --v4)
     {
       v5 = (_BYTE *)(v3 + 1);
       *v5 = 0;
       v3 = (int)(v5 + 1);
-      --v4;
     }
-    while ( v4 );
     v0 = (char *)(v3 - 1032);
-    --v1;
   }
-  while ( v1 );
-  v6 = 132;
-  do
+  
+  for (v6 = 132; v6; --v6)
   {
     *v0 = 0;
     v0 += 2;
-    --v6;
   }
-  while ( v6 );
   *v0 = 0;
 }
 
@@ -2848,8 +2837,7 @@ void __fastcall DrawULine(int y)
 
   v1 = gpBuffer + 142170;
   v2 = &gpBuffer[screen_y_times_768[SStringY[y] + 198] + 90];
-  v3 = 3;
-  do
+  for (v3 = 3; v3; --v3)
   {
     qmemcpy(v2, v1, 0x108u);
     v5 = v1 + 264;
@@ -2857,9 +2845,7 @@ void __fastcall DrawULine(int y)
     *v4 = *v5;
     v1 = (char *)(v5 + 252);
     v2 = (char *)(v4 + 252);
-    --v3;
   }
-  while ( v3 );
 }
 
 //----- (00429968) --------------------------------------------------------

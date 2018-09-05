@@ -689,16 +689,13 @@ void __fastcall DrawFlask(char *Xbuf, int a2, int Xbufof, char *Xgbuf, int Xgbuf
   v8 = a6;
   do
   {
-    v9 = 59;
-    do
+    for (v9 = 59; v9; --v9)
     {
       v10 = *v6++;
       if ( v10 )
         *v7 = v10;
       ++v7;
-      --v9;
     }
-    while ( v9 );
     v6 = &v6[a2 - 59];
     v7 += 709;
     --v8;
