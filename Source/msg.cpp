@@ -1809,7 +1809,7 @@ BOOL __fastcall delta_get_item(TCmdGItem *pI, unsigned __int8 bLevel)
   }
   if ( (((unsigned __int16)pI->wCI >> 8) & 0x80u) == 0 )
     return 0;
-  assert(0 < (signed int)bLevel, 764, "msg.cpp");
+  assert((signed int)bLevel > 0, 764, "msg.cpp");
   v4 = sgLevels[bLevel].item;
   v6 = 0;
   while ( v6 < 127 )

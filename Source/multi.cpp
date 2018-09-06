@@ -154,7 +154,7 @@ void __fastcall multi_send_msg_packet(int a1, unsigned __int8 *a2, unsigned __in
   v10 = plr[myplr]._ptargx;
   v11 = plr[myplr]._ptargy;
   v15 = len + 8;
-  assert(v15 < gdwNormalMsgSize, 265, "multi.cpp");
+  assert(gdwNormalMsgSize > v15, 265, "multi.cpp");
   v13 = v15;
   memcpy(&v14, packet, len);
   v16 = 1;

@@ -1600,7 +1600,7 @@ BOOL __fastcall PlayerMHit(int pnum, int m, int dist, int mind, int maxd, int mt
   if ( m == -1 )
     v8 = 100 - (v21 >> 1);
   else
-    v8 = (unsigned __int8)monster[m].mHit + 30 + 2 * (monster[m].mLevel - plr[pnum]._pLevel) - v21;
+    v8 = monster[m].mHit + 30 + 2 * (monster[m].mLevel - plr[pnum]._pLevel) - v21;
   v20 = v8 - 2 * dist;
   if ( v20 < 10 )
     v20 = 10;

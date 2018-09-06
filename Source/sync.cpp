@@ -223,7 +223,7 @@ void __fastcall sync_monster_data(int pnum, TSyncMonster *packet)
   {
     for ( j = 0; nummonsters > j && monstactive[j] != i; ++j )
       ;
-    assert(j < nummonsters, 240, "sync.cpp");
+    assert(nummonsters > j, 240, "sync.cpp");
     v2 = abs(plr[myplr].WorldY - monster[i]._my);
     v8 = abs(plr[myplr].WorldX - monster[i]._mx) + v2;
     if ( v8 > 0xFF )
