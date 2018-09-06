@@ -11,10 +11,8 @@ int __fastcall codec_decode(void *pbSrcDst, int size, char *pszPassword)
   int i; // [esp+C0h] [ebp-8h]
 
   pbSrcDst_ = (unsigned __int8 *)pbSrcDst;
-  if ( !pbSrcDst )
-    assertion_failed(130, "C:\\Diablo\\Direct\\CODEC.CPP");
-  if ( !pszPassword )
-    assertion_failed(131, "C:\\Diablo\\Direct\\CODEC.CPP");
+  assert(pbSrcDst, 130, "CODEC.CPP");
+  assert(pszPassword, 131, "CODEC.CPP");
   codec_init_key(0, pszPassword);
   if ( (unsigned int)size <= 8 )
     return 0;
@@ -108,8 +106,7 @@ int __fastcall codec_get_encoded_len(int dwSrcBytes)
   int v2; // [esp+Ch] [ebp-4h]
 
   v2 = dwSrcBytes;
-  if ( !dwSrcBytes )
-    assertion_failed(230, "C:\\Diablo\\Direct\\CODEC.CPP");
+  assert(dwSrcBytes, 230, "CODEC.CPP");
   if ( dwSrcBytes & 0x3F )
     v2 = 64 - (dwSrcBytes & 0x3F) + dwSrcBytes;
   return v2 + 8;
@@ -130,10 +127,8 @@ void __fastcall codec_encode(void *pbSrcDst, int size, int size_64, char *pszPas
 
   dwSrcBytes = size;
   v6 = pbSrcDst;
-  if ( !pbSrcDst )
-    assertion_failed(241, "C:\\Diablo\\Direct\\CODEC.CPP");
-  if ( !pszPassword )
-    assertion_failed(242, "C:\\Diablo\\Direct\\CODEC.CPP");
+  assert(pbSrcDst, 241, "CODEC.CPP");
+  assert(pszPassword, 242, "CODEC.CPP");
   if ( codec_get_encoded_len(size) != size_64 )
     TermMsg("Invalid encode parameters");
   codec_init_key(1, pszPassword);

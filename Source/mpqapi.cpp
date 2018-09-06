@@ -133,10 +133,8 @@ void __fastcall mpqapi_remove_hash_entries(bool (__stdcall *fnGetName)(int, char
   char *pszArchive; // [esp+128h] [ebp+8h]
   int (__stdcall *v10)(int, char *); // [esp+12Ch] [ebp+Ch]
 
-  if ( !pszArchive )
-    assertion_failed(529, "C:\\Diablo\\Direct\\mpqapi.cpp");
-  if ( !v10 )
-    assertion_failed(530, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  assert(pszArchive, 529, "mpqapi.cpp");
+  assert(v10, 530, "mpqapi.cpp");
   if ( mpqapi_open_archive(pszArchive, 0) )
   {
     v6 = 0;
@@ -295,14 +293,13 @@ BOOL __fastcall mpqapi_write_file_contents(char *pszName, char *pbData, int dwLe
     if ( !v13 )
     {
       nNumberOfBytesToWrite = 4 * v19 + 4;
-      lpBuffer = DiabloAllocPtr(nNumberOfBytesToWrite, 627, "C:\\Diablo\\Direct\\mpqapi.cpp");
+      lpBuffer = DiabloAllocPtr(nNumberOfBytesToWrite, 627, "mpqapi.cpp");
       memset(lpBuffer, 0, nNumberOfBytesToWrite);
       if ( !WriteFile(hFile, lpBuffer, nNumberOfBytesToWrite, &nNumberOfBytesToWrite, 0) )
         goto LABEL_37;
       v15 += nNumberOfBytesToWrite;
     }
-    if ( !lpBuffer )
-      assertion_failed(635, "C:\\Diablo\\Direct\\mpqapi.cpp");
+    assert(lpBuffer, 635, "mpqapi.cpp");
     *((_DWORD *)lpBuffer + v13) = v15;
     encrypt_encrypt_block(mpq_buf, NumberOfBytesWritten & 0xFFFFFFFC, v18 + v13);
     if ( !WriteFile(hFile, mpq_buf, NumberOfBytesWritten, (LPDWORD)&NumberOfBytesWritten, 0) )
@@ -314,8 +311,7 @@ BOOL __fastcall mpqapi_write_file_contents(char *pszName, char *pbData, int dwLe
       dwLen -= 4096;
     v15 += NumberOfBytesWritten;
   }
-  if ( !lpBuffer )
-    assertion_failed(653, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  assert(lpBuffer, 653, "mpqapi.cpp");
   *((_DWORD *)lpBuffer + v13) = v15;
   encrypt_encrypt_block(lpBuffer, nNumberOfBytesToWrite, v18 - 1);
   if ( SetFilePointer(hFile, -v15, 0, 1u) == -1
@@ -324,13 +320,12 @@ BOOL __fastcall mpqapi_write_file_contents(char *pszName, char *pbData, int dwLe
   {
 LABEL_37:
     if ( lpBuffer )
-      mem_free_dbg(lpBuffer, 679, "C:\\Diablo\\Direct\\mpqapi.cpp");
+      mem_free_dbg(lpBuffer, 679, "mpqapi.cpp");
     return 0;
   }
-  mem_free_dbg(lpBuffer, 662, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  mem_free_dbg(lpBuffer, 662, "mpqapi.cpp");
   lpBuffer = 0;
-  if ( pBlk->sizealloc < v15 )
-    assertion_failed(666, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  assert(pBlk->sizealloc >= v15, 666, "mpqapi.cpp");
   if ( pBlk->sizealloc > v15 )
   {
     block_size = pBlk->sizealloc - v15;

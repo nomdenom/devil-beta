@@ -1,8 +1,7 @@
 //----- (0044E3D0) --------------------------------------------------------
 void __cdecl LoadDebugGFX()
 {
-  if ( pSquareCel )
-    assertion_failed(32, "C:\\Diablo\\Direct\\DEBUG.CPP");
+  assert(!pSquareCel, 32, "DEBUG.CPP");
 }
 
 //----- (0044E401) --------------------------------------------------------

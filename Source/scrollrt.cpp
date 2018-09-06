@@ -43,8 +43,7 @@ void __fastcall DrawMissile(int x, int y, int sx, int sy, int a5, int a6, int de
         }
         else
         {
-          if ( !missile[v10]._miAnimData )
-            assertion_failed(142, "C:\\Diablo\\Direct\\SCROLLRT.CPP");
+          assert(missile[v10]._miAnimData, 142, "SCROLLRT.CPP");
           CelDrawHdrOnly(
             screen_xa,
             screen_ya,
@@ -89,8 +88,7 @@ void __fastcall DrawMissile(int x, int y, int sx, int sy, int a5, int a6, int de
       }
       else
       {
-        if ( !missile[v9]._miAnimData )
-          assertion_failed(121, "C:\\Diablo\\Direct\\SCROLLRT.CPP");
+        assert(missile[v9]._miAnimData, 121, "SCROLLRT.CPP");
         CelDrawHdrOnly(
           screen_x,
           screen_y,
@@ -1706,8 +1704,7 @@ void __fastcall DrawPlayer(int pnum, int x, int y, int px, int py, int animdata,
       CelDecodeClr(165, px, py, (char *)animdata, animframe, animwidth, a9, a10);
     if ( myplr == pnum )
     {
-      if ( !animdata )
-        assertion_failed(246, "C:\\Diablo\\Direct\\SCROLLRT.CPP");
+      assert(animdata, 246, "SCROLLRT.CPP");
       CelDrawHdrOnly(px, py, (char *)animdata, animframe, animwidth, a9, a10);
     }
     else if ( dFlags[x][y] & 0x40 && (!plr[myplr]._pInfraFlag || light_table_index <= 8) )
@@ -1779,8 +1776,7 @@ void __fastcall DrawObject(int x, int y, int a3, int a4, int pre_flag, int a6, i
   }
   else
   {
-    if ( !object[v10]._oAnimData )
-      assertion_failed(327, "C:\\Diablo\\Direct\\SCROLLRT.CPP");
+    assert(object[v10]._oAnimData, 327, "SCROLLRT.CPP");
     CelDrawHdrOnly(
       screen_x,
       screen_y,
@@ -2089,7 +2085,7 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
         if ( error_code != DDERR_WASSTILLDRAWING && error_code != DDERR_SURFACEBUSY )
         {
           if ( error_code )
-            DDErrDlg(error_code, 1940, "C:\\Diablo\\Direct\\SCROLLRT.CPP");
+            DDErrDlg(error_code, 1940, "SCROLLRT.CPP");
           surface_ = (char *)v54.lpSurface;
           if ( v54.lPitch - 640 != scrollrt_4DC21C_soff || scrollrt_4DC21C_soff == -1 )
           {
@@ -2255,7 +2251,7 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
           }
           error_codea = lpDDSPrimary->lpVtbl->Unlock(lpDDSPrimary, 0);
           if ( error_codea )
-            DDErrDlg(error_codea, 2184, "C:\\Diablo\\Direct\\SCROLLRT.CPP");
+            DDErrDlg(error_codea, 2184, "SCROLLRT.CPP");
           DrawFPS();
         }
       }

@@ -11,16 +11,12 @@ BOOL __fastcall ReadWaveFile(int handle, WAVEFORMATEX *wf, int *len)
   int v13; // [esp+2Ch] [ebp-10h]
   int v14; // [esp+38h] [ebp-4h]
 
-  if ( !handle )
-    assertion_failed(52, "C:\\Diablo\\Direct\\wave.cpp");
-  if ( !wf )
-    assertion_failed(53, "C:\\Diablo\\Direct\\wave.cpp");
-  if ( !len )
-    assertion_failed(54, "C:\\Diablo\\Direct\\wave.cpp");
+  assert(handle, 52, "wave.cpp");
+  assert(wf, 53, "wave.cpp");
+  assert(len, 54, "wave.cpp");
   if ( !SFileReadFile(handle, (int)&v12, 12, (int)&v14, 0) )
     return 0;
-  if ( v14 != 12 )
-    assertion_failed(60, "C:\\Diablo\\Direct\\wave.cpp");
+  assert(v14 == 12, 60, "wave.cpp");
   if ( v12 != 'FFIR' || v13 != 'EVAW' )
     return 0;
   if ( !WReadFile(handle, ' tmf', len) )
@@ -29,8 +25,7 @@ BOOL __fastcall ReadWaveFile(int handle, WAVEFORMATEX *wf, int *len)
     return 0;
   if ( !SFileReadFile(handle, (int)&v6, 16, (int)&v14, 0) )
     return 0;
-  if ( v14 != 16 )
-    assertion_failed(77, "C:\\Diablo\\Direct\\wave.cpp");
+  assert(v14 == 16, 77, "wave.cpp");
   if ( SFileSetFilePointer(handle, *len - 16, 0, 1) == -1 )
     return 0;
   wf->wFormatTag = v6;
@@ -55,8 +50,7 @@ BOOL __fastcall WReadFile(int hsFile, DWORD tag, void *a3)
   {
     if ( !SFileReadFile(hsFile, (int)&v8, 8, (int)&v7, 0) )
       return 0;
-    if ( v7 != 8 )
-      assertion_failed(28, "C:\\Diablo\\Direct\\wave.cpp");
+    assert(v7 == 8, 28, "wave.cpp");
     if ( v8 == tag )
       break;
     v4 = SFileSetFilePointer(hsFile, v9, 0, 1);

@@ -47,7 +47,7 @@ void __fastcall LoadL1Dungeon(char *sFileName, int vx, int vy)
   dmaxx = 96;
   dmaxy = 96;
   DRLG_InitTrans();
-  pMap = LoadFileInMem(pszName, 0, 721, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+  pMap = LoadFileInMem(pszName, 0, 721, "DRLG_L1.CPP");
   for ( i = 0; i < 40; ++i )
   {
     for ( j = 0; j < 40; ++j )
@@ -82,7 +82,7 @@ void __fastcall LoadL1Dungeon(char *sFileName, int vx, int vy)
   DRLG_InitL1Vals();
   SetMapMonsters((char *)pMap, 0, 0);
   SetMapObjects((char *)pMap, 0, 0);
-  mem_free_dbg(pMap, 763, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+  mem_free_dbg(pMap, 763, "DRLG_L1.CPP");
 }
 
 //----- (0049B0F5) --------------------------------------------------------
@@ -267,7 +267,7 @@ void __fastcall LoadPreL1Dungeon(char *sFileName, int vx, int vy)
   dminy = 16;
   dmaxx = 96;
   dmaxy = 96;
-  ptr = LoadFileInMem(sFileName, 0, 780, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+  ptr = LoadFileInMem(sFileName, 0, 780, "DRLG_L1.CPP");
   for ( i = 0; i < 40; ++i )
   {
     for ( j = 0; j < 40; ++j )
@@ -301,7 +301,7 @@ void __fastcall LoadPreL1Dungeon(char *sFileName, int vx, int vy)
     for ( n = 0; n < 40; ++n )
       pdungeon[n][m] = dungeon[n][m];
   }
-  mem_free_dbg(ptr, 814, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+  mem_free_dbg(ptr, 814, "DRLG_L1.CPP");
 }
 
 //----- (0049B774) --------------------------------------------------------
@@ -327,23 +327,23 @@ void __cdecl DRLG_LoadL1SP()
   setloadflag = 0;
   if ( quests[1]._qlevel == currlevel )
   {
-    pSetPiece = LoadFileInMem("Levels\\L1Data\\rnd6.DUN", 0, 626, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+    pSetPiece = LoadFileInMem("Levels\\L1Data\\rnd6.DUN", 0, 626, "DRLG_L1.CPP");
     setloadflag = 1;
   }
   else if ( quests[0]._qlevel != currlevel || gbMaxPlayers != 1 )
   {
     if ( quests[4]._qlevel == currlevel )
     {
-      pSetPiece = LoadFileInMem("Levels\\L1Data\\Hero2.DUN", 0, 637, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+      pSetPiece = LoadFileInMem("Levels\\L1Data\\Hero2.DUN", 0, 637, "DRLG_L1.CPP");
       setloadflag = 1;
     }
   }
   else
   {
     if ( quests[0]._qactive == 2 )
-      pSetPiece = LoadFileInMem("Levels\\L1Data\\SKngDO.DUN", 0, 631, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+      pSetPiece = LoadFileInMem("Levels\\L1Data\\SKngDO.DUN", 0, 631, "DRLG_L1.CPP");
     else
-      pSetPiece = LoadFileInMem("Levels\\L1Data\\SKngDC.DUN", 0, 633, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+      pSetPiece = LoadFileInMem("Levels\\L1Data\\SKngDC.DUN", 0, 633, "DRLG_L1.CPP");
     setloadflag = 1;
   }
 }
@@ -351,7 +351,7 @@ void __cdecl DRLG_LoadL1SP()
 //----- (0049B8FB) --------------------------------------------------------
 void __cdecl DRLG_FreeL1SP()
 {
-  mem_free_dbg(pSetPiece, 645, "C:\\Diablo\\Direct\\DRLG_L1.CPP");
+  mem_free_dbg(pSetPiece, 645, "DRLG_L1.CPP");
   pSetPiece = 0;
 }
 

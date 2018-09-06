@@ -4,14 +4,10 @@ int __cdecl msg_wait_resync()
   int v0; // ST20_4
   int result; // eax
 
-  if ( !ghMainWnd )
-    assertion_failed(294, "C:\\Diablo\\Direct\\msg.cpp");
-  if ( sgpMegaPkt )
-    assertion_failed(295, "C:\\Diablo\\Direct\\msg.cpp");
-  if ( sgpCurrPkt )
-    assertion_failed(296, "C:\\Diablo\\Direct\\msg.cpp");
-  if ( dword_5FE158 < 0 )
-    assertion_failed(297, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(ghMainWnd, 294, "msg.cpp");
+  assert(!sgpMegaPkt, 295, "msg.cpp");
+  assert(!sgpCurrPkt, 296, "msg.cpp");
+  assert(dword_5FE158 >= 0, 297, "msg.cpp");
   msg_get_next_packet();
   gbBufferMsgs = 1;
   sgbDeltaChunks = -1;
@@ -51,7 +47,7 @@ TMegaPkt *__cdecl msg_get_next_packet()
   TMegaPkt *result; // eax
   TMegaPkt *i; // [esp+Ch] [ebp-4h]
 
-  sgpCurrPkt = (TMegaPkt *)DiabloAllocPtr(32008, 162, "C:\\Diablo\\Direct\\msg.cpp");
+  sgpCurrPkt = (TMegaPkt *)DiabloAllocPtr(32008, 162, "msg.cpp");
   sgpCurrPkt->pNext = 0;
   sgpCurrPkt->dwSpaceLeft = 32000;
   for ( i = (TMegaPkt *)&sgpMegaPkt; i->pNext; i = i->pNext )
@@ -67,7 +63,7 @@ void __cdecl msg_free_packets()
   while ( sgpMegaPkt )
   {
     sgpCurrPkt = sgpMegaPkt->pNext;
-    mem_free_dbg(sgpMegaPkt, 177, "C:\\Diablo\\Direct\\msg.cpp");
+    mem_free_dbg(sgpMegaPkt, 177, "msg.cpp");
     sgpMegaPkt = sgpCurrPkt;
   }
 }
@@ -113,15 +109,12 @@ void __cdecl msg_process_net_packets()
 {
   if ( msg_5FF8B4_isprocessing )
   {
-    if ( sgpMegaPkt )
-      assertion_failed(345, "C:\\Diablo\\Direct\\msg.cpp");
+    assert(!sgpMegaPkt, 345, "msg.cpp");
   }
   else
   {
-    if ( currlevel )
-      assertion_failed(349, "C:\\Diablo\\Direct\\msg.cpp");
-    if ( plr[myplr].plrlevel )
-      assertion_failed(350, "C:\\Diablo\\Direct\\msg.cpp");
+    assert(!currlevel, 349, "msg.cpp");
+    assert(!plr[myplr].plrlevel, 350, "msg.cpp");
     gbBufferMsgs = 2;
     msg_pre_packet();
     gbBufferMsgs = 0;
@@ -156,8 +149,7 @@ void __cdecl msg_pre_packet()
       }
       else
       {
-        if ( pnum >= 4 )
-          assertion_failed(200, "C:\\Diablo\\Direct\\msg.cpp");
+        assert(pnum < 4, 200, "msg.cpp");
         v1 = ParseCmd(pnum, v3);
         v3 += v1;
         v2 -= v1;
@@ -178,7 +170,7 @@ void __fastcall DeltaExportData(int pnum)
   PkPlayerStruct *buffer; // [esp+14h] [ebp-Ch]
   signed int i; // [esp+1Ch] [ebp-4h]
 
-  buffer = (PkPlayerStruct *)DiabloAllocPtr(5814, 512, "C:\\Diablo\\Direct\\msg.cpp");
+  buffer = (PkPlayerStruct *)DiabloAllocPtr(5814, 512, "msg.cpp");
   for ( i = 0; i < 17; ++i )
   {
     v1 = DeltaExportItem(&buffer->destParam1, &sgLevels[i]);
@@ -191,7 +183,7 @@ void __fastcall DeltaExportData(int pnum)
   v6 = msg_comp_level(&buffer->destAction, (int)v5);
   multi_41D36B(pnum, 78, buffer, v6);
   multi_41D36B(pnum, 79, buffer, 1);
-  mem_free_dbg(buffer, 535, "C:\\Diablo\\Direct\\msg.cpp");
+  mem_free_dbg(buffer, 535, "msg.cpp");
 }
 
 //----- (00494B0F) --------------------------------------------------------
@@ -440,8 +432,7 @@ void __cdecl DeltaSaveLevel()
     if ( i != myplr )
       plr[i]._pGFXLoad = 0;
   }
-  if ( currlevel >= 0x11u )
-    assertion_failed(887, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(currlevel < 0x11u, 887, "msg.cpp");
   plr[myplr]._pLvlVisited[currlevel] = 1;
   delta_leave_sync(currlevel);
 }
@@ -502,8 +493,7 @@ void __cdecl DeltaLoadLevel()
                sgLevels[currlevel].item[ia].wIndx,
                sgLevels[currlevel].item[ia].wCI,
                sgLevels[currlevel].item[ia].dwSeed);
-        if ( ii == -1 )
-          assertion_failed(945, "C:\\Diablo\\Direct\\msg.cpp");
+        assert(ii != -1, 945, "msg.cpp");
         if ( dItem[item[ii]._ix][item[ii]._iy] == ii + 1 )
           dItem[item[ii]._ix][item[ii]._iy] = 0;
         DeleteItem(ii, ia);
@@ -800,11 +790,9 @@ void __fastcall NetSendCmdString(int a1, const char *pszStr)
   char v5[81]; // [esp+15h] [ebp-57h]
   size_t v6; // [esp+68h] [ebp-4h]
 
-  if ( !pszStr )
-    assertion_failed(1278, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(pszStr, 1278, "msg.cpp");
   v6 = strlen(pszStr);
-  if ( v6 >= 0x50 )
-    assertion_failed(1282, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(v6 < 0x50, 1282, "msg.cpp");
   a2 = 81;
   strcpy(v5, pszStr);
   multi_send_msg_packet(a1, (unsigned __int8 *)&a2, v6 + 2);
@@ -830,8 +818,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
   switch ( *pCmd )
   {
     case CMD_WALKXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1356, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1356, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 1u);
@@ -1007,8 +994,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 18;
     case CMD_ATTACKXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1576, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1576, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 0);
@@ -1018,8 +1004,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_RATTACKXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1604, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1604, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1029,8 +1014,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_SPELLXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1618, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1618, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1043,8 +1027,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_TSPELLXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1635, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1635, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1057,8 +1040,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_OPOBJXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1652, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1652, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         if ( object[*(unsigned __int16 *)(pCmd + 3)]._oSolidFlag || object[*(unsigned __int16 *)(pCmd + 3)]._oDoorFlag )
@@ -1070,8 +1052,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_DISARMXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1668, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1668, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         if ( object[*(unsigned __int16 *)(pCmd + 3)]._oSolidFlag || object[*(unsigned __int16 *)(pCmd + 3)]._oDoorFlag )
@@ -1083,8 +1064,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_ATTACKID:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1696, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1696, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         v5 = abs(plr[pnum].WorldX - monster[*(unsigned __int16 *)(pCmd + 1)]._mfutx);
@@ -1100,8 +1080,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_ATTACKPID:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1712, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1712, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, plr[*(unsigned __int16 *)(pCmd + 1)]._px, plr[*(unsigned __int16 *)(pCmd + 1)]._py, 0);
@@ -1110,8 +1089,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_RATTACKID:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1725, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1725, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1120,8 +1098,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_RATTACKPID:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1738, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1738, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1130,8 +1107,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_SPELLID:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1751, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1751, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1143,8 +1119,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_SPELLPID:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1767, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1767, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1156,8 +1131,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_TSPELLID:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1783, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1783, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1169,8 +1143,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_TSPELLPID:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1799, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1799, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1193,8 +1166,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_OPOBJT:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1684, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1684, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         plr[pnum].destAction = 18;
@@ -1210,8 +1182,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_TALKXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1852, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1852, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 0);
@@ -1308,12 +1279,10 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 1;
     case CMD_REQUESTGITEM:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1434, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1434, "msg.cpp");
       if ( gbBufferMsgs != 1 && msg_49AC05(plr[pnum].plrlevel) )
       {
-        if ( plr[myplr].plrlevel != currlevel )
-          assertion_failed(1441, "C:\\Diablo\\Direct\\msg.cpp");
+        assert(plr[myplr].plrlevel == currlevel, 1441, "msg.cpp");
         v16 = FindGetItem(*((unsigned __int16 *)pCmd + 3), *((_WORD *)pCmd + 4), *(_DWORD *)(pCmd + 10));
         if ( v16 != -1 && !item[v16]._isin )
         {
@@ -1331,12 +1300,10 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 25;
     case CMD_REQUESTAGITEM:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1493, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1493, "msg.cpp");
       if ( gbBufferMsgs != 1 && msg_49AC05(plr[pnum].plrlevel) )
       {
-        if ( plr[myplr].plrlevel != currlevel )
-          assertion_failed(1500, "C:\\Diablo\\Direct\\msg.cpp");
+        assert(plr[myplr].plrlevel == currlevel, 1500, "msg.cpp");
         v15 = FindGetItem(*((unsigned __int16 *)pCmd + 3), *((_WORD *)pCmd + 4), *(_DWORD *)(pCmd + 10));
         if ( v15 != -1 && !item[v15]._isin )
         {
@@ -1354,8 +1321,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 25;
     case CMD_GOTOGETITEM:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1421, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1421, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 0);
@@ -1364,8 +1330,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_GOTOAGETITEM:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1480, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1480, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 0);
@@ -1458,8 +1423,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 2;
     case CMD_PLRDAMAGE:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1970, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1970, "msg.cpp");
       if ( (unsigned __int8)pCmd[1] == myplr && gbBufferMsgs != 1 )
       {
         drawmanaflag = 1;
@@ -1525,8 +1489,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
         multi_player_joins(pnum, (TCmdPlrInfoHdr *)pCmd, 0);
       return *(unsigned __int16 *)(pCmd + 3) + 5;
     case CMD_SATTACKXY:
-      if ( gbBufferMsgs == 2 )
-        assertion_failed(1590, "C:\\Diablo\\Direct\\msg.cpp");
+      assert(gbBufferMsgs != 2, 1590, "msg.cpp");
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1641,12 +1604,9 @@ void __fastcall msg_send_packet(int pnum, void *packet, int dwSize)
   char packeta; // [esp+14h] [ebp-4h]
   char v5; // [esp+15h] [ebp-3h]
 
-  if ( (unsigned int)pnum >= 4 )
-    assertion_failed(214, "C:\\Diablo\\Direct\\msg.cpp");
-  if ( !packet )
-    assertion_failed(215, "C:\\Diablo\\Direct\\msg.cpp");
-  if ( dwSize > (unsigned int)gdwLargestMsgSize )
-    assertion_failed(216, "C:\\Diablo\\Direct\\msg.cpp");
+  assert((unsigned int)pnum < 4, 214, "msg.cpp");
+  assert(packet, 215, "msg.cpp");
+  assert(dwSize <= (unsigned int)gdwLargestMsgSize, 216, "msg.cpp");
   if ( pnum != sgnCurrMegaPlayer )
   {
     sgnCurrMegaPlayer = pnum;
@@ -1654,12 +1614,10 @@ void __fastcall msg_send_packet(int pnum, void *packet, int dwSize)
     v5 = pnum;
     msg_send_packet(pnum, &packeta, 2);
   }
-  if ( !sgpCurrPkt )
-    assertion_failed(228, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(sgpCurrPkt, 228, "msg.cpp");
   if ( sgpCurrPkt->dwSpaceLeft < (unsigned int)dwSize )
     msg_get_next_packet();
-  if ( sgpCurrPkt->dwSpaceLeft < (unsigned int)dwSize )
-    assertion_failed(231, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(sgpCurrPkt->dwSpaceLeft >= (unsigned int)dwSize, 231, "msg.cpp");
   memcpy((char *)&sgpCurrPkt[1] - sgpCurrPkt->dwSpaceLeft, packet, dwSize);
   sgpCurrPkt->dwSpaceLeft -= dwSize;
 }
@@ -1667,14 +1625,12 @@ void __fastcall msg_send_packet(int pnum, void *packet, int dwSize)
 //----- (0049A299) --------------------------------------------------------
 int __fastcall msg_49A299_on_dlevel(int pnum, char *pCmd)
 {
-  if ( myplr == pnum )
-    assertion_failed(569, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(myplr != pnum, 569, "msg.cpp");
   if ( dword_4DCFB0 == -1 )
   {
     if ( *pCmd != 61 || *(_WORD *)(pCmd + 1) )
       return *(unsigned __int16 *)(pCmd + 3) + 5;
-    if ( sgbDeltaChunks )
-      assertion_failed(581, "C:\\Diablo\\Direct\\msg.cpp");
+    assert(!sgbDeltaChunks, 581, "msg.cpp");
     dword_4DCFB0 = pnum;
     dword_649D20 = 0;
     byte_6635F0 = *pCmd;
@@ -1696,8 +1652,7 @@ int __fastcall msg_49A299_on_dlevel(int pnum, char *pCmd)
       byte_6635F0 = *pCmd;
     }
   }
-  if ( *(unsigned __int16 *)(pCmd + 1) != dword_649D20 )
-    assertion_failed(612, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(*(unsigned __int16 *)(pCmd + 1) == dword_649D20, 612, "msg.cpp");
   memcpy(&sgRecvBuf[*(unsigned __int16 *)(pCmd + 1)], pCmd + 5, *(unsigned __int16 *)(pCmd + 3));
   dword_649D20 += *(unsigned __int16 *)(pCmd + 3);
   return *(unsigned __int16 *)(pCmd + 3) + 5;
@@ -1854,8 +1809,7 @@ BOOL __fastcall delta_get_item(TCmdGItem *pI, unsigned __int8 bLevel)
   }
   if ( (((unsigned __int16)pI->wCI >> 8) & 0x80u) == 0 )
     return 0;
-  if ( (signed int)bLevel <= 0 )
-    assertion_failed(764, "C:\\Diablo\\Direct\\msg.cpp");
+  assert(0 < (signed int)bLevel, 764, "msg.cpp");
   v4 = sgLevels[bLevel].item;
   v6 = 0;
   while ( v6 < 127 )

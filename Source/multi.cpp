@@ -6,10 +6,8 @@ void __fastcall NetSendLoPri(unsigned __int8 *pbMsg, unsigned __int8 bLen)
 
   size = bLen;
   packet = pbMsg;
-  if ( !sgbNetInited )
-    assertion_failed(173, "C:\\Diablo\\Direct\\multi.cpp");
-  if ( bLen > (unsigned int)(gdwNormalMsgSize - 8) )
-    assertion_failed(177, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(sgbNetInited, 173, "multi.cpp");
+  assert(bLen <= (unsigned int)(gdwNormalMsgSize - 8), 177, "multi.cpp");
   multi_copy_packet(packet_5FFCD8, pbMsg, bLen);
   multi_copy_packet(packet_5FF8D0, packet, size);
 }
@@ -45,20 +43,17 @@ void __fastcall NetSendHiPri_1(void *packet, BYTE size)
   int v15; // [esp+218h] [ebp-8h]
   char *bLen; // [esp+21Ch] [ebp-4h]
 
-  if ( !sgbNetInited )
-    assertion_failed(186, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(sgbNetInited, 186, "multi.cpp");
   if ( packet )
   {
-    if ( size > (unsigned int)(gdwNormalMsgSize - 8) )
-      assertion_failed(189, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(size <= (unsigned int)(gdwNormalMsgSize - 8), 189, "multi.cpp");
     multi_copy_packet(&pbMsg, packet, size);
     multi_copy_packet(packet_5FF8D0, packet, size);
   }
   if ( !dword_5FF8BC )
   {
     dword_5FF8BC = 1;
-    if ( (unsigned int)myplr >= 4 )
-      assertion_failed(200, "C:\\Diablo\\Direct\\multi.cpp");
+    assert((unsigned int)myplr < 4, 200, "multi.cpp");
     v11 = 26992;
     v7 = plr[myplr].WorldX;
     v8 = plr[myplr].WorldY;
@@ -119,12 +114,10 @@ void __fastcall NetSendHiPri(unsigned __int8 *pbMsg, unsigned __int8 bLen)
 //----- (0041C4E2) --------------------------------------------------------
 void __fastcall multi_recv_packet(void *packet, BYTE size, int *a3)
 {
-  if ( !sgbNetInited )
-    assertion_failed(235, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(sgbNetInited, 235, "multi.cpp");
   if ( packet )
   {
-    if ( size > (unsigned int)(gdwNormalMsgSize - 8) )
-      assertion_failed(238, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(size <= (unsigned int)(gdwNormalMsgSize - 8), 238, "multi.cpp");
     multi_copy_packet(packet_5FF8D0, packet, size);
   }
 }
@@ -150,12 +143,9 @@ void __fastcall multi_send_msg_packet(int a1, unsigned __int8 *a2, unsigned __in
 
   packet = a2;
   v7 = a1;
-  if ( !sgbNetInited )
-    assertion_failed(247, "C:\\Diablo\\Direct\\multi.cpp");
-  if ( !a2 )
-    assertion_failed(248, "C:\\Diablo\\Direct\\multi.cpp");
-  if ( !len )
-    assertion_failed(249, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(sgbNetInited, 247, "multi.cpp");
+  assert(a2, 248, "multi.cpp");
+  assert(len, 249, "multi.cpp");
   if ( (1 << myplr) & a1 )
     multi_copy_packet(packet_5FF8D0, a2, len);
   v12 = 26992;
@@ -164,8 +154,7 @@ void __fastcall multi_send_msg_packet(int a1, unsigned __int8 *a2, unsigned __in
   v10 = plr[myplr]._ptargx;
   v11 = plr[myplr]._ptargy;
   v15 = len + 8;
-  if ( gdwNormalMsgSize <= v15 )
-    assertion_failed(265, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(v15 < gdwNormalMsgSize, 265, "multi.cpp");
   v13 = v15;
   memcpy(&v14, packet, len);
   v16 = 1;
@@ -227,10 +216,8 @@ void __fastcall multi_41C8BA(BOOL a1)
       case 0:
         break;
       case 1:
-        if ( !dword_5FE120[pnum] )
-          assertion_failed(440, "C:\\Diablo\\Direct\\multi.cpp");
-        if ( dword_5FE0F0[pnum] != 4 )
-          assertion_failed(441, "C:\\Diablo\\Direct\\multi.cpp");
+        assert(dword_5FE120[pnum], 440, "multi.cpp");
+        assert(dword_5FE0F0[pnum] == 4, 441, "multi.cpp");
         multi_41C9FB(pnum, *(_DWORD *)dword_5FE120[pnum]);
         break;
       case 2:
@@ -285,8 +272,7 @@ void __fastcall multi_41CA8A(int pnum)
       ;
     if ( myplr == i )
     {
-      if ( gbBufferMsgs )
-        assertion_failed(353, "C:\\Diablo\\Direct\\multi.cpp");
+      assert(!gbBufferMsgs, 353, "multi.cpp");
       byte_5FF8C8[pnum] = 1;
     }
   }
@@ -299,8 +285,7 @@ int __fastcall multi_handle_delta()
   int a2; // [esp+Ch] [ebp-8h]
   int pfSendAsync; // [esp+10h] [ebp-4h]
 
-  if ( !sgbNetInited )
-    assertion_failed(474, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(sgbNetInited, 474, "multi.cpp");
   if ( gbGameDestroyed )
   {
     gbRunGame = 0;
@@ -392,27 +377,21 @@ void __cdecl multi_process_network_packets()
   v2 = &v7;
   NetSendHiPri((unsigned __int8 *)packet_5FF8D0, (unsigned int)&bLen);
   multi_handle_all_packets(myplr, (int)&bLen, 504 - v7);
-  if ( !sgbNetInited )
-    assertion_failed(554, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(sgbNetInited, 554, "multi.cpp");
   while ( SNetReceiveMessage(&pnum, &v8, &v6, v2) )
   {
     v4 = v8;
-    if ( v6 < 8 )
-      assertion_failed(557, "C:\\Diablo\\Direct\\multi.cpp");
-    if ( pnum >= 4 )
-      assertion_failed(558, "C:\\Diablo\\Direct\\multi.cpp");
-    if ( *((_WORD *)v8 + 2) != 26992 )
-      assertion_failed(559, "C:\\Diablo\\Direct\\multi.cpp");
-    if ( *((unsigned __int16 *)v8 + 3) != v6 )
-      assertion_failed(560, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(v6 >= 8, 557, "multi.cpp");
+    assert(pnum < 4, 558, "multi.cpp");
+    assert(*((_WORD *)v8 + 2) == 26992, 559, "multi.cpp");
+    assert(*((unsigned __int16 *)v8 + 3) == v6, 560, "multi.cpp");
     plr[pnum]._pownerx = *v8;
     plr[pnum]._pownery = v4[1];
     if ( pnum != myplr )
     {
       if ( pnum != myplr )
       {
-        if ( gbBufferMsgs == 2 )
-          assertion_failed(573, "C:\\Diablo\\Direct\\multi.cpp");
+        assert(gbBufferMsgs != 2, 573, "multi.cpp");
         if ( gbBufferMsgs != 1 && plr[pnum].plractive )
         {
           if ( plr[pnum].plrlevel != currlevel || plr[pnum]._pLvlChanging )
@@ -487,12 +466,9 @@ void __fastcall multi_41D36B(int pnum, char a2, PkPlayerStruct *a3, int a4)
   char *v14; // [esp+21Ch] [ebp-8h]
   int v15; // [esp+220h] [ebp-4h]
 
-  if ( myplr == pnum )
-    assertion_failed(622, "C:\\Diablo\\Direct\\multi.cpp");
-  if ( !a3 )
-    assertion_failed(625, "C:\\Diablo\\Direct\\multi.cpp");
-  if ( (unsigned int)a4 > 0xFFFF )
-    assertion_failed(626, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(myplr != pnum, 622, "multi.cpp");
+  assert(a3, 625, "multi.cpp");
+  assert((unsigned int)a4 <= 0xFFFF, 626, "multi.cpp");
   v15 = 0;
   while ( a4 )
   {
@@ -509,8 +485,7 @@ void __fastcall multi_41D36B(int pnum, char a2, PkPlayerStruct *a3, int a4)
     if ( a4 >= (unsigned int)(gdwLargestMsgSize - 13) )
       v4 = gdwLargestMsgSize - 13;
     v13 = v4;
-    if ( v4 > 0xFFFF )
-      assertion_failed(645, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(v4 <= 0xFFFF, 645, "multi.cpp");
     *(_WORD *)(v14 + 3) = v13;
     memcpy(&v11[13], a3, *(unsigned __int16 *)(v14 + 3));
     v12 = 13;
@@ -592,18 +567,15 @@ void __stdcall multi_handle_events(void *a1)
   v2 = *(_DWORD *)a1;
   if ( v2 == 1 )
   {
-    if ( !*((_DWORD *)a1 + 2) )
-      assertion_failed(772, "C:\\Diablo\\Direct\\multi.cpp");
-    if ( *((_DWORD *)a1 + 3) != 4 )
-      assertion_failed(773, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(*((_DWORD *)a1 + 2), 772, "multi.cpp");
+    assert(*((_DWORD *)a1 + 3) == 4, 773, "multi.cpp");
     s = **((_DWORD **)a1 + 2);
     msg_5FF8B4_isprocessing = 0;
   }
   else if ( v2 != 2 && v2 == 3 )
   {
     v1 = *((_DWORD *)a1 + 1) == 0;
-    if ( *((_DWORD *)a1 + 1) >= 4u )
-      assertion_failed(785, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(*((_DWORD *)a1 + 1) < 4u, 785, "multi.cpp");
     byte_5FF8B0[*((_DWORD *)a1 + 1)] = 1;
   }
 }
@@ -645,8 +617,7 @@ int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
   }
   SetRndSeed(0);
   s = time(0);
-  if ( !pfExitProgram )
-    assertion_failed(849, "C:\\Diablo\\Direct\\multi.cpp");
+  assert(pfExitProgram, 849, "multi.cpp");
   *pfExitProgram = 0;
   memset(v24, 0, 0x24u);
   *(_DWORD *)v24 = 36;
@@ -688,8 +659,7 @@ int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
       v4 = GetLastErr();
       TermMsg("SNetCreateGame1:\n%s", v4);
     }
-    if ( v17 )
-      assertion_failed(906, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(!v17, 906, "multi.cpp");
     myplr = 0;
     gbMaxPlayers = 1;
   }
@@ -709,19 +679,15 @@ int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
     multi_event_handler(1);
     if ( !SNetSelectGame(1, v24, &v19, v23, &fileinfo, &v16) )
       return 0;
-    if ( v16 >= 4 )
-      assertion_failed(932, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(v16 < 4, 932, "multi.cpp");
     if ( !SNetGetNumPlayers(&v15, &v11, &v12) )
     {
       v5 = GetLastErr();
       TermMsg("SNetGetNumPlayers:\n%s", v5);
     }
-    if ( v15 >= 4 )
-      assertion_failed(937, "C:\\Diablo\\Direct\\multi.cpp");
-    if ( v11 >= 4 )
-      assertion_failed(938, "C:\\Diablo\\Direct\\multi.cpp");
-    if ( !v12 || v12 > 4 )
-      assertion_failed(939, "C:\\Diablo\\Direct\\multi.cpp");
+    assert(v15 < 4, 937, "multi.cpp");
+    assert(v11 < 4, 938, "multi.cpp");
+    assert(!(!v12 || v12 > 4), 939, "multi.cpp");
     v13 = 0;
     while ( v11 >= v15 )
     {
@@ -857,8 +823,7 @@ void __fastcall multi_player_joins(int pnum, TCmdPlrInfoHdr *cmd, int a3)
       {
         if ( plr[pnum].plractive )
         {
-          if ( strcmp(plr[pnum]._pName, &netplr[982 * pnum + 8]) )
-            assertion_failed(1032, "C:\\Diablo\\Direct\\multi.cpp");
+          assert(!strcmp(plr[pnum]._pName, &netplr[982 * pnum + 8]), 1032, "multi.cpp");
         }
         else
         {

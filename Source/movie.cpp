@@ -8,8 +8,7 @@ void __fastcall play_movie(char *pszMovie, bool user_can_close)
 
   if ( window_activated )
   {
-    if ( !ghMainWnd )
-      assertion_failed(69, "C:\\Diablo\\Direct\\movie.cpp");
+    assert(ghMainWnd, 69, "movie.cpp");
     func = SetWindowProc(MovieWndProc);
     InvalidateRect(ghMainWnd, 0, 0);
     UpdateWindow(ghMainWnd);
@@ -39,8 +38,7 @@ void __fastcall play_movie(char *pszMovie, bool user_can_close)
       SVidPlayEnd(v5);
     ShowCursor(1);
     func = SetWindowProc(func);
-    if ( func != MovieWndProc )
-      assertion_failed(100, "C:\\Diablo\\Direct\\movie.cpp");
+    assert(func == MovieWndProc, 100, "movie.cpp");
   }
 }
 
@@ -100,7 +98,7 @@ void __fastcall movie_unused_482539(char *palette, char *a2)
   pszFileName = a2;
   if ( window_activated )
   {
-    pCelBuff = LoadFileInMem(palette, 0, 122, "C:\\Diablo\\Direct\\movie.cpp");
+    pCelBuff = LoadFileInMem(palette, 0, 122, "movie.cpp");
     if ( pCelBuff )
     {
       ClearScreenBuffer();
@@ -118,7 +116,7 @@ void __fastcall movie_unused_482539(char *palette, char *a2)
       CelDecodeOnly(64, 639, pCelBuff, 1, 640);
       drawpanflag = 255;
       scrollrt_draw_game_screen(1);
-      mem_free_dbg(pCelBuff, 146, "C:\\Diablo\\Direct\\movie.cpp");
+      mem_free_dbg(pCelBuff, 146, "movie.cpp");
     }
   }
 }
@@ -128,8 +126,7 @@ BOOL movie_unused_482640_paint()
 {
   const PAINTSTRUCT Paint; // [esp+Ch] [ebp-40h]
 
-  if ( !ghMainWnd )
-    assertion_failed(108, "C:\\Diablo\\Direct\\movie.cpp");
+  assert(ghMainWnd, 108, "movie.cpp");
   BeginPaint(ghMainWnd, (LPPAINTSTRUCT)&Paint);
   drawpanflag = 255;
   scrollrt_draw_game_screen(1);

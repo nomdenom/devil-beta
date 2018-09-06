@@ -1,29 +1,28 @@
 //----- (0044EF20) --------------------------------------------------------
 void __cdecl FreeInvGFX()
 {
-  mem_free_dbg(pInvCels, 87, "C:\\Diablo\\Direct\\inv.cpp");
+  mem_free_dbg(pInvCels, 87, "inv.cpp");
   pInvCels = 0;
 }
 
 //----- (0044EF4F) --------------------------------------------------------
 void __cdecl InitInv()
 {
-  if ( pInvCels )
-    assertion_failed(95, "C:\\Diablo\\Direct\\inv.cpp");
+  assert(!pInvCels, 95, "inv.cpp");
   if ( plr[myplr]._pClass )
   {
     if ( plr[myplr]._pClass == 1 )
     {
-      pInvCels = LoadFileInMem("Data\\Inv\\Inv_rog.CEL", 0, 97, "C:\\Diablo\\Direct\\inv.cpp");
+      pInvCels = LoadFileInMem("Data\\Inv\\Inv_rog.CEL", 0, 97, "inv.cpp");
     }
     else if ( plr[myplr]._pClass == 2 )
     {
-      pInvCels = LoadFileInMem("Data\\Inv\\Inv_Sor.CEL", 0, 98, "C:\\Diablo\\Direct\\inv.cpp");
+      pInvCels = LoadFileInMem("Data\\Inv\\Inv_Sor.CEL", 0, 98, "inv.cpp");
     }
   }
   else
   {
-    pInvCels = LoadFileInMem("Data\\Inv\\Inv.CEL", 0, 96, "C:\\Diablo\\Direct\\inv.cpp");
+    pInvCels = LoadFileInMem("Data\\Inv\\Inv.CEL", 0, 96, "inv.cpp");
   }
   invflag = 0;
   draw_btn = 0;
@@ -98,8 +97,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[0]._iStatFlag )
     {
-      if ( !pCursCels )
-        assertion_failed(166, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(pCursCels, 166, "inv.cpp");
       CelDrawHdrOnly(516, 219, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -123,8 +121,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[1]._iStatFlag )
     {
-      if ( !pCursCels )
-        assertion_failed(184, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(pCursCels, 184, "inv.cpp");
       CelDrawHdrOnly(429, 365, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -148,8 +145,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[2]._iStatFlag )
     {
-      if ( !pCursCels )
-        assertion_failed(202, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(pCursCels, 202, "inv.cpp");
       CelDrawHdrOnly(631, 365, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -173,8 +169,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[3]._iStatFlag )
     {
-      if ( !pCursCels )
-        assertion_failed(220, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(pCursCels, 220, "inv.cpp");
       CelDrawHdrOnly(588, 220, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -206,8 +201,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[4]._iStatFlag )
     {
-      if ( !pCursCels )
-        assertion_failed(242, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(pCursCels, 242, "inv.cpp");
       CelDrawHdrOnly(screen_x, screen_y, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -250,8 +244,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[5]._iStatFlag )
     {
-      if ( !pCursCels )
-        assertion_failed(273, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(pCursCels, 273, "inv.cpp");
       CelDrawHdrOnly(screen_xa, screen_y, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -275,8 +268,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[6]._iStatFlag )
     {
-      if ( !pCursCels )
-        assertion_failed(291, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(pCursCels, 291, "inv.cpp");
       CelDrawHdrOnly(516, 320, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -294,11 +286,9 @@ void __cdecl DrawInv()
   {
     if ( plr[myplr].InvGrid[j] > 0 )
     {
-      if ( v4[j] )
-        assertion_failed(307, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(!v4[j], 307, "inv.cpp");
       v4[j] = 1;
-      if ( plr[myplr].InvGrid[j] > plr[myplr]._pNumInv )
-        assertion_failed(309, "C:\\Diablo\\Direct\\inv.cpp");
+      assert(plr[myplr].InvGrid[j] <= plr[myplr]._pNumInv, 309, "inv.cpp");
       v9 = plr[myplr].InvGrid[j] - 1;
       frame = plr[myplr].InvList[v9]._iCurs + 12;
       frame_width = InvItemWidth[frame];
@@ -313,8 +303,7 @@ void __cdecl DrawInv()
       }
       if ( plr[myplr].InvList[v9]._iStatFlag )
       {
-        if ( !pCursCels )
-          assertion_failed(320, "C:\\Diablo\\Direct\\inv.cpp");
+        assert(pCursCels, 320, "inv.cpp");
         CelDrawHdrOnly(InvRect[j + 25].X + 64, InvRect[j + 25].Y + 159, pCursCels, frame, frame_width, 0, 8);
       }
       else
@@ -354,8 +343,7 @@ void __cdecl DrawInvBelt()
         }
         if ( plr[myplr].SpdList[i]._iStatFlag )
         {
-          if ( !pCursCels )
-            assertion_failed(353, "C:\\Diablo\\Direct\\inv.cpp");
+          assert(pCursCels, 353, "inv.cpp");
           CelDrawHdrOnly(InvRect[i + 65].X + 64, InvRect[i + 65].Y + 159, pCursCels, frame, frame_width, 0, 8);
         }
         else
@@ -1518,8 +1506,7 @@ void __fastcall SyncGetItem(int x, int y, int idx, unsigned __int16 ci, int isee
   {
     v5 = FindGetItem(idx, ci, iseed);
   }
-  if ( v5 == -1 )
-    assertion_failed(1240, "C:\\Diablo\\Direct\\inv.cpp");
+  assert(v5 != -1, 1240, "inv.cpp");
   item[v5]._isin = 1;
   dItem[item[v5]._ix][item[v5]._iy] = 0;
 }
@@ -1847,8 +1834,7 @@ char __cdecl CheckInvHLight()
     v2 = 0;
     x = v7->InvBody;
   }
-  if ( !x )
-    assertion_failed(1515, "C:\\Diablo\\Direct\\inv.cpp");
+  assert(x, 1515, "inv.cpp");
   if ( x->_itype == -1 )
     return -1;
   if ( x->_itype == 11 )

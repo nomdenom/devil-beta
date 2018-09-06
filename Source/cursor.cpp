@@ -1,16 +1,15 @@
 //----- (00485990) --------------------------------------------------------
 void __cdecl InitCursor()
 {
-  if ( pCursCels )
-    assertion_failed(121, "C:\\Diablo\\Direct\\CURSOR.CPP");
-  pCursCels = (char *)LoadFileInMem("Data\\Inv\\Objcurs.CEL", 0, 122, "C:\\Diablo\\Direct\\CURSOR.CPP");
+  assert(!pCursCels, 121, "CURSOR.CPP");
+  pCursCels = (char *)LoadFileInMem("Data\\Inv\\Objcurs.CEL", 0, 122, "CURSOR.CPP");
   cursor_dword_647724_buf1 = 0;
 }
 
 //----- (004859E3) --------------------------------------------------------
 void __cdecl FreeCursor()
 {
-  mem_free_dbg(pCursCels, 130, "C:\\Diablo\\Direct\\CURSOR.CPP");
+  mem_free_dbg(pCursCels, 130, "CURSOR.CPP");
   pCursCels = 0;
   cursor_dword_647724_buf1 = 0;
 }

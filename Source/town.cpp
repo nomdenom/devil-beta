@@ -712,8 +712,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         item[v17]._iAnimWidth,
         0,
         dir);
-    if ( !item[v17]._iAnimData )
-      assertion_failed(663, "C:\\Diablo\\Direct\\TOWN.CPP");
+    assert(item[v17]._iAnimData, 663, "TOWN.CPP");
     CelDrawHdrOnly(screen_x, sy, (char *)item[v17]._iAnimData, item[v17]._iAnimFrame, item[v17]._iAnimWidth, 0, dir);
   }
   if ( dFlags[x][y] & 0x10 )
@@ -730,8 +729,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         towner[-(dMonster[x][y - 1] + 1)]._tAnimWidth,
         0,
         dir);
-    if ( !towner[v20]._tAnimData )
-      assertion_failed(671, "C:\\Diablo\\Direct\\TOWN.CPP");
+    assert(towner[v20]._tAnimData, 671, "TOWN.CPP");
     CelDrawHdrOnly(
       screen_xa,
       sy,
@@ -755,8 +753,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         towner[v21]._tAnimWidth,
         0,
         dir);
-    if ( !towner[v21]._tAnimData )
-      assertion_failed(679, "C:\\Diablo\\Direct\\TOWN.CPP");
+    assert(towner[v21]._tAnimData, 679, "TOWN.CPP");
     CelDrawHdrOnly(
       screen_xb,
       sy,
@@ -781,8 +778,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         plr[v18]._pAnimWidth,
         0,
         dir);
-    if ( !plr[v18]._pAnimData )
-      assertion_failed(687, "C:\\Diablo\\Direct\\TOWN.CPP");
+    assert(plr[v18]._pAnimData, 687, "TOWN.CPP");
     CelDrawHdrOnly(screen_xc, screen_y, (char *)plr[v18]._pAnimData, plr[v18]._pAnimFrame, plr[v18]._pAnimWidth, 0, dir);
     if ( some_flag && plr[v18]._peflag )
       town_draw_e_flag((char *)buffer - 64, x - 1, y + 1, a4, dir, sx - 64, sy);
@@ -802,8 +798,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         plr[v19]._pAnimWidth,
         0,
         dir);
-    if ( !plr[v19]._pAnimData )
-      assertion_failed(700, "C:\\Diablo\\Direct\\TOWN.CPP");
+    assert(plr[v19]._pAnimData, 700, "TOWN.CPP");
     CelDrawHdrOnly(
       screen_xd,
       screen_ya,
@@ -1490,20 +1485,20 @@ void __cdecl T_Pass3()
       dPiece[j + 1][i + 1] = 0;
     }
   }
-  P3Tiles = LoadFileInMem("Levels\\TownData\\Town.TIL", 0, 1344, "C:\\Diablo\\Direct\\TOWN.CPP");
-  pSector = LoadFileInMem("Levels\\TownData\\Sector1s.DUN", 0, 1347, "C:\\Diablo\\Direct\\TOWN.CPP");
+  P3Tiles = LoadFileInMem("Levels\\TownData\\Town.TIL", 0, 1344, "TOWN.CPP");
+  pSector = LoadFileInMem("Levels\\TownData\\Sector1s.DUN", 0, 1347, "TOWN.CPP");
   T_FillSector((WORD *)P3Tiles, (WORD *)pSector, 46, 46, 25, 25);
-  mem_free_dbg(pSector, 1349, "C:\\Diablo\\Direct\\TOWN.CPP");
-  v2 = LoadFileInMem("Levels\\TownData\\Sector2s.DUN", 0, 1351, "C:\\Diablo\\Direct\\TOWN.CPP");
+  mem_free_dbg(pSector, 1349, "TOWN.CPP");
+  v2 = LoadFileInMem("Levels\\TownData\\Sector2s.DUN", 0, 1351, "TOWN.CPP");
   T_FillSector((WORD *)P3Tiles, (WORD *)v2, 46, 0, 25, 23);
-  mem_free_dbg(v2, 1353, "C:\\Diablo\\Direct\\TOWN.CPP");
-  v3 = LoadFileInMem("Levels\\TownData\\Sector3s.DUN", 0, 1355, "C:\\Diablo\\Direct\\TOWN.CPP");
+  mem_free_dbg(v2, 1353, "TOWN.CPP");
+  v3 = LoadFileInMem("Levels\\TownData\\Sector3s.DUN", 0, 1355, "TOWN.CPP");
   T_FillSector((WORD *)P3Tiles, (WORD *)v3, 0, 46, 23, 25);
-  mem_free_dbg(v3, 1357, "C:\\Diablo\\Direct\\TOWN.CPP");
-  v4 = LoadFileInMem("Levels\\TownData\\Sector4s.DUN", 0, 1359, "C:\\Diablo\\Direct\\TOWN.CPP");
+  mem_free_dbg(v3, 1357, "TOWN.CPP");
+  v4 = LoadFileInMem("Levels\\TownData\\Sector4s.DUN", 0, 1359, "TOWN.CPP");
   T_FillSector((WORD *)P3Tiles, (WORD *)v4, 0, 0, 23, 23);
-  mem_free_dbg(v4, 1361, "C:\\Diablo\\Direct\\TOWN.CPP");
-  mem_free_dbg(P3Tiles, 1363, "C:\\Diablo\\Direct\\TOWN.CPP");
+  mem_free_dbg(v4, 1361, "TOWN.CPP");
+  mem_free_dbg(P3Tiles, 1363, "TOWN.CPP");
 }
 
 //----- (0044DFCE) --------------------------------------------------------

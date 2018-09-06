@@ -52,11 +52,10 @@ void __fastcall InitMonsterSND(int monst)
         {
           sprintf(v5, monsterdata[v7].sndfile, monster_action_sounds[i], j + 1);
           v1 = strlen(v5);
-          path = (char *)DiabloAllocPtr(v1 + 1, 223, "C:\\Diablo\\Direct\\effects.cpp");
+          path = (char *)DiabloAllocPtr(v1 + 1, 223, "effects.cpp");
           strcpy(path, v5);
           v4 = sound_file_load(path);
-          if ( !v4 )
-            assertion_failed(229, "C:\\Diablo\\Direct\\effects.cpp");
+          assert(v4, 229, "effects.cpp");
           Monsters[monst].XSnds[i][j] = v4;
         }
       }
@@ -88,7 +87,7 @@ void __cdecl FreeEffects()
           ptr = sound_file->sound_path;
           sound_file->sound_path = 0;
           sound_file_cleanup(sound_file);
-          mem_free_dbg(ptr, 255, "C:\\Diablo\\Direct\\effects.cpp");
+          mem_free_dbg(ptr, 255, "effects.cpp");
         }
       }
     }
@@ -149,8 +148,7 @@ void __fastcall PlaySFX(int psfx)
   unsigned int psfxa; // [esp+Ch] [ebp-4h]
 
   psfxa = RndSFX(psfx);
-  if ( psfxa >= 0xE1 )
-    assertion_failed(367, "C:\\Diablo\\Direct\\effects.cpp");
+  assert(psfxa < 0xE1, 367, "effects.cpp");
   PlaySFX_priv(&sgSFX[psfxa], 0, 0, 0);
 }
 
@@ -193,10 +191,8 @@ void __fastcall stream_play(_BYTE *a1, int a2, int a3)
   int v3; // ST20_4
   int lVolumea; // [esp+Ch] [ebp-Ch]
 
-  if ( !a1 )
-    assertion_failed(115, "C:\\Diablo\\Direct\\effects.cpp");
-  if ( !(*a1 & 2) )
-    assertion_failed(116, "C:\\Diablo\\Direct\\effects.cpp");
+  assert(a1, 115, "effects.cpp");
+  assert((*a1 & 2), 116, "effects.cpp");
   sfx_stop();
   lVolumea = sound_get_or_set_sound_volume(1) + a2;
   if ( lVolumea >= -1600 )
@@ -275,8 +271,7 @@ void __fastcall PlaySfxLoc(int psfx, int x, int y)
   unsigned int psfxa; // [esp+10h] [ebp-4h]
 
   psfxa = RndSFX(psfx);
-  if ( psfxa >= 0xE1 )
-    assertion_failed(377, "C:\\Diablo\\Direct\\effects.cpp");
+  assert(psfxa < 0xE1, 377, "effects.cpp");
   PlaySFX_priv(&sgSFX[psfxa], 1, x, y);
 }
 

@@ -42,8 +42,7 @@ void __cdecl gamemenu_handle_previous()
 //----- (0046684F) --------------------------------------------------------
 void __fastcall j_gamemenu_previous(int a1)
 {
-  if ( !a1 )
-    assertion_failed(156, "C:\\Diablo\\Direct\\GameMenu.cpp");
+  assert(a1, 156, "GameMenu.cpp");
   gamemenu_previous();
 }
 
@@ -52,8 +51,7 @@ void __fastcall gamemenu_new_game(int a1)
 {
   signed int i; // [esp+10h] [ebp-4h]
 
-  if ( !a1 )
-    assertion_failed(164, "C:\\Diablo\\Direct\\GameMenu.cpp");
+  assert(a1, 164, "GameMenu.cpp");
   for ( i = 0; i < 4; ++i )
   {
     plr[i]._pmode = 11;
@@ -69,8 +67,7 @@ void __fastcall gamemenu_new_game(int a1)
 //----- (00466946) --------------------------------------------------------
 void __fastcall gamemenu_quit_game(int a1)
 {
-  if ( !a1 )
-    assertion_failed(183, "C:\\Diablo\\Direct\\GameMenu.cpp");
+  assert(a1, 183, "GameMenu.cpp");
   gamemenu_new_game(a1);
   gbRunGameResult = 0;
 }
@@ -78,8 +75,7 @@ void __fastcall gamemenu_quit_game(int a1)
 //----- (0046698C) --------------------------------------------------------
 void __fastcall gamemenu_load_game(int a1)
 {
-  if ( !a1 )
-    assertion_failed(192, "C:\\Diablo\\Direct\\GameMenu.cpp");
+  assert(a1, 192, "GameMenu.cpp");
   if ( pcurs == 1 )
   {
     if ( (signed int)gbMaxPlayers <= 1 )
@@ -114,8 +110,7 @@ void __fastcall gamemenu_load_game(int a1)
 //----- (00466A4F) --------------------------------------------------------
 void __fastcall gamemenu_save_game(int a1)
 {
-  if ( !a1 )
-    assertion_failed(218, "C:\\Diablo\\Direct\\GameMenu.cpp");
+  assert(a1, 218, "GameMenu.cpp");
   if ( pcurs == 1 )
   {
     if ( (signed int)gbMaxPlayers <= 1 )
@@ -149,16 +144,14 @@ void __fastcall gamemenu_save_game(int a1)
 //----- (00466B2C) --------------------------------------------------------
 void __fastcall gamemenu_restart_town(int a1)
 {
-  if ( !a1 )
-    assertion_failed(243, "C:\\Diablo\\Direct\\GameMenu.cpp");
+  assert(a1, 243, "GameMenu.cpp");
   NetSendCmd(1u, 0x56u);
 }
 
 //----- (00466B6F) --------------------------------------------------------
 void __fastcall gamemenu_options(int a1)
 {
-  if ( !a1 )
-    assertion_failed(312, "C:\\Diablo\\Direct\\GameMenu.cpp");
+  assert(a1, 312, "GameMenu.cpp");
   gamemenu_get_music();
   gamemenu_get_sound();
   gamemenu_get_gamma();

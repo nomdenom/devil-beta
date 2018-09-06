@@ -2974,7 +2974,7 @@ LABEL_129:
             v13 *= 2;
             if ( v16 )
             {
-              __asm { xlat }
+              ASM_XLAT();
               *v2 = _AL;
             }
             ++v2;
@@ -3027,7 +3027,7 @@ LABEL_129:
                   v23 *= 2;
                   if ( v16 )
                   {
-                    __asm { xlat }
+                    ASM_XLAT();
                     *v2 = _AL;
                   }
                   ++v2;
@@ -3055,9 +3055,9 @@ LABEL_50:
                 goto LABEL_268;
               _AX = *((_WORD *)v3 + 1);
               v3 += 4;
-              __asm { xlat }
+              ASM_XLAT();
               _AX = __ROR2__(_AX, 8);
-              __asm { xlat }
+              ASM_XLAT();
               *v27 = __ROR2__(_AX, 8);
               ++v27;
               if ( v28 )
@@ -3067,13 +3067,13 @@ LABEL_268:
                 {
                   _EAX = *(_DWORD *)v3;
                   v3 += 4;
-                  __asm { xlat }
+                  ASM_XLAT();
                   _EAX = __ROR4__(_EAX, 8);
-                  __asm { xlat }
+                  ASM_XLAT();
                   _EAX = __ROR4__(_EAX, 8);
-                  __asm { xlat }
+                  ASM_XLAT();
                   _EAX = __ROR4__(_EAX, 8);
-                  __asm { xlat }
+                  ASM_XLAT();
                   *(_DWORD *)v27 = __ROR4__(_EAX, 8);
                   v27 += 2;
                   --v28;
@@ -3096,9 +3096,9 @@ LABEL_268:
                     goto LABEL_269;
                   _AX = *((_WORD *)v3 + 1);
                   v3 += 4;
-                  __asm { xlat }
+                  ASM_XLAT();
                   _AX = __ROR2__(_AX, 8);
-                  __asm { xlat }
+                  ASM_XLAT();
                   *v33 = __ROR2__(_AX, 8);
                   ++v33;
                   if ( v34 )
@@ -3108,13 +3108,13 @@ LABEL_269:
                     {
                       _EAX = *(_DWORD *)v3;
                       v3 += 4;
-                      __asm { xlat }
+                      ASM_XLAT();
                       _EAX = __ROR4__(_EAX, 8);
-                      __asm { xlat }
+                      ASM_XLAT();
                       _EAX = __ROR4__(_EAX, 8);
-                      __asm { xlat }
+                      ASM_XLAT();
                       _EAX = __ROR4__(_EAX, 8);
-                      __asm { xlat }
+                      ASM_XLAT();
                       *(_DWORD *)v33 = __ROR4__(_EAX, 8);
                       v33 += 2;
                       --v34;
@@ -3137,13 +3137,13 @@ LABEL_269:
               {
                 _EAX = *(_DWORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_DWORD *)v2 = __ROR4__(_EAX, 8);
                 v2 += 4;
               }
@@ -3151,9 +3151,9 @@ LABEL_269:
               {
                 _AX = *(_WORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _AX = __ROR2__(_AX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_WORD *)v2 = __ROR2__(_AX, 8);
                 v2 += 2;
               }
@@ -3171,13 +3171,13 @@ LABEL_269:
                   {
                     _EAX = *(_DWORD *)v3;
                     v3 += 4;
-                    __asm { xlat }
+                    ASM_XLAT();
                     _EAX = __ROR4__(_EAX, 8);
-                    __asm { xlat }
+                    ASM_XLAT();
                     _EAX = __ROR4__(_EAX, 8);
-                    __asm { xlat }
+                    ASM_XLAT();
                     _EAX = __ROR4__(_EAX, 8);
-                    __asm { xlat }
+                    ASM_XLAT();
                     *(_DWORD *)v2 = __ROR4__(_EAX, 8);
                     v2 += 4;
                   }
@@ -3185,9 +3185,9 @@ LABEL_269:
                   {
                     _AX = *(_WORD *)v3;
                     v3 += 4;
-                    __asm { xlat }
+                    ASM_XLAT();
                     _AX = __ROR2__(_AX, 8);
-                    __asm { xlat }
+                    ASM_XLAT();
                     *(_WORD *)v2 = __ROR2__(_AX, 8);
                     v2 += 2;
                   }
@@ -3209,9 +3209,9 @@ LABEL_269:
                 goto LABEL_270;
               _AX = *((_WORD *)v3 + 1);
               v3 += 4;
-              __asm { xlat }
+              ASM_XLAT();
               _AX = __ROR2__(_AX, 8);
-              __asm { xlat }
+              ASM_XLAT();
               *v46 = __ROR2__(_AX, 8);
               ++v46;
               if ( v47 )
@@ -3221,13 +3221,13 @@ LABEL_270:
                 {
                   _EAX = *(_DWORD *)v3;
                   v3 += 4;
-                  __asm { xlat }
+                  ASM_XLAT();
                   _EAX = __ROR4__(_EAX, 8);
-                  __asm { xlat }
+                  ASM_XLAT();
                   _EAX = __ROR4__(_EAX, 8);
-                  __asm { xlat }
+                  ASM_XLAT();
                   _EAX = __ROR4__(_EAX, 8);
-                  __asm { xlat }
+                  ASM_XLAT();
                   *(_DWORD *)v46 = __ROR4__(_EAX, 8);
                   v46 += 2;
                   --v47;
@@ -3256,7 +3256,7 @@ LABEL_270:
                     v51 *= 2;
                     if ( v16 )
                     {
-                      __asm { xlat }
+                      ASM_XLAT();
                       *v2 = _AL;
                     }
                     ++v2;
@@ -3280,13 +3280,13 @@ LABEL_270:
               {
                 _EAX = *(_DWORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_DWORD *)v2 = __ROR4__(_EAX, 8);
                 v2 += 4;
               }
@@ -3294,9 +3294,9 @@ LABEL_270:
               {
                 _AX = *(_WORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _AX = __ROR2__(_AX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_WORD *)v2 = __ROR2__(_AX, 8);
                 v2 += 2;
               }
@@ -3321,7 +3321,7 @@ LABEL_270:
                     v60 *= 2;
                     if ( v16 )
                     {
-                      __asm { xlat }
+                      ASM_XLAT();
                       *v2 = _AL;
                     }
                     ++v2;
@@ -8195,7 +8195,7 @@ LABEL_252:
               v13 *= 2;
               if ( v16 )
               {
-                __asm { xlat }
+                ASM_XLAT();
                 *v2 = _AL;
               }
               ++v2;
@@ -8243,7 +8243,7 @@ LABEL_252:
                   v22 *= 2;
                   if ( v16 )
                   {
-                    __asm { xlat }
+                    ASM_XLAT();
                     *v2 = _AL;
                   }
                   ++v2;
@@ -8307,7 +8307,7 @@ LABEL_117:
                       v71 *= 2;
                       if ( v16 )
                       {
-                        __asm { xlat }
+                        ASM_XLAT();
                         *v2 = _AL;
                       }
                       ++v2;
@@ -8340,13 +8340,13 @@ LABEL_117:
               {
                 _EAX = *(_DWORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_DWORD *)v2 = __ROR4__(_EAX, 8);
                 v2 += 4;
               }
@@ -8354,9 +8354,9 @@ LABEL_117:
               {
                 _AX = *(_WORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _AX = __ROR2__(_AX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_WORD *)v2 = __ROR2__(_AX, 8);
                 v2 += 2;
               }
@@ -8392,7 +8392,7 @@ LABEL_98:
                     v60 *= 2;
                     if ( v16 )
                     {
-                      __asm { xlat }
+                      ASM_XLAT();
                       *v2 = _AL;
                     }
                     ++v2;
@@ -8426,9 +8426,9 @@ LABEL_98:
               goto LABEL_322;
             _AX = *((_WORD *)v3 + 1);
             v3 += 4;
-            __asm { xlat }
+            ASM_XLAT();
             _AX = __ROR2__(_AX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             *v55 = __ROR2__(_AX, 8);
             ++v55;
             if ( v56 )
@@ -8438,13 +8438,13 @@ LABEL_322:
               {
                 _EAX = *(_DWORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_DWORD *)v55 = __ROR4__(_EAX, 8);
                 v55 += 2;
                 --v56;
@@ -8484,13 +8484,13 @@ LABEL_80:
               {
                 _EAX = *(_DWORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_DWORD *)v2 = __ROR4__(_EAX, 8);
                 v2 += 4;
               }
@@ -8498,9 +8498,9 @@ LABEL_80:
               {
                 _AX = *(_WORD *)v3;
                 v3 += 2;
-                __asm { xlat }
+                ASM_XLAT();
                 _AX = __ROR2__(_AX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_WORD *)v2 = __ROR2__(_AX, 8);
                 v2 += 2;
               }
@@ -8521,13 +8521,13 @@ LABEL_80:
           {
             _EAX = *(_DWORD *)v3;
             v3 += 4;
-            __asm { xlat }
+            ASM_XLAT();
             _EAX = __ROR4__(_EAX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             _EAX = __ROR4__(_EAX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             _EAX = __ROR4__(_EAX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             *(_DWORD *)v2 = __ROR4__(_EAX, 8);
             v2 += 4;
           }
@@ -8535,9 +8535,9 @@ LABEL_80:
           {
             _AX = *(_WORD *)v3;
             v3 += 4;
-            __asm { xlat }
+            ASM_XLAT();
             _AX = __ROR2__(_AX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             *(_WORD *)v2 = __ROR2__(_AX, 8);
             v2 += 2;
           }
@@ -8576,9 +8576,9 @@ LABEL_62:
               goto LABEL_323;
             _AX = *((_WORD *)v3 + 1);
             v3 += 4;
-            __asm { xlat }
+            ASM_XLAT();
             _AX = __ROR2__(_AX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             *v36 = __ROR2__(_AX, 8);
             ++v36;
             if ( v37 )
@@ -8588,13 +8588,13 @@ LABEL_323:
               {
                 _EAX = *(_DWORD *)v3;
                 v3 += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *(_DWORD *)v36 = __ROR4__(_EAX, 8);
                 v36 += 2;
                 --v37;
@@ -8620,9 +8620,9 @@ LABEL_323:
           goto LABEL_324;
         _AX = *((_WORD *)v3 + 1);
         v3 += 4;
-        __asm { xlat }
+        ASM_XLAT();
         _AX = __ROR2__(_AX, 8);
-        __asm { xlat }
+        ASM_XLAT();
         *v28 = __ROR2__(_AX, 8);
         ++v28;
         if ( v29 )
@@ -8632,13 +8632,13 @@ LABEL_324:
           {
             _EAX = *(_DWORD *)v3;
             v3 += 4;
-            __asm { xlat }
+            ASM_XLAT();
             _EAX = __ROR4__(_EAX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             _EAX = __ROR4__(_EAX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             _EAX = __ROR4__(_EAX, 8);
-            __asm { xlat }
+            ASM_XLAT();
             *(_DWORD *)v28 = __ROR4__(_EAX, 8);
             v28 += 2;
             --v29;

@@ -31,9 +31,8 @@ void __cdecl InitObjectGFX()
     {
       ObjFileList[numobjfiles] = i;
       sprintf(&pszName, "Objects\\%s.CEL", ObjMasterLoadList[i]);
-      if ( pObjCels[numobjfiles] )
-        assertion_failed(123, "C:\\Diablo\\Direct\\OBJECTS.CPP");
-      pObjCels[numobjfiles++] = LoadFileInMem(&pszName, 0, 124, "C:\\Diablo\\Direct\\OBJECTS.CPP");
+      assert(!pObjCels[numobjfiles], 123, "OBJECTS.CPP");
+      pObjCels[numobjfiles++] = LoadFileInMem(&pszName, 0, 124, "OBJECTS.CPP");
     }
   }
 }
@@ -45,7 +44,7 @@ void __cdecl FreeObjectGFX()
 
   for ( i = 0; i < numobjfiles; ++i )
   {
-    mem_free_dbg(pObjCels[i], 134, "C:\\Diablo\\Direct\\OBJECTS.CPP");
+    mem_free_dbg(pObjCels[i], 134, "OBJECTS.CPP");
     pObjCels[i] = 0;
   }
 }
@@ -730,9 +729,8 @@ void __fastcall SetMapObjects(char *pMap, int startx, int starty)
     {
       ObjFileList[numobjfiles] = m;
       sprintf(pszName, "Objects\\%s.CEL", ObjMasterLoadList[m]);
-      if ( pObjCels[numobjfiles] )
-        assertion_failed(715, "C:\\Diablo\\Direct\\OBJECTS.CPP");
-      pObjCels[numobjfiles++] = LoadFileInMem(pszName, 0, 716, "C:\\Diablo\\Direct\\OBJECTS.CPP");
+      assert(!pObjCels[numobjfiles], 715, "OBJECTS.CPP");
+      pObjCels[numobjfiles++] = LoadFileInMem(pszName, 0, 716, "OBJECTS.CPP");
     }
   }
   v18 = &pMap[v19 + 2];

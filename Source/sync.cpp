@@ -18,8 +18,7 @@ int __fastcall sync_all_monsters(TSyncHeader *packet, int size)
   packet->bLevel = currlevel;
   packet->wLen = 0;
   SyncPlrInv(packet);
-  if ( v3 > 0xFFFF )
-    assertion_failed(207, "C:\\Diablo\\Direct\\sync.cpp");
+  assert(v3 <= 0xFFFF, 207, "sync.cpp");
   sync_one_monster();
   for ( i = 0; i < nummonsters && v3 >= 5; ++i )
   {
@@ -165,8 +164,7 @@ void __fastcall SyncPlrInv(TSyncHeader *pItem)
     if ( !item[v2].IDidx )
       pItem->wItemVal = item[v2]._ivalue;
   }
-  if ( (unsigned int)sgnSyncPInv >= 7 )
-    assertion_failed(167, "C:\\Diablo\\Direct\\sync.cpp");
+  assert((unsigned int)sgnSyncPInv < 7, 167, "sync.cpp");
   v1 = &plr[myplr].InvBody[sgnSyncPInv];
   if ( plr[myplr].InvBody[sgnSyncPInv]._itype == -1 )
   {
@@ -192,8 +190,7 @@ int __fastcall SyncData(int pnum, TSyncHeader *packet)
   packeta = (TSyncMonster *)&packet->bPInvId;
   if ( packet->bCmd != 38 )
     TermMsg("bad sync command");
-  if ( gbBufferMsgs == 2 )
-    assertion_failed(343, "C:\\Diablo\\Direct\\sync.cpp");
+  assert(gbBufferMsgs != 2, 343, "sync.cpp");
   if ( gbBufferMsgs == 1 )
     return packet->wLen + 33;
   if ( myplr == pnum )
@@ -205,8 +202,7 @@ int __fastcall SyncData(int pnum, TSyncHeader *packet)
     delta_sync_monster(packeta, packet->bLevel);
     ++packeta;
   }
-  if ( i )
-    assertion_failed(363, "C:\\Diablo\\Direct\\sync.cpp");
+  assert(!i, 363, "sync.cpp");
   return packet->wLen + 33;
 }
 
@@ -227,8 +223,7 @@ void __fastcall sync_monster_data(int pnum, TSyncMonster *packet)
   {
     for ( j = 0; nummonsters > j && monstactive[j] != i; ++j )
       ;
-    if ( nummonsters <= j )
-      assertion_failed(240, "C:\\Diablo\\Direct\\sync.cpp");
+    assert(j < nummonsters, 240, "sync.cpp");
     v2 = abs(plr[myplr].WorldY - monster[i]._my);
     v8 = abs(plr[myplr].WorldX - monster[i]._mx) + v2;
     if ( v8 > 0xFF )

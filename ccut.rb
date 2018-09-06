@@ -3,6 +3,7 @@ require 'fileutils'
 require 'pathname'
 
 require_relative 'idx'
+require_relative 'rewrite'
 
 OUTDIR = Pathname.new("Source")
 
@@ -108,6 +109,7 @@ ARGF.each_line do |l|
             l = $1 + $3
             $stderr.puts "REPLACE: #{$2} => #{$3}"
         else
+            l = rewrite_generic l
             l = rewrite_line_idx l
         end
         outf.puts l

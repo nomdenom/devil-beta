@@ -23,8 +23,7 @@ void __fastcall SetTownerGPtrs(void *pData, void **pAnim)
 //----- (00457AB0) --------------------------------------------------------
 void __fastcall NewTownerAnim(int tnum, void *pAnim, int numFrames, int Delay)
 {
-  if ( !pAnim )
-    assertion_failed(98, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(pAnim, 98, "towners.cpp");
   towner[tnum]._tAnimData = pAnim;
   towner[tnum]._tAnimLen = numFrames;
   towner[tnum]._tAnimFrame = 1;
@@ -52,9 +51,8 @@ void __fastcall InitTownerInfo(int i, int w, bool sel, int t, int x, int y, int 
 void __cdecl InitSmith()
 {
   InitTownerInfo(numtowners, 96, 1, 0, 62, 63, 0, 10);
-  if ( towner[numtowners]._tNData )
-    assertion_failed(128, "C:\\Diablo\\Direct\\towners.cpp");
-  towner[numtowners]._tNData = LoadFileInMem("Towners\\Smith\\SmithN.CEL", 0, 129, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!towner[numtowners]._tNData, 128, "towners.cpp");
+  towner[numtowners]._tNData = LoadFileInMem("Towners\\Smith\\SmithN.CEL", 0, 129, "towners.cpp");
   SetTownerGPtrs(towner[numtowners]._tNData, (void **)towner[numtowners]._tNAnim);
   towner[numtowners]._tNFrames = 16;
   NewTownerAnim(numtowners, towner[numtowners]._tNAnim[1], towner[numtowners]._tNFrames, 3);
@@ -66,9 +64,8 @@ void __cdecl InitSmith()
 void __cdecl InitBarOwner()
 {
   InitTownerInfo(numtowners, 96, 1, 3, 55, 62, 3, 10);
-  if ( towner[numtowners]._tNData )
-    assertion_failed(142, "C:\\Diablo\\Direct\\towners.cpp");
-  towner[numtowners]._tNData = LoadFileInMem("Towners\\TwnF\\TwnFN.CEL", 0, 143, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!towner[numtowners]._tNData, 142, "towners.cpp");
+  towner[numtowners]._tNData = LoadFileInMem("Towners\\TwnF\\TwnFN.CEL", 0, 143, "towners.cpp");
   SetTownerGPtrs(towner[numtowners]._tNData, (void **)towner[numtowners]._tNAnim);
   towner[numtowners]._tNFrames = 16;
   NewTownerAnim(numtowners, towner[numtowners]._tNAnim[1], towner[numtowners]._tNFrames, 3);
@@ -82,9 +79,8 @@ void __cdecl InitTownDead()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 2, 24, 32, -1, 10);
-  if ( towner[numtowners]._tNData )
-    assertion_failed(155, "C:\\Diablo\\Direct\\towners.cpp");
-  towner[numtowners]._tNData = LoadFileInMem("Towners\\Butch\\Deadguy.CEL", 0, 156, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!towner[numtowners]._tNData, 155, "towners.cpp");
+  towner[numtowners]._tNData = LoadFileInMem("Towners\\Butch\\Deadguy.CEL", 0, 156, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
   towner[numtowners]._tNFrames = 8;
@@ -99,9 +95,8 @@ void __cdecl InitWitch()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 7, 80, 20, 5, 10);
-  if ( towner[numtowners]._tNData )
-    assertion_failed(168, "C:\\Diablo\\Direct\\towners.cpp");
-  towner[numtowners]._tNData = LoadFileInMem("Towners\\TownWmn1\\WmnN.CEL", 0, 169, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!towner[numtowners]._tNData, 168, "towners.cpp");
+  towner[numtowners]._tNData = LoadFileInMem("Towners\\TownWmn1\\WmnN.CEL", 0, 169, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
   towner[numtowners]._tNFrames = 19;
@@ -116,9 +111,8 @@ void __cdecl InitBoy()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 6, 11, 53, -1, 10);
-  if ( towner[numtowners]._tNData )
-    assertion_failed(181, "C:\\Diablo\\Direct\\towners.cpp");
-  towner[numtowners]._tNData = LoadFileInMem("Towners\\TownBoy\\PegKid1.CEL", 0, 182, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!towner[numtowners]._tNData, 181, "towners.cpp");
+  towner[numtowners]._tNData = LoadFileInMem("Towners\\TownBoy\\PegKid1.CEL", 0, 182, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
   towner[numtowners]._tNFrames = 20;
@@ -133,9 +127,8 @@ void __cdecl InitHealer()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 1, 55, 79, 1, 10);
-  if ( towner[numtowners]._tNData )
-    assertion_failed(194, "C:\\Diablo\\Direct\\towners.cpp");
-  towner[numtowners]._tNData = LoadFileInMem("Towners\\Healer\\Healer.CEL", 0, 195, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!towner[numtowners]._tNData, 194, "towners.cpp");
+  towner[numtowners]._tNData = LoadFileInMem("Towners\\Healer\\Healer.CEL", 0, 195, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
   towner[numtowners]._tNFrames = 20;
@@ -150,13 +143,12 @@ void __cdecl InitTeller()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 4, 62, 71, 2, 10);
-  if ( towner[numtowners]._tNData )
-    assertion_failed(208, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!towner[numtowners]._tNData, 208, "towners.cpp");
   towner[numtowners]._tNData = LoadFileInMem(
                                  "Towners\\Strytell\\Strytell.CEL",
                                  0,
                                  209,
-                                 "C:\\Diablo\\Direct\\towners.cpp");
+                                 "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
   towner[numtowners]._tNFrames = 25;
@@ -171,9 +163,8 @@ void __cdecl InitDrunk()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 5, 71, 84, 4, 10);
-  if ( towner[numtowners]._tNData )
-    assertion_failed(221, "C:\\Diablo\\Direct\\towners.cpp");
-  towner[numtowners]._tNData = LoadFileInMem("Towners\\Drunk\\TwnDrunk.CEL", 0, 222, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!towner[numtowners]._tNData, 221, "towners.cpp");
+  towner[numtowners]._tNData = LoadFileInMem("Towners\\Drunk\\TwnDrunk.CEL", 0, 222, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
   towner[numtowners]._tNFrames = 18;
@@ -192,9 +183,8 @@ void __cdecl InitCows()
   int v4; // [esp+18h] [ebp-Ch]
   int x; // [esp+1Ch] [ebp-8h]
 
-  if ( pCowCels )
-    assertion_failed(236, "C:\\Diablo\\Direct\\towners.cpp");
-  pCowCels = LoadFileInMem("Towners\\Animals\\Cow.CEL", 0, 237, "C:\\Diablo\\Direct\\towners.cpp");
+  assert(!pCowCels, 236, "towners.cpp");
+  pCowCels = LoadFileInMem("Towners\\Animals\\Cow.CEL", 0, 237, "towners.cpp");
   for ( i = 0; i < 3; ++i )
   {
     x = TownCowX[i];
@@ -249,11 +239,11 @@ void __cdecl FreeTownerGFX()
     }
     else if ( towner[i]._tNData )
     {
-      mem_free_dbg(towner[i]._tNData, 293, "C:\\Diablo\\Direct\\towners.cpp");
+      mem_free_dbg(towner[i]._tNData, 293, "towners.cpp");
       towner[i]._tNData = 0;
     }
   }
-  mem_free_dbg(pCowCels, 299, "C:\\Diablo\\Direct\\towners.cpp");
+  mem_free_dbg(pCowCels, 299, "towners.cpp");
   pCowCels = 0;
 }
 

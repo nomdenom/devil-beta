@@ -12,8 +12,7 @@ int __fastcall nthread_send_and_recv_turn(int cur_turn, int turn_delta)
   v7 = cur_turn;
   if ( SNetGetTurnsInTransit(&v9) )
   {
-    if ( !gdwTurnsInTransit )
-      assertion_failed(138, "C:\\Diablo\\Direct\\nthread.cpp");
+    assert(gdwTurnsInTransit, 138, "nthread.cpp");
     while ( 1 )
     {
       v4 = v9++;
@@ -54,24 +53,20 @@ int __fastcall nthread_recv_turns(int *pfSendAsync, int *a2)
   char *v3; // eax
   int error_code; // [esp+14h] [ebp-4h]
 
-  if ( !pfSendAsync )
-    assertion_failed(206, "C:\\Diablo\\Direct\\nthread.cpp");
-  if ( !a2 )
-    assertion_failed(207, "C:\\Diablo\\Direct\\nthread.cpp");
+  assert(pfSendAsync, 206, "nthread.cpp");
+  assert(a2, 207, "nthread.cpp");
   *pfSendAsync = 0;
   *a2 = 0;
   if ( byte_5FE0D0 )
     nthread_41B69A();
-  if ( !sgbPacketCountDown )
-    assertion_failed(216, "C:\\Diablo\\Direct\\nthread.cpp");
+  assert(sgbPacketCountDown, 216, "nthread.cpp");
   if ( --sgbPacketCountDown )
   {
     dword_4C104C += 50;
     return 1;
   }
   sgbPacketCountDown = byte_5FE0E8;
-  if ( !sgbSyncCountDown )
-    assertion_failed(228, "C:\\Diablo\\Direct\\nthread.cpp");
+  assert(sgbSyncCountDown, 228, "nthread.cpp");
   if ( --sgbSyncCountDown )
     goto LABEL_23;
   if ( SNetReceiveTurns(0, 4, dword_5FE120, dword_5FE0F0, dword_5FE0D8) )
@@ -116,8 +111,7 @@ void __cdecl nthread_41B69A()
 
   if ( window_activated )
   {
-    if ( (unsigned int)myplr >= 4 )
-      assertion_failed(176, "C:\\Diablo\\Direct\\nthread.cpp");
+    assert((unsigned int)myplr < 4, 176, "nthread.cpp");
     v1[0] = "<%d> %d %d %d";
     v1[1] = "%d <%d> %d %d";
     v1[2] = "%d %d <%d> %d";
@@ -169,11 +163,9 @@ void __fastcall nthread_start(bool set_turn_upper_bit)
   if ( v6 >= 0x200 )
     v2 = 512;
   gdwLargestMsgSize = v2;
-  if ( v2 < 0x80 )
-    assertion_failed(349, "C:\\Diablo\\Direct\\nthread.cpp");
+  assert(v2 >= 0x80, 349, "nthread.cpp");
   gdwNormalMsgSize = v8 * (unsigned int)byte_5FE0E8 / 0x14;
-  if ( !v7 )
-    assertion_failed(357, "C:\\Diablo\\Direct\\nthread.cpp");
+  assert(v7, 357, "nthread.cpp");
   if ( v7 > 4 )
     v7 = 4;
   gdwNormalMsgSize /= v7;
@@ -192,8 +184,7 @@ void __fastcall nthread_start(bool set_turn_upper_bit)
     InitializeCriticalSection(&stru_5FE100);
     EnterCriticalSection(&stru_5FE100);
     byte_5FE118 = 1;
-    if ( sghThread != (HANDLE)-1 )
-      assertion_failed(386, "C:\\Diablo\\Direct\\nthread.cpp");
+    assert(sghThread == (HANDLE)-1, 386, "nthread.cpp");
     sghThread = (HANDLE)_beginthreadex(0, 0x2000u, (int)nthread_handler, 0, 0, (LPDWORD)&ThreadId);
     if ( sghThread == (HANDLE)-1 )
     {
@@ -267,8 +258,7 @@ void __fastcall nthread_ignore_mutex(bool bStart)
 {
   if ( sghThread != (HANDLE)-1 )
   {
-    if ( sgbThreadIsRunning == bStart )
-      assertion_failed(440, "C:\\Diablo\\Direct\\nthread.cpp");
+    assert(sgbThreadIsRunning != bStart, 440, "nthread.cpp");
     if ( bStart )
       LeaveCriticalSection(&stru_5FE100);
     else

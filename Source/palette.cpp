@@ -15,10 +15,10 @@ void __cdecl palette_init()
   LoadSysPal();
   error_code = lpDD->lpVtbl->CreatePalette(lpDD, 4, (LPPALETTEENTRY)system_palette, &lpDDPalette, 0);
   if ( error_code )
-    DDErrDlg(error_code, 119, "C:\\Diablo\\Direct\\PALETTE.CPP");
+    DDErrDlg(error_code, 119, "PALETTE.CPP");
   error_codea = lpDDSPrimary->lpVtbl->SetPalette(lpDDSPrimary, lpDDPalette);
   if ( error_codea )
-    DDErrDlg(error_codea, 121, "C:\\Diablo\\Direct\\PALETTE.CPP");
+    DDErrDlg(error_codea, 121, "PALETTE.CPP");
 }
 
 //----- (0048DDE7) --------------------------------------------------------
@@ -80,8 +80,7 @@ void __fastcall LoadPalette(char *pszFileName)
   int v5; // [esp+310h] [ebp-8h]
   int i; // [esp+314h] [ebp-4h]
 
-  if ( !pszFileName )
-    assertion_failed(135, "C:\\Diablo\\Direct\\PALETTE.CPP");
+  assert(pszFileName, 135, "PALETTE.CPP");
   if ( !SFileOpenFile(pszFileName, &v5) )
     TermMsg("Unable to open file %s", pszFileName);
   SFileReadFile(v5, (int)&v2, 768, 0, 0);
@@ -131,7 +130,7 @@ void __cdecl palette_update()
     }
     error_code = lpDDPalette->lpVtbl->SetEntries(lpDDPalette, 0, v0, v2, (LPPALETTEENTRY)&system_palette[v0]);
     if ( error_code )
-      DDErrDlg(error_code, 45, "C:\\Diablo\\Direct\\PALETTE.CPP");
+      DDErrDlg(error_code, 45, "PALETTE.CPP");
   }
 }
 

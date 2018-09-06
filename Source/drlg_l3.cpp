@@ -123,7 +123,7 @@ void __fastcall LoadPreL3Dungeon(char *sFileName, int vx, int vy)
 
   InitL3Dungeon();
   DRLG_InitTrans();
-  ptr = LoadFileInMem(sFileName, 0, 1577, "C:\\Diablo\\Direct\\DRLG_L3.CPP");
+  ptr = LoadFileInMem(sFileName, 0, 1577, "DRLG_L3.CPP");
   v9 = *ptr;
   v8 = ptr[2];
   v11 = ptr + 4;
@@ -147,6 +147,6 @@ void __fastcall LoadPreL3Dungeon(char *sFileName, int vx, int vy)
     }
   }
   memcpy(pdungeon, dungeon, 0x640u);
-  mem_free_dbg(ptr, 1600, "C:\\Diablo\\Direct\\DRLG_L3.CPP");
+  mem_free_dbg(ptr, 1600, "DRLG_L3.CPP");
 }
 

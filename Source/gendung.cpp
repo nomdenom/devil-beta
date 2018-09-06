@@ -15,19 +15,19 @@ void __cdecl FillSolidBlockTbls()
   switch ( leveltype )
   {
     case 0:
-      ptr = LoadFileInMem("Levels\\TownData\\Town.SOL", (int *)&pdwFileLen, 119, "C:\\Diablo\\Direct\\GENDUNG.CPP");
+      ptr = LoadFileInMem("Levels\\TownData\\Town.SOL", (int *)&pdwFileLen, 119, "GENDUNG.CPP");
       break;
     case 1:
-      ptr = LoadFileInMem("Levels\\L1Data\\L1.SOL", (int *)&pdwFileLen, 122, "C:\\Diablo\\Direct\\GENDUNG.CPP");
+      ptr = LoadFileInMem("Levels\\L1Data\\L1.SOL", (int *)&pdwFileLen, 122, "GENDUNG.CPP");
       break;
     case 2:
-      ptr = LoadFileInMem("Levels\\L2Data\\L2.SOL", (int *)&pdwFileLen, 125, "C:\\Diablo\\Direct\\GENDUNG.CPP");
+      ptr = LoadFileInMem("Levels\\L2Data\\L2.SOL", (int *)&pdwFileLen, 125, "GENDUNG.CPP");
       break;
     case 3:
-      ptr = LoadFileInMem("Levels\\L3Data\\L3.SOL", (int *)&pdwFileLen, 128, "C:\\Diablo\\Direct\\GENDUNG.CPP");
+      ptr = LoadFileInMem("Levels\\L3Data\\L3.SOL", (int *)&pdwFileLen, 128, "GENDUNG.CPP");
       break;
     case 4:
-      ptr = LoadFileInMem("Levels\\L4Data\\L4.SOL", (int *)&pdwFileLen, 131, "C:\\Diablo\\Direct\\GENDUNG.CPP");
+      ptr = LoadFileInMem("Levels\\L4Data\\L4.SOL", (int *)&pdwFileLen, 131, "GENDUNG.CPP");
       break;
     default:
       TermMsg("FillSolidBlockTbls");
@@ -49,7 +49,7 @@ void __cdecl FillSolidBlockTbls()
       nTrapTable[i] = 1;
     block_lvidD[i] = (unsigned __int8)(v0 & 0x70) >> 4;
   }
-  mem_free_dbg(ptr, 149, "C:\\Diablo\\Direct\\GENDUNG.CPP");
+  mem_free_dbg(ptr, 149, "GENDUNG.CPP");
 }
 
 //----- (00411BF1) --------------------------------------------------------
@@ -172,7 +172,7 @@ void __cdecl gendung_418D91()
             do
             {
               _AL = *v6++;
-              __asm { xlat }
+              ASM_XLAT();
               *v7++ = _AL;
               --v12;
             }
@@ -198,7 +198,7 @@ LABEL_51:
         for ( kk = v34; kk; --kk )
         {
           _AL = *v0++;
-          __asm { xlat }
+          ASM_XLAT();
           *v1++ = _AL;
         }
         v31 += v34;

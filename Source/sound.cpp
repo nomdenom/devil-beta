@@ -1,8 +1,7 @@
 //----- (00413B70) --------------------------------------------------------
 void __fastcall snd_stop_snd(TSnd *pSnd)
 {
-  if ( !pSnd )
-    assertion_failed(128, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(pSnd, 128, "SOUND.CPP");
   if ( pSnd->DSB )
     pSnd->DSB->lpVtbl->Stop(pSnd->DSB);
 }
@@ -13,13 +12,12 @@ BOOL __fastcall snd_playing(TSnd *pSnd)
   int v2; // [esp+10h] [ebp-8h]
   int error_code; // [esp+14h] [ebp-4h]
 
-  if ( !pSnd )
-    assertion_failed(137, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(pSnd, 137, "SOUND.CPP");
   if ( !pSnd->DSB )
     return 0;
   error_code = pSnd->DSB->lpVtbl->GetStatus(pSnd->DSB, (LPDWORD)&v2);
   if ( error_code )
-    DSErrDlg(error_code, 143, "C:\\Diablo\\Direct\\SOUND.CPP");
+    DSErrDlg(error_code, 143, "SOUND.CPP");
   return v2 == 1;
 }
 
@@ -31,8 +29,7 @@ void __fastcall snd_play_snd(TSnd *pSnd, int lVolume, int lPan)
   int error_codea; // [esp+14h] [ebp-4h]
   int error_codeb; // [esp+14h] [ebp-4h]
 
-  if ( !pSnd )
-    assertion_failed(154, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(pSnd, 154, "SOUND.CPP");
   if ( gbSoundOn && pSnd->DSB && !snd_playing(pSnd) )
   {
     v4 = value + lVolume;
@@ -49,13 +46,13 @@ void __fastcall snd_play_snd(TSnd *pSnd, int lVolume, int lPan)
     {
       error_code = pSnd->DSB->lpVtbl->SetVolume(pSnd->DSB, v4);
       if ( error_code )
-        DSErrDlg(error_code, 168, "C:\\Diablo\\Direct\\SOUND.CPP");
+        DSErrDlg(error_code, 168, "SOUND.CPP");
     }
     if ( lPan )
     {
       error_codea = pSnd->DSB->lpVtbl->SetPan(pSnd->DSB, lPan);
       if ( error_codea )
-        DSErrDlg(error_codea, 173, "C:\\Diablo\\Direct\\SOUND.CPP");
+        DSErrDlg(error_codea, 173, "SOUND.CPP");
     }
     error_codeb = pSnd->DSB->lpVtbl->Play(pSnd->DSB, 0, 0, 0);
     if ( error_codeb == -2005401450 )
@@ -64,7 +61,7 @@ void __fastcall snd_play_snd(TSnd *pSnd, int lVolume, int lPan)
       error_codeb = pSnd->DSB->lpVtbl->Play(pSnd->DSB, 0, 0, 0);
     }
     if ( error_codeb )
-      DSErrDlg(error_codeb, 180, "C:\\Diablo\\Direct\\SOUND.CPP");
+      DSErrDlg(error_codeb, 180, "SOUND.CPP");
   }
 }
 
@@ -80,8 +77,7 @@ BOOL __fastcall sound_file_reload(TSnd *sound_file, IDirectSoundBuffer *DSB)
   DWORD v10; // [esp+28h] [ebp-8h]
   int v11; // [esp+2Ch] [ebp-4h]
 
-  if ( !sound_file )
-    assertion_failed(84, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(sound_file, 84, "SOUND.CPP");
   if ( DSB || (result = sound_file->DSB->lpVtbl->Restore(sound_file->DSB)) == 0 )
   {
     if ( DSB )
@@ -96,17 +92,16 @@ BOOL __fastcall sound_file_reload(TSnd *sound_file, IDirectSoundBuffer *DSB)
     }
     error_code = sound_file->DSB->lpVtbl->Lock(sound_file->DSB, 0, sound_file->len, &v9, &v10, &v5, &v7, 0);
     if ( error_code )
-      DSErrDlg(error_code, 105, "C:\\Diablo\\Direct\\SOUND.CPP");
+      DSErrDlg(error_code, 105, "SOUND.CPP");
     if ( SFileSetFilePointer(DSB, sound_file->offset, 0, 0) == -1 )
       TermMsg("Unable to seek in sound file %s", sound_file->sound_path);
     if ( !SFileReadFile((int)DSB, (int)v9, v10, (int)&v11, 0) )
       TermMsg("Unable to read sound file %s", sound_file->sound_path);
-    if ( v10 != v11 )
-      assertion_failed(114, "C:\\Diablo\\Direct\\SOUND.CPP");
+    assert(v10 == v11, 114, "SOUND.CPP");
     result = sound_file->DSB->lpVtbl->Unlock(sound_file->DSB, v9, v10, v5, v7);
     error_code = result;
     if ( result )
-      DSErrDlg(error_code, 118, "C:\\Diablo\\Direct\\SOUND.CPP");
+      DSErrDlg(error_code, 118, "SOUND.CPP");
     if ( v6 )
       result = SFileCloseFile(v6);
   }
@@ -123,7 +118,7 @@ TSnd *__fastcall sound_file_load(char *path)
   v2 = path;
   if ( !sglpDS )
     return 0;
-  sound_file = (TSnd *)DiabloAllocPtr(36, 207, "C:\\Diablo\\Direct\\SOUND.CPP");
+  sound_file = (TSnd *)DiabloAllocPtr(36, 207, "SOUND.CPP");
   memset(sound_file, 0, 0x24u);
   sound_file->sound_path = v2;
   if ( !SFileOpenFile(v2, &DSB) )
@@ -142,8 +137,7 @@ void __fastcall sound_CreateSoundBuffer(TSnd *sound_file)
   int error_code; // [esp+10h] [ebp-18h]
   DSBUFFERDESC v3; // [esp+14h] [ebp-14h]
 
-  if ( !sglpDS )
-    assertion_failed(187, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(sglpDS, 187, "SOUND.CPP");
   memset(&v3, 0, 0x14u);
   v3.dwSize = 20;
   v3.dwFlags = 194;
@@ -151,7 +145,7 @@ void __fastcall sound_CreateSoundBuffer(TSnd *sound_file)
   v3.lpwfxFormat = &sound_file->fmt;
   error_code = sglpDS->lpVtbl->CreateSoundBuffer(sglpDS, &v3, &sound_file->DSB, 0);
   if ( error_code )
-    DSErrDlg(error_code, 197, "C:\\Diablo\\Direct\\SOUND.CPP");
+    DSErrDlg(error_code, 197, "SOUND.CPP");
 }
 
 //----- (0041414C) --------------------------------------------------------
@@ -168,7 +162,7 @@ void __fastcall sound_file_cleanup(TSnd *sound_file)
       ptr->DSB->lpVtbl->Release(ptr->DSB);
       ptr->DSB = 0;
     }
-    mem_free_dbg(ptr, 242, "C:\\Diablo\\Direct\\SOUND.CPP");
+    mem_free_dbg(ptr, 242, "SOUND.CPP");
   }
 }
 
@@ -180,18 +174,15 @@ void __fastcall snd_init(HWND hWnd)
 
   sound_load_volume("Sound Volume", &value);
   sound_load_volume("Music Volume", &sglMusicVolume);
-  if ( sglpDS )
-    assertion_failed(303, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(!sglpDS, 303, "SOUND.CPP");
   if ( DirectSoundCreate(0, &sglpDS, 0) )
     sglpDS = 0;
   if ( sglpDS && !sglpDS->lpVtbl->SetCooperativeLevel(sglpDS, hWnd, 3) )
     sound_create_primary_buffer(0);
   v3 = SVidInitialize(sglpDS);
-  if ( sglpDS && !v3 )
-    assertion_failed(311, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(!(sglpDS && !v3), 311, "SOUND.CPP");
   v1 = SFileDdaInitialize(sglpDS);
-  if ( sglpDS && !v1 )
-    assertion_failed(314, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(!(sglpDS && !v1), 314, "SOUND.CPP");
   gbSndInited = sglpDS != 0;
 }
 
@@ -225,8 +216,7 @@ void __fastcall sound_create_primary_buffer(int music_track)
   int a3; // [esp+88h] [ebp-1Ch]
   WAVEFORMATEX wf; // [esp+90h] [ebp-14h]
 
-  if ( !sglpDS )
-    assertion_failed(251, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(sglpDS, 251, "SOUND.CPP");
   if ( !music_track )
   {
     memset(&v2, 0, 0x14u);
@@ -234,14 +224,14 @@ void __fastcall sound_create_primary_buffer(int music_track)
     v2.dwFlags = 1;
     error_code = sglpDS->lpVtbl->CreateSoundBuffer(sglpDS, &v2, &sglpDSB, 0);
     if ( error_code )
-      DSErrDlg(error_code, 264, "C:\\Diablo\\Direct\\SOUND.CPP");
+      DSErrDlg(error_code, 264, "SOUND.CPP");
   }
   if ( sglpDSB )
   {
     v4.dwSize = 96;
     error_code = sglpDS->lpVtbl->GetCaps(sglpDS, &v4);
     if ( error_code )
-      DSErrDlg(error_code, 272, "C:\\Diablo\\Direct\\SOUND.CPP");
+      DSErrDlg(error_code, 272, "SOUND.CPP");
     if ( !music_track || !ReadWaveFile(music_track, &wf, &a3) )
     {
       memset(&wf, 0, 0x12u);
@@ -257,7 +247,7 @@ void __fastcall sound_create_primary_buffer(int music_track)
     if ( error_code && error_code != -2005401500 )
     {
       if ( error_code )
-        DSErrDlg(error_code, 294, "C:\\Diablo\\Direct\\SOUND.CPP");
+        DSErrDlg(error_code, 294, "SOUND.CPP");
     }
   }
 }
@@ -342,8 +332,7 @@ void __fastcall music_start(int nTrack)
 {
   int v1; // ST1C_4
 
-  if ( (unsigned int)nTrack >= 6 )
-    assertion_failed(389, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert((unsigned int)nTrack < 6, 389, "SOUND.CPP");
   music_stop();
   if ( sglpDS && gbMusicOn )
   {
@@ -368,10 +357,8 @@ int __fastcall sound_get_or_set_music_volume(int volume)
 {
   if ( volume == 1 )
     return sglMusicVolume;
-  if ( volume < -1600 )
-    assertion_failed(416, "C:\\Diablo\\Direct\\SOUND.CPP");
-  if ( volume > 0 )
-    assertion_failed(417, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(volume >= -1600, 416, "SOUND.CPP");
+  assert(volume <= 0, 417, "SOUND.CPP");
   sglMusicVolume = volume;
   if ( sgpMusicTrack )
     SFileDdaSetVolume(sgpMusicTrack, sglMusicVolume, 0);
@@ -383,10 +370,8 @@ int __fastcall sound_get_or_set_sound_volume(int volume)
 {
   if ( volume == 1 )
     return value;
-  if ( volume < -1600 )
-    assertion_failed(430, "C:\\Diablo\\Direct\\SOUND.CPP");
-  if ( volume > 0 )
-    assertion_failed(431, "C:\\Diablo\\Direct\\SOUND.CPP");
+  assert(volume >= -1600, 430, "SOUND.CPP");
+  assert(volume <= 0, 431, "SOUND.CPP");
   value = volume;
   return volume;
 }

@@ -103,7 +103,7 @@ void __fastcall LoadL3Dungeon(char *sFileName, int vx, int vy)
   dmaxx = 96;
   dmaxy = 96;
   DRLG_InitTrans();
-  pMap = LoadFileInMem(sFileName, 0, 1520, "C:\\Diablo\\Direct\\DRLG_L3.CPP");
+  pMap = LoadFileInMem(sFileName, 0, 1520, "DRLG_L3.CPP");
   v11 = *pMap;
   v10 = pMap[2];
   v13 = pMap + 4;
@@ -161,6 +161,6 @@ void __fastcall LoadL3Dungeon(char *sFileName, int vx, int vy)
       }
     }
   }
-  mem_free_dbg(pMap, 1563, "C:\\Diablo\\Direct\\DRLG_L3.CPP");
+  mem_free_dbg(pMap, 1563, "DRLG_L3.CPP");
 }
 

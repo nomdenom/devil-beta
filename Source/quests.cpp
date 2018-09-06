@@ -245,9 +245,9 @@ void __fastcall DrawSChamber(int quest_id, int xx, int yy)
   v4 = xx;
   v5 = quest_id;
   if ( quests[quest_id]._qactive == 2 )
-    ptr = LoadFileInMem("Levels\\L2Data\\Bonestr2.DUN", 0, 279, "C:\\Diablo\\Direct\\Quests.cpp");
+    ptr = LoadFileInMem("Levels\\L2Data\\Bonestr2.DUN", 0, 279, "Quests.cpp");
   else
-    ptr = LoadFileInMem("Levels\\L2Data\\Bonestr1.DUN", 0, 281, "C:\\Diablo\\Direct\\Quests.cpp");
+    ptr = LoadFileInMem("Levels\\L2Data\\Bonestr1.DUN", 0, 281, "Quests.cpp");
   v9 = *ptr;
   v8 = ptr[2];
   v11 = ptr + 4;
@@ -274,7 +274,7 @@ void __fastcall DrawSChamber(int quest_id, int xx, int yy)
   quests[v5]._qtx = 2 * v4 + 22;
   quests[v5]._qty = 2 * yy + 23;
   CheckQuestKill(16 * v5, v3);
-  mem_free_dbg(ptr, 307, "C:\\Diablo\\Direct\\Quests.cpp");
+  mem_free_dbg(ptr, 307, "Quests.cpp");
 }
 
 //----- (0047929B) --------------------------------------------------------
@@ -291,7 +291,7 @@ void __fastcall DrawLTBanner(int xx, int yy)
 
   v2 = yy;
   v3 = xx;
-  ptr = LoadFileInMem("Levels\\L1Data\\Hero1.DUN", 0, 319, "C:\\Diablo\\Direct\\Quests.cpp");
+  ptr = LoadFileInMem("Levels\\L1Data\\Hero1.DUN", 0, 319, "Quests.cpp");
   v7 = *ptr;
   v6 = ptr[2];
   v8 = (char *)(ptr + 4);
@@ -304,7 +304,7 @@ void __fastcall DrawLTBanner(int xx, int yy)
       v8 += 2;
     }
   }
-  mem_free_dbg(ptr, 332, "C:\\Diablo\\Direct\\Quests.cpp");
+  mem_free_dbg(ptr, 332, "Quests.cpp");
 }
 
 //----- (0047936F) --------------------------------------------------------
@@ -321,7 +321,7 @@ void __fastcall DrawBlind(int xx, int yy)
 
   v2 = yy;
   v3 = xx;
-  pMap = LoadFileInMem("Levels\\L2Data\\Blind1.DUN", 0, 344, "C:\\Diablo\\Direct\\Quests.cpp");
+  pMap = LoadFileInMem("Levels\\L2Data\\Blind1.DUN", 0, 344, "Quests.cpp");
   SetMapMonsters((char *)pMap, 2 * v3, 2 * v2);
   v7 = *pMap;
   v6 = pMap[2];
@@ -339,7 +339,7 @@ void __fastcall DrawBlind(int xx, int yy)
       v8 += 2;
     }
   }
-  mem_free_dbg(pMap, 363, "C:\\Diablo\\Direct\\Quests.cpp");
+  mem_free_dbg(pMap, 363, "Quests.cpp");
 }
 
 //----- (00479476) --------------------------------------------------------
@@ -356,7 +356,7 @@ void __fastcall DrawBlood(int xx, int yy)
 
   v2 = yy;
   v3 = xx;
-  ptr = LoadFileInMem("Levels\\L2Data\\Blood2.DUN", 0, 375, "C:\\Diablo\\Direct\\Quests.cpp");
+  ptr = LoadFileInMem("Levels\\L2Data\\Blood2.DUN", 0, 375, "Quests.cpp");
   v7 = *ptr;
   v6 = ptr[2];
   v8 = ptr + 4;
@@ -373,7 +373,7 @@ void __fastcall DrawBlood(int xx, int yy)
       v8 += 2;
     }
   }
-  mem_free_dbg(ptr, 397, "C:\\Diablo\\Direct\\Quests.cpp");
+  mem_free_dbg(ptr, 397, "Quests.cpp");
 }
 
 //----- (0047956A) --------------------------------------------------------

@@ -1996,7 +1996,7 @@ void __fastcall LoadMissileGFX(BYTE mi)
   if ( misfiledata[mi].mFlags & 4 )
   {
     sprintf(pszName, "Missiles\\%s.CEL", misfiledata[mi].mName);
-    v5 = LoadFileInMem(pszName, 0, 866, "C:\\Diablo\\Direct\\MISSILES.CPP");
+    v5 = LoadFileInMem(pszName, 0, 866, "MISSILES.CPP");
     for ( i = 0; misfiledata[mi].mAnimFAmt > i; ++i )
       misfiledata[mi].mAnimData[i] = &v5[*(_DWORD *)&v5[4 * i]];
   }
@@ -2004,7 +2004,7 @@ void __fastcall LoadMissileGFX(BYTE mi)
   {
     sprintf(pszName, "Missiles\\%s.CEL", misfiledata[mi].mName);
     if ( !misfiledata[mi].mAnimData[0] )
-      misfiledata[mi].mAnimData[0] = LoadFileInMem(pszName, 0, 874, "C:\\Diablo\\Direct\\MISSILES.CPP");
+      misfiledata[mi].mAnimData[0] = LoadFileInMem(pszName, 0, 874, "MISSILES.CPP");
   }
   else
   {
@@ -2013,7 +2013,7 @@ void __fastcall LoadMissileGFX(BYTE mi)
       sprintf(pszName, "Missiles\\%s%i.CEL", misfiledata[mi].mName, i + 1);
       if ( !misfiledata[mi].mAnimData[i] )
       {
-        v1 = LoadFileInMem(pszName, 0, 879, "C:\\Diablo\\Direct\\MISSILES.CPP");
+        v1 = LoadFileInMem(pszName, 0, 879, "MISSILES.CPP");
         misfiledata[mi].mAnimData[i] = v1;
       }
     }
@@ -2044,7 +2044,7 @@ void __fastcall FreeMissileGFX(int mi)
       mem_free_dbg(
         &misfiledata[mi].mAnimData[0][-4 * misfiledata[mi].mAnimFAmt],
         907,
-        "C:\\Diablo\\Direct\\MISSILES.CPP");
+        "MISSILES.CPP");
       misfiledata[mi].mAnimData[0] = 0;
     }
   }
@@ -2054,7 +2054,7 @@ void __fastcall FreeMissileGFX(int mi)
     {
       if ( misfiledata[mi].mAnimData[i] )
       {
-        mem_free_dbg(misfiledata[mi].mAnimData[i], 916, "C:\\Diablo\\Direct\\MISSILES.CPP");
+        mem_free_dbg(misfiledata[mi].mAnimData[i], 916, "MISSILES.CPP");
         misfiledata[mi].mAnimData[i] = 0;
       }
     }

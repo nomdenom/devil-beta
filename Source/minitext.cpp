@@ -39,19 +39,18 @@ void __cdecl minitext_4129E5_init_qtexts()
 //----- (00412B03) --------------------------------------------------------
 void __cdecl FreeQuestText()
 {
-  mem_free_dbg(pMedTextCels, 681, "C:\\Diablo\\Direct\\minitext.cpp");
+  mem_free_dbg(pMedTextCels, 681, "minitext.cpp");
   pMedTextCels = 0;
-  mem_free_dbg(pTextBoxCels, 683, "C:\\Diablo\\Direct\\minitext.cpp");
+  mem_free_dbg(pTextBoxCels, 683, "minitext.cpp");
   pTextBoxCels = 0;
 }
 
 //----- (00412B51) --------------------------------------------------------
 void __cdecl InitQuestText()
 {
-  if ( pMedTextCels )
-    assertion_failed(691, "C:\\Diablo\\Direct\\minitext.cpp");
-  pMedTextCels = LoadFileInMem("Data\\MedTextS.CEL", 0, 692, "C:\\Diablo\\Direct\\minitext.cpp");
-  pTextBoxCels = LoadFileInMem("Data\\TextBox.CEL", 0, 693, "C:\\Diablo\\Direct\\minitext.cpp");
+  assert(!pMedTextCels, 691, "minitext.cpp");
+  pMedTextCels = LoadFileInMem("Data\\MedTextS.CEL", 0, 692, "minitext.cpp");
+  pTextBoxCels = LoadFileInMem("Data\\TextBox.CEL", 0, 693, "minitext.cpp");
   qtextflag = 0;
 }
 

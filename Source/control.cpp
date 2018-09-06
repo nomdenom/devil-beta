@@ -37,7 +37,7 @@ void __fastcall DrawSpellCel(int xp, int yp, char *Trans, int nCel, int w)
       if ( v10 & 1 )
       {
         _AL = *v6++;
-        __asm { xlat }
+        ASM_XLAT();
         *v7++ = _AL;
         if ( !v11 )
           continue;
@@ -48,9 +48,9 @@ void __fastcall DrawSpellCel(int xp, int yp, char *Trans, int nCel, int w)
         goto LABEL_15;
       _AX = *(_WORD *)v6;
       v6 += 2;
-      __asm { xlat }
+      ASM_XLAT();
       _AX = __ROR2__(_AX, 8);
-      __asm { xlat }
+      ASM_XLAT();
       *(_WORD *)v7 = __ROR2__(_AX, 8);
       v7 += 2;
       if ( v15 )
@@ -60,13 +60,13 @@ LABEL_15:
         {
           _EAX = *(_DWORD *)v6;
           v6 += 4;
-          __asm { xlat }
+          ASM_XLAT();
           _EAX = __ROR4__(_EAX, 8);
-          __asm { xlat }
+          ASM_XLAT();
           _EAX = __ROR4__(_EAX, 8);
-          __asm { xlat }
+          ASM_XLAT();
           _EAX = __ROR4__(_EAX, 8);
-          __asm { xlat }
+          ASM_XLAT();
           *(_DWORD *)v7 = __ROR4__(_EAX, 8);
           v7 += 4;
           --v15;
@@ -803,39 +803,38 @@ void __cdecl InitControlPan()
   signed int j; // [esp+Ch] [ebp-4h]
   signed int k; // [esp+Ch] [ebp-4h]
 
-  if ( pBtmBuff )
-    assertion_failed(1016, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  assert(!pBtmBuff, 1016, "CONTROL.CPP");
   if ( gbMaxPlayers == 1 )
   {
-    pBtmBuff = (char *)DiabloAllocPtr(0x16800, 1018, "C:\\Diablo\\Direct\\CONTROL.CPP");
+    pBtmBuff = (char *)DiabloAllocPtr(0x16800, 1018, "CONTROL.CPP");
     memset(pBtmBuff, 0, 0x16800u);
   }
   else
   {
-    pBtmBuff = (char *)DiabloAllocPtr(0x2D000, 1021, "C:\\Diablo\\Direct\\CONTROL.CPP");
+    pBtmBuff = (char *)DiabloAllocPtr(0x2D000, 1021, "CONTROL.CPP");
     memset(pBtmBuff, 0, 0x2D000u);
   }
-  pManaBuff = (char *)DiabloAllocPtr(0x1E40, 1024, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pManaBuff = (char *)DiabloAllocPtr(0x1E40, 1024, "CONTROL.CPP");
   memset(pManaBuff, 0, 0x1E40u);
-  pLifeBuff = (char *)DiabloAllocPtr(0x1E40, 1026, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pLifeBuff = (char *)DiabloAllocPtr(0x1E40, 1026, "CONTROL.CPP");
   memset(pLifeBuff, 0, 0x1E40u);
-  pPanelText = LoadFileInMem("CtrlPan\\SmalText.CEL", 0, 1028, "C:\\Diablo\\Direct\\CONTROL.CPP");
-  pChrPanel = LoadFileInMem("Data\\Char.CEL", 0, 1029, "C:\\Diablo\\Direct\\CONTROL.CPP");
-  Trans = (char *)LoadFileInMem("CtrlPan\\SpelIcon.CEL", 0, 1030, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pPanelText = LoadFileInMem("CtrlPan\\SmalText.CEL", 0, 1028, "CONTROL.CPP");
+  pChrPanel = LoadFileInMem("Data\\Char.CEL", 0, 1029, "CONTROL.CPP");
+  Trans = (char *)LoadFileInMem("CtrlPan\\SpelIcon.CEL", 0, 1030, "CONTROL.CPP");
   SetSpellTrans(0);
-  pStatusPanel = (char *)LoadFileInMem("CtrlPan\\Panel8.CEL", 0, 1034, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pStatusPanel = (char *)LoadFileInMem("CtrlPan\\Panel8.CEL", 0, 1034, "CONTROL.CPP");
   CelDecodeRect(pBtmBuff, 0, 143, 640, pStatusPanel, 1, 640);
-  mem_free_dbg(pStatusPanel, 1036, "C:\\Diablo\\Direct\\CONTROL.CPP");
-  pStatusPanel = (char *)LoadFileInMem("CtrlPan\\P8Bulbs.CEL", 0, 1037, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pStatusPanel, 1036, "CONTROL.CPP");
+  pStatusPanel = (char *)LoadFileInMem("CtrlPan\\P8Bulbs.CEL", 0, 1037, "CONTROL.CPP");
   CelDecodeRect(pLifeBuff, 0, 87, 88, pStatusPanel, 1, 88);
   CelDecodeRect(pManaBuff, 0, 87, 88, pStatusPanel, 2, 88);
-  mem_free_dbg(pStatusPanel, 1040, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pStatusPanel, 1040, "CONTROL.CPP");
   if ( gbMaxPlayers != 1 )
   {
-    pTalkPanel = (char *)LoadFileInMem("CtrlPan\\TalkPanl.CEL", 0, 1042, "C:\\Diablo\\Direct\\CONTROL.CPP");
+    pTalkPanel = (char *)LoadFileInMem("CtrlPan\\TalkPanl.CEL", 0, 1042, "CONTROL.CPP");
     CelDecodeRect(pBtmBuff, 0, 287, 640, pTalkPanel, 1, 640);
-    mem_free_dbg(pTalkPanel, 1044, "C:\\Diablo\\Direct\\CONTROL.CPP");
-    pMultiBtns = LoadFileInMem("CtrlPan\\P8But2.CEL", 0, 1045, "C:\\Diablo\\Direct\\CONTROL.CPP");
+    mem_free_dbg(pTalkPanel, 1044, "CONTROL.CPP");
+    pMultiBtns = LoadFileInMem("CtrlPan\\P8But2.CEL", 0, 1045, "CONTROL.CPP");
     talkflag = 0;
     sgbPlrTalkTbl = 0;
     sgszTalkMsg[0] = 0;
@@ -844,7 +843,7 @@ void __cdecl InitControlPan()
   }
   panelflag = 0;
   lvlbtndown = 0;
-  pPanelButtons = LoadFileInMem("CtrlPan\\Panel8bu.CEL", 0, 1055, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pPanelButtons = LoadFileInMem("CtrlPan\\Panel8bu.CEL", 0, 1055, "CONTROL.CPP");
   for ( j = 0; j < 8; ++j )
     panbtn[j] = 0;
   panbtndown = 0;
@@ -852,20 +851,20 @@ void __cdecl InitControlPan()
     numpanbtns = 6;
   else
     numpanbtns = 8;
-  pChrButtons = LoadFileInMem("Data\\CharBut.CEL", 0, 1061, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pChrButtons = LoadFileInMem("Data\\CharBut.CEL", 0, 1061, "CONTROL.CPP");
   for ( k = 0; k < 4; ++k )
     chrbtn[k] = 0;
   chrbtnactive = 0;
-  pDurIcons = LoadFileInMem("Items\\DurIcons.CEL", 0, 1065, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pDurIcons = LoadFileInMem("Items\\DurIcons.CEL", 0, 1065, "CONTROL.CPP");
   strcpy(infostr, empty_string_0);
   j_ClearPanel();
   drawmanaflag = 1;
   drawhpflag = 1;
   chrflag = 0;
   spselflag = 0;
-  pSpellBkCel = LoadFileInMem("Data\\SpellBk.CEL", 0, 1074, "C:\\Diablo\\Direct\\CONTROL.CPP");
-  pSBkBtnCel = LoadFileInMem("Data\\SpellBkB.CEL", 0, 1075, "C:\\Diablo\\Direct\\CONTROL.CPP");
-  pSBkIconCels = (char *)LoadFileInMem("Data\\SpellI2.CEL", 0, 1076, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pSpellBkCel = LoadFileInMem("Data\\SpellBk.CEL", 0, 1074, "CONTROL.CPP");
+  pSBkBtnCel = LoadFileInMem("Data\\SpellBkB.CEL", 0, 1075, "CONTROL.CPP");
+  pSBkIconCels = (char *)LoadFileInMem("Data\\SpellI2.CEL", 0, 1076, "CONTROL.CPP");
   sbooktab = 0;
   sbookflag = 0;
   if ( plr[myplr]._pClass )
@@ -883,8 +882,8 @@ void __cdecl InitControlPan()
   {
     SpellPages[0][0] = 26;
   }
-  pQLogCel = LoadFileInMem("Data\\Quest.CEL", 0, 1083, "C:\\Diablo\\Direct\\CONTROL.CPP");
-  pGBoxBuff = LoadFileInMem("CtrlPan\\Golddrop.cel", 0, 1085, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  pQLogCel = LoadFileInMem("Data\\Quest.CEL", 0, 1083, "CONTROL.CPP");
+  pGBoxBuff = LoadFileInMem("CtrlPan\\Golddrop.cel", 0, 1085, "CONTROL.CPP");
   dropGoldFlag = 0;
   dropGoldValue = 0;
   initialDropGoldValue = 0;
@@ -1348,35 +1347,35 @@ void __cdecl CheckBtnUp()
 //----- (00417C98) --------------------------------------------------------
 void __cdecl FreeControlPan()
 {
-  mem_free_dbg(pBtmBuff, 1457, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pBtmBuff, 1457, "CONTROL.CPP");
   pBtmBuff = 0;
-  mem_free_dbg(pManaBuff, 1459, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pManaBuff, 1459, "CONTROL.CPP");
   pManaBuff = 0;
-  mem_free_dbg(pLifeBuff, 1461, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pLifeBuff, 1461, "CONTROL.CPP");
   pLifeBuff = 0;
-  mem_free_dbg(pPanelText, 1463, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pPanelText, 1463, "CONTROL.CPP");
   pPanelText = 0;
-  mem_free_dbg(pChrPanel, 1465, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pChrPanel, 1465, "CONTROL.CPP");
   pChrPanel = 0;
-  mem_free_dbg(Trans, 1467, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(Trans, 1467, "CONTROL.CPP");
   Trans = 0;
-  mem_free_dbg(pPanelButtons, 1469, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pPanelButtons, 1469, "CONTROL.CPP");
   pPanelButtons = 0;
-  mem_free_dbg(pMultiBtns, 1471, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pMultiBtns, 1471, "CONTROL.CPP");
   pMultiBtns = 0;
-  mem_free_dbg(pChrButtons, 1473, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pChrButtons, 1473, "CONTROL.CPP");
   pChrButtons = 0;
-  mem_free_dbg(pDurIcons, 1475, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pDurIcons, 1475, "CONTROL.CPP");
   pDurIcons = 0;
-  mem_free_dbg(pQLogCel, 1477, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pQLogCel, 1477, "CONTROL.CPP");
   pQLogCel = 0;
-  mem_free_dbg(pSpellBkCel, 1479, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pSpellBkCel, 1479, "CONTROL.CPP");
   pSpellBkCel = 0;
-  mem_free_dbg(pSBkBtnCel, 1481, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pSBkBtnCel, 1481, "CONTROL.CPP");
   pSBkBtnCel = 0;
-  mem_free_dbg(pSBkIconCels, 1483, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pSBkIconCels, 1483, "CONTROL.CPP");
   pSBkIconCels = 0;
-  mem_free_dbg(pGBoxBuff, 1485, "C:\\Diablo\\Direct\\CONTROL.CPP");
+  mem_free_dbg(pGBoxBuff, 1485, "CONTROL.CPP");
   pGBoxBuff = 0;
 }
 
@@ -1901,22 +1900,16 @@ void __cdecl RedBack()
     v6 = 4608;
   v0 = gpBuffer + 122944;
   _EBX = &pLightTbl[v6];
-  v2 = 352;
-  do
+  for (v2 = 352; v2; --v2)
   {
-    v3 = 640;
-    do
+    for (v3 = 640; v3; --v3)
     {
       _AL = *v0;
-      __asm { xlat }
+      ASM_XLAT();
       *v0++ = _AL;
-      --v3;
     }
-    while ( v3 );
     v0 += 128;
-    --v2;
   }
-  while ( v2 );
 }
 
 //----- (00419E1D) --------------------------------------------------------

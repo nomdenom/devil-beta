@@ -39,15 +39,15 @@ void __cdecl InitAutomap()
   switch ( leveltype )
   {
     case 1:
-      ptr = LoadFileInMem("Levels\\L1Data\\L1.AMP", (int *)&pdwFileLen, 109, "C:\\Diablo\\Direct\\automap.cpp");
+      ptr = LoadFileInMem("Levels\\L1Data\\L1.AMP", (int *)&pdwFileLen, 109, "automap.cpp");
       pdwFileLen >>= 1;
       break;
     case 2:
-      ptr = LoadFileInMem("Levels\\L2Data\\L2.AMP", (int *)&pdwFileLen, 114, "C:\\Diablo\\Direct\\automap.cpp");
+      ptr = LoadFileInMem("Levels\\L2Data\\L2.AMP", (int *)&pdwFileLen, 114, "automap.cpp");
       pdwFileLen >>= 1;
       break;
     case 3:
-      ptr = LoadFileInMem("Levels\\L3Data\\L3.AMP", (int *)&pdwFileLen, 119, "C:\\Diablo\\Direct\\automap.cpp");
+      ptr = LoadFileInMem("Levels\\L3Data\\L3.AMP", (int *)&pdwFileLen, 119, "automap.cpp");
       pdwFileLen >>= 1;
       break;
     default:
@@ -60,7 +60,7 @@ void __cdecl InitAutomap()
     v1 = *v5++;
     automaptype[j] = v0 + (v1 << 8);
   }
-  mem_free_dbg(ptr, 135, "C:\\Diablo\\Direct\\automap.cpp");
+  mem_free_dbg(ptr, 135, "automap.cpp");
   memset(automapview, 0, 1600u);
   for ( k = 0; k < 112; ++k )
   {

@@ -15,8 +15,7 @@ void __fastcall gmenu_print_text(int x, int y, char *pszStr)
 {
   char v5; // [esp+14h] [ebp-4h]
 
-  if ( !pszStr )
-    assertion_failed(90, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(pszStr, 90, "gmenu.cpp");
   while ( *pszStr )
   {
     v5 = lfontframe[*pszStr++];
@@ -29,15 +28,15 @@ void __fastcall gmenu_print_text(int x, int y, char *pszStr)
 //----- (00479E52) --------------------------------------------------------
 void __cdecl FreeGMenu()
 {
-  mem_free_dbg(sgpLogo, 113, "C:\\Diablo\\Direct\\gmenu.cpp");
+  mem_free_dbg(sgpLogo, 113, "gmenu.cpp");
   sgpLogo = 0;
-  mem_free_dbg(BigTGold_cel, 115, "C:\\Diablo\\Direct\\gmenu.cpp");
+  mem_free_dbg(BigTGold_cel, 115, "gmenu.cpp");
   BigTGold_cel = 0;
-  mem_free_dbg(PentSpin_cel, 117, "C:\\Diablo\\Direct\\gmenu.cpp");
+  mem_free_dbg(PentSpin_cel, 117, "gmenu.cpp");
   PentSpin_cel = 0;
-  mem_free_dbg(option_cel, 119, "C:\\Diablo\\Direct\\gmenu.cpp");
+  mem_free_dbg(option_cel, 119, "gmenu.cpp");
   option_cel = 0;
-  mem_free_dbg(optbar_cel, 121, "C:\\Diablo\\Direct\\gmenu.cpp");
+  mem_free_dbg(optbar_cel, 121, "gmenu.cpp");
   optbar_cel = 0;
 }
 
@@ -49,13 +48,12 @@ void __cdecl gmenu_init_menu()
   sgpCurrItem = 0;
   gmenu_642C2C = 0;
   gmenu_642C08 = 0;
-  if ( sgpLogo )
-    assertion_failed(135, "C:\\Diablo\\Direct\\gmenu.cpp");
-  sgpLogo = LoadFileInMem("Data\\Diabsmal.CEL", 0, 136, "C:\\Diablo\\Direct\\gmenu.cpp");
-  BigTGold_cel = (char *)LoadFileInMem("Data\\BigTGold.CEL", 0, 137, "C:\\Diablo\\Direct\\gmenu.cpp");
-  PentSpin_cel = LoadFileInMem("Data\\PentSpin.CEL", 0, 138, "C:\\Diablo\\Direct\\gmenu.cpp");
-  option_cel = LoadFileInMem("Data\\option.CEL", 0, 139, "C:\\Diablo\\Direct\\gmenu.cpp");
-  optbar_cel = LoadFileInMem("Data\\optbar.CEL", 0, 140, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(!sgpLogo, 135, "gmenu.cpp");
+  sgpLogo = LoadFileInMem("Data\\Diabsmal.CEL", 0, 136, "gmenu.cpp");
+  BigTGold_cel = (char *)LoadFileInMem("Data\\BigTGold.CEL", 0, 137, "gmenu.cpp");
+  PentSpin_cel = LoadFileInMem("Data\\PentSpin.CEL", 0, 138, "gmenu.cpp");
+  option_cel = LoadFileInMem("Data\\option.CEL", 0, 139, "gmenu.cpp");
+  optbar_cel = LoadFileInMem("Data\\optbar.CEL", 0, 140, "gmenu.cpp");
 }
 
 //----- (00479FE1) --------------------------------------------------------
@@ -186,8 +184,7 @@ void __fastcall gmenu_clear_buffer(int x, int y, int width, int height)
   int v4; // ST20_4
   char *i; // [esp+18h] [ebp-4h]
 
-  if ( !gpBuffer )
-    assertion_failed(204, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(gpBuffer, 204, "gmenu.cpp");
   for ( i = &gpBuffer[x + screen_y_times_768[y]]; ; i -= 768 )
   {
     v4 = height--;
@@ -216,14 +213,12 @@ int __fastcall gmenu_presskeys(int a1)
 {
   if ( !gmenu_642C20_start )
     return 0;
-  if ( !sgpCurrItem )
-    assertion_failed(317, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(sgpCurrItem, 317, "gmenu.cpp");
   switch ( a1 )
   {
     case 13:
       PlaySFX(41);
-      if ( !sgpCurrItem )
-        assertion_failed(342, "C:\\Diablo\\Direct\\gmenu.cpp");
+      assert(sgpCurrItem, 342, "gmenu.cpp");
       ((void (__thiscall *)(signed int))sgpCurrItem->fnMenu)(1);
       return 1;
     case 27:
@@ -285,8 +280,7 @@ int __fastcall gmenu_on_mouse_move()
 
   if ( !gmenu_642C08 )
     return 0;
-  if ( !sgpCurrItem )
-    assertion_failed(379, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(sgpCurrItem, 379, "gmenu.cpp");
   gmenu_valid_mouse_pos(&plOffset);
   v2 = sgpCurrItem->dwFlags & 0xFFF000;
   v2 >>= 12;
@@ -303,8 +297,7 @@ bool __fastcall gmenu_valid_mouse_pos(int *plOffset)
 {
   bool result; // al
 
-  if ( !plOffset )
-    assertion_failed(359, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(plOffset, 359, "gmenu.cpp");
   *plOffset = 282;
   if ( *plOffset <= MouseX )
   {
@@ -421,8 +414,7 @@ void __fastcall gmenu_slider_1(TMenuItem *pItem, int min, int max, int gamma)
 {
   signed int v4; // [esp+14h] [ebp-4h]
 
-  if ( !pItem )
-    assertion_failed(445, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(pItem, 445, "gmenu.cpp");
   v4 = (signed int)(pItem->dwFlags & 0xFFF000) >> 12;
   if ( v4 < 2 )
     v4 = 2;
@@ -435,8 +427,7 @@ int __fastcall gmenu_slider_get(TMenuItem *pItem, int min, int max)
 {
   signed int v4; // [esp+18h] [ebp-4h]
 
-  if ( !pItem )
-    assertion_failed(468, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(pItem, 468, "gmenu.cpp");
   v4 = (signed int)(pItem->dwFlags & 0xFFF000) >> 12;
   if ( v4 < 2 )
     v4 = 2;
@@ -446,10 +437,8 @@ int __fastcall gmenu_slider_get(TMenuItem *pItem, int min, int max)
 //----- (0047AA5C) --------------------------------------------------------
 void __fastcall gmenu_slider_3(TMenuItem *pItem, int dwTicks)
 {
-  if ( !pItem )
-    assertion_failed(492, "C:\\Diablo\\Direct\\gmenu.cpp");
-  if ( (unsigned int)dwTicks < 2 || (unsigned int)dwTicks > 0xFFF )
-    assertion_failed(493, "C:\\Diablo\\Direct\\gmenu.cpp");
+  assert(pItem, 492, "gmenu.cpp");
+  assert(!((unsigned int)dwTicks < 2 || (unsigned int)dwTicks > 0xFFF), 493, "gmenu.cpp");
   pItem->dwFlags &= 0xFF000FFF;
   pItem->dwFlags |= (dwTicks << 12) & 0xFFF000;
 }

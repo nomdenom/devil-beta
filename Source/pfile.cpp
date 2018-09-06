@@ -40,8 +40,7 @@ void __fastcall pfile_436A75_reverse_name(int pnum)
   if ( pnum == myplr )
   {
     v2 = pfile_get_save_num_from_name(plr[pnum]._pName);
-    if ( v2 >= 0x14 )
-      assertion_failed(123, "C:\\Diablo\\Direct\\pfile.cpp");
+    assert(v2 < 0x14, 123, "pfile.cpp");
     _strrev(hero_names[v2]);
     _strrev(name);
   }
@@ -64,8 +63,7 @@ void __cdecl pfile_write_hero()
   int v0; // eax
   PkPlayerStruct pPack; // [esp+Ch] [ebp-3D8h]
 
-  if ( myplr < 0 || myplr >= 4 )
-    assertion_failed(285, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(!(myplr < 0 || myplr >= 4), 285, "pfile.cpp");
   PackPlayer(&pPack, myplr);
   v0 = pfile_get_save_num_from_name(pPack.pName);
   pfile_encode_hero(v0, &pPack);
@@ -82,8 +80,7 @@ void __fastcall pfile_encode_hero(unsigned int save_num, PkPlayerStruct *pPack)
   char a2a; // [esp+2Ch] [ebp-108h]
   int nSize; // [esp+130h] [ebp-4h]
 
-  if ( save_num >= 0x14 )
-    assertion_failed(258, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(save_num < 0x14, 258, "pfile.cpp");
   pfile_436D33(save_num, &a2a);
   strcpy(Buffer, "xgr1");
   *(_DWORD *)&Buffer[5] = 0;
@@ -93,12 +90,12 @@ void __fastcall pfile_encode_hero(unsigned int save_num, PkPlayerStruct *pPack)
   nSize = 16;
   GetComputerNameA(Buffer, (LPDWORD)&nSize);
   dwBytes = codec_get_encoded_len(982);
-  pbSrcDst = DiabloAllocPtr(dwBytes, 269, "C:\\Diablo\\Direct\\pfile.cpp");
+  pbSrcDst = DiabloAllocPtr(dwBytes, 269, "pfile.cpp");
   memcpy(pbSrcDst, pPack, 0x3D6u);
   codec_encode(pbSrcDst, 982, dwBytes, Buffer);
   mpqapi_write_file(v4, v3, (int)FileName);
   empty_fn_4();
-  mem_free_dbg(pbSrcDst, 278, "C:\\Diablo\\Direct\\pfile.cpp");
+  mem_free_dbg(pbSrcDst, 278, "pfile.cpp");
 }
 
 //----- (00436D33) --------------------------------------------------------
@@ -201,12 +198,9 @@ BOOL __fastcall pfile_read_hero(unsigned int a1, PkPlayerStruct *pPack, char *a3
   int nSize; // [esp+13Ch] [ebp-4h]
 
   v4 = pPack;
-  if ( a1 >= 0x14 )
-    assertion_failed(185, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( !pPack )
-    assertion_failed(186, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( !a3 )
-    assertion_failed(187, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(a1 < 0x14, 185, "pfile.cpp");
+  assert(pPack, 186, "pfile.cpp");
+  assert(a3, 187, "pfile.cpp");
   pfile_436D33(a1, v9);
   if ( !SFileOpenFile(v9, &v10) )
     return 0;
@@ -221,11 +215,10 @@ BOOL __fastcall pfile_read_hero(unsigned int a1, PkPlayerStruct *pPack, char *a3
   nSize = 16;
   GetComputerNameA(Buffer, (LPDWORD)&nSize);
   dwBytes = SFileGetFileSize(v10, 0);
-  pbSrcDst = DiabloAllocPtr(dwBytes, 208, "C:\\Diablo\\Direct\\pfile.cpp");
+  pbSrcDst = DiabloAllocPtr(dwBytes, 208, "pfile.cpp");
   if ( SFileReadFile(v10, (int)pbSrcDst, dwBytes, (int)&v5, 0) )
   {
-    if ( v5 != dwBytes )
-      assertion_failed(212, "C:\\Diablo\\Direct\\pfile.cpp");
+    assert(v5 == dwBytes, 212, "pfile.cpp");
     v5 = codec_decode(pbSrcDst, dwBytes, Buffer);
     if ( v5 == 982 )
     {
@@ -238,7 +231,7 @@ BOOL __fastcall pfile_read_hero(unsigned int a1, PkPlayerStruct *pPack, char *a3
     }
   }
   if ( pbSrcDst )
-    mem_free_dbg(pbSrcDst, 229, "C:\\Diablo\\Direct\\pfile.cpp");
+    mem_free_dbg(pbSrcDst, 229, "pfile.cpp");
   SFileCloseFile(v10);
   return v7;
 }
@@ -274,8 +267,7 @@ bool __stdcall pfile_ui_save_create(_uiheroinfo *heroinfo)
   PkPlayerStruct pPack; // [esp+Ch] [ebp-3DCh]
   unsigned int a1; // [esp+3E4h] [ebp-4h]
 
-  if ( !heroinfo->name[0] )
-    assertion_failed(384, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(heroinfo->name[0], 384, "pfile.cpp");
   a1 = pfile_get_save_num_from_name(heroinfo->name);
   if ( a1 == 20 )
   {
@@ -340,8 +332,7 @@ bool __stdcall pfile_get_file_name(int lvl, char *dst)
     lvl = 4;
     v3 = "h%02d%02d";
   }
-  if ( (unsigned int)pfile_4C922C_count >= 0x14 )
-    assertion_failed(164, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert((unsigned int)pfile_4C922C_count < 0x14, 164, "pfile.cpp");
   sprintf(dst, v3, pfile_4C922C_count, lvl);
   return 1;
 }
@@ -372,11 +363,9 @@ void __cdecl pfile_read_player_from_save()
   PkPlayerStruct a2; // [esp+14h] [ebp-3DCh]
   int hsArchive; // [esp+3ECh] [ebp-4h]
 
-  if ( myplr < 0 || myplr >= 4 )
-    assertion_failed(442, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(!(myplr < 0 || myplr >= 4), 442, "pfile.cpp");
   hsArchive = pfile_get_save_num_from_name(name);
-  if ( hsArchive == 20 )
-    assertion_failed(444, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(hsArchive != 20, 444, "pfile.cpp");
   v3 = pfile_open_save_archive(v1, v0);
   if ( !v3 )
     TermMsg("Unable to open archive");
@@ -394,8 +383,7 @@ bool __fastcall pfile_archive_contains_game(int hsArchive)
   char v3[260]; // [esp+10h] [ebp-108h]
   int v4; // [esp+114h] [ebp-4h]
 
-  if ( (unsigned int)hsArchive >= 0x14 )
-    assertion_failed(238, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert((unsigned int)hsArchive < 0x14, 238, "pfile.cpp");
   LOBYTE(v1) = gbMaxPlayers;
   if ( gbMaxPlayers == 1 )
   {
@@ -418,14 +406,12 @@ void __fastcall pfile_unused_sub_4376DF(char *a1)
   unsigned int v2; // [esp+10h] [ebp-4h]
 
   v2 = pfile_get_save_num_from_name(name);
-  if ( v2 >= 0x14 )
-    assertion_failed(462, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(v2 < 0x14, 462, "pfile.cpp");
   if ( setlevel )
     sprintf(a1, "g%02dls%02d", v2, (unsigned __int8)setlvlnum);
   else
     sprintf(a1, "g%02dlv%02d", v2, currlevel);
-  if ( gbMaxPlayers != 1 )
-    assertion_failed(465, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(gbMaxPlayers == 1, 465, "pfile.cpp");
 }
 
 //----- (00437792) --------------------------------------------------------
@@ -434,11 +420,9 @@ void __fastcall pfile_unused_sub_437792(char *a1)
   unsigned int v2; // [esp+10h] [ebp-4h]
 
   v2 = pfile_get_save_num_from_name(name);
-  if ( v2 >= 0x14 )
-    assertion_failed(473, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(v2 < 0x14, 473, "pfile.cpp");
   sprintf(a1, "g%02d", v2);
-  if ( gbMaxPlayers != 1 )
-    assertion_failed(475, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(gbMaxPlayers == 1, 475, "pfile.cpp");
 }
 
 //----- (0043780C) --------------------------------------------------------
@@ -449,14 +433,10 @@ void __fastcall pfile_unused_sub_43780C(int a1, void *a2, int size, int size_64)
   CHAR Buffer[16]; // [esp+14h] [ebp-14h]
   DWORD nSize; // [esp+24h] [ebp-4h]
 
-  if ( !a1 )
-    assertion_failed(482, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( !a2 )
-    assertion_failed(483, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( !size )
-    assertion_failed(484, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( gbMaxPlayers != 1 )
-    assertion_failed(485, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(a1, 482, "pfile.cpp");
+  assert(a2, 483, "pfile.cpp");
+  assert(size, 484, "pfile.cpp");
+  assert(gbMaxPlayers == 1, 485, "pfile.cpp");
   strcpy(Buffer, "xgr1");
   *(_DWORD *)&Buffer[5] = 0;
   *(_DWORD *)&Buffer[9] = 0;
@@ -479,12 +459,9 @@ void __fastcall pfile_unused_sub_437919(int *a1, int *size)
   int v8; // [esp+30h] [ebp-8h]
   DWORD nSize; // [esp+34h] [ebp-4h]
 
-  if ( !a1 )
-    assertion_failed(501, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( !size )
-    assertion_failed(502, "C:\\Diablo\\Direct\\pfile.cpp");
-  if ( gbMaxPlayers != 1 )
-    assertion_failed(503, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(a1, 501, "pfile.cpp");
+  assert(size, 502, "pfile.cpp");
+  assert(gbMaxPlayers == 1, 503, "pfile.cpp");
   v6 = pfile_open_save_archive(a1, (int)size);
   if ( !v6 )
     TermMsg("Unable to open save file archive");
@@ -493,11 +470,10 @@ void __fastcall pfile_unused_sub_437919(int *a1, int *size)
   *size = SFileGetFileSize(v8, 0);
   if ( !*size )
     TermMsg("Invalid save file");
-  pbSrcDst = DiabloAllocPtr(*size, 516, "C:\\Diablo\\Direct\\pfile.cpp");
+  pbSrcDst = DiabloAllocPtr(*size, 516, "pfile.cpp");
   if ( !SFileReadFile(v8, (int)pbSrcDst, *size, (int)&v4, 0) )
     TermMsg("Unable to read save file");
-  if ( *size != v4 )
-    assertion_failed(521, "C:\\Diablo\\Direct\\pfile.cpp");
+  assert(*size == v4, 521, "pfile.cpp");
   SFileCloseFile(v8);
   SFileCloseArchive(v6);
   strcpy(Buffer, "xgr1");

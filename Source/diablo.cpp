@@ -2,15 +2,15 @@
 void __cdecl FreeGameMem()
 {
   music_stop();
-  mem_free_dbg(pDungeonCels, 320, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  mem_free_dbg(pDungeonCels, 320, "DIABLO.CPP");
   pDungeonCels = 0;
-  mem_free_dbg(pMegaTiles, 322, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  mem_free_dbg(pMegaTiles, 322, "DIABLO.CPP");
   pMegaTiles = 0;
-  mem_free_dbg(pLevelPieces, 324, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  mem_free_dbg(pLevelPieces, 324, "DIABLO.CPP");
   pLevelPieces = 0;
-  mem_free_dbg(level_special_cel, 326, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  mem_free_dbg(level_special_cel, 326, "DIABLO.CPP");
   level_special_cel = 0;
-  mem_free_dbg(pSpeedCels, 328, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  mem_free_dbg(pSpeedCels, 328, "DIABLO.CPP");
   pSpeedCels = 0;
   FreeMissiles();
   FreeMonsters();
@@ -27,8 +27,7 @@ void __fastcall run_game_loop(int uMsg)
 
   nthread_ignore_mutex(1);
   start_game(uMsg);
-  if ( !ghMainWnd )
-    assertion_failed(380, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  assert(ghMainWnd, 380, "DIABLO.CPP");
   func = SetWindowProc(GM_Game);
   drawpanflag = 255;
   control_update_life_mana();
@@ -62,8 +61,7 @@ void __fastcall run_game_loop(int uMsg)
   drawpanflag = 255;
   scrollrt_draw_game_screen(1);
   func = SetWindowProc(func);
-  if ( func != GM_Game )
-    assertion_failed(419, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  assert(func == GM_Game, 419, "DIABLO.CPP");
   free_game();
 }
 
@@ -75,8 +73,7 @@ void __fastcall start_game(int uMsg)
   InitCursor();
   MakeLightTable();
   LoadDebugGFX();
-  if ( !ghMainWnd )
-    assertion_failed(348, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  assert(ghMainWnd, 348, "DIABLO.CPP");
   music_stop();
   ShowProgress(uMsg);
   gmenu_init_menu();
@@ -380,8 +377,7 @@ void __fastcall diablo_491753(BOOL shift)
   int v3; // eax
   BOOL v5; // [esp+10h] [ebp-4h]
 
-  if ( MouseY >= 352 )
-    assertion_failed(528, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  assert(MouseY < 352, 528, "DIABLO.CPP");
   if ( leveltype )
   {
     v5 = abs(plr[myplr].WorldX - cursmx) < 2 && abs(plr[myplr].WorldY - cursmy) < 2;
@@ -615,8 +611,7 @@ void __fastcall diablo_hotkey_msg(int dwMsg)
     if ( v5 )
       *v5 = 0;
     strcat(Filename, "\\Diablo.ini");
-    if ( (unsigned int)dwMsg >= 4 )
-      assertion_failed(809, "C:\\Diablo\\Direct\\DIABLO.CPP");
+    assert((unsigned int)dwMsg < 4, 809, "DIABLO.CPP");
     GetPrivateProfileStringA("NetMsg", spszMsgKeyTbl[dwMsg], spszMsgTbl[dwMsg], ReturnedString, 0x50u, Filename);
     for ( i = ReturnedString; *i; ++i )
     {
@@ -1066,42 +1061,40 @@ void __fastcall PressChar(char vkey)
 //----- (004931A7) --------------------------------------------------------
 void __cdecl LoadLvlGFX()
 {
-  if ( pDungeonCels )
-    assertion_failed(1447, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  assert(!pDungeonCels, 1447, "DIABLO.CPP");
   if ( leveltype )
   {
     if ( leveltype == 1 )
     {
-      pDungeonCels = LoadFileInMem("Levels\\L1Data\\L1.CEL", 0, 1457, "C:\\Diablo\\Direct\\DIABLO.CPP");
-      pMegaTiles = (WORD *)LoadFileInMem("Levels\\L1Data\\L1.TIL", 0, 1458, "C:\\Diablo\\Direct\\DIABLO.CPP");
-      pLevelPieces = LoadFileInMem("Levels\\L1Data\\L1.MIN", 0, 1459, "C:\\Diablo\\Direct\\DIABLO.CPP");
-      level_special_cel = (char *)LoadFileInMem("Levels\\L1Data\\L1S.CEL", 0, 1460, "C:\\Diablo\\Direct\\DIABLO.CPP");
+      pDungeonCels = LoadFileInMem("Levels\\L1Data\\L1.CEL", 0, 1457, "DIABLO.CPP");
+      pMegaTiles = (WORD *)LoadFileInMem("Levels\\L1Data\\L1.TIL", 0, 1458, "DIABLO.CPP");
+      pLevelPieces = LoadFileInMem("Levels\\L1Data\\L1.MIN", 0, 1459, "DIABLO.CPP");
+      level_special_cel = (char *)LoadFileInMem("Levels\\L1Data\\L1S.CEL", 0, 1460, "DIABLO.CPP");
     }
     else
     {
       if ( leveltype != 2 )
         TermMsg("LoadLvlGFX");
-      pDungeonCels = LoadFileInMem("Levels\\L2Data\\L2.CEL", 0, 1465, "C:\\Diablo\\Direct\\DIABLO.CPP");
-      pMegaTiles = (WORD *)LoadFileInMem("Levels\\L2Data\\L2.TIL", 0, 1466, "C:\\Diablo\\Direct\\DIABLO.CPP");
-      pLevelPieces = LoadFileInMem("Levels\\L2Data\\L2.MIN", 0, 1467, "C:\\Diablo\\Direct\\DIABLO.CPP");
-      level_special_cel = (char *)LoadFileInMem("Levels\\L2Data\\L2S.CEL", 0, 1468, "C:\\Diablo\\Direct\\DIABLO.CPP");
+      pDungeonCels = LoadFileInMem("Levels\\L2Data\\L2.CEL", 0, 1465, "DIABLO.CPP");
+      pMegaTiles = (WORD *)LoadFileInMem("Levels\\L2Data\\L2.TIL", 0, 1466, "DIABLO.CPP");
+      pLevelPieces = LoadFileInMem("Levels\\L2Data\\L2.MIN", 0, 1467, "DIABLO.CPP");
+      level_special_cel = (char *)LoadFileInMem("Levels\\L2Data\\L2S.CEL", 0, 1468, "DIABLO.CPP");
     }
   }
   else
   {
-    pDungeonCels = LoadFileInMem("Levels\\TownData\\Town.CEL", 0, 1450, "C:\\Diablo\\Direct\\DIABLO.CPP");
-    pMegaTiles = (WORD *)LoadFileInMem("Levels\\TownData\\Town.TIL", 0, 1451, "C:\\Diablo\\Direct\\DIABLO.CPP");
-    pLevelPieces = LoadFileInMem("Levels\\TownData\\Town.MIN", 0, 1452, "C:\\Diablo\\Direct\\DIABLO.CPP");
-    level_special_cel = (char *)LoadFileInMem("Levels\\TownData\\TownS.CEL", 0, 1453, "C:\\Diablo\\Direct\\DIABLO.CPP");
+    pDungeonCels = LoadFileInMem("Levels\\TownData\\Town.CEL", 0, 1450, "DIABLO.CPP");
+    pMegaTiles = (WORD *)LoadFileInMem("Levels\\TownData\\Town.TIL", 0, 1451, "DIABLO.CPP");
+    pLevelPieces = LoadFileInMem("Levels\\TownData\\Town.MIN", 0, 1452, "DIABLO.CPP");
+    level_special_cel = (char *)LoadFileInMem("Levels\\TownData\\TownS.CEL", 0, 1453, "DIABLO.CPP");
   }
 }
 
 //----- (00493377) --------------------------------------------------------
 void __cdecl LoadAllGFX()
 {
-  if ( pSpeedCels )
-    assertion_failed(1501, "C:\\Diablo\\Direct\\DIABLO.CPP");
-  pSpeedCels = DiabloAllocPtr(0x100000, 1502, "C:\\Diablo\\Direct\\DIABLO.CPP");
+  assert(!pSpeedCels, 1501, "DIABLO.CPP");
+  pSpeedCels = DiabloAllocPtr(0x100000, 1502, "DIABLO.CPP");
   IncProgress();
   IncProgress();
   InitObjectGFX();
@@ -1184,9 +1177,8 @@ void __fastcall LoadGameLevel(BOOL firstflag, int lvldir)
   IncProgress();
   if ( setlevel )
   {
-    if ( pSpeedCels )
-      assertion_failed(1700, "C:\\Diablo\\Direct\\DIABLO.CPP");
-    pSpeedCels = DiabloAllocPtr(0x100000, 1701, "C:\\Diablo\\Direct\\DIABLO.CPP");
+    assert(!pSpeedCels, 1700, "DIABLO.CPP");
+    pSpeedCels = DiabloAllocPtr(0x100000, 1701, "DIABLO.CPP");
     LoadSetMap();
     IncProgress();
     GetLevelMTypes();

@@ -362,8 +362,7 @@ void __cdecl CheckTriggers()
             StartNewLvl(myplr, trigs[i]._tmsg, currlevel - 1);
             break;
           case 0x404:
-            if ( gbMaxPlayers != 1 )
-              assertion_failed(443, "C:\\Diablo\\Direct\\TRIGS.CPP");
+            assert(gbMaxPlayers == 1, 443, "TRIGS.CPP");
             SetReturnLvlPos();
             StartNewLvl(myplr, trigs[i]._tmsg, 0);
             break;

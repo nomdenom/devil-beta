@@ -10,10 +10,8 @@ void __fastcall CelDrawDatOnly(char *pDecodeTo, char *pRLEBytes, int dwRLESize, 
   char v10; // cf
   unsigned int v11; // ecx
 
-  if ( !pDecodeTo )
-    assertion_failed(45, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pRLEBytes )
-    assertion_failed(46, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pDecodeTo, 45, "ENGINE.CPP");
+  assert(pRLEBytes, 46, "ENGINE.CPP");
   src = pRLEBytes;
   dst = pDecodeTo;
   src_end = &pRLEBytes[dwRLESize];
@@ -65,8 +63,7 @@ LABEL_16:
 //----- (0048E7BC) --------------------------------------------------------
 void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int frame, int frame_width)
 {
-  if ( !pCelBuff )
-    assertion_failed(107, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 107, "ENGINE.CPP");
   CelDrawDatOnly(
     &gpBuffer[screen_x + screen_y_times_768[screen_y]],
     (char *)pCelBuff + *((_DWORD *)pCelBuff + frame),
@@ -77,10 +74,8 @@ void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int fr
 //----- (0048E843) --------------------------------------------------------
 void __fastcall CelDecDatOnly(char *pBuff, char *pCelBuff, int frame, int frame_width)
 {
-  if ( !pCelBuff )
-    assertion_failed(128, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pBuff )
-    assertion_failed(129, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 128, "ENGINE.CPP");
+  assert(pBuff, 129, "ENGINE.CPP");
   CelDrawDatOnly(
     pBuff,
     &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]],
@@ -96,8 +91,7 @@ void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int f
   int dwRLESize; // [esp+20h] [ebp-8h]
   int v11; // [esp+24h] [ebp-4h]
 
-  if ( !pCelBuff )
-    assertion_failed(150, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 150, "ENGINE.CPP");
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[always_0];
   if ( v7 )
@@ -126,10 +120,8 @@ void __fastcall CelDecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int fra
   int dwRLESize; // [esp+1Ch] [ebp-8h]
   int v10; // [esp+20h] [ebp-4h]
 
-  if ( !pCelBuff )
-    assertion_failed(177, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pBuff )
-    assertion_failed(178, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 177, "ENGINE.CPP");
+  assert(pBuff, 178, "ENGINE.CPP");
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v6 = *(_WORD *)&pRLEBytes[always_0];
   if ( v6 )
@@ -156,10 +148,8 @@ void __fastcall CelDecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_c
   int v8; // eax
   int v9; // ST00_4
 
-  if ( !pDecodeTo )
-    assertion_failed(197, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pRLEBytes )
-    assertion_failed(198, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pDecodeTo, 197, "ENGINE.CPP");
+  assert(pRLEBytes, 198, "ENGINE.CPP");
   src = pRLEBytes;
   dst = pDecodeTo;
   src_end = &pRLEBytes[frame_content_size];
@@ -264,10 +254,8 @@ void __fastcall CelDecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_
   int v27; // [esp+14h] [ebp-Ch]
   BYTE *v28; // [esp+18h] [ebp-8h]
 
-  if ( !pDecodeTo )
-    assertion_failed(320, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pRLEBytes )
-    assertion_failed(321, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pDecodeTo, 320, "ENGINE.CPP");
+  assert(pRLEBytes, 321, "ENGINE.CPP");
   v28 = &pLightTbl[256 * light_table_index];
   src = pRLEBytes;
   dst = pDecodeTo;
@@ -301,7 +289,7 @@ LABEL_19:
             if ( !v11 )
               goto LABEL_28;
             _AL = *src;
-            __asm { xlat }
+            ASM_XLAT();
             *dst = _AL;
             src += 2;
             dst += 2;
@@ -312,11 +300,11 @@ LABEL_28:
               {
                 _EAX = *(_DWORD *)src;
                 src += 4;
-                __asm { xlat }
+                ASM_XLAT();
                 *dst = _EAX;
                 v25 = dst + 2;
                 _EAX = __ROR4__(_EAX, 16);
-                __asm { xlat }
+                ASM_XLAT();
                 *v25 = _EAX;
                 dst = v25 + 2;
                 --v21;
@@ -332,7 +320,7 @@ LABEL_28:
           if ( !(v8 & 1) )
             goto LABEL_19;
           _AL = *src++;
-          __asm { xlat }
+          ASM_XLAT();
           *dst++ = _AL;
           if ( v10 )
           {
@@ -345,7 +333,7 @@ LABEL_12:
             v14 = dst + 1;
             _AL = *v13;
             src = v13 + 1;
-            __asm { xlat }
+            ASM_XLAT();
             *v14 = _AL;
             dst = v14 + 1;
             if ( v12 )
@@ -357,11 +345,11 @@ LABEL_29:
                 src += 4;
                 v18 = dst + 1;
                 _EAX = __ROR4__(_EAX, 8);
-                __asm { xlat }
+                ASM_XLAT();
                 *v18 = _EAX;
                 _EAX = __ROR4__(_EAX, 16);
                 v18 += 2;
-                __asm { xlat }
+                ASM_XLAT();
                 *v18 = _EAX;
                 dst = v18 + 1;
                 --v12;
@@ -395,8 +383,7 @@ void __fastcall CelDecodeLightOnly(int screen_x, int screen_y, char *pCelBuff, i
   char *pRLEBytes; // [esp+18h] [ebp-8h]
   int frame_content_size; // [esp+1Ch] [ebp-4h]
 
-  if ( !pCelBuff )
-    assertion_failed(444, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 444, "ENGINE.CPP");
   frame_content_size = *(_DWORD *)&pCelBuff[4 * frame + 4] - *(_DWORD *)&pCelBuff[4 * frame];
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   pDecodeTo = &gpBuffer[screen_x + screen_y_times_768[screen_y]];
@@ -416,8 +403,7 @@ void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff
   int frame_content_size; // [esp+20h] [ebp-8h]
   int v13; // [esp+24h] [ebp-4h]
 
-  if ( !pCelBuff )
-    assertion_failed(497, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 497, "ENGINE.CPP");
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[always_0];
   if ( v7 )
@@ -448,10 +434,8 @@ void __fastcall CelDecodeHdrLightTrans(char *pBuff, char *pCelBuff, int frame, i
   int frame_content_size; // [esp+1Ch] [ebp-8h]
   int v11; // [esp+20h] [ebp-4h]
 
-  if ( !pCelBuff )
-    assertion_failed(560, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pBuff )
-    assertion_failed(561, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 560, "ENGINE.CPP");
+  assert(pBuff, 561, "ENGINE.CPP");
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v6 = *(_WORD *)&pRLEBytes[always_0];
   if ( v6 )
@@ -496,8 +480,7 @@ void __fastcall CelDrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, i
   int v19; // [esp+28h] [ebp-Ch]
   int v20; // [esp+2Ch] [ebp-8h]
 
-  if ( !pCelBuff )
-    assertion_failed(595, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 595, "ENGINE.CPP");
   v15 = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v8 = *(_WORD *)&v15[always_0];
   if ( v8 )
@@ -569,10 +552,8 @@ void __fastcall Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_conte
   char v10; // cf
   unsigned int v11; // ecx
 
-  if ( !pDecodeTo )
-    assertion_failed(669, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pRLEBytes )
-    assertion_failed(670, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pDecodeTo, 669, "ENGINE.CPP");
+  assert(pRLEBytes, 670, "ENGINE.CPP");
   src = pRLEBytes;
   dst = pDecodeTo;
   src_end = &pRLEBytes[frame_content_size];
@@ -631,8 +612,7 @@ void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int 
   int v11; // [esp+24h] [ebp-4h]
 
   v8 = screen_y;
-  if ( !pCelBuff )
-    assertion_failed(735, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 735, "ENGINE.CPP");
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[a6];
   if ( v7 )
@@ -663,10 +643,8 @@ void __fastcall Cel2DecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int fr
   int v10; // [esp+20h] [ebp-4h]
 
   v7 = pCelBuff;
-  if ( !pCelBuff )
-    assertion_failed(762, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pBuff )
-    assertion_failed(763, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 762, "ENGINE.CPP");
+  assert(pBuff, 763, "ENGINE.CPP");
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v6 = *(_WORD *)&pRLEBytes[a5];
   if ( v6 )
@@ -692,10 +670,8 @@ void __fastcall Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_
   int v8; // eax
   int v9; // ST00_4
 
-  if ( !pDecodeTo )
-    assertion_failed(783, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pRLEBytes )
-    assertion_failed(784, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pDecodeTo, 783, "ENGINE.CPP");
+  assert(pRLEBytes, 784, "ENGINE.CPP");
   v4 = pRLEBytes;
   v5 = pDecodeTo;
   v6 = &pRLEBytes[frame_content_size];
@@ -809,10 +785,8 @@ void __fastcall Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame
   int v27; // [esp+14h] [ebp-Ch]
   BYTE *v28; // [esp+18h] [ebp-8h]
 
-  if ( !pDecodeTo )
-    assertion_failed(912, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pRLEBytes )
-    assertion_failed(913, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pDecodeTo, 912, "ENGINE.CPP");
+  assert(pRLEBytes, 913, "ENGINE.CPP");
   v28 = &pLightTbl[256 * light_table_index];
   v4 = pRLEBytes;
   v5 = (unsigned int)pDecodeTo;
@@ -848,7 +822,7 @@ LABEL_21:
               if ( !v11 )
                 goto LABEL_30;
               _AL = *v4;
-              __asm { xlat }
+              ASM_XLAT();
               *(_BYTE *)v5 = _AL;
               v4 += 2;
               v5 += 2;
@@ -859,11 +833,11 @@ LABEL_30:
                 {
                   _EAX = *(_DWORD *)v4;
                   v4 += 4;
-                  __asm { xlat }
+                  ASM_XLAT();
                   *(_BYTE *)v5 = _EAX;
                   v25 = (_BYTE *)(v5 + 2);
                   _EAX = __ROR4__(_EAX, 16);
-                  __asm { xlat }
+                  ASM_XLAT();
                   *v25 = _EAX;
                   v5 = (unsigned int)(v25 + 2);
                   --v21;
@@ -879,7 +853,7 @@ LABEL_30:
             if ( !(v8 & 1) )
               goto LABEL_21;
             _AL = *v4++;
-            __asm { xlat }
+            ASM_XLAT();
             *(_BYTE *)v5++ = _AL;
             if ( v10 )
             {
@@ -892,7 +866,7 @@ LABEL_14:
               v14 = (_BYTE *)(v5 + 1);
               _AL = *v13;
               v4 = v13 + 1;
-              __asm { xlat }
+              ASM_XLAT();
               *v14 = _AL;
               v5 = (unsigned int)(v14 + 1);
               if ( v12 )
@@ -904,11 +878,11 @@ LABEL_31:
                   v4 += 4;
                   v18 = (_BYTE *)(v5 + 1);
                   _EAX = __ROR4__(_EAX, 8);
-                  __asm { xlat }
+                  ASM_XLAT();
                   *v18 = _EAX;
                   _EAX = __ROR4__(_EAX, 16);
                   v18 += 2;
-                  __asm { xlat }
+                  ASM_XLAT();
                   *v18 = _EAX;
                   v5 = (unsigned int)(v18 + 1);
                   --v12;
@@ -951,8 +925,7 @@ void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, i
   int frame_content_size; // [esp+20h] [ebp-8h]
   int v13; // [esp+24h] [ebp-4h]
 
-  if ( !pCelBuff )
-    assertion_failed(1042, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 1042, "ENGINE.CPP");
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[a6];
   if ( v7 )
@@ -982,8 +955,7 @@ void __fastcall Cel2DecodeLightTrans(char *dst_buf, char *pCelBuff, int frame, i
   int frame_content_size; // [esp+1Ch] [ebp-8h]
   int v11; // [esp+20h] [ebp-4h]
 
-  if ( !pCelBuff )
-    assertion_failed(1108, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 1108, "ENGINE.CPP");
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v6 = *(_WORD *)&pRLEBytes[a5];
   if ( v6 )
@@ -1029,8 +1001,7 @@ void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, 
   int v21; // [esp+28h] [ebp-Ch]
   int v22; // [esp+2Ch] [ebp-8h]
 
-  if ( !pCelBuff )
-    assertion_failed(1145, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 1145, "ENGINE.CPP");
   v17 = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v8 = *(_WORD *)&v17[always_0];
   if ( v8 )
@@ -1115,10 +1086,8 @@ void __fastcall CelDecodeRect(char *pBuff, int always_0, int dst_height, int dst
   unsigned int v15; // ecx
   int dst_widtha; // [esp+2Ch] [ebp+Ch]
 
-  if ( !pCelBuff )
-    assertion_failed(1228, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pBuff )
-    assertion_failed(1229, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 1228, "ENGINE.CPP");
+  assert(pBuff, 1229, "ENGINE.CPP");
   v7 = &pCelBuff[4 * frame];
   v8 = &pCelBuff[*(_DWORD *)v7];
   v9 = &pBuff[always_0 + dst_height * dst_width];
@@ -1184,8 +1153,7 @@ void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCel
   int v18; // [esp+20h] [ebp-Ch]
   int v19; // [esp+24h] [ebp-8h]
 
-  if ( !pCelBuff )
-    assertion_failed(1305, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 1305, "ENGINE.CPP");
   v8 = &pCelBuff[4 * frame];
   v17 = &pCelBuff[*(_DWORD *)v8];
   v16 = *(unsigned __int16 *)&v17[a7];
@@ -1258,8 +1226,7 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
   int v20; // [esp+20h] [ebp-Ch]
   int v21; // [esp+24h] [ebp-8h]
 
-  if ( !pCelBuff )
-    assertion_failed(1395, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pCelBuff, 1395, "ENGINE.CPP");
   v8 = &pCelBuff[4 * frame];
   v19 = &pCelBuff[*(_DWORD *)v8];
   v18 = *(unsigned __int16 *)&v19[a7];
@@ -1354,10 +1321,8 @@ void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
   int v9; // ecx
   int i; // [esp+14h] [ebp-4h]
 
-  if ( !p )
-    assertion_failed(1495, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !ttbl )
-    assertion_failed(1496, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(p, 1495, "ENGINE.CPP");
+  assert(ttbl, 1496, "ENGINE.CPP");
   for ( i = 1; i <= last_frame; ++i )
   {
     v3 = &p[4 * i];
@@ -1378,7 +1343,7 @@ void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
         do
         {
           _AL = *v4++;
-          __asm { xlat }
+          ASM_XLAT();
           *v6++ = _AL;
           --v9;
         }
@@ -1800,8 +1765,7 @@ unsigned __int8 *__fastcall LoadFileInMem(char *pszName, int *pdwFileLen, int li
 
   v5 = pdwFileLen;
   v6 = pszName;
-  if ( !pszName )
-    assertion_failed(1873, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(pszName, 1873, "ENGINE.CPP");
   if ( !SFileOpenFile(pszName, &v7) )
     TermMsg("Unable to open SFILE:\n%s", v6);
   dwBytes = SFileGetFileSize(v7, 0);
@@ -1809,11 +1773,9 @@ unsigned __int8 *__fastcall LoadFileInMem(char *pszName, int *pdwFileLen, int li
     *v5 = dwBytes;
   v9 = (unsigned __int8 *)DiabloAllocPtr(dwBytes, line, file);
   v10 = SFileReadFile(v7, (int)v9, dwBytes, 0, 0);
-  if ( !v10 )
-    assertion_failed(1887, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(v10, 1887, "ENGINE.CPP");
   v10 = SFileCloseFile(v7);
-  if ( !v10 )
-    assertion_failed(1890, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(v10, 1890, "ENGINE.CPP");
   return v9;
 }
 
@@ -1824,18 +1786,14 @@ void __fastcall LoadFileWithMem(char *pszName, void *buf)
   int v5; // [esp+18h] [ebp-8h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  if ( !buf )
-    assertion_failed(1900, "C:\\Diablo\\Direct\\ENGINE.CPP");
-  if ( !pszName )
-    assertion_failed(1901, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(buf, 1900, "ENGINE.CPP");
+  assert(pszName, 1901, "ENGINE.CPP");
   if ( !SFileOpenFile(pszName, &v4) )
     TermMsg("Unable to open SFILE:\n%s", pszName);
   v5 = SFileGetFileSize(v4, 0);
   v6 = SFileReadFile(v4, (int)buf, v5, 0, 0);
-  if ( !v6 )
-    assertion_failed(1907, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(v6, 1907, "ENGINE.CPP");
   v6 = SFileCloseFile(v4);
-  if ( !v6 )
-    assertion_failed(1910, "C:\\Diablo\\Direct\\ENGINE.CPP");
+  assert(v6, 1910, "ENGINE.CPP");
 }
 

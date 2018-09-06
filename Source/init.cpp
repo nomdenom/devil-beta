@@ -44,8 +44,7 @@ void __cdecl dx_cleanup_42D257()
   }
   if ( lpDD )
   {
-    if ( !ghMainWnd )
-      assertion_failed(371, "C:\\Diablo\\Direct\\init.cpp");
+    assert(ghMainWnd, 371, "init.cpp");
     lpDD->lpVtbl->SetCooperativeLevel(lpDD, ghMainWnd, 8);
     lpDD->lpVtbl->Release(lpDD);
     lpDD = 0;
@@ -65,21 +64,21 @@ void __fastcall dx_init_42D315(HWND hwnd)
   SetFocus(hwnd);
   error_code = DirectDrawCreate(0, &lpDD, 0);
   if ( error_code )
-    DDErrDlg(error_code, 386, "C:\\Diablo\\Direct\\init.cpp");
+    DDErrDlg(error_code, 386, "init.cpp");
   if ( fullscreen )
   {
     error_code = lpDD->lpVtbl->SetCooperativeLevel(lpDD, hwnd, 17);
     if ( error_code )
-      DDErrDlg(error_code, 406, "C:\\Diablo\\Direct\\init.cpp");
+      DDErrDlg(error_code, 406, "init.cpp");
     error_code = lpDD->lpVtbl->SetDisplayMode(lpDD, 640, 480, 8);
     if ( error_code )
-      DDErrDlg(error_code, 410, "C:\\Diablo\\Direct\\init.cpp");
+      DDErrDlg(error_code, 410, "init.cpp");
   }
   else
   {
     error_code = lpDD->lpVtbl->SetCooperativeLevel(lpDD, hwnd, 8);
     if ( error_code )
-      DDErrDlg(error_code, 395, "C:\\Diablo\\Direct\\init.cpp");
+      DDErrDlg(error_code, 395, "init.cpp");
     SetRect((LPRECT)&rc, 0, 0, 640, 480);
     v1 = GetWindowLongA(hwnd, -20);
     v2 = GetWindowLongA(hwnd, -16);
@@ -91,22 +90,20 @@ void __fastcall dx_init_42D315(HWND hwnd)
   v7.ddsCaps.dwCaps = 512;
   error_code = lpDD->lpVtbl->CreateSurface(lpDD, &v7, &lpDDSPrimary, 0);
   if ( error_code )
-    DDErrDlg(error_code, 422, "C:\\Diablo\\Direct\\init.cpp");
+    DDErrDlg(error_code, 422, "init.cpp");
   palette_init();
   v6 = SDrawManualInitialize(hwnd, lpDD, lpDDSPrimary, 0, 0, lpDDPalette, 0);
-  if ( !v6 )
-    assertion_failed(428, "C:\\Diablo\\Direct\\init.cpp");
+  assert(v6, 428, "init.cpp");
   GdiSetBatchLimit(1u);
   if ( !gpBuffer )
-    gpBuffer = (char *)DiabloAllocPtr(503808, 434, "C:\\Diablo\\Direct\\init.cpp");
+    gpBuffer = (char *)DiabloAllocPtr(503808, 434, "init.cpp");
 }
 
 //----- (0042D562) --------------------------------------------------------
 void __cdecl dx_reinit_42D562()
 {
   scrollrt_draw_cursor_back_buffer();
-  if ( !ghMainWnd )
-    assertion_failed(442, "C:\\Diablo\\Direct\\init.cpp");
+  assert(ghMainWnd, 442, "init.cpp");
   dx_cleanup_42D257();
   drawpanflag = 255;
   dx_init_42D315(ghMainWnd);
@@ -130,7 +127,7 @@ void __fastcall init_cleanup()
   }
   if ( gpBuffer )
   {
-    mem_free_dbg(gpBuffer, 465, "C:\\Diablo\\Direct\\init.cpp");
+    mem_free_dbg(gpBuffer, 465, "init.cpp");
     gpBuffer = 0;
   }
   SFileDdaDestroy();
@@ -450,12 +447,11 @@ void __cdecl init_get_file_info()
     dwLen = GetFileVersionInfoSizeA(diablo_exe_path, (LPDWORD)&dwHandle);
     if ( dwLen )
     {
-      lpData = DiabloAllocPtr(dwLen, 565, "C:\\Diablo\\Direct\\init.cpp");
+      lpData = DiabloAllocPtr(dwLen, 565, "init.cpp");
       if ( GetFileVersionInfoA(diablo_exe_path, 0, dwLen, lpData)
         && VerQueryValueA(lpData, "\\", (LPVOID *)&lpBuffer, &puLen) )
       {
-        if ( puLen < 0x34 )
-          assertion_failed(573, "C:\\Diablo\\Direct\\init.cpp");
+        assert(puLen >= 0x34, 573, "init.cpp");
         sprintf(
           "version unknown",
           "Version %d.%d.%d.%d",
@@ -464,7 +460,7 @@ void __cdecl init_get_file_info()
           *(_DWORD *)(lpBuffer + 20) >> 16,
           *(_DWORD *)(lpBuffer + 20) & 0xFFFF);
       }
-      mem_free_dbg(lpData, 585, "C:\\Diablo\\Direct\\init.cpp");
+      mem_free_dbg(lpData, 585, "init.cpp");
     }
   }
 }

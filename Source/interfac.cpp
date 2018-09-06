@@ -14,8 +14,7 @@ void __cdecl DrawCutscene()
 {
   unsigned int i; // [esp+Ch] [ebp-4h]
 
-  if ( !sgpBackCel )
-    assertion_failed(208, "C:\\Diablo\\Direct\\Interfac.cpp");
+  assert(sgpBackCel, 208, "Interfac.cpp");
   CelDecodeOnly(64, 639, sgpBackCel, 1, 640);
   for ( i = 0; i < sgdwProgress; ++i )
     DrawProgress(
@@ -32,8 +31,7 @@ void __fastcall DrawProgress(int screen_x, int screen_y, int progress_id)
   char *v3; // [esp+14h] [ebp-8h]
   signed int i; // [esp+18h] [ebp-4h]
 
-  if ( !gpBuffer )
-    assertion_failed(192, "C:\\Diablo\\Direct\\Interfac.cpp");
+  assert(gpBuffer, 192, "Interfac.cpp");
   v3 = &gpBuffer[screen_x + screen_y_times_768[screen_y]];
   for ( i = 0; i < 22; ++i )
   {
@@ -47,8 +45,7 @@ void __fastcall ShowProgress(int uMsg)
 {
   WNDPROC func; // [esp+14h] [ebp-4h]
 
-  if ( !ghMainWnd )
-    assertion_failed(256, "C:\\Diablo\\Direct\\Interfac.cpp");
+  assert(ghMainWnd, 256, "Interfac.cpp");
   func = SetWindowProc(interfac_41F03E_wndproc);
   ClearScreenBuffer();
   scrollrt_draw_game_screen(1);
@@ -68,8 +65,7 @@ void __fastcall ShowProgress(int uMsg)
         DeltaSaveLevel();
       FreeGameMem();
       leveltype = gnLevelTypeTbl[++currlevel];
-      if ( plr[myplr].plrlevel != currlevel )
-        assertion_failed(293, "C:\\Diablo\\Direct\\Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, 293, "Interfac.cpp");
       IncProgress();
       LoadGameLevel(0, 0);
       IncProgress();
@@ -83,8 +79,7 @@ void __fastcall ShowProgress(int uMsg)
       IncProgress();
       FreeGameMem();
       leveltype = gnLevelTypeTbl[--currlevel];
-      if ( plr[myplr].plrlevel != currlevel )
-        assertion_failed(308, "C:\\Diablo\\Direct\\Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, 308, "Interfac.cpp");
       IncProgress();
       LoadGameLevel(0, 1);
       IncProgress();
@@ -136,8 +131,7 @@ void __fastcall ShowProgress(int uMsg)
       FreeGameMem();
       currlevel = plr[myplr].plrlevel;
       leveltype = gnLevelTypeTbl[currlevel];
-      if ( plr[myplr].plrlevel != currlevel )
-        assertion_failed(358, "C:\\Diablo\\Direct\\Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, 358, "Interfac.cpp");
       IncProgress();
       LoadGameLevel(0, 6);
       IncProgress();
@@ -151,8 +145,7 @@ void __fastcall ShowProgress(int uMsg)
       FreeGameMem();
       currlevel = plr[myplr].plrlevel;
       leveltype = gnLevelTypeTbl[currlevel];
-      if ( plr[myplr].plrlevel != currlevel )
-        assertion_failed(372, "C:\\Diablo\\Direct\\Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, 372, "Interfac.cpp");
       IncProgress();
       LoadGameLevel(0, 7);
       IncProgress();
@@ -166,8 +159,7 @@ void __fastcall ShowProgress(int uMsg)
       FreeGameMem();
       currlevel = plr[myplr].plrlevel;
       leveltype = gnLevelTypeTbl[currlevel];
-      if ( plr[myplr].plrlevel != currlevel )
-        assertion_failed(386, "C:\\Diablo\\Direct\\Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, 386, "Interfac.cpp");
       IncProgress();
       LoadGameLevel(0, 0);
       IncProgress();
@@ -187,59 +179,56 @@ void __fastcall ShowProgress(int uMsg)
     default:
       break;
   }
-  if ( !ghMainWnd )
-    assertion_failed(395, "C:\\Diablo\\Direct\\Interfac.cpp");
+  assert(ghMainWnd, 395, "Interfac.cpp");
   PaletteFadeOut(8);
   FreeInterface();
-  if ( SetWindowProc(func) != interfac_41F03E_wndproc )
-    assertion_failed(401, "C:\\Diablo\\Direct\\Interfac.cpp");
+  assert(SetWindowProc(func) == interfac_41F03E_wndproc, 401, "Interfac.cpp");
   NetSendCmdLocParam1(1u, 0x38u, plr[myplr].WorldX, plr[myplr].WorldY, plr[myplr].plrlevel);
 }
 
 //----- (0041EAD8) --------------------------------------------------------
 void __cdecl FreeInterface()
 {
-  mem_free_dbg(sgpBackCel, 50, "C:\\Diablo\\Direct\\Interfac.cpp");
+  mem_free_dbg(sgpBackCel, 50, "Interfac.cpp");
   sgpBackCel = 0;
 }
 
 //----- (0041EB07) --------------------------------------------------------
 void __fastcall InitCutscene(int interface_mode)
 {
-  if ( sgpBackCel )
-    assertion_failed(58, "C:\\Diablo\\Direct\\Interfac.cpp");
+  assert(!sgpBackCel, 58, "Interfac.cpp");
   switch ( interface_mode )
   {
     case 1026:
       switch ( gnLevelTypeTbl[currlevel] )
       {
         case 0:
-          sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", 0, 63, "C:\\Diablo\\Direct\\Interfac.cpp");
+          sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", 0, 63, "Interfac.cpp");
           LoadPalette("Gendata\\Cuttt.pal");
           progress_id = 1;
           break;
         case 1:
-          sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 68, "C:\\Diablo\\Direct\\Interfac.cpp");
+          sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 68, "Interfac.cpp");
           LoadPalette("Gendata\\Cutl1d.pal");
           progress_id = 0;
           break;
         case 2:
-          sgpBackCel = LoadFileInMem("Gendata\\Cut2.CEL", 0, 73, "C:\\Diablo\\Direct\\Interfac.cpp");
+          sgpBackCel = LoadFileInMem("Gendata\\Cut2.CEL", 0, 73, "Interfac.cpp");
           LoadPalette("Gendata\\Cut2.pal");
           progress_id = 2;
           break;
         case 3:
-          sgpBackCel = LoadFileInMem("Gendata\\Cut3.CEL", 0, 78, "C:\\Diablo\\Direct\\Interfac.cpp");
+          sgpBackCel = LoadFileInMem("Gendata\\Cut3.CEL", 0, 78, "Interfac.cpp");
           LoadPalette("Gendata\\Cut3.pal");
           progress_id = 1;
           break;
         case 4:
-          sgpBackCel = LoadFileInMem("Gendata\\Cut4.CEL", 0, 83, "C:\\Diablo\\Direct\\Interfac.cpp");
+          sgpBackCel = LoadFileInMem("Gendata\\Cut4.CEL", 0, 83, "Interfac.cpp");
           LoadPalette("Gendata\\Cut4.pal");
           progress_id = 1;
           break;
         default:
-          sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 88, "C:\\Diablo\\Direct\\Interfac.cpp");
+          sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 88, "Interfac.cpp");
           LoadPalette("Gendata\\Cutl1d.pal");
           progress_id = 0;
           break;
@@ -251,32 +240,32 @@ void __fastcall InitCutscene(int interface_mode)
         switch ( gnLevelTypeTbl[currlevel] )
         {
           case 0:
-            sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", 0, 103, "C:\\Diablo\\Direct\\Interfac.cpp");
+            sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", 0, 103, "Interfac.cpp");
             LoadPalette("Gendata\\Cuttt.pal");
             progress_id = 1;
             break;
           case 1:
-            sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 108, "C:\\Diablo\\Direct\\Interfac.cpp");
+            sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 108, "Interfac.cpp");
             LoadPalette("Gendata\\Cutl1d.pal");
             progress_id = 0;
             break;
           case 2:
-            sgpBackCel = LoadFileInMem("Gendata\\Cut2.CEL", 0, 113, "C:\\Diablo\\Direct\\Interfac.cpp");
+            sgpBackCel = LoadFileInMem("Gendata\\Cut2.CEL", 0, 113, "Interfac.cpp");
             LoadPalette("Gendata\\Cut2.pal");
             progress_id = 2;
             break;
           case 3:
-            sgpBackCel = LoadFileInMem("Gendata\\Cut3.CEL", 0, 118, "C:\\Diablo\\Direct\\Interfac.cpp");
+            sgpBackCel = LoadFileInMem("Gendata\\Cut3.CEL", 0, 118, "Interfac.cpp");
             LoadPalette("Gendata\\Cut3.pal");
             progress_id = 1;
             break;
           case 4:
-            sgpBackCel = LoadFileInMem("Gendata\\Cut4.CEL", 0, 123, "C:\\Diablo\\Direct\\Interfac.cpp");
+            sgpBackCel = LoadFileInMem("Gendata\\Cut4.CEL", 0, 123, "Interfac.cpp");
             LoadPalette("Gendata\\Cut4.pal");
             progress_id = 1;
             break;
           default:
-            sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 128, "C:\\Diablo\\Direct\\Interfac.cpp");
+            sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 128, "Interfac.cpp");
             LoadPalette("Gendata\\Cutl1d.pal");
             progress_id = 0;
             break;
@@ -284,44 +273,44 @@ void __fastcall InitCutscene(int interface_mode)
       }
       else
       {
-        sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", 0, 97, "C:\\Diablo\\Direct\\Interfac.cpp");
+        sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", 0, 97, "Interfac.cpp");
         LoadPalette("Gendata\\Cuttt.pal");
         progress_id = 1;
       }
       break;
     case 1028:
-      sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 143, "C:\\Diablo\\Direct\\Interfac.cpp");
+      sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 143, "Interfac.cpp");
       LoadPalette("Gendata\\Cutl1d.pal");
       progress_id = 0;
       break;
     case 1029:
-      sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 137, "C:\\Diablo\\Direct\\Interfac.cpp");
+      sgpBackCel = LoadFileInMem("Gendata\\Cutl1d.CEL", 0, 137, "Interfac.cpp");
       LoadPalette("Gendata\\Cutl1d.pal");
       progress_id = 0;
       break;
     case 1030:
-      sgpBackCel = LoadFileInMem("Gendata\\Cutportl.CEL", 0, 149, "C:\\Diablo\\Direct\\Interfac.cpp");
+      sgpBackCel = LoadFileInMem("Gendata\\Cutportl.CEL", 0, 149, "Interfac.cpp");
       LoadPalette("Gendata\\Cutportl.pal");
       progress_id = 1;
       break;
     case 1031:
     case 1032:
-      sgpBackCel = LoadFileInMem("Gendata\\Cut2.CEL", 0, 168, "C:\\Diablo\\Direct\\Interfac.cpp");
+      sgpBackCel = LoadFileInMem("Gendata\\Cut2.CEL", 0, 168, "Interfac.cpp");
       LoadPalette("Gendata\\Cut2.pal");
       progress_id = 2;
       break;
     case 1033:
-      sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", 0, 174, "C:\\Diablo\\Direct\\Interfac.cpp");
+      sgpBackCel = LoadFileInMem("Gendata\\Cuttt.CEL", 0, 174, "Interfac.cpp");
       LoadPalette("Gendata\\Cuttt.pal");
       progress_id = 1;
       break;
     case 1034:
-      sgpBackCel = LoadFileInMem("Gendata\\Cutstart.CEL", 0, 161, "C:\\Diablo\\Direct\\Interfac.cpp");
+      sgpBackCel = LoadFileInMem("Gendata\\Cutstart.CEL", 0, 161, "Interfac.cpp");
       LoadPalette("Gendata\\Cutstart.pal");
       progress_id = 1;
       break;
     case 1035:
-      sgpBackCel = LoadFileInMem("Gendata\\Cutstart.CEL", 0, 155, "C:\\Diablo\\Direct\\Interfac.cpp");
+      sgpBackCel = LoadFileInMem("Gendata\\Cutstart.CEL", 0, 155, "Interfac.cpp");
       LoadPalette("Gendata\\Cutstart.pal");
       progress_id = 1;
       break;
@@ -412,12 +401,12 @@ void __fastcall mpqapi_close_archive(char *pszArchive, bool bFree, int dwChar)
 {
   if ( sgpBlockTbl )
   {
-    mem_free_dbg(sgpBlockTbl, 314, "C:\\Diablo\\Direct\\mpqapi.cpp");
+    mem_free_dbg(sgpBlockTbl, 314, "mpqapi.cpp");
     sgpBlockTbl = 0;
   }
   if ( sgpHashTbl )
   {
-    mem_free_dbg(sgpHashTbl, 318, "C:\\Diablo\\Direct\\mpqapi.cpp");
+    mem_free_dbg(sgpHashTbl, 318, "mpqapi.cpp");
     sgpHashTbl = 0;
   }
   CloseHandle(hFile);
@@ -435,8 +424,7 @@ BOOL __fastcall mpqapi_open_archive(char *pszArchive, BOOL hidden)
   TMPQHeader a1; // [esp+14h] [ebp-24h]
   int NumberOfBytesRead; // [esp+34h] [ebp-4h]
 
-  if ( !pszArchive )
-    assertion_failed(382, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  assert(pszArchive, 382, "mpqapi.cpp");
   encrypt_init_lookup_table();
   hFile = CreateFileA(pszArchive, 0xC0000000, 0, 0, 3u, 0, 0);
   if ( hFile == (HANDLE)-1 )
@@ -450,33 +438,27 @@ BOOL __fastcall mpqapi_open_archive(char *pszArchive, BOOL hidden)
   memset(&a1, 0, 0x20u);
   if ( !mpqapi_parse_archive_header(&a1, &lDistanceToMove) )
     goto LABEL_30;
-  sgpBlockTbl = (_BLOCKENTRY *)DiabloAllocPtr(0x8000, 417, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  sgpBlockTbl = (_BLOCKENTRY *)DiabloAllocPtr(0x8000, 417, "mpqapi.cpp");
   memset(sgpBlockTbl, 0, 0x8000u);
   if ( a1.dwBlockTableSize )
   {
-    if ( a1.dwBlockTableSize != 2048 )
-      assertion_failed(422, "C:\\Diablo\\Direct\\mpqapi.cpp");
-    if ( a1.dwBlockTablePos != 96 )
-      assertion_failed(423, "C:\\Diablo\\Direct\\mpqapi.cpp");
+    assert(a1.dwBlockTableSize == 2048, 422, "mpqapi.cpp");
+    assert(a1.dwBlockTablePos == 96, 423, "mpqapi.cpp");
     if ( SetFilePointer(hFile, 96, 0, 0) == -1 || !ReadFile(hFile, sgpBlockTbl, 0x8000u, (LPDWORD)&NumberOfBytesRead, 0) )
       goto LABEL_30;
-    if ( NumberOfBytesRead != 0x8000 )
-      assertion_failed(428, "C:\\Diablo\\Direct\\mpqapi.cpp");
+    assert(NumberOfBytesRead == 0x8000, 428, "mpqapi.cpp");
     v5 = encrypt_hash("(block table)", 3);
     encrypt_decrypt_block(sgpBlockTbl, 0x8000, v5);
   }
-  sgpHashTbl = (_HASHENTRY *)DiabloAllocPtr(0x8000, 438, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  sgpHashTbl = (_HASHENTRY *)DiabloAllocPtr(0x8000, 438, "mpqapi.cpp");
   memset(sgpHashTbl, 255, 0x8000u);
   if ( !a1.dwHashTableSize )
     return 1;
-  if ( a1.dwHashTableSize != 2048 )
-    assertion_failed(443, "C:\\Diablo\\Direct\\mpqapi.cpp");
-  if ( a1.dwHashTablePos != 32864 )
-    assertion_failed(444, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  assert(a1.dwHashTableSize == 2048, 443, "mpqapi.cpp");
+  assert(a1.dwHashTablePos == 32864, 444, "mpqapi.cpp");
   if ( SetFilePointer(hFile, 32864, 0, 0) != -1 && ReadFile(hFile, sgpHashTbl, 0x8000u, (LPDWORD)&NumberOfBytesRead, 0) )
   {
-    if ( NumberOfBytesRead != 0x8000 )
-      assertion_failed(449, "C:\\Diablo\\Direct\\mpqapi.cpp");
+    assert(NumberOfBytesRead == 0x8000, 449, "mpqapi.cpp");
     v6 = encrypt_hash("(hash table)", 3);
     encrypt_decrypt_block(sgpHashTbl, 0x8000, v6);
     return 1;
@@ -493,8 +475,7 @@ BOOL __fastcall mpqapi_parse_archive_header(TMPQHeader *pHdr, int *pdwNextFileSt
   int v6; // [esp+18h] [ebp-8h]
   unsigned int v7; // [esp+1Ch] [ebp-4h]
 
-  if ( !pHdr )
-    assertion_failed(330, "C:\\Diablo\\Direct\\mpqapi.cpp");
+  assert(pHdr, 330, "mpqapi.cpp");
   v6 = 0;
   v7 = GetFileSize(hFile, 0);
   *pdwNextFileStart = v7;
@@ -504,8 +485,7 @@ BOOL __fastcall mpqapi_parse_archive_header(TMPQHeader *pHdr, int *pdwNextFileSt
     {
       if ( ReadFile(hFile, pHdr, 0x20u, (LPDWORD)&NumberOfBytesRead, 0) )
       {
-        if ( NumberOfBytesRead != 32 )
-          assertion_failed(345, "C:\\Diablo\\Direct\\mpqapi.cpp");
+        assert(NumberOfBytesRead == 32, 345, "mpqapi.cpp");
       }
       else
       {

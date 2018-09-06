@@ -108,11 +108,11 @@ int __fastcall encrypt_compress(void *buf, int size)
 
   v4 = (unsigned __int8 *)size;
   v5 = (unsigned __int8 *)buf;
-  ptr = DiabloAllocPtr(36312, 112, "C:\\Diablo\\Direct\\encrypt.cpp");
+  ptr = DiabloAllocPtr(36312, 112, "encrypt.cpp");
   v2 = 2 * (_DWORD)v4;
   if ( (unsigned int)(2 * (_DWORD)v4) <= 0x2000 )
     v2 = 0x2000;
-  v10 = DiabloAllocPtr(v2, 113, "C:\\Diablo\\Direct\\encrypt.cpp");
+  v10 = DiabloAllocPtr(v2, 113, "encrypt.cpp");
   v9.pbInBuff = v5;
   v9.pbInBuffEnd = 0;
   v9.pbOutBuff = (unsigned __int8 *)v10;
@@ -126,8 +126,8 @@ int __fastcall encrypt_compress(void *buf, int size)
     memcpy(v5, v10, (size_t)v9.pbOutBuffEnd);
     v4 = v9.pbOutBuffEnd;
   }
-  mem_free_dbg(ptr, 135, "C:\\Diablo\\Direct\\encrypt.cpp");
-  mem_free_dbg(v10, 136, "C:\\Diablo\\Direct\\encrypt.cpp");
+  mem_free_dbg(ptr, 135, "encrypt.cpp");
+  mem_free_dbg(v10, 136, "encrypt.cpp");
   return (int)v4;
 }
 
@@ -164,18 +164,17 @@ void __fastcall encrypt_decompress(void *param, int recv_size, int dwMaxBytes)
 
   v3 = (unsigned __int8 *)recv_size;
   v4 = (unsigned __int8 *)param;
-  ptr = DiabloAllocPtr(36312, 145, "C:\\Diablo\\Direct\\encrypt.cpp");
-  v7 = DiabloAllocPtr(dwMaxBytes, 146, "C:\\Diablo\\Direct\\encrypt.cpp");
+  ptr = DiabloAllocPtr(36312, 145, "encrypt.cpp");
+  v7 = DiabloAllocPtr(dwMaxBytes, 146, "encrypt.cpp");
   v6.pbInBuff = v4;
   v6.pbInBuffEnd = 0;
   v6.pbOutBuff = (unsigned __int8 *)v7;
   v6.pbOutBuffEnd = 0;
   v6.pbSize = v3;
   explode((int)encrypt_pkware_read, (int)encrypt_pkware_write, (int)ptr, (int)&v6);
-  if ( v6.pbOutBuffEnd > (unsigned __int8 *)dwMaxBytes )
-    assertion_failed(158, "C:\\Diablo\\Direct\\encrypt.cpp");
+  assert(v6.pbOutBuffEnd <= (unsigned __int8 *)dwMaxBytes, 158, "encrypt.cpp");
   memcpy(v4, v7, (size_t)v6.pbOutBuffEnd);
-  mem_free_dbg(ptr, 163, "C:\\Diablo\\Direct\\encrypt.cpp");
-  mem_free_dbg(v7, 164, "C:\\Diablo\\Direct\\encrypt.cpp");
+  mem_free_dbg(ptr, 163, "encrypt.cpp");
+  mem_free_dbg(v7, 164, "encrypt.cpp");
 }
 

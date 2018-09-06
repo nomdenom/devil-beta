@@ -3,11 +3,10 @@ void __cdecl InitStores()
 {
   signed int i; // [esp+Ch] [ebp-4h]
 
-  if ( pSTextBoxCels )
-    assertion_failed(87, "C:\\Diablo\\Direct\\stores.cpp");
-  pSTextBoxCels = LoadFileInMem("Data\\TextBox2.CEL", 0, 88, "C:\\Diablo\\Direct\\stores.cpp");
-  pCelBuff = (char *)LoadFileInMem("Data\\PentSpn2.CEL", 0, 89, "C:\\Diablo\\Direct\\stores.cpp");
-  pSTextSlidCels = LoadFileInMem("Data\\TextSlid.CEL", 0, 90, "C:\\Diablo\\Direct\\stores.cpp");
+  assert(!pSTextBoxCels, 87, "stores.cpp");
+  pSTextBoxCels = LoadFileInMem("Data\\TextBox2.CEL", 0, 88, "stores.cpp");
+  pCelBuff = (char *)LoadFileInMem("Data\\PentSpn2.CEL", 0, 89, "stores.cpp");
+  pSTextSlidCels = LoadFileInMem("Data\\TextSlid.CEL", 0, 90, "stores.cpp");
   ClearSText(0, 24);
   stextflag = 0;
   InStoreFlag = 1;
@@ -55,11 +54,11 @@ void __cdecl SetupTownStores()
 //----- (0042E53B) --------------------------------------------------------
 void __cdecl FreeStoreMem()
 {
-  mem_free_dbg(pSTextBoxCels, 139, "C:\\Diablo\\Direct\\stores.cpp");
+  mem_free_dbg(pSTextBoxCels, 139, "stores.cpp");
   pSTextBoxCels = 0;
-  mem_free_dbg(pCelBuff, 141, "C:\\Diablo\\Direct\\stores.cpp");
+  mem_free_dbg(pCelBuff, 141, "stores.cpp");
   pCelBuff = 0;
-  mem_free_dbg(pSTextSlidCels, 143, "C:\\Diablo\\Direct\\stores.cpp");
+  mem_free_dbg(pSTextSlidCels, 143, "stores.cpp");
   pSTextSlidCels = 0;
 }
 

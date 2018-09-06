@@ -175,9 +175,8 @@ void __fastcall InitMonsterGFX(int monst)
     if ( (animletter[i] != 's' || monsterdata[v3].has_special) && monsterdata[v3].Frames[i] > 0 )
     {
       sprintf(&pszName, monsterdata[v3].GraphicType, animletter[i]);
-      if ( Monsters[monst].Anims[i].CMem )
-        assertion_failed(414, "C:\\Diablo\\Direct\\MONSTER.CPP");
-      v1 = LoadFileInMem(&pszName, 0, 415, "C:\\Diablo\\Direct\\MONSTER.CPP");
+      assert(!Monsters[monst].Anims[i].CMem, 414, "MONSTER.CPP");
+      v1 = LoadFileInMem(&pszName, 0, 415, "MONSTER.CPP");
       Monsters[monst].Anims[i].CMem = v1;
       v7 = (DWORD *)Monsters[monst].Anims[i].CMem;
       if ( Monsters[monst].mtype != 108 || animletter[i] != 's' && animletter[i] != 'd' )
@@ -207,9 +206,9 @@ void __fastcall InitMonsterGFX(int monst)
                                            monsterdata[v3].TransFile,
                                            0,
                                            434,
-                                           "C:\\Diablo\\Direct\\MONSTER.CPP");
+                                           "MONSTER.CPP");
     InitMonsterTRN(monst, monsterdata[v3].has_special);
-    mem_free_dbg(Monsters[monst].trans_file, 436, "C:\\Diablo\\Direct\\MONSTER.CPP");
+    mem_free_dbg(Monsters[monst].trans_file, 436, "MONSTER.CPP");
     Monsters[monst].trans_file = 0;
   }
   if ( v3 >= 60 && v3 <= 63 && !(MissileFileFlag & 1) )
@@ -503,12 +502,10 @@ void __fastcall monster_402D39(int num)
   {
     for ( mtypea = 0; mtypea < nummtypes && Monsters[mtypea].mtype != UniqMonst[1].mtype; ++mtypea )
       ;
-    if ( mtypea >= nummtypes )
-      assertion_failed(799, "C:\\Diablo\\Direct\\MONSTER.CPP");
+    assert(mtypea < nummtypes, 799, "MONSTER.CPP");
     for ( unpackfilesize = 0; unpackfilesize < nummtypes && !IsSkel(Monsters[unpackfilesize].mtype); ++unpackfilesize )
       ;
-    if ( unpackfilesize >= nummtypes )
-      assertion_failed(802, "C:\\Diablo\\Direct\\MONSTER.CPP");
+    assert(unpackfilesize < nummtypes, 802, "MONSTER.CPP");
     PlaceUniqueMonst(1, mtypea, unpackfilesize, 30);
   }
 }
@@ -3879,7 +3876,7 @@ void __cdecl FreeMonsters()
     {
       if ( animletter[j] != 's' || monsterdata[v0].has_special )
       {
-        mem_free_dbg(Monsters[i].Anims[j].CMem, 3968, "C:\\Diablo\\Direct\\MONSTER.CPP");
+        mem_free_dbg(Monsters[i].Anims[j].CMem, 3968, "MONSTER.CPP");
         Monsters[i].Anims[j].CMem = 0;
       }
     }
@@ -3946,8 +3943,7 @@ BOOL __fastcall DirOK(int i, int mdir)
           v10 = -v10;
         if ( v10 )
           --v10;
-        if ( v10 < 0 )
-          assertion_failed(4029, "C:\\Diablo\\Direct\\MONSTER.CPP");
+        assert(v10 >= 0, 4029, "MONSTER.CPP");
         if ( monster[v10].leaderflag == 1
           && monster[v10].leader == i
           && monster[v10]._mfutx == j

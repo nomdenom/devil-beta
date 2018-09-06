@@ -341,7 +341,7 @@ void __fastcall DoVision(int nXPos, int nYPos, int nRadius, unsigned __int8 doau
 //----- (004388DD) --------------------------------------------------------
 void __cdecl FreeLightTable()
 {
-  mem_free_dbg(pLightTbl, 583, "C:\\Diablo\\Direct\\LIGHTING.CPP");
+  mem_free_dbg(pLightTbl, 583, "LIGHTING.CPP");
   pLightTbl = 0;
 }
 
@@ -390,9 +390,8 @@ void __cdecl MakeLightTable()
   unsigned __int8 v40; // [esp+88h] [ebp-4h]
   unsigned __int8 v41; // [esp+88h] [ebp-4h]
 
-  if ( pLightTbl )
-    assertion_failed(603, "C:\\Diablo\\Direct\\LIGHTING.CPP");
-  pLightTbl = (BYTE *)DiabloAllocPtr(6912, 604, "C:\\Diablo\\Direct\\LIGHTING.CPP");
+  assert(!pLightTbl, 603, "LIGHTING.CPP");
+  pLightTbl = (BYTE *)DiabloAllocPtr(6912, 604, "LIGHTING.CPP");
   pLightTbl_ = pLightTbl;
   v38 = 0;
   if ( light4flag )
@@ -469,16 +468,16 @@ void __cdecl MakeLightTable()
   }
   for ( jj = 0; jj < 256; ++jj )
     *pLightTbl_++ = 0;
-  ptr = LoadFileInMem("PlrGFX\\Infra.TRN", 0, 647, "C:\\Diablo\\Direct\\LIGHTING.CPP");
+  ptr = LoadFileInMem("PlrGFX\\Infra.TRN", 0, 647, "LIGHTING.CPP");
   v30 = ptr;
   for ( kk = 0; kk < 256; ++kk )
     *pLightTbl_++ = *v30++;
-  mem_free_dbg(ptr, 650, "C:\\Diablo\\Direct\\LIGHTING.CPP");
-  ptra = LoadFileInMem("PlrGFX\\Stone.TRN", 0, 653, "C:\\Diablo\\Direct\\LIGHTING.CPP");
+  mem_free_dbg(ptr, 650, "LIGHTING.CPP");
+  ptra = LoadFileInMem("PlrGFX\\Stone.TRN", 0, 653, "LIGHTING.CPP");
   v31 = ptra;
   for ( ll = 0; ll < 256; ++ll )
     *pLightTbl_++ = *v31++;
-  mem_free_dbg(ptra, 656, "C:\\Diablo\\Direct\\LIGHTING.CPP");
+  mem_free_dbg(ptra, 656, "LIGHTING.CPP");
   for ( mm = 0; mm < 8; ++mm )
   {
     for ( nn = -30; (signed int)nn < 239; ++nn )

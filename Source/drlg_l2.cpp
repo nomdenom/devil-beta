@@ -275,12 +275,12 @@ void __cdecl DRLG_LoadL2SP()
   setloadflag_2 = 0;
   if ( quests[8]._qlevel == currlevel )
   {
-    pSetPiece_2 = LoadFileInMem("Levels\\L2Data\\Blind2.DUN", 0, 1417, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+    pSetPiece_2 = LoadFileInMem("Levels\\L2Data\\Blind2.DUN", 0, 1417, "DRLG_L2.CPP");
     setloadflag_2 = 1;
   }
   else if ( quests[9]._qlevel == currlevel )
   {
-    pSetPiece_2 = LoadFileInMem("Levels\\L2Data\\Blood1.DUN", 0, 1421, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+    pSetPiece_2 = LoadFileInMem("Levels\\L2Data\\Blood1.DUN", 0, 1421, "DRLG_L2.CPP");
     setloadflag_2 = 1;
   }
 }
@@ -288,7 +288,7 @@ void __cdecl DRLG_LoadL2SP()
 //----- (0047D384) --------------------------------------------------------
 void __cdecl DRLG_FreeL2SP()
 {
-  mem_free_dbg(pSetPiece_2, 1429, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+  mem_free_dbg(pSetPiece_2, 1429, "DRLG_L2.CPP");
   pSetPiece_2 = 0;
 }
 
@@ -401,7 +401,7 @@ void __fastcall AddHall(int nX1, int nY1, int nX2, int nY2, int nHd)
 
   if ( pHallList )
   {
-    v7 = (HALLNODE *)DiabloAllocPtr(24, 1571, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+    v7 = (HALLNODE *)DiabloAllocPtr(24, 1571, "DRLG_L2.CPP");
     v7->nHallx1 = nX1;
     v7->nHally1 = nY1;
     v7->nHallx2 = nX2;
@@ -414,7 +414,7 @@ void __fastcall AddHall(int nX1, int nY1, int nX2, int nY2, int nHd)
   }
   else
   {
-    pHallList = (HALLNODE *)DiabloAllocPtr(24, 1562, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+    pHallList = (HALLNODE *)DiabloAllocPtr(24, 1562, "DRLG_L2.CPP");
     pHallList->nHallx1 = nX1;
     pHallList->nHally1 = nY1;
     pHallList->nHallx2 = nX2;
@@ -575,7 +575,7 @@ void __fastcall GetHall(int *nX1, int *nY1, int *nX2, int *nY2, int *nHd)
   *nX2 = pHallList->nHallx2;
   *nY2 = pHallList->nHally2;
   *nHd = pHallList->nHalldir;
-  mem_free_dbg(pHallList, 1720, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+  mem_free_dbg(pHallList, 1720, "DRLG_L2.CPP");
   pHallList = v5;
 }
 
@@ -1984,7 +1984,7 @@ void __fastcall LoadL2Dungeon(char *sFileName, int vx, int vy)
   pszName = sFileName;
   InitDungeon();
   DRLG_InitTrans();
-  pMap = LoadFileInMem(pszName, 0, 2960, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+  pMap = LoadFileInMem(pszName, 0, 2960, "DRLG_L2.CPP");
   v15 = *pMap;
   v14 = pMap[2];
   v17 = pMap + 4;
@@ -2055,7 +2055,7 @@ void __fastcall LoadL2Dungeon(char *sFileName, int vx, int vy)
   ViewY = vy;
   SetMapMonsters((char *)pMap, 0, 0);
   SetMapObjects((char *)pMap, 0, 0);
-  mem_free_dbg(pMap, 3025, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+  mem_free_dbg(pMap, 3025, "DRLG_L2.CPP");
 }
 
 //----- (00481F92) --------------------------------------------------------
@@ -2076,7 +2076,7 @@ void __fastcall LoadPreL2Dungeon(char *sFileName, int vx, int vy)
   pszName = sFileName;
   InitDungeon();
   DRLG_InitTrans();
-  ptr = LoadFileInMem(pszName, 0, 3039, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+  ptr = LoadFileInMem(pszName, 0, 3039, "DRLG_L2.CPP");
   v11 = *ptr;
   v10 = ptr[2];
   v13 = ptr + 4;
@@ -2109,7 +2109,7 @@ void __fastcall LoadPreL2Dungeon(char *sFileName, int vx, int vy)
     for ( n = 0; n < 40; ++n )
       pdungeon[n][m] = dungeon[n][m];
   }
-  mem_free_dbg(ptr, 3065, "C:\\Diablo\\Direct\\DRLG_L2.CPP");
+  mem_free_dbg(ptr, 3065, "DRLG_L2.CPP");
 }
 
 //----- (0048221F) --------------------------------------------------------

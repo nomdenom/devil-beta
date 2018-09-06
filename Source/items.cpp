@@ -8,9 +8,8 @@ void __cdecl InitItemGFX()
   for ( i = 0; i < 31; ++i )
   {
     sprintf(&pszName, "Items\\%s.CEL", ItemDropStrs[i]);
-    if ( Item2Frm[i] )
-      assertion_failed(399, "C:\\Diablo\\Direct\\ITEMS.CPP");
-    v0 = LoadFileInMem(&pszName, 0, 400, "C:\\Diablo\\Direct\\ITEMS.CPP");
+    assert(!Item2Frm[i], 399, "ITEMS.CPP");
+    v0 = LoadFileInMem(&pszName, 0, 400, "ITEMS.CPP");
     Item2Frm[i] = v0;
   }
   memset(UniqueItemFlag, 0, 0x200u);
@@ -350,8 +349,7 @@ void __fastcall CalcPlrItemVals(int p, BOOL Loadgfx)
     LoadPlrGFX(p, 1);
     SetPlrAnims(p);
     v29 = plr[p]._pdir;
-    if ( !plr[p]._pNAnim[v29] )
-      assertion_failed(704, "C:\\Diablo\\Direct\\ITEMS.CPP");
+    assert(plr[p]._pNAnim[v29], 704, "ITEMS.CPP");
     plr[p]._pAnimData = plr[p]._pNAnim[v29];
     plr[p]._pAnimLen = plr[p]._pNFrames;
     plr[p]._pAnimFrame = 1;
@@ -2162,7 +2160,7 @@ void __cdecl FreeItemGFX()
 
   for ( i = 0; i < 31; ++i )
   {
-    mem_free_dbg(Item2Frm[i], 2462, "C:\\Diablo\\Direct\\ITEMS.CPP");
+    mem_free_dbg(Item2Frm[i], 2462, "ITEMS.CPP");
     Item2Frm[i] = 0;
   }
 }

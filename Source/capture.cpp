@@ -13,8 +13,7 @@ void __cdecl CaptureScreen()
   }
   else
   {
-    if ( !gpBuffer )
-      assertion_failed(247, "C:\\Diablo\\Direct\\capture.cpp");
+    assert(gpBuffer, 247, "capture.cpp");
     DrawAndBlit();
     lpDDPalette->lpVtbl->GetEntries(lpDDPalette, 0, 0, 256, (LPPALETTEENTRY)&pal);
     RedPalette(&pal);
@@ -89,7 +88,7 @@ BOOL __fastcall CapturePix(HANDLE hFile, WORD width, WORD height, WORD stride, B
 
   v7 = width;
   hFilea = hFile;
-  lpBuffer = (BYTE *)DiabloAllocPtr(2 * width, 169, "C:\\Diablo\\Direct\\capture.cpp");
+  lpBuffer = (BYTE *)DiabloAllocPtr(2 * width, 169, "capture.cpp");
   while ( 1 )
   {
     v5 = height--;
@@ -103,7 +102,7 @@ BOOL __fastcall CapturePix(HANDLE hFile, WORD width, WORD height, WORD stride, B
     if ( NumberOfBytesWritten != nNumberOfBytesToWrite )
       return 0;
   }
-  mem_free_dbg(lpBuffer, 179, "C:\\Diablo\\Direct\\capture.cpp");
+  mem_free_dbg(lpBuffer, 179, "capture.cpp");
   return 1;
 }
 

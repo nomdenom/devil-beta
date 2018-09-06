@@ -62,7 +62,7 @@ void __fastcall DRLG_SetMapTrans(char *sFileName)
   unsigned __int8 *ptr; // [esp+20h] [ebp-Ch]
   char *v9; // [esp+24h] [ebp-8h]
 
-  ptr = LoadFileInMem(sFileName, 0, 146, "C:\\Diablo\\Direct\\SetMaps.cpp");
+  ptr = LoadFileInMem(sFileName, 0, 146, "SetMaps.cpp");
   v1 = *ptr;
   v2 = ptr[2];
   v3 = 2 * v1 * v2 + 2;
@@ -77,7 +77,7 @@ void __fastcall DRLG_SetMapTrans(char *sFileName)
       v9 += 2;
     }
   }
-  mem_free_dbg(ptr, 168, "C:\\Diablo\\Direct\\SetMaps.cpp");
+  mem_free_dbg(ptr, 168, "SetMaps.cpp");
 }
 
 //----- (00436770) --------------------------------------------------------

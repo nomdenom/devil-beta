@@ -212,17 +212,16 @@ void __fastcall InitPlrGFXMem(int pnum)
   int v1; // [esp+Ch] [ebp-4h]
 
   v1 = pnum;
-  if ( plr[pnum]._pNData )
-    assertion_failed(407, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[pnum]._pNData = DiabloAllocPtr(284672, 408, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[v1]._pWData = DiabloAllocPtr(118784, 409, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[v1]._pAData = DiabloAllocPtr(356352, 410, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[v1]._pHData = DiabloAllocPtr(105472, 411, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[v1]._pLData = DiabloAllocPtr(368640, 412, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[v1]._pFData = DiabloAllocPtr(493568, 413, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[v1]._pTData = DiabloAllocPtr(595968, 414, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[v1]._pDData = DiabloAllocPtr(269312, 415, "C:\\Diablo\\Direct\\PLAYER.CPP");
-  plr[v1]._pBData = DiabloAllocPtr(78848, 416, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  assert(!plr[pnum]._pNData, 407, "PLAYER.CPP");
+  plr[pnum]._pNData = DiabloAllocPtr(284672, 408, "PLAYER.CPP");
+  plr[v1]._pWData = DiabloAllocPtr(118784, 409, "PLAYER.CPP");
+  plr[v1]._pAData = DiabloAllocPtr(356352, 410, "PLAYER.CPP");
+  plr[v1]._pHData = DiabloAllocPtr(105472, 411, "PLAYER.CPP");
+  plr[v1]._pLData = DiabloAllocPtr(368640, 412, "PLAYER.CPP");
+  plr[v1]._pFData = DiabloAllocPtr(493568, 413, "PLAYER.CPP");
+  plr[v1]._pTData = DiabloAllocPtr(595968, 414, "PLAYER.CPP");
+  plr[v1]._pDData = DiabloAllocPtr(269312, 415, "PLAYER.CPP");
+  plr[v1]._pBData = DiabloAllocPtr(78848, 416, "PLAYER.CPP");
   plr[v1]._pGFXLoad = 0;
 }
 
@@ -232,23 +231,23 @@ void __fastcall FreePlayerGFX(int pnum)
   int v1; // ST10_4
 
   v1 = pnum;
-  mem_free_dbg(plr[pnum]._pNData, 424, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[pnum]._pNData, 424, "PLAYER.CPP");
   plr[v1]._pNData = 0;
-  mem_free_dbg(plr[v1]._pWData, 426, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[v1]._pWData, 426, "PLAYER.CPP");
   plr[v1]._pWData = 0;
-  mem_free_dbg(plr[v1]._pAData, 428, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[v1]._pAData, 428, "PLAYER.CPP");
   plr[v1]._pAData = 0;
-  mem_free_dbg(plr[v1]._pHData, 430, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[v1]._pHData, 430, "PLAYER.CPP");
   plr[v1]._pHData = 0;
-  mem_free_dbg(plr[v1]._pLData, 432, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[v1]._pLData, 432, "PLAYER.CPP");
   plr[v1]._pLData = 0;
-  mem_free_dbg(plr[v1]._pFData, 434, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[v1]._pFData, 434, "PLAYER.CPP");
   plr[v1]._pFData = 0;
-  mem_free_dbg(plr[v1]._pTData, 436, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[v1]._pTData, 436, "PLAYER.CPP");
   plr[v1]._pTData = 0;
-  mem_free_dbg(plr[v1]._pDData, 438, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[v1]._pDData, 438, "PLAYER.CPP");
   plr[v1]._pDData = 0;
-  mem_free_dbg(plr[v1]._pBData, 440, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  mem_free_dbg(plr[v1]._pBData, 440, "PLAYER.CPP");
   plr[v1]._pBData = 0;
   plr[v1]._pGFXLoad = 0;
 }
@@ -1707,18 +1706,15 @@ void __fastcall StartNewLvl(int pnum, int fom, int lvl)
     case 1027:
     case 1031:
     case 1032:
-      if ( plr[pnum].plrlevel == lvl )
-        assertion_failed(1840, "C:\\Diablo\\Direct\\PLAYER.CPP");
+      assert(plr[pnum].plrlevel != lvl, 1840, "PLAYER.CPP");
       plr[pnum].plrlevel = lvl;
       break;
     case 1028:
-      if ( gbMaxPlayers != 1 )
-        assertion_failed(1851, "C:\\Diablo\\Direct\\PLAYER.CPP");
+      assert(gbMaxPlayers == 1, 1851, "PLAYER.CPP");
       return;
     case 1029:
       setlvlnum = lvl;
-      if ( gbMaxPlayers != 1 )
-        assertion_failed(1856, "C:\\Diablo\\Direct\\PLAYER.CPP");
+      assert(gbMaxPlayers == 1, 1856, "PLAYER.CPP");
       return;
     case 1033:
       break;
@@ -1740,8 +1736,7 @@ void __fastcall StartNewLvl(int pnum, int fom, int lvl)
 void __fastcall RestartTownLvl(int pnum)
 {
   InitLevelChange(pnum);
-  if ( !plr[pnum].plrlevel )
-    assertion_failed(1878, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  assert(plr[pnum].plrlevel, 1878, "PLAYER.CPP");
   plr[pnum].plrlevel = 0;
   plr[pnum]._pInvincible = 0;
   SetPlayerHitPoints(pnum, 64);
@@ -2863,8 +2858,7 @@ void __cdecl ProcessPlayers()
 
   for ( i = 0; i < 40; ++i )
   {
-    if ( plr[myplr].InvGrid[i] > 0 && plr[myplr].InvGrid[i] > plr[myplr]._pNumInv )
-      assertion_failed(2837, "C:\\Diablo\\Direct\\PLAYER.CPP");
+    assert(!(plr[myplr].InvGrid[i] > 0 && plr[myplr].InvGrid[i] > plr[myplr]._pNumInv), 2837, "PLAYER.CPP");
   }
   if ( sfxdelay > 0 && !--sfxdelay )
     PlaySFX(sfxdnum);
@@ -3153,8 +3147,7 @@ void __fastcall SyncPlrAnim(int pnum)
       TermMsg("SyncPlrAnim");
       return;
   }
-  if ( !plr[pnum]._pAnimData )
-    assertion_failed(3116, "C:\\Diablo\\Direct\\PLAYER.CPP");
+  assert(plr[pnum]._pAnimData, 3116, "PLAYER.CPP");
 }
 
 //----- (00477AEA) --------------------------------------------------------
