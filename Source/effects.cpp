@@ -56,7 +56,7 @@ void __fastcall InitMonsterSND(int monst)
           strcpy(path, v5);
           v4 = sound_file_load(path);
           assert(v4, 229, "effects.cpp");
-          Monsters[monst].XSnds[i][j] = v4;
+          Monsters[monst].Snds[i][j] = v4;
         }
       }
     }
@@ -80,10 +80,10 @@ void __cdecl FreeEffects()
     {
       for ( k = 0; k < 2; ++k )
       {
-        sound_file = (TSnd *)Monsters[i].XSnds[j][k];
+        sound_file = (TSnd *)Monsters[i].Snds[j][k];
         if ( sound_file )
         {
-          Monsters[i].XSnds[j][k] = 0;
+          Monsters[i].Snds[j][k] = 0;
           ptr = sound_file->sound_path;
           sound_file->sound_path = 0;
           sound_file_cleanup(sound_file);
@@ -110,9 +110,9 @@ void __fastcall PlayEffect(int i, int mode)
     if ( calc_snd_position(monster[i]._mx, monster[i]._my, &plVolume, &plPan) )
     {
       v6 = monster[i]._mMTidx;
-      if ( !Monsters[v6].XSnds[mode][v7] )
+      if ( !Monsters[v6].Snds[mode][v7] )
         TermMsg("Monster sound problem\n:%s playing %i", Monsters[v6].MData->mName, mode);
-      snd_play_snd((TSnd *)Monsters[v6].XSnds[mode][v7], plVolume, plPan);
+      snd_play_snd((TSnd *)Monsters[v6].Snds[mode][v7], plVolume, plPan);
     }
   }
 }
