@@ -24,36 +24,34 @@ void __fastcall mpqapi_alloc_block(int block_offset, int block_size)
   signed int v2; // ST20_4
   _BLOCKENTRY *v3; // eax
   int block_sizeb; // [esp+Ch] [ebp-14h]
-  int block_offseta; // [esp+10h] [ebp-10h]
   signed int v7; // [esp+18h] [ebp-8h]
-  _BLOCKENTRY *v8; // [esp+1Ch] [ebp-4h]
+  _BLOCKENTRY *blockTbl; // [esp+1Ch] [ebp-4h]
 
-  block_offseta = block_offset;
-  v8 = sgpBlockTbl;
+  blockTbl = sgpBlockTbl;
   v7 = 2048;
   while ( 1 )
   {
     v2 = v7--;
     if ( !v2 )
       break;
-    if ( v8->offset && !v8->flags && !v8->sizefile )
+    if ( blockTbl->offset && !blockTbl->flags && !blockTbl->sizefile )
     {
-      if ( v8->offset + v8->sizealloc == block_offset )
+      if ( blockTbl->offset + blockTbl->sizealloc == block_offset )
       {
-        block_offseta = v8->offset;
-        block_sizeb = v8->sizealloc + block_size;
+        block_offset = blockTbl->offset;
+        block_sizeb = blockTbl->sizealloc + block_size;
 LABEL_12:
-        memset(v8, 0, 0x10u);
-        mpqapi_alloc_block(block_offseta, block_sizeb);
+        memset(blockTbl, 0, 0x10u);
+        mpqapi_alloc_block(block_offset, block_sizeb);
         return;
       }
-      if ( block_offset + block_size == v8->offset )
+      if ( block_offset + block_size == blockTbl->offset )
       {
-        block_sizeb = v8->sizealloc + block_size;
+        block_sizeb = blockTbl->sizealloc + block_size;
         goto LABEL_12;
       }
     }
-    ++v8;
+    ++blockTbl;
   }
   if ( block_offset + block_size > (unsigned int)lDistanceToMove )
     TermMsg("MPQ free list error");
@@ -64,7 +62,7 @@ LABEL_12:
   else
   {
     v3 = mpqapi_new_block(0);
-    v3->offset = block_offseta;
+    v3->offset = block_offset;
     v3->sizealloc = block_size;
     v3->sizefile = 0;
     v3->flags = 0;

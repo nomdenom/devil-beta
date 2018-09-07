@@ -1055,7 +1055,7 @@ void __cdecl L5makeDungeon()
       v1 = 2 * i;
       L5Dungeon[2 * j][2 * i] = dungeon[j][i];
       L5Dungeon[v0][v1 + 1] = dungeon[j][i];
-      L5Dungeon[0][16 * (5 * v0 + 5) + v1] = dungeon[j][i];
+      L5Dungeon[v0 + 1][v1] = dungeon[j][i];
       L5Dungeon[0][16 * (10 * j + 5) + 1 + v1] = dungeon[j][i];
     }
   }
@@ -1081,9 +1081,9 @@ void __cdecl L5makeDmt()
   {
     v5 = 0;
     for ( l = 1; l <= 77; l += 2 )
-      dungeon[v5++][v4] = L5ConvTbl[8 * L5Dungeon[0][16 * (5 * l + 5) + 1 + k]
+      dungeon[v5++][v4] = L5ConvTbl[8 * L5Dungeon[l + 1][k + 1]
                                   + 4 * L5Dungeon[l][k + 1]
-                                  + 2 * L5Dungeon[0][16 * (5 * l + 5) + k]
+                                  + 2 * L5Dungeon[l + 1][k]
                                   + L5Dungeon[l][k]];
     ++v4;
   }

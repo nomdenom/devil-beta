@@ -1,3 +1,5 @@
+require_relative 'term_colors'
+
 TOKENS = {
     "I" => %q{([a-zA-Z_][a-zA-Z_0-9]*)},
     "N" => %q{(-?\d+)},
@@ -35,7 +37,9 @@ DIMS = {
     "dungeon" => 40,
     "predungeon" => 40,
     "dflags" => 40,
-
+    "L5Dungeon" => 80,
+    "automapview" => 40,
+    "SpellPages" => 7,
 }
 
 %w(dung_map dPiece dObject dMonster dFlags dPlayer dItem).each do |d| 
@@ -45,7 +49,7 @@ end
 def arr_exp(id, id1, delta1, id2, delta2, mult = nil)
     dim1 = DIMS[id]
     if !dim1 || (mult && mult != dim1)
-        $stderr.puts "Unknown: id=#{id} mult=#{mult}"
+        $stderr.puts "!! Unknown: id=#{id} mult=#{mult}".red
         return
     end
 
@@ -83,7 +87,7 @@ def rewrite_line_idx(t)
         arr_exp(id, id1, d1, id2, d2) || _
     }
 
-    $stderr.puts "#{t.ljust(50)} => #{ts}" if t != ts
+    $stderr.puts ">> #{t.strip.ljust(50)} => #{ts.strip}" if t != ts
 
     ts
 end

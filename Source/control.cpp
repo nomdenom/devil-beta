@@ -1957,7 +1957,7 @@ void __cdecl DrawSpellBook()
   v4 = HIDWORD(plr[myplr]._pAblSpells) | HIDWORD(plr[myplr]._pMemSpells) | HIDWORD(plr[myplr]._pISpells);
   for ( i = 1; i < 8; ++i )
   {
-    ii = SpellPages[sbooktab - 1][i + 6];
+    ii = SpellPages[sbooktab][i - 1];
     if ( ii != -1 )
     {
       v0 = 1 << (ii - 1);

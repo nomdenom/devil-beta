@@ -528,7 +528,7 @@ void __cdecl AddL2Torches()
           AddObject(OBJ_TORCHR2, xp, yp);
         if ( v2 == 37 && !random(145, 10) && !dObject[xp - 1][yp] )
           AddObject(OBJ_TORCHL, xp - 1, yp);
-        if ( v2 == 41 && !random(145, 10) && !dungeon[39][112 * xp + 39 + yp] )
+        if ( v2 == 41 && !random(145, 10) && !dObject[xp][yp - 1] )
           AddObject(OBJ_TORCHR, xp, yp - 1);
       }
     }
@@ -1010,9 +1010,9 @@ void __fastcall AddPurifyingFountain(int i)
 
   v1 = object[i]._oy;
   v2 = object[i]._ox;
-  dungeon[39][112 * v2 + 39 + v1] = -1 - i;
+  dObject[v2][v1 - 1] = -1 - i;
   dObject[v2 - 1][v1] = -1 - i;
-  dungeon[39][112 * (v2 - 1) + 39 + v1] = -1 - i;
+  dObject[v2 - 1 - 1][v1 + 111] = -1 - i;
 }
 
 //----- (0045F6E8) --------------------------------------------------------
@@ -1971,11 +1971,11 @@ void __fastcall MonstCheckDoors(int m)
   v5 = monster[m]._mx;
   v4 = monster[m]._my;
   v1 = 0;
-  if ( dungeon[39][112 * (v5 - 1) + 39 + v4] )
+  if ( dObject[v5 - 1 - 1][v4 + 111] )
     v1 = 1;
-  if ( !v1 && dungeon[39][112 * v5 + 39 + v4] )
+  if ( !v1 && dObject[v5][v4 - 1] )
     v1 = 1;
-  if ( !v1 && dungeon[39][112 * (v5 + 1) + 39 + v4] )
+  if ( !v1 && dObject[v5 + 1 - 1][v4 + 111] )
     v1 = 1;
   if ( !v1 && dObject[v5 - 1][v4] )
     v1 = 1;

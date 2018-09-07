@@ -4,6 +4,7 @@ require 'pathname'
 
 require_relative 'idx'
 require_relative 'rewrite'
+require_relative 'term_colors'
 
 OUTDIR = Pathname.new("Source")
 
@@ -21,7 +22,7 @@ targets = [
     [0x490C20, "diablo"],
     [0x49AE30, "drlg_l1"],
     [0x47c790, "drlg_l2"],
-    [0x43A677, "drlg_l3"],
+    [0x43a370, "drlg_l3"],
     [0x4674C0, "effects"],
     [0x47AAE0, "encrypt"],
     [0x48E700, "engine"],
@@ -72,7 +73,7 @@ targets = [
     [0xFFFFFF, nil]
 ].sort_by { |d| d[0] }
 
-p targets
+#p targets
 
 cur_target = -1
 addr = nil
@@ -87,16 +88,21 @@ init_target = Proc.new {
 
 
 ARGF.each_line do |l|
-    if was_addr
-        was_addr = false
-        puts "#{addr.to_s(16)}: #{l}"
+    no_comments = l.gsub(/\/\/.*$/, "")
+
+    if !no_comments.strip.empty?
+        if was_addr
+            was_addr = false
+            puts "#{addr.to_s(16)}: #{l}"
+        end
     end
+
     if l =~ /^\/\/----- \(([A-F0-9]+)\)/
         addr = $1.to_i(16)
         was_addr = true
         if addr >= targets[cur_target + 1][0]
             cur_target += 1
-            puts "--- Output to #{targets[cur_target]}"
+            puts "--- Output to #{targets[cur_target]}".cyan
             init_target.call
         end
         #printf "addr = %08X\n", addr

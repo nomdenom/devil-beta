@@ -23,8 +23,8 @@ BOOL __fastcall TFit_Shrine(int i)
         && !nSolidTable[dPiece[v4 + 1][v3]]
         && dung_map[v4 - 1][v3] == themes[i].ttval
         && dung_map[v4 + 1][v3] == themes[i].ttval
-        && !dungeon[39][112 * (v4 - 1) + 39 + v3]
-        && !dungeon[39][112 * (v4 + 1) + 39 + v3] )
+        && !dObject[v4 - 1 - 1][v3 + 111]
+        && !dObject[v4 + 1 - 1][v3 + 111] )
       {
         v2 = 1;
       }
@@ -34,7 +34,7 @@ BOOL __fastcall TFit_Shrine(int i)
         && !nSolidTable[dPiece[v4][v3 + 1]]
         && dung_map[v4][v3 - 1] == themes[i].ttval
         && dung_map[v4][v3 + 1] == themes[i].ttval
-        && !dungeon[39][112 * (v4 - 1) + 39 + v3]
+        && !dObject[v4 - 1 - 1][v3 + 111]
         && !dObject[v4 - 1][v3 + 1] )
       {
         v2 = 2;
@@ -398,7 +398,7 @@ void __fastcall Theme_MonstPit(int t)
     }
   }
   CreateRndItem(x, y, 1u, 0, 1);
-  v1 = (int)*(&sgpBlockTbl + numitems);
+  v1 = itemactive[numitems - 1];
   item[v1]._iAnimFrame = item[v1]._iAnimLen;
   item[v1]._iAnimFlag = 0;
   item[v1]._iSelFlag = 1;
@@ -505,7 +505,7 @@ void __fastcall Theme_Treasure(int t)
           CreateTypeItem(x, y, 0, 11, 0, 0, 1);
         else
           CreateRndItem(x, y, 0, 0, 1);
-        v1 = (int)*(&sgpBlockTbl + numitems);
+        v1 = itemactive[numitems - 1];
         item[v1]._iAnimFrame = item[v1]._iAnimLen;
         item[v1]._iAnimFlag = 0;
         item[v1]._iSelFlag = 1;
@@ -662,7 +662,7 @@ void __fastcall Theme_PurifyingFountain(int t)
               CreateTypeItem(oxa, oya, 0, 11, 0, 0, 1);
             else
               CreateRndItem(oxa, oya, 0, 0, 1);
-            v1 = (int)*(&sgpBlockTbl + numitems);
+            v1 = itemactive[numitems - 1];
             item[v1]._iAnimFrame = item[v1]._iAnimLen;
             item[v1]._iAnimFlag = 0;
             item[v1]._iSelFlag = 1;

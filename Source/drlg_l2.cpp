@@ -2112,6 +2112,52 @@ void __fastcall LoadPreL2Dungeon(char *sFileName, int vx, int vy)
   mem_free_dbg(ptr, 3065, "DRLG_L2.CPP");
 }
 
+//----- (00482168) --------------------------------------------------------
+void __fastcall unused_sub_482168(int a1, int a2)
+{
+  BYTE (*v2)[40]; // esi
+  char *v3; // edi
+  signed int v4; // edx
+  signed int v5; // ecx
+  char v6; // al
+  char v7; // al
+  char *v8; // [esp-4h] [ebp-24h]
+  int v9; // [esp+14h] [ebp-Ch]
+  int v10; // [esp+1Ch] [ebp-4h]
+
+  v10 = 40 - ((a1 - 16) >> 1);
+  v9 = 40 - ((a2 - 16) >> 1);
+  v2 = dungeon;
+  v3 = gpBuffer + 135248;
+  for (v4 = 40; v4; --v4)
+  {
+    v8 = v3;
+    for (v5 = 40; v5; --v5)
+    {
+      v6 = *(_BYTE *)v2;
+      v2 = (BYTE (*)[40])((char *)v2 + 1);
+      if ( v4 == v10 && v5 == v9 )
+      {
+        v7 = -32;
+      }
+      else if ( v6 == 12 )
+      {
+        v7 = 0;
+      }
+      else
+      {
+        v7 = -125;
+      }
+      *v3 = v7;
+      v3[1] = v7;
+      v3[768] = v7;
+      v3[769] = v7;
+      v3 += 1536;
+    }
+    v3 = v8 + 2;
+  }
+}
+
 //----- (0048221F) --------------------------------------------------------
 void __fastcall CreateL2Dungeon(int rseed, int entry)
 {

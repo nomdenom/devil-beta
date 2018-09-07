@@ -2559,7 +2559,7 @@ void __fastcall CheckNewPath(int pnum)
               v51 = plr[pnum].destParam1;
               v47 = abs(plr[pnum].WorldX - object[v51]._ox);
               v43 = abs(plr[pnum].WorldY - object[v51]._oy);
-              if ( v43 > 1 && (char)dungeon[39][112 * object[v51]._ox + 39 + object[v51]._oy] == -1 - v51 )
+              if ( v43 > 1 && dObject[object[v51]._ox - 1][object[v51]._oy + 111] == -1 - v51 )
                 v43 = abs(plr[pnum].WorldY - object[v51]._oy + 1);
               if ( v47 <= 1 && v43 <= 1 )
               {
@@ -2643,7 +2643,7 @@ void __fastcall CheckNewPath(int pnum)
             v48 = plr[pnum].destParam1;
             v45 = abs(plr[pnum].WorldX - object[v48]._ox);
             v37 = abs(plr[pnum].WorldY - object[v48]._oy);
-            if ( v37 > 1 && (char)dungeon[39][112 * object[v48]._ox + 39 + object[v48]._oy] == -1 - v48 )
+            if ( v37 > 1 && dObject[object[v48]._ox - 1][object[v48]._oy + 111] == -1 - v48 )
               v37 = abs(plr[pnum].WorldY - object[v48]._oy + 1);
             if ( v45 <= 1 && v37 <= 1 )
             {
@@ -2662,7 +2662,7 @@ void __fastcall CheckNewPath(int pnum)
             v49 = plr[pnum].destParam1;
             v46 = abs(plr[pnum].WorldX - object[v49]._ox);
             v38 = abs(plr[pnum].WorldY - object[v49]._oy);
-            if ( v38 > 1 && (char)dungeon[39][112 * object[v49]._ox + 39 + object[v49]._oy] == -1 - v49 )
+            if ( v38 > 1 && dObject[object[v49]._ox - 1][object[v49]._oy + 111] == -1 - v49 )
               v38 = abs(plr[pnum].WorldY - object[v49]._oy + 1);
             if ( v46 <= 1 && v38 <= 1 )
             {

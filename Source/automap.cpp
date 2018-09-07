@@ -590,18 +590,18 @@ void __fastcall SetAutomapView(int x, int y)
         }
         else if ( ((unsigned __int16)GetAutomapType(tx - 1, ty, 0) >> 8) & 0x40 )
         {
-          automapview[0][8 * (5 * tx - 5) + ty] = 1;
+          automapview[tx - 1][ty] = 1;
         }
         break;
       case 3:
         if ( v2 & 0x4000 )
         {
           if ( GetAutomapType(tx + 1, ty, 0) == 16391 )
-            automapview[0][8 * (5 * tx + 5) + ty] = 1;
+            automapview[tx + 1][ty] = 1;
         }
         else if ( ((unsigned __int16)GetAutomapType(tx, ty - 1, 0) >> 8) & 0x40 )
         {
-          automapview[tx - 1][ty + 39] = 1;
+          automapview[tx][ty - 1] = 1;
         }
         break;
       case 4:
@@ -610,42 +610,42 @@ void __fastcall SetAutomapView(int x, int y)
           if ( GetAutomapType(tx, ty + 1, 0) == 16391 )
             automapview[tx][ty + 1] = 1;
           if ( GetAutomapType(tx + 1, ty, 0) == 16391 )
-            automapview[0][8 * (5 * tx + 5) + ty] = 1;
+            automapview[tx + 1][ty] = 1;
         }
         else
         {
           if ( ((unsigned __int16)GetAutomapType(tx - 1, ty, 0) >> 8) & 0x40 )
-            automapview[0][8 * (5 * tx - 5) + ty] = 1;
+            automapview[tx - 1][ty] = 1;
           if ( ((unsigned __int16)GetAutomapType(tx, ty - 1, 0) >> 8) & 0x40 )
-            automapview[tx - 1][ty + 39] = 1;
+            automapview[tx][ty - 1] = 1;
           if ( ((unsigned __int16)GetAutomapType(tx - 1, ty - 1, 0) >> 8) & 0x40 )
-            automapview[-1][8 * (5 * tx - 5) + 39 + ty] = 1;
+            automapview[tx][ty - 2] = 1;
         }
         break;
       case 5:
         if ( v2 & 0x4000 )
         {
           if ( ((unsigned __int16)GetAutomapType(tx, ty - 1, 0) >> 8) & 0x40 )
-            automapview[tx - 1][ty + 39] = 1;
+            automapview[tx][ty - 1] = 1;
           if ( GetAutomapType(tx, ty + 1, 0) == 16391 )
             automapview[tx][ty + 1] = 1;
         }
         else if ( ((unsigned __int16)GetAutomapType(tx - 1, ty, 0) >> 8) & 0x40 )
         {
-          automapview[0][8 * (5 * tx - 5) + ty] = 1;
+          automapview[tx - 1][ty] = 1;
         }
         break;
       case 6:
         if ( v2 & 0x4000 )
         {
           if ( ((unsigned __int16)GetAutomapType(tx - 1, ty, 0) >> 8) & 0x40 )
-            automapview[0][8 * (5 * tx - 5) + ty] = 1;
+            automapview[tx - 1][ty] = 1;
           if ( GetAutomapType(tx + 1, ty, 0) == 16391 )
-            automapview[0][8 * (5 * tx + 5) + ty] = 1;
+            automapview[tx + 1][ty] = 1;
         }
         else if ( ((unsigned __int16)GetAutomapType(tx, ty - 1, 0) >> 8) & 0x40 )
         {
-          automapview[tx - 1][ty + 39] = 1;
+          automapview[tx][ty - 1] = 1;
         }
         break;
       default:
