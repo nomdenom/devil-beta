@@ -15,7 +15,7 @@ void __fastcall gmenu_print_text(int x, int y, char *pszStr)
 {
   char v5; // [esp+14h] [ebp-4h]
 
-  assert(pszStr, 90, "gmenu.cpp");
+  assert(pszStr, "gmenu.cpp", 90);
   while ( *pszStr )
   {
     v5 = lfontframe[*pszStr++];
@@ -48,7 +48,7 @@ void __cdecl gmenu_init_menu()
   sgpCurrItem = 0;
   gmenu_642C2C = 0;
   gmenu_642C08 = 0;
-  assert(!sgpLogo, 135, "gmenu.cpp");
+  assert(!sgpLogo, "gmenu.cpp", 135);
   sgpLogo = LoadFileInMem("Data\\Diabsmal.CEL", 0, 136, "gmenu.cpp");
   BigTGold_cel = (char *)LoadFileInMem("Data\\BigTGold.CEL", 0, 137, "gmenu.cpp");
   PentSpin_cel = LoadFileInMem("Data\\PentSpin.CEL", 0, 138, "gmenu.cpp");
@@ -184,7 +184,7 @@ void __fastcall gmenu_clear_buffer(int x, int y, int width, int height)
   int v4; // ST20_4
   char *i; // [esp+18h] [ebp-4h]
 
-  assert(gpBuffer, 204, "gmenu.cpp");
+  assert(gpBuffer, "gmenu.cpp", 204);
   for ( i = &gpBuffer[x + screen_y_times_768[y]]; ; i -= 768 )
   {
     v4 = height--;
@@ -213,12 +213,12 @@ int __fastcall gmenu_presskeys(int a1)
 {
   if ( !gmenu_642C20_start )
     return 0;
-  assert(sgpCurrItem, 317, "gmenu.cpp");
+  assert(sgpCurrItem, "gmenu.cpp", 317);
   switch ( a1 )
   {
     case 13:
       PlaySFX(41);
-      assert(sgpCurrItem, 342, "gmenu.cpp");
+      assert(sgpCurrItem, "gmenu.cpp", 342);
       ((void (__thiscall *)(signed int))sgpCurrItem->fnMenu)(1);
       return 1;
     case 27:
@@ -280,7 +280,7 @@ int __fastcall gmenu_on_mouse_move()
 
   if ( !gmenu_642C08 )
     return 0;
-  assert(sgpCurrItem, 379, "gmenu.cpp");
+  assert(sgpCurrItem, "gmenu.cpp", 379);
   gmenu_valid_mouse_pos(&plOffset);
   v2 = sgpCurrItem->dwFlags & 0xFFF000;
   v2 >>= 12;
@@ -297,7 +297,7 @@ bool __fastcall gmenu_valid_mouse_pos(int *plOffset)
 {
   bool result; // al
 
-  assert(plOffset, 359, "gmenu.cpp");
+  assert(plOffset, "gmenu.cpp", 359);
   *plOffset = 282;
   if ( *plOffset <= MouseX )
   {
@@ -414,7 +414,7 @@ void __fastcall gmenu_slider_1(TMenuItem *pItem, int min, int max, int gamma)
 {
   signed int v4; // [esp+14h] [ebp-4h]
 
-  assert(pItem, 445, "gmenu.cpp");
+  assert(pItem, "gmenu.cpp", 445);
   v4 = (signed int)(pItem->dwFlags & 0xFFF000) >> 12;
   if ( v4 < 2 )
     v4 = 2;
@@ -427,7 +427,7 @@ int __fastcall gmenu_slider_get(TMenuItem *pItem, int min, int max)
 {
   signed int v4; // [esp+18h] [ebp-4h]
 
-  assert(pItem, 468, "gmenu.cpp");
+  assert(pItem, "gmenu.cpp", 468);
   v4 = (signed int)(pItem->dwFlags & 0xFFF000) >> 12;
   if ( v4 < 2 )
     v4 = 2;
@@ -437,8 +437,8 @@ int __fastcall gmenu_slider_get(TMenuItem *pItem, int min, int max)
 //----- (0047AA5C) --------------------------------------------------------
 void __fastcall gmenu_slider_3(TMenuItem *pItem, int dwTicks)
 {
-  assert(pItem, 492, "gmenu.cpp");
-  assert(!((unsigned int)dwTicks < 2 || (unsigned int)dwTicks > 0xFFF), 493, "gmenu.cpp");
+  assert(pItem, "gmenu.cpp", 492);
+  assert(!((unsigned int)dwTicks < 2 || (unsigned int)dwTicks > 0xFFF), "gmenu.cpp", 493);
   pItem->dwFlags &= 0xFF000FFF;
   pItem->dwFlags |= (dwTicks << 12) & 0xFFF000;
 }

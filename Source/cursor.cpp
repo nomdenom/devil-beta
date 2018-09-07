@@ -1,7 +1,7 @@
 //----- (00485990) --------------------------------------------------------
 void __cdecl InitCursor()
 {
-  assert(!pCursCels, 121, "CURSOR.CPP");
+  assert(!pCursCels, "CURSOR.CPP", 121);
   pCursCels = (char *)LoadFileInMem("Data\\Inv\\Objcurs.CEL", 0, 122, "CURSOR.CPP");
   cursor_dword_647724_buf1 = 0;
 }

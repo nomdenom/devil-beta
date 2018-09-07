@@ -12,7 +12,7 @@ int __fastcall nthread_send_and_recv_turn(int cur_turn, int turn_delta)
   v7 = cur_turn;
   if ( SNetGetTurnsInTransit(&v9) )
   {
-    assert(gdwTurnsInTransit, 138, "nthread.cpp");
+    assert(gdwTurnsInTransit, "nthread.cpp", 138);
     while ( 1 )
     {
       v4 = v9++;
@@ -53,20 +53,20 @@ int __fastcall nthread_recv_turns(int *pfSendAsync, int *a2)
   char *v3; // eax
   int error_code; // [esp+14h] [ebp-4h]
 
-  assert(pfSendAsync, 206, "nthread.cpp");
-  assert(a2, 207, "nthread.cpp");
+  assert(pfSendAsync, "nthread.cpp", 206);
+  assert(a2, "nthread.cpp", 207);
   *pfSendAsync = 0;
   *a2 = 0;
   if ( byte_5FE0D0 )
     nthread_41B69A();
-  assert(sgbPacketCountDown, 216, "nthread.cpp");
+  assert(sgbPacketCountDown, "nthread.cpp", 216);
   if ( --sgbPacketCountDown )
   {
     dword_4C104C += 50;
     return 1;
   }
   sgbPacketCountDown = byte_5FE0E8;
-  assert(sgbSyncCountDown, 228, "nthread.cpp");
+  assert(sgbSyncCountDown, "nthread.cpp", 228);
   if ( --sgbSyncCountDown )
     goto LABEL_23;
   if ( SNetReceiveTurns(0, 4, dword_5FE120, dword_5FE0F0, dword_5FE0D8) )
@@ -111,7 +111,7 @@ void __cdecl nthread_41B69A()
 
   if ( window_activated )
   {
-    assert((unsigned int)myplr < 4, 176, "nthread.cpp");
+    assert((unsigned int)myplr < 4, "nthread.cpp", 176);
     v1[0] = "<%d> %d %d %d";
     v1[1] = "%d <%d> %d %d";
     v1[2] = "%d %d <%d> %d";
@@ -163,9 +163,9 @@ void __fastcall nthread_start(bool set_turn_upper_bit)
   if ( v6 >= 0x200 )
     v2 = 512;
   gdwLargestMsgSize = v2;
-  assert(v2 >= 0x80, 349, "nthread.cpp");
+  assert(v2 >= 0x80, "nthread.cpp", 349);
   gdwNormalMsgSize = v8 * (unsigned int)byte_5FE0E8 / 0x14;
-  assert(v7, 357, "nthread.cpp");
+  assert(v7, "nthread.cpp", 357);
   if ( v7 > 4 )
     v7 = 4;
   gdwNormalMsgSize /= v7;
@@ -184,7 +184,7 @@ void __fastcall nthread_start(bool set_turn_upper_bit)
     InitializeCriticalSection(&stru_5FE100);
     EnterCriticalSection(&stru_5FE100);
     byte_5FE118 = 1;
-    assert(sghThread == (HANDLE)-1, 386, "nthread.cpp");
+    assert(sghThread == (HANDLE)-1, "nthread.cpp", 386);
     sghThread = (HANDLE)_beginthreadex(0, 0x2000u, (int)nthread_handler, 0, 0, (LPDWORD)&ThreadId);
     if ( sghThread == (HANDLE)-1 )
     {
@@ -258,7 +258,7 @@ void __fastcall nthread_ignore_mutex(bool bStart)
 {
   if ( sghThread != (HANDLE)-1 )
   {
-    assert(sgbThreadIsRunning != bStart, 440, "nthread.cpp");
+    assert(sgbThreadIsRunning != bStart, "nthread.cpp", 440);
     if ( bStart )
       LeaveCriticalSection(&stru_5FE100);
     else

@@ -31,7 +31,7 @@ void __cdecl InitObjectGFX()
     {
       ObjFileList[numobjfiles] = i;
       sprintf(&pszName, "Objects\\%s.CEL", ObjMasterLoadList[i]);
-      assert(!pObjCels[numobjfiles], 123, "OBJECTS.CPP");
+      assert(!pObjCels[numobjfiles], "OBJECTS.CPP", 123);
       pObjCels[numobjfiles++] = LoadFileInMem(&pszName, 0, 124, "OBJECTS.CPP");
     }
   }
@@ -729,7 +729,7 @@ void __fastcall SetMapObjects(char *pMap, int startx, int starty)
     {
       ObjFileList[numobjfiles] = m;
       sprintf(pszName, "Objects\\%s.CEL", ObjMasterLoadList[m]);
-      assert(!pObjCels[numobjfiles], 715, "OBJECTS.CPP");
+      assert(!pObjCels[numobjfiles], "OBJECTS.CPP", 715);
       pObjCels[numobjfiles++] = LoadFileInMem(pszName, 0, 716, "OBJECTS.CPP");
     }
   }

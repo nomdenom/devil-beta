@@ -712,7 +712,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         item[v17]._iAnimWidth,
         0,
         dir);
-    assert(item[v17]._iAnimData, 663, "TOWN.CPP");
+    assert(item[v17]._iAnimData, "TOWN.CPP", 663);
     CelDrawHdrOnly(screen_x, sy, (char *)item[v17]._iAnimData, item[v17]._iAnimFrame, item[v17]._iAnimWidth, 0, dir);
   }
   if ( dFlags[x][y] & 0x10 )
@@ -729,7 +729,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         towner[-(dMonster[x][y - 1] + 1)]._tAnimWidth,
         0,
         dir);
-    assert(towner[v20]._tAnimData, 671, "TOWN.CPP");
+    assert(towner[v20]._tAnimData, "TOWN.CPP", 671);
     CelDrawHdrOnly(
       screen_xa,
       sy,
@@ -753,7 +753,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         towner[v21]._tAnimWidth,
         0,
         dir);
-    assert(towner[v21]._tAnimData, 679, "TOWN.CPP");
+    assert(towner[v21]._tAnimData, "TOWN.CPP", 679);
     CelDrawHdrOnly(
       screen_xb,
       sy,
@@ -778,7 +778,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         plr[v18]._pAnimWidth,
         0,
         dir);
-    assert(plr[v18]._pAnimData, 687, "TOWN.CPP");
+    assert(plr[v18]._pAnimData, "TOWN.CPP", 687);
     CelDrawHdrOnly(screen_xc, screen_y, (char *)plr[v18]._pAnimData, plr[v18]._pAnimFrame, plr[v18]._pAnimWidth, 0, dir);
     if ( some_flag && plr[v18]._peflag )
       town_draw_e_flag((char *)buffer - 64, x - 1, y + 1, a4, dir, sx - 64, sy);
@@ -798,7 +798,7 @@ void __fastcall town_draw_town_all(void *buffer, int x, int y, int a4, int dir, 
         plr[v19]._pAnimWidth,
         0,
         dir);
-    assert(plr[v19]._pAnimData, 700, "TOWN.CPP");
+    assert(plr[v19]._pAnimData, "TOWN.CPP", 700);
     CelDrawHdrOnly(
       screen_xd,
       screen_ya,

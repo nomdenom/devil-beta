@@ -4,10 +4,10 @@ int __cdecl msg_wait_resync()
   int v0; // ST20_4
   int result; // eax
 
-  assert(ghMainWnd, 294, "msg.cpp");
-  assert(!sgpMegaPkt, 295, "msg.cpp");
-  assert(!sgpCurrPkt, 296, "msg.cpp");
-  assert(dword_5FE158 >= 0, 297, "msg.cpp");
+  assert(ghMainWnd, "msg.cpp", 294);
+  assert(!sgpMegaPkt, "msg.cpp", 295);
+  assert(!sgpCurrPkt, "msg.cpp", 296);
+  assert(dword_5FE158 >= 0, "msg.cpp", 297);
   msg_get_next_packet();
   gbBufferMsgs = 1;
   sgbDeltaChunks = -1;
@@ -109,12 +109,12 @@ void __cdecl msg_process_net_packets()
 {
   if ( msg_5FF8B4_isprocessing )
   {
-    assert(!sgpMegaPkt, 345, "msg.cpp");
+    assert(!sgpMegaPkt, "msg.cpp", 345);
   }
   else
   {
-    assert(!currlevel, 349, "msg.cpp");
-    assert(!plr[myplr].plrlevel, 350, "msg.cpp");
+    assert(!currlevel, "msg.cpp", 349);
+    assert(!plr[myplr].plrlevel, "msg.cpp", 350);
     gbBufferMsgs = 2;
     msg_pre_packet();
     gbBufferMsgs = 0;
@@ -149,7 +149,7 @@ void __cdecl msg_pre_packet()
       }
       else
       {
-        assert(pnum < 4, 200, "msg.cpp");
+        assert(pnum < 4, "msg.cpp", 200);
         v1 = ParseCmd(pnum, v3);
         v3 += v1;
         v2 -= v1;
@@ -432,7 +432,7 @@ void __cdecl DeltaSaveLevel()
     if ( i != myplr )
       plr[i]._pGFXLoad = 0;
   }
-  assert(currlevel < 0x11u, 887, "msg.cpp");
+  assert(currlevel < 0x11u, "msg.cpp", 887);
   plr[myplr]._pLvlVisited[currlevel] = 1;
   delta_leave_sync(currlevel);
 }
@@ -493,7 +493,7 @@ void __cdecl DeltaLoadLevel()
                sgLevels[currlevel].item[ia].wIndx,
                sgLevels[currlevel].item[ia].wCI,
                sgLevels[currlevel].item[ia].dwSeed);
-        assert(ii != -1, 945, "msg.cpp");
+        assert(ii != -1, "msg.cpp", 945);
         if ( dItem[item[ii]._ix][item[ii]._iy] == ii + 1 )
           dItem[item[ii]._ix][item[ii]._iy] = 0;
         DeleteItem(ii, ia);
@@ -790,9 +790,9 @@ void __fastcall NetSendCmdString(int a1, const char *pszStr)
   char v5[81]; // [esp+15h] [ebp-57h]
   size_t v6; // [esp+68h] [ebp-4h]
 
-  assert(pszStr, 1278, "msg.cpp");
+  assert(pszStr, "msg.cpp", 1278);
   v6 = strlen(pszStr);
-  assert(v6 < 0x50, 1282, "msg.cpp");
+  assert(v6 < 0x50, "msg.cpp", 1282);
   a2 = 81;
   strcpy(v5, pszStr);
   multi_send_msg_packet(a1, (unsigned __int8 *)&a2, v6 + 2);
@@ -818,7 +818,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
   switch ( *pCmd )
   {
     case CMD_WALKXY:
-      assert(gbBufferMsgs != 2, 1356, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1356);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 1u);
@@ -994,7 +994,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 18;
     case CMD_ATTACKXY:
-      assert(gbBufferMsgs != 2, 1576, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1576);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 0);
@@ -1004,7 +1004,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_RATTACKXY:
-      assert(gbBufferMsgs != 2, 1604, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1604);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1014,7 +1014,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_SPELLXY:
-      assert(gbBufferMsgs != 2, 1618, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1618);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1027,7 +1027,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_TSPELLXY:
-      assert(gbBufferMsgs != 2, 1635, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1635);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1040,7 +1040,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_OPOBJXY:
-      assert(gbBufferMsgs != 2, 1652, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1652);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         if ( object[*(unsigned __int16 *)(pCmd + 3)]._oSolidFlag || object[*(unsigned __int16 *)(pCmd + 3)]._oDoorFlag )
@@ -1052,7 +1052,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_DISARMXY:
-      assert(gbBufferMsgs != 2, 1668, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1668);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         if ( object[*(unsigned __int16 *)(pCmd + 3)]._oSolidFlag || object[*(unsigned __int16 *)(pCmd + 3)]._oDoorFlag )
@@ -1064,7 +1064,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_ATTACKID:
-      assert(gbBufferMsgs != 2, 1696, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1696);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         v5 = abs(plr[pnum].WorldX - monster[*(unsigned __int16 *)(pCmd + 1)]._mfutx);
@@ -1080,7 +1080,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_ATTACKPID:
-      assert(gbBufferMsgs != 2, 1712, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1712);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, plr[*(unsigned __int16 *)(pCmd + 1)]._px, plr[*(unsigned __int16 *)(pCmd + 1)]._py, 0);
@@ -1089,7 +1089,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_RATTACKID:
-      assert(gbBufferMsgs != 2, 1725, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1725);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1098,7 +1098,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_RATTACKPID:
-      assert(gbBufferMsgs != 2, 1738, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1738);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1107,7 +1107,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_SPELLID:
-      assert(gbBufferMsgs != 2, 1751, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1751);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1119,7 +1119,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_SPELLPID:
-      assert(gbBufferMsgs != 2, 1767, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1767);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1131,7 +1131,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_TSPELLID:
-      assert(gbBufferMsgs != 2, 1783, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1783);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1143,7 +1143,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_TSPELLPID:
-      assert(gbBufferMsgs != 2, 1799, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1799);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1166,7 +1166,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_OPOBJT:
-      assert(gbBufferMsgs != 2, 1684, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1684);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         plr[pnum].destAction = 18;
@@ -1182,7 +1182,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 3;
     case CMD_TALKXY:
-      assert(gbBufferMsgs != 2, 1852, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1852);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 0);
@@ -1279,10 +1279,10 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 1;
     case CMD_REQUESTGITEM:
-      assert(gbBufferMsgs != 2, 1434, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1434);
       if ( gbBufferMsgs != 1 && msg_49AC05(plr[pnum].plrlevel) )
       {
-        assert(plr[myplr].plrlevel == currlevel, 1441, "msg.cpp");
+        assert(plr[myplr].plrlevel == currlevel, "msg.cpp", 1441);
         v16 = FindGetItem(*((unsigned __int16 *)pCmd + 3), *((_WORD *)pCmd + 4), *(_DWORD *)(pCmd + 10));
         if ( v16 != -1 && !item[v16]._isin )
         {
@@ -1300,10 +1300,10 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 25;
     case CMD_REQUESTAGITEM:
-      assert(gbBufferMsgs != 2, 1493, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1493);
       if ( gbBufferMsgs != 1 && msg_49AC05(plr[pnum].plrlevel) )
       {
-        assert(plr[myplr].plrlevel == currlevel, 1500, "msg.cpp");
+        assert(plr[myplr].plrlevel == currlevel, "msg.cpp", 1500);
         v15 = FindGetItem(*((unsigned __int16 *)pCmd + 3), *((_WORD *)pCmd + 4), *(_DWORD *)(pCmd + 10));
         if ( v15 != -1 && !item[v15]._isin )
         {
@@ -1321,7 +1321,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 25;
     case CMD_GOTOGETITEM:
-      assert(gbBufferMsgs != 2, 1421, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1421);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 0);
@@ -1330,7 +1330,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 5;
     case CMD_GOTOAGETITEM:
-      assert(gbBufferMsgs != 2, 1480, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1480);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         MakePlrPath(pnum, (unsigned __int8)pCmd[1], (unsigned __int8)pCmd[2], 0);
@@ -1423,7 +1423,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       }
       return 2;
     case CMD_PLRDAMAGE:
-      assert(gbBufferMsgs != 2, 1970, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1970);
       if ( (unsigned __int8)pCmd[1] == myplr && gbBufferMsgs != 1 )
       {
         drawmanaflag = 1;
@@ -1489,7 +1489,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
         multi_player_joins(pnum, (TCmdPlrInfoHdr *)pCmd, 0);
       return *(unsigned __int16 *)(pCmd + 3) + 5;
     case CMD_SATTACKXY:
-      assert(gbBufferMsgs != 2, 1590, "msg.cpp");
+      assert(gbBufferMsgs != 2, "msg.cpp", 1590);
       if ( gbBufferMsgs != 1 && plr[pnum].plrlevel == currlevel )
       {
         ClrPlrPath(pnum);
@@ -1604,9 +1604,9 @@ void __fastcall msg_send_packet(int pnum, void *packet, int dwSize)
   char packeta; // [esp+14h] [ebp-4h]
   char v5; // [esp+15h] [ebp-3h]
 
-  assert((unsigned int)pnum < 4, 214, "msg.cpp");
-  assert(packet, 215, "msg.cpp");
-  assert(dwSize <= (unsigned int)gdwLargestMsgSize, 216, "msg.cpp");
+  assert((unsigned int)pnum < 4, "msg.cpp", 214);
+  assert(packet, "msg.cpp", 215);
+  assert(dwSize <= (unsigned int)gdwLargestMsgSize, "msg.cpp", 216);
   if ( pnum != sgnCurrMegaPlayer )
   {
     sgnCurrMegaPlayer = pnum;
@@ -1614,10 +1614,10 @@ void __fastcall msg_send_packet(int pnum, void *packet, int dwSize)
     v5 = pnum;
     msg_send_packet(pnum, &packeta, 2);
   }
-  assert(sgpCurrPkt, 228, "msg.cpp");
+  assert(sgpCurrPkt, "msg.cpp", 228);
   if ( sgpCurrPkt->dwSpaceLeft < (unsigned int)dwSize )
     msg_get_next_packet();
-  assert(sgpCurrPkt->dwSpaceLeft >= (unsigned int)dwSize, 231, "msg.cpp");
+  assert(sgpCurrPkt->dwSpaceLeft >= (unsigned int)dwSize, "msg.cpp", 231);
   memcpy((char *)&sgpCurrPkt[1] - sgpCurrPkt->dwSpaceLeft, packet, dwSize);
   sgpCurrPkt->dwSpaceLeft -= dwSize;
 }
@@ -1625,12 +1625,12 @@ void __fastcall msg_send_packet(int pnum, void *packet, int dwSize)
 //----- (0049A299) --------------------------------------------------------
 int __fastcall msg_49A299_on_dlevel(int pnum, char *pCmd)
 {
-  assert(myplr != pnum, 569, "msg.cpp");
+  assert(myplr != pnum, "msg.cpp", 569);
   if ( dword_4DCFB0 == -1 )
   {
     if ( *pCmd != 61 || *(_WORD *)(pCmd + 1) )
       return *(unsigned __int16 *)(pCmd + 3) + 5;
-    assert(!sgbDeltaChunks, 581, "msg.cpp");
+    assert(!sgbDeltaChunks, "msg.cpp", 581);
     dword_4DCFB0 = pnum;
     dword_649D20 = 0;
     byte_6635F0 = *pCmd;
@@ -1652,7 +1652,7 @@ int __fastcall msg_49A299_on_dlevel(int pnum, char *pCmd)
       byte_6635F0 = *pCmd;
     }
   }
-  assert(*(unsigned __int16 *)(pCmd + 1) == dword_649D20, 612, "msg.cpp");
+  assert(*(unsigned __int16 *)(pCmd + 1) == dword_649D20, "msg.cpp", 612);
   memcpy(&sgRecvBuf[*(unsigned __int16 *)(pCmd + 1)], pCmd + 5, *(unsigned __int16 *)(pCmd + 3));
   dword_649D20 += *(unsigned __int16 *)(pCmd + 3);
   return *(unsigned __int16 *)(pCmd + 3) + 5;
@@ -1809,7 +1809,7 @@ BOOL __fastcall delta_get_item(TCmdGItem *pI, unsigned __int8 bLevel)
   }
   if ( (((unsigned __int16)pI->wCI >> 8) & 0x80u) == 0 )
     return 0;
-  assert((signed int)bLevel > 0, 764, "msg.cpp");
+  assert((signed int)bLevel > 0, "msg.cpp", 764);
   v4 = sgLevels[bLevel].item;
   v6 = 0;
   while ( v6 < 127 )

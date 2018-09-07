@@ -8,7 +8,7 @@ void __fastcall play_movie(char *pszMovie, bool user_can_close)
 
   if ( window_activated )
   {
-    assert(ghMainWnd, 69, "movie.cpp");
+    assert(ghMainWnd, "movie.cpp", 69);
     func = SetWindowProc(MovieWndProc);
     InvalidateRect(ghMainWnd, 0, 0);
     UpdateWindow(ghMainWnd);
@@ -38,7 +38,7 @@ void __fastcall play_movie(char *pszMovie, bool user_can_close)
       SVidPlayEnd(v5);
     ShowCursor(1);
     func = SetWindowProc(func);
-    assert(func == MovieWndProc, 100, "movie.cpp");
+    assert(func == MovieWndProc, "movie.cpp", 100);
   }
 }
 
@@ -126,7 +126,7 @@ BOOL movie_unused_482640_paint()
 {
   const PAINTSTRUCT Paint; // [esp+Ch] [ebp-40h]
 
-  assert(ghMainWnd, 108, "movie.cpp");
+  assert(ghMainWnd, "movie.cpp", 108);
   BeginPaint(ghMainWnd, (LPPAINTSTRUCT)&Paint);
   drawpanflag = 255;
   scrollrt_draw_game_screen(1);

@@ -8,7 +8,7 @@ void __cdecl InitItemGFX()
   for ( i = 0; i < 31; ++i )
   {
     sprintf(&pszName, "Items\\%s.CEL", ItemDropStrs[i]);
-    assert(!Item2Frm[i], 399, "ITEMS.CPP");
+    assert(!Item2Frm[i], "ITEMS.CPP", 399);
     v0 = LoadFileInMem(&pszName, 0, 400, "ITEMS.CPP");
     Item2Frm[i] = v0;
   }
@@ -349,7 +349,7 @@ void __fastcall CalcPlrItemVals(int p, BOOL Loadgfx)
     LoadPlrGFX(p, 1);
     SetPlrAnims(p);
     v29 = plr[p]._pdir;
-    assert(plr[p]._pNAnim[v29], 704, "ITEMS.CPP");
+    assert(plr[p]._pNAnim[v29], "ITEMS.CPP", 704);
     plr[p]._pAnimData = plr[p]._pNAnim[v29];
     plr[p]._pAnimLen = plr[p]._pNFrames;
     plr[p]._pAnimFrame = 1;

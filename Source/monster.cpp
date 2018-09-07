@@ -175,7 +175,7 @@ void __fastcall InitMonsterGFX(int monst)
     if ( (animletter[i] != 's' || monsterdata[v3].has_special) && monsterdata[v3].Frames[i] > 0 )
     {
       sprintf(&pszName, monsterdata[v3].GraphicType, animletter[i]);
-      assert(!Monsters[monst].Anims[i].CMem, 414, "MONSTER.CPP");
+      assert(!Monsters[monst].Anims[i].CMem, "MONSTER.CPP", 414);
       v1 = LoadFileInMem(&pszName, 0, 415, "MONSTER.CPP");
       Monsters[monst].Anims[i].CMem = v1;
       v7 = (DWORD *)Monsters[monst].Anims[i].CMem;
@@ -508,10 +508,10 @@ void __fastcall monster_402D39(int num)
   {
     for ( mtypea = 0; mtypea < nummtypes && Monsters[mtypea].mtype != UniqMonst[1].mtype; ++mtypea )
       ;
-    assert(mtypea < nummtypes, 799, "MONSTER.CPP");
+    assert(mtypea < nummtypes, "MONSTER.CPP", 799);
     for ( unpackfilesize = 0; unpackfilesize < nummtypes && !IsSkel(Monsters[unpackfilesize].mtype); ++unpackfilesize )
       ;
-    assert(unpackfilesize < nummtypes, 802, "MONSTER.CPP");
+    assert(unpackfilesize < nummtypes, "MONSTER.CPP", 802);
     PlaceUniqueMonst(1, mtypea, unpackfilesize, 30);
   }
 }
@@ -3916,7 +3916,7 @@ BOOL __fastcall DirOK(int i, int mdir)
           v10 = -v10;
         if ( v10 )
           --v10;
-        assert(v10 >= 0, 4029, "MONSTER.CPP");
+        assert(v10 >= 0, "MONSTER.CPP", 4029);
         if ( monster[v10].leaderflag == 1
           && monster[v10].leader == i
           && monster[v10]._mfutx == j

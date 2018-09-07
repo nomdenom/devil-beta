@@ -10,8 +10,8 @@ void __fastcall CelDrawDatOnly(char *pDecodeTo, char *pRLEBytes, int dwRLESize, 
   char v10; // cf
   unsigned int v11; // ecx
 
-  assert(pDecodeTo, 45, "ENGINE.CPP");
-  assert(pRLEBytes, 46, "ENGINE.CPP");
+  assert(pDecodeTo, "ENGINE.CPP", 45);
+  assert(pRLEBytes, "ENGINE.CPP", 46);
   src = pRLEBytes;
   dst = pDecodeTo;
   src_end = &pRLEBytes[dwRLESize];
@@ -63,7 +63,7 @@ LABEL_16:
 //----- (0048E7BC) --------------------------------------------------------
 void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int frame, int frame_width)
 {
-  assert(pCelBuff, 107, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 107);
   CelDrawDatOnly(
     &gpBuffer[screen_x + screen_y_times_768[screen_y]],
     (char *)pCelBuff + *((_DWORD *)pCelBuff + frame),
@@ -74,8 +74,8 @@ void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int fr
 //----- (0048E843) --------------------------------------------------------
 void __fastcall CelDecDatOnly(char *pBuff, char *pCelBuff, int frame, int frame_width)
 {
-  assert(pCelBuff, 128, "ENGINE.CPP");
-  assert(pBuff, 129, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 128);
+  assert(pBuff, "ENGINE.CPP", 129);
   CelDrawDatOnly(
     pBuff,
     &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]],
@@ -91,7 +91,7 @@ void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int f
   int dwRLESize; // [esp+20h] [ebp-8h]
   int v11; // [esp+24h] [ebp-4h]
 
-  assert(pCelBuff, 150, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 150);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[always_0];
   if ( v7 )
@@ -120,8 +120,8 @@ void __fastcall CelDecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int fra
   int dwRLESize; // [esp+1Ch] [ebp-8h]
   int v10; // [esp+20h] [ebp-4h]
 
-  assert(pCelBuff, 177, "ENGINE.CPP");
-  assert(pBuff, 178, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 177);
+  assert(pBuff, "ENGINE.CPP", 178);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v6 = *(_WORD *)&pRLEBytes[always_0];
   if ( v6 )
@@ -148,8 +148,8 @@ void __fastcall CelDecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_c
   int v8; // eax
   int v9; // ST00_4
 
-  assert(pDecodeTo, 197, "ENGINE.CPP");
-  assert(pRLEBytes, 198, "ENGINE.CPP");
+  assert(pDecodeTo, "ENGINE.CPP", 197);
+  assert(pRLEBytes, "ENGINE.CPP", 198);
   src = pRLEBytes;
   dst = pDecodeTo;
   src_end = &pRLEBytes[frame_content_size];
@@ -254,8 +254,8 @@ void __fastcall CelDecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_
   int v27; // [esp+14h] [ebp-Ch]
   BYTE *v28; // [esp+18h] [ebp-8h]
 
-  assert(pDecodeTo, 320, "ENGINE.CPP");
-  assert(pRLEBytes, 321, "ENGINE.CPP");
+  assert(pDecodeTo, "ENGINE.CPP", 320);
+  assert(pRLEBytes, "ENGINE.CPP", 321);
   v28 = &pLightTbl[256 * light_table_index];
   src = pRLEBytes;
   dst = pDecodeTo;
@@ -383,7 +383,7 @@ void __fastcall CelDecodeLightOnly(int screen_x, int screen_y, char *pCelBuff, i
   char *pRLEBytes; // [esp+18h] [ebp-8h]
   int frame_content_size; // [esp+1Ch] [ebp-4h]
 
-  assert(pCelBuff, 444, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 444);
   frame_content_size = *(_DWORD *)&pCelBuff[4 * frame + 4] - *(_DWORD *)&pCelBuff[4 * frame];
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   pDecodeTo = &gpBuffer[screen_x + screen_y_times_768[screen_y]];
@@ -403,7 +403,7 @@ void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff
   int frame_content_size; // [esp+20h] [ebp-8h]
   int v13; // [esp+24h] [ebp-4h]
 
-  assert(pCelBuff, 497, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 497);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[always_0];
   if ( v7 )
@@ -434,8 +434,8 @@ void __fastcall CelDecodeHdrLightTrans(char *pBuff, char *pCelBuff, int frame, i
   int frame_content_size; // [esp+1Ch] [ebp-8h]
   int v11; // [esp+20h] [ebp-4h]
 
-  assert(pCelBuff, 560, "ENGINE.CPP");
-  assert(pBuff, 561, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 560);
+  assert(pBuff, "ENGINE.CPP", 561);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v6 = *(_WORD *)&pRLEBytes[always_0];
   if ( v6 )
@@ -480,7 +480,7 @@ void __fastcall CelDrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, i
   int v19; // [esp+28h] [ebp-Ch]
   int v20; // [esp+2Ch] [ebp-8h]
 
-  assert(pCelBuff, 595, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 595);
   v15 = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v8 = *(_WORD *)&v15[always_0];
   if ( v8 )
@@ -552,8 +552,8 @@ void __fastcall Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_conte
   char v10; // cf
   unsigned int v11; // ecx
 
-  assert(pDecodeTo, 669, "ENGINE.CPP");
-  assert(pRLEBytes, 670, "ENGINE.CPP");
+  assert(pDecodeTo, "ENGINE.CPP", 669);
+  assert(pRLEBytes, "ENGINE.CPP", 670);
   src = pRLEBytes;
   dst = pDecodeTo;
   src_end = &pRLEBytes[frame_content_size];
@@ -612,7 +612,7 @@ void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int 
   int v11; // [esp+24h] [ebp-4h]
 
   v8 = screen_y;
-  assert(pCelBuff, 735, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 735);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[a6];
   if ( v7 )
@@ -643,8 +643,8 @@ void __fastcall Cel2DecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int fr
   int v10; // [esp+20h] [ebp-4h]
 
   v7 = pCelBuff;
-  assert(pCelBuff, 762, "ENGINE.CPP");
-  assert(pBuff, 763, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 762);
+  assert(pBuff, "ENGINE.CPP", 763);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v6 = *(_WORD *)&pRLEBytes[a5];
   if ( v6 )
@@ -670,8 +670,8 @@ void __fastcall Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_
   int v8; // eax
   int v9; // ST00_4
 
-  assert(pDecodeTo, 783, "ENGINE.CPP");
-  assert(pRLEBytes, 784, "ENGINE.CPP");
+  assert(pDecodeTo, "ENGINE.CPP", 783);
+  assert(pRLEBytes, "ENGINE.CPP", 784);
   v4 = pRLEBytes;
   v5 = pDecodeTo;
   v6 = &pRLEBytes[frame_content_size];
@@ -785,8 +785,8 @@ void __fastcall Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame
   int v27; // [esp+14h] [ebp-Ch]
   BYTE *v28; // [esp+18h] [ebp-8h]
 
-  assert(pDecodeTo, 912, "ENGINE.CPP");
-  assert(pRLEBytes, 913, "ENGINE.CPP");
+  assert(pDecodeTo, "ENGINE.CPP", 912);
+  assert(pRLEBytes, "ENGINE.CPP", 913);
   v28 = &pLightTbl[256 * light_table_index];
   v4 = pRLEBytes;
   v5 = (unsigned int)pDecodeTo;
@@ -925,7 +925,7 @@ void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, i
   int frame_content_size; // [esp+20h] [ebp-8h]
   int v13; // [esp+24h] [ebp-4h]
 
-  assert(pCelBuff, 1042, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 1042);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[a6];
   if ( v7 )
@@ -955,7 +955,7 @@ void __fastcall Cel2DecodeLightTrans(char *dst_buf, char *pCelBuff, int frame, i
   int frame_content_size; // [esp+1Ch] [ebp-8h]
   int v11; // [esp+20h] [ebp-4h]
 
-  assert(pCelBuff, 1108, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 1108);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v6 = *(_WORD *)&pRLEBytes[a5];
   if ( v6 )
@@ -1001,7 +1001,7 @@ void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, 
   int v21; // [esp+28h] [ebp-Ch]
   int v22; // [esp+2Ch] [ebp-8h]
 
-  assert(pCelBuff, 1145, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 1145);
   v17 = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v8 = *(_WORD *)&v17[always_0];
   if ( v8 )
@@ -1086,8 +1086,8 @@ void __fastcall CelDecodeRect(char *pBuff, int always_0, int dst_height, int dst
   unsigned int v15; // ecx
   int dst_widtha; // [esp+2Ch] [ebp+Ch]
 
-  assert(pCelBuff, 1228, "ENGINE.CPP");
-  assert(pBuff, 1229, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 1228);
+  assert(pBuff, "ENGINE.CPP", 1229);
   v7 = &pCelBuff[4 * frame];
   v8 = &pCelBuff[*(_DWORD *)v7];
   v9 = &pBuff[always_0 + dst_height * dst_width];
@@ -1153,7 +1153,7 @@ void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCel
   int v18; // [esp+20h] [ebp-Ch]
   int v19; // [esp+24h] [ebp-8h]
 
-  assert(pCelBuff, 1305, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 1305);
   v8 = &pCelBuff[4 * frame];
   v17 = &pCelBuff[*(_DWORD *)v8];
   v16 = *(unsigned __int16 *)&v17[a7];
@@ -1226,7 +1226,7 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
   int v20; // [esp+20h] [ebp-Ch]
   int v21; // [esp+24h] [ebp-8h]
 
-  assert(pCelBuff, 1395, "ENGINE.CPP");
+  assert(pCelBuff, "ENGINE.CPP", 1395);
   v8 = &pCelBuff[4 * frame];
   v19 = &pCelBuff[*(_DWORD *)v8];
   v18 = *(unsigned __int16 *)&v19[a7];
@@ -1321,8 +1321,8 @@ void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
   int v9; // ecx
   int i; // [esp+14h] [ebp-4h]
 
-  assert(p, 1495, "ENGINE.CPP");
-  assert(ttbl, 1496, "ENGINE.CPP");
+  assert(p, "ENGINE.CPP", 1495);
+  assert(ttbl, "ENGINE.CPP", 1496);
   for ( i = 1; i <= last_frame; ++i )
   {
     v3 = &p[4 * i];
@@ -1765,7 +1765,7 @@ unsigned __int8 *__fastcall LoadFileInMem(char *pszName, int *pdwFileLen, int li
 
   v5 = pdwFileLen;
   v6 = pszName;
-  assert(pszName, 1873, "ENGINE.CPP");
+  assert(pszName, "ENGINE.CPP", 1873);
   if ( !SFileOpenFile(pszName, &v7) )
     TermMsg("Unable to open SFILE:\n%s", v6);
   dwBytes = SFileGetFileSize(v7, 0);
@@ -1773,9 +1773,9 @@ unsigned __int8 *__fastcall LoadFileInMem(char *pszName, int *pdwFileLen, int li
     *v5 = dwBytes;
   v9 = (unsigned __int8 *)DiabloAllocPtr(dwBytes, line, file);
   v10 = SFileReadFile(v7, (int)v9, dwBytes, 0, 0);
-  assert(v10, 1887, "ENGINE.CPP");
+  assert(v10, "ENGINE.CPP", 1887);
   v10 = SFileCloseFile(v7);
-  assert(v10, 1890, "ENGINE.CPP");
+  assert(v10, "ENGINE.CPP", 1890);
   return v9;
 }
 
@@ -1786,14 +1786,14 @@ void __fastcall LoadFileWithMem(char *pszName, void *buf)
   int v5; // [esp+18h] [ebp-8h]
   int v6; // [esp+1Ch] [ebp-4h]
 
-  assert(buf, 1900, "ENGINE.CPP");
-  assert(pszName, 1901, "ENGINE.CPP");
+  assert(buf, "ENGINE.CPP", 1900);
+  assert(pszName, "ENGINE.CPP", 1901);
   if ( !SFileOpenFile(pszName, &v4) )
     TermMsg("Unable to open SFILE:\n%s", pszName);
   v5 = SFileGetFileSize(v4, 0);
   v6 = SFileReadFile(v4, (int)buf, v5, 0, 0);
-  assert(v6, 1907, "ENGINE.CPP");
+  assert(v6, "ENGINE.CPP", 1907);
   v6 = SFileCloseFile(v4);
-  assert(v6, 1910, "ENGINE.CPP");
+  assert(v6, "ENGINE.CPP", 1910);
 }
 

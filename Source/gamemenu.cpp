@@ -42,7 +42,7 @@ void __cdecl gamemenu_handle_previous()
 //----- (0046684F) --------------------------------------------------------
 void __fastcall j_gamemenu_previous(int a1)
 {
-  assert(a1, 156, "GameMenu.cpp");
+  assert(a1, "GameMenu.cpp", 156);
   gamemenu_previous();
 }
 
@@ -51,7 +51,7 @@ void __fastcall gamemenu_new_game(int a1)
 {
   signed int i; // [esp+10h] [ebp-4h]
 
-  assert(a1, 164, "GameMenu.cpp");
+  assert(a1, "GameMenu.cpp", 164);
   for ( i = 0; i < 4; ++i )
   {
     plr[i]._pmode = 11;
@@ -67,7 +67,7 @@ void __fastcall gamemenu_new_game(int a1)
 //----- (00466946) --------------------------------------------------------
 void __fastcall gamemenu_quit_game(int a1)
 {
-  assert(a1, 183, "GameMenu.cpp");
+  assert(a1, "GameMenu.cpp", 183);
   gamemenu_new_game(a1);
   gbRunGameResult = 0;
 }
@@ -75,7 +75,7 @@ void __fastcall gamemenu_quit_game(int a1)
 //----- (0046698C) --------------------------------------------------------
 void __fastcall gamemenu_load_game(int a1)
 {
-  assert(a1, 192, "GameMenu.cpp");
+  assert(a1, "GameMenu.cpp", 192);
   if ( pcurs == 1 )
   {
     if ( (signed int)gbMaxPlayers <= 1 )
@@ -110,7 +110,7 @@ void __fastcall gamemenu_load_game(int a1)
 //----- (00466A4F) --------------------------------------------------------
 void __fastcall gamemenu_save_game(int a1)
 {
-  assert(a1, 218, "GameMenu.cpp");
+  assert(a1, "GameMenu.cpp", 218);
   if ( pcurs == 1 )
   {
     if ( (signed int)gbMaxPlayers <= 1 )
@@ -144,14 +144,14 @@ void __fastcall gamemenu_save_game(int a1)
 //----- (00466B2C) --------------------------------------------------------
 void __fastcall gamemenu_restart_town(int a1)
 {
-  assert(a1, 243, "GameMenu.cpp");
+  assert(a1, "GameMenu.cpp", 243);
   NetSendCmd(1u, 0x56u);
 }
 
 //----- (00466B6F) --------------------------------------------------------
 void __fastcall gamemenu_options(int a1)
 {
-  assert(a1, 312, "GameMenu.cpp");
+  assert(a1, "GameMenu.cpp", 312);
   gamemenu_get_music();
   gamemenu_get_sound();
   gamemenu_get_gamma();

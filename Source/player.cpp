@@ -212,7 +212,7 @@ void __fastcall InitPlrGFXMem(int pnum)
   int v1; // [esp+Ch] [ebp-4h]
 
   v1 = pnum;
-  assert(!plr[pnum]._pNData, 407, "PLAYER.CPP");
+  assert(!plr[pnum]._pNData, "PLAYER.CPP", 407);
   plr[pnum]._pNData = DiabloAllocPtr(284672, 408, "PLAYER.CPP");
   plr[v1]._pWData = DiabloAllocPtr(118784, 409, "PLAYER.CPP");
   plr[v1]._pAData = DiabloAllocPtr(356352, 410, "PLAYER.CPP");
@@ -1706,15 +1706,15 @@ void __fastcall StartNewLvl(int pnum, int fom, int lvl)
     case 1027:
     case 1031:
     case 1032:
-      assert(plr[pnum].plrlevel != lvl, 1840, "PLAYER.CPP");
+      assert(plr[pnum].plrlevel != lvl, "PLAYER.CPP", 1840);
       plr[pnum].plrlevel = lvl;
       break;
     case 1028:
-      assert(gbMaxPlayers == 1, 1851, "PLAYER.CPP");
+      assert(gbMaxPlayers == 1, "PLAYER.CPP", 1851);
       return;
     case 1029:
       setlvlnum = lvl;
-      assert(gbMaxPlayers == 1, 1856, "PLAYER.CPP");
+      assert(gbMaxPlayers == 1, "PLAYER.CPP", 1856);
       return;
     case 1033:
       break;
@@ -1736,7 +1736,7 @@ void __fastcall StartNewLvl(int pnum, int fom, int lvl)
 void __fastcall RestartTownLvl(int pnum)
 {
   InitLevelChange(pnum);
-  assert(plr[pnum].plrlevel, 1878, "PLAYER.CPP");
+  assert(plr[pnum].plrlevel, "PLAYER.CPP", 1878);
   plr[pnum].plrlevel = 0;
   plr[pnum]._pInvincible = 0;
   SetPlayerHitPoints(pnum, 64);
@@ -2858,7 +2858,7 @@ void __cdecl ProcessPlayers()
 
   for ( i = 0; i < 40; ++i )
   {
-    assert(!(plr[myplr].InvGrid[i] > 0 && plr[myplr].InvGrid[i] > plr[myplr]._pNumInv), 2837, "PLAYER.CPP");
+    assert(!(plr[myplr].InvGrid[i] > 0 && plr[myplr].InvGrid[i] > plr[myplr]._pNumInv), "PLAYER.CPP", 2837);
   }
   if ( sfxdelay > 0 && !--sfxdelay )
     PlaySFX(sfxdnum);
@@ -3147,7 +3147,7 @@ void __fastcall SyncPlrAnim(int pnum)
       TermMsg("SyncPlrAnim");
       return;
   }
-  assert(plr[pnum]._pAnimData, 3116, "PLAYER.CPP");
+  assert(plr[pnum]._pAnimData, "PLAYER.CPP", 3116);
 }
 
 //----- (00477AEA) --------------------------------------------------------

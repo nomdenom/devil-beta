@@ -6,14 +6,14 @@ size_t EventPlrMsg(char *pszFmt, ...)
   va_list va; // [esp+20h] [ebp+Ch]
 
   va_start(va, pszFmt);
-  assert(pszFmt, 45, "plrmsg.cpp");
+  assert(pszFmt, "plrmsg.cpp", 45);
   v1 = &plr_msgs[plr_msg_slot++];
   plr_msg_slot &= 7u;
   v1->player = 4;
   v1->time = GetTickCount();
   vsprintf(v1->str, pszFmt, va);
   result = strlen(v1->str);
-  assert(result < 0x77, 56, "plrmsg.cpp");
+  assert(result < 0x77, "plrmsg.cpp", 56);
   return result;
 }
 
@@ -22,14 +22,14 @@ void __fastcall SendPlrMsg(int pnum, const char *pszStr)
 {
   _plrmsg *v4; // [esp+14h] [ebp-4h]
 
-  assert((unsigned int)pnum < 4, 63, "plrmsg.cpp");
-  assert(pszStr, 64, "plrmsg.cpp");
+  assert((unsigned int)pnum < 4, "plrmsg.cpp", 63);
+  assert(pszStr, "plrmsg.cpp", 64);
   v4 = &plr_msgs[plr_msg_slot++];
   plr_msg_slot &= 7u;
   v4->player = pnum;
   v4->time = GetTickCount();
-  assert(strlen(plr[pnum]._pName) < 0x20, 72, "plrmsg.cpp");
-  assert(strlen(pszStr) < 0x50, 73, "plrmsg.cpp");
+  assert(strlen(plr[pnum]._pName) < 0x20, "plrmsg.cpp", 72);
+  assert(strlen(pszStr) < 0x50, "plrmsg.cpp", 73);
   sprintf(v4->str, "%s: %s", plr[pnum]._pName, pszStr);
 }
 

@@ -172,7 +172,7 @@ void __fastcall encrypt_decompress(void *param, int recv_size, int dwMaxBytes)
   v6.pbOutBuffEnd = 0;
   v6.pbSize = v3;
   explode((int)encrypt_pkware_read, (int)encrypt_pkware_write, (int)ptr, (int)&v6);
-  assert(v6.pbOutBuffEnd <= (unsigned __int8 *)dwMaxBytes, 158, "encrypt.cpp");
+  assert(v6.pbOutBuffEnd <= (unsigned __int8 *)dwMaxBytes, "encrypt.cpp", 158);
   memcpy(v4, v7, (size_t)v6.pbOutBuffEnd);
   mem_free_dbg(ptr, 163, "encrypt.cpp");
   mem_free_dbg(v7, 164, "encrypt.cpp");

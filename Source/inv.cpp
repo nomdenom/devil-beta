@@ -8,7 +8,7 @@ void __cdecl FreeInvGFX()
 //----- (0044EF4F) --------------------------------------------------------
 void __cdecl InitInv()
 {
-  assert(!pInvCels, 95, "inv.cpp");
+  assert(!pInvCels, "inv.cpp", 95);
   if ( plr[myplr]._pClass )
   {
     if ( plr[myplr]._pClass == 1 )
@@ -97,7 +97,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[0]._iStatFlag )
     {
-      assert(pCursCels, 166, "inv.cpp");
+      assert(pCursCels, "inv.cpp", 166);
       CelDrawHdrOnly(516, 219, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -121,7 +121,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[1]._iStatFlag )
     {
-      assert(pCursCels, 184, "inv.cpp");
+      assert(pCursCels, "inv.cpp", 184);
       CelDrawHdrOnly(429, 365, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -145,7 +145,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[2]._iStatFlag )
     {
-      assert(pCursCels, 202, "inv.cpp");
+      assert(pCursCels, "inv.cpp", 202);
       CelDrawHdrOnly(631, 365, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -169,7 +169,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[3]._iStatFlag )
     {
-      assert(pCursCels, 220, "inv.cpp");
+      assert(pCursCels, "inv.cpp", 220);
       CelDrawHdrOnly(588, 220, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -201,7 +201,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[4]._iStatFlag )
     {
-      assert(pCursCels, 242, "inv.cpp");
+      assert(pCursCels, "inv.cpp", 242);
       CelDrawHdrOnly(screen_x, screen_y, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -244,7 +244,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[5]._iStatFlag )
     {
-      assert(pCursCels, 273, "inv.cpp");
+      assert(pCursCels, "inv.cpp", 273);
       CelDrawHdrOnly(screen_xa, screen_y, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -268,7 +268,7 @@ void __cdecl DrawInv()
     }
     if ( plr[myplr].InvBody[6]._iStatFlag )
     {
-      assert(pCursCels, 291, "inv.cpp");
+      assert(pCursCels, "inv.cpp", 291);
       CelDrawHdrOnly(516, 320, pCursCels, frame, frame_width, 0, 8);
     }
     else
@@ -286,9 +286,9 @@ void __cdecl DrawInv()
   {
     if ( plr[myplr].InvGrid[j] > 0 )
     {
-      assert(!v4[j], 307, "inv.cpp");
+      assert(!v4[j], "inv.cpp", 307);
       v4[j] = 1;
-      assert(plr[myplr].InvGrid[j] <= plr[myplr]._pNumInv, 309, "inv.cpp");
+      assert(plr[myplr].InvGrid[j] <= plr[myplr]._pNumInv, "inv.cpp", 309);
       v9 = plr[myplr].InvGrid[j] - 1;
       frame = plr[myplr].InvList[v9]._iCurs + 12;
       frame_width = InvItemWidth[frame];
@@ -303,7 +303,7 @@ void __cdecl DrawInv()
       }
       if ( plr[myplr].InvList[v9]._iStatFlag )
       {
-        assert(pCursCels, 320, "inv.cpp");
+        assert(pCursCels, "inv.cpp", 320);
         CelDrawHdrOnly(InvRect[j + 25].X + 64, InvRect[j + 25].Y + 159, pCursCels, frame, frame_width, 0, 8);
       }
       else
@@ -343,7 +343,7 @@ void __cdecl DrawInvBelt()
         }
         if ( plr[myplr].SpdList[i]._iStatFlag )
         {
-          assert(pCursCels, 353, "inv.cpp");
+          assert(pCursCels, "inv.cpp", 353);
           CelDrawHdrOnly(InvRect[i + 65].X + 64, InvRect[i + 65].Y + 159, pCursCels, frame, frame_width, 0, 8);
         }
         else
@@ -1506,7 +1506,7 @@ void __fastcall SyncGetItem(int x, int y, int idx, unsigned __int16 ci, int isee
   {
     v5 = FindGetItem(idx, ci, iseed);
   }
-  assert(v5 != -1, 1240, "inv.cpp");
+  assert(v5 != -1, "inv.cpp", 1240);
   item[v5]._isin = 1;
   dItem[item[v5]._ix][item[v5]._iy] = 0;
 }
@@ -1834,7 +1834,7 @@ char __cdecl CheckInvHLight()
     v2 = 0;
     x = v7->InvBody;
   }
-  assert(x, 1515, "inv.cpp");
+  assert(x, "inv.cpp", 1515);
   if ( x->_itype == -1 )
     return -1;
   if ( x->_itype == 11 )

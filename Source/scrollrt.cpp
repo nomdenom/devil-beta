@@ -43,7 +43,7 @@ void __fastcall DrawMissile(int x, int y, int sx, int sy, int a5, int a6, int de
         }
         else
         {
-          assert(missile[v10]._miAnimData, 142, "SCROLLRT.CPP");
+          assert(missile[v10]._miAnimData, "SCROLLRT.CPP", 142);
           CelDrawHdrOnly(
             screen_xa,
             screen_ya,
@@ -88,7 +88,7 @@ void __fastcall DrawMissile(int x, int y, int sx, int sy, int a5, int a6, int de
       }
       else
       {
-        assert(missile[v9]._miAnimData, 121, "SCROLLRT.CPP");
+        assert(missile[v9]._miAnimData, "SCROLLRT.CPP", 121);
         CelDrawHdrOnly(
           screen_x,
           screen_y,
@@ -1704,7 +1704,7 @@ void __fastcall DrawPlayer(int pnum, int x, int y, int px, int py, int animdata,
       CelDecodeClr(165, px, py, (char *)animdata, animframe, animwidth, a9, a10);
     if ( myplr == pnum )
     {
-      assert(animdata, 246, "SCROLLRT.CPP");
+      assert(animdata, "SCROLLRT.CPP", 246);
       CelDrawHdrOnly(px, py, (char *)animdata, animframe, animwidth, a9, a10);
     }
     else if ( dFlags[x][y] & 0x40 && (!plr[myplr]._pInfraFlag || light_table_index <= 8) )
@@ -1776,7 +1776,7 @@ void __fastcall DrawObject(int x, int y, int a3, int a4, int pre_flag, int a6, i
   }
   else
   {
-    assert(object[v10]._oAnimData, 327, "SCROLLRT.CPP");
+    assert(object[v10]._oAnimData, "SCROLLRT.CPP", 327);
     CelDrawHdrOnly(
       screen_x,
       screen_y,

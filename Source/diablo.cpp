@@ -27,7 +27,7 @@ void __fastcall run_game_loop(int uMsg)
 
   nthread_ignore_mutex(1);
   start_game(uMsg);
-  assert(ghMainWnd, 380, "DIABLO.CPP");
+  assert(ghMainWnd, "DIABLO.CPP", 380);
   func = SetWindowProc(GM_Game);
   drawpanflag = 255;
   control_update_life_mana();
@@ -61,7 +61,7 @@ void __fastcall run_game_loop(int uMsg)
   drawpanflag = 255;
   scrollrt_draw_game_screen(1);
   func = SetWindowProc(func);
-  assert(func == GM_Game, 419, "DIABLO.CPP");
+  assert(func == GM_Game, "DIABLO.CPP", 419);
   free_game();
 }
 
@@ -73,7 +73,7 @@ void __fastcall start_game(int uMsg)
   InitCursor();
   MakeLightTable();
   LoadDebugGFX();
-  assert(ghMainWnd, 348, "DIABLO.CPP");
+  assert(ghMainWnd, "DIABLO.CPP", 348);
   music_stop();
   ShowProgress(uMsg);
   gmenu_init_menu();
@@ -377,7 +377,7 @@ void __fastcall diablo_491753(BOOL shift)
   int v3; // eax
   BOOL v5; // [esp+10h] [ebp-4h]
 
-  assert(MouseY < 352, 528, "DIABLO.CPP");
+  assert(MouseY < 352, "DIABLO.CPP", 528);
   if ( leveltype )
   {
     v5 = abs(plr[myplr].WorldX - cursmx) < 2 && abs(plr[myplr].WorldY - cursmy) < 2;
@@ -611,7 +611,7 @@ void __fastcall diablo_hotkey_msg(int dwMsg)
     if ( v5 )
       *v5 = 0;
     strcat(Filename, "\\Diablo.ini");
-    assert((unsigned int)dwMsg < 4, 809, "DIABLO.CPP");
+    assert((unsigned int)dwMsg < 4, "DIABLO.CPP", 809);
     GetPrivateProfileStringA("NetMsg", spszMsgKeyTbl[dwMsg], spszMsgTbl[dwMsg], ReturnedString, 0x50u, Filename);
     for ( i = ReturnedString; *i; ++i )
     {
@@ -1061,7 +1061,7 @@ void __fastcall PressChar(char vkey)
 //----- (004931A7) --------------------------------------------------------
 void __cdecl LoadLvlGFX()
 {
-  assert(!pDungeonCels, 1447, "DIABLO.CPP");
+  assert(!pDungeonCels, "DIABLO.CPP", 1447);
   if ( leveltype )
   {
     if ( leveltype == 1 )
@@ -1093,7 +1093,7 @@ void __cdecl LoadLvlGFX()
 //----- (00493377) --------------------------------------------------------
 void __cdecl LoadAllGFX()
 {
-  assert(!pSpeedCels, 1501, "DIABLO.CPP");
+  assert(!pSpeedCels, "DIABLO.CPP", 1501);
   pSpeedCels = DiabloAllocPtr(0x100000, 1502, "DIABLO.CPP");
   IncProgress();
   IncProgress();
@@ -1177,7 +1177,7 @@ void __fastcall LoadGameLevel(BOOL firstflag, int lvldir)
   IncProgress();
   if ( setlevel )
   {
-    assert(!pSpeedCels, 1700, "DIABLO.CPP");
+    assert(!pSpeedCels, "DIABLO.CPP", 1700);
     pSpeedCels = DiabloAllocPtr(0x100000, 1701, "DIABLO.CPP");
     LoadSetMap();
     IncProgress();

@@ -13,7 +13,7 @@ void __cdecl CaptureScreen()
   }
   else
   {
-    assert(gpBuffer, 247, "capture.cpp");
+    assert(gpBuffer, "capture.cpp", 247);
     DrawAndBlit();
     lpDDPalette->lpVtbl->GetEntries(lpDDPalette, 0, 0, 256, (LPPALETTEENTRY)&pal);
     RedPalette(&pal);

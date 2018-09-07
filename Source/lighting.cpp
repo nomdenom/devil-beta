@@ -390,7 +390,7 @@ void __cdecl MakeLightTable()
   unsigned __int8 v40; // [esp+88h] [ebp-4h]
   unsigned __int8 v41; // [esp+88h] [ebp-4h]
 
-  assert(!pLightTbl, 603, "LIGHTING.CPP");
+  assert(!pLightTbl, "LIGHTING.CPP", 603);
   pLightTbl = (BYTE *)DiabloAllocPtr(6912, 604, "LIGHTING.CPP");
   pLightTbl_ = pLightTbl;
   v38 = 0;

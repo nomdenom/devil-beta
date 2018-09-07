@@ -362,7 +362,7 @@ void __cdecl CheckTriggers()
             StartNewLvl(myplr, trigs[i]._tmsg, currlevel - 1);
             break;
           case 0x404:
-            assert(gbMaxPlayers == 1, 443, "TRIGS.CPP");
+            assert(gbMaxPlayers == 1, "TRIGS.CPP", 443);
             SetReturnLvlPos();
             StartNewLvl(myplr, trigs[i]._tmsg, 0);
             break;

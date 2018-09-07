@@ -23,7 +23,7 @@ void __fastcall SetTownerGPtrs(void *pData, void **pAnim)
 //----- (00457AB0) --------------------------------------------------------
 void __fastcall NewTownerAnim(int tnum, void *pAnim, int numFrames, int Delay)
 {
-  assert(pAnim, 98, "towners.cpp");
+  assert(pAnim, "towners.cpp", 98);
   towner[tnum]._tAnimData = pAnim;
   towner[tnum]._tAnimLen = numFrames;
   towner[tnum]._tAnimFrame = 1;
@@ -51,7 +51,7 @@ void __fastcall InitTownerInfo(int i, int w, bool sel, int t, int x, int y, int 
 void __cdecl InitSmith()
 {
   InitTownerInfo(numtowners, 96, 1, 0, 62, 63, 0, 10);
-  assert(!towner[numtowners]._tNData, 128, "towners.cpp");
+  assert(!towner[numtowners]._tNData, "towners.cpp", 128);
   towner[numtowners]._tNData = LoadFileInMem("Towners\\Smith\\SmithN.CEL", 0, 129, "towners.cpp");
   SetTownerGPtrs(towner[numtowners]._tNData, (void **)towner[numtowners]._tNAnim);
   towner[numtowners]._tNFrames = 16;
@@ -64,7 +64,7 @@ void __cdecl InitSmith()
 void __cdecl InitBarOwner()
 {
   InitTownerInfo(numtowners, 96, 1, 3, 55, 62, 3, 10);
-  assert(!towner[numtowners]._tNData, 142, "towners.cpp");
+  assert(!towner[numtowners]._tNData, "towners.cpp", 142);
   towner[numtowners]._tNData = LoadFileInMem("Towners\\TwnF\\TwnFN.CEL", 0, 143, "towners.cpp");
   SetTownerGPtrs(towner[numtowners]._tNData, (void **)towner[numtowners]._tNAnim);
   towner[numtowners]._tNFrames = 16;
@@ -79,7 +79,7 @@ void __cdecl InitTownDead()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 2, 24, 32, -1, 10);
-  assert(!towner[numtowners]._tNData, 155, "towners.cpp");
+  assert(!towner[numtowners]._tNData, "towners.cpp", 155);
   towner[numtowners]._tNData = LoadFileInMem("Towners\\Butch\\Deadguy.CEL", 0, 156, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
@@ -95,7 +95,7 @@ void __cdecl InitWitch()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 7, 80, 20, 5, 10);
-  assert(!towner[numtowners]._tNData, 168, "towners.cpp");
+  assert(!towner[numtowners]._tNData, "towners.cpp", 168);
   towner[numtowners]._tNData = LoadFileInMem("Towners\\TownWmn1\\WmnN.CEL", 0, 169, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
@@ -111,7 +111,7 @@ void __cdecl InitBoy()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 6, 11, 53, -1, 10);
-  assert(!towner[numtowners]._tNData, 181, "towners.cpp");
+  assert(!towner[numtowners]._tNData, "towners.cpp", 181);
   towner[numtowners]._tNData = LoadFileInMem("Towners\\TownBoy\\PegKid1.CEL", 0, 182, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
@@ -127,7 +127,7 @@ void __cdecl InitHealer()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 1, 55, 79, 1, 10);
-  assert(!towner[numtowners]._tNData, 194, "towners.cpp");
+  assert(!towner[numtowners]._tNData, "towners.cpp", 194);
   towner[numtowners]._tNData = LoadFileInMem("Towners\\Healer\\Healer.CEL", 0, 195, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
@@ -143,7 +143,7 @@ void __cdecl InitTeller()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 4, 62, 71, 2, 10);
-  assert(!towner[numtowners]._tNData, 208, "towners.cpp");
+  assert(!towner[numtowners]._tNData, "towners.cpp", 208);
   towner[numtowners]._tNData = LoadFileInMem(
                                  "Towners\\Strytell\\Strytell.CEL",
                                  0,
@@ -163,7 +163,7 @@ void __cdecl InitDrunk()
   signed int i; // [esp+Ch] [ebp-4h]
 
   InitTownerInfo(numtowners, 96, 1, 5, 71, 84, 4, 10);
-  assert(!towner[numtowners]._tNData, 221, "towners.cpp");
+  assert(!towner[numtowners]._tNData, "towners.cpp", 221);
   towner[numtowners]._tNData = LoadFileInMem("Towners\\Drunk\\TwnDrunk.CEL", 0, 222, "towners.cpp");
   for ( i = 0; i < 8; ++i )
     towner[numtowners]._tNAnim[i] = towner[numtowners]._tNData;
@@ -183,7 +183,7 @@ void __cdecl InitCows()
   int v4; // [esp+18h] [ebp-Ch]
   int x; // [esp+1Ch] [ebp-8h]
 
-  assert(!pCowCels, 236, "towners.cpp");
+  assert(!pCowCels, "towners.cpp", 236);
   pCowCels = LoadFileInMem("Towners\\Animals\\Cow.CEL", 0, 237, "towners.cpp");
   for ( i = 0; i < 3; ++i )
   {

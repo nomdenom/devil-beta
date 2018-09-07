@@ -131,8 +131,8 @@ void __fastcall mpqapi_remove_hash_entries(bool (__stdcall *fnGetName)(int, char
   char *pszArchive; // [esp+128h] [ebp+8h]
   int (__stdcall *v10)(int, char *); // [esp+12Ch] [ebp+Ch]
 
-  assert(pszArchive, 529, "mpqapi.cpp");
-  assert(v10, 530, "mpqapi.cpp");
+  assert(pszArchive, "mpqapi.cpp", 529);
+  assert(v10, "mpqapi.cpp", 530);
   if ( mpqapi_open_archive(pszArchive, 0) )
   {
     v6 = 0;
@@ -297,7 +297,7 @@ BOOL __fastcall mpqapi_write_file_contents(char *pszName, char *pbData, int dwLe
         goto LABEL_37;
       v15 += nNumberOfBytesToWrite;
     }
-    assert(lpBuffer, 635, "mpqapi.cpp");
+    assert(lpBuffer, "mpqapi.cpp", 635);
     *((_DWORD *)lpBuffer + v13) = v15;
     encrypt_encrypt_block(mpq_buf, NumberOfBytesWritten & 0xFFFFFFFC, v18 + v13);
     if ( !WriteFile(hFile, mpq_buf, NumberOfBytesWritten, (LPDWORD)&NumberOfBytesWritten, 0) )
@@ -309,7 +309,7 @@ BOOL __fastcall mpqapi_write_file_contents(char *pszName, char *pbData, int dwLe
       dwLen -= 4096;
     v15 += NumberOfBytesWritten;
   }
-  assert(lpBuffer, 653, "mpqapi.cpp");
+  assert(lpBuffer, "mpqapi.cpp", 653);
   *((_DWORD *)lpBuffer + v13) = v15;
   encrypt_encrypt_block(lpBuffer, nNumberOfBytesToWrite, v18 - 1);
   if ( SetFilePointer(hFile, -v15, 0, 1u) == -1
@@ -323,7 +323,7 @@ LABEL_37:
   }
   mem_free_dbg(lpBuffer, 662, "mpqapi.cpp");
   lpBuffer = 0;
-  assert(pBlk->sizealloc >= v15, 666, "mpqapi.cpp");
+  assert(pBlk->sizealloc >= v15, "mpqapi.cpp", 666);
   if ( pBlk->sizealloc > v15 )
   {
     block_size = pBlk->sizealloc - v15;

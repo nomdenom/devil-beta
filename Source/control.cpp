@@ -803,7 +803,7 @@ void __cdecl InitControlPan()
   signed int j; // [esp+Ch] [ebp-4h]
   signed int k; // [esp+Ch] [ebp-4h]
 
-  assert(!pBtmBuff, 1016, "CONTROL.CPP");
+  assert(!pBtmBuff, "CONTROL.CPP", 1016);
   if ( gbMaxPlayers == 1 )
   {
     pBtmBuff = (char *)DiabloAllocPtr(0x16800, 1018, "CONTROL.CPP");

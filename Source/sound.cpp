@@ -1,7 +1,7 @@
 //----- (00413B70) --------------------------------------------------------
 void __fastcall snd_stop_snd(TSnd *pSnd)
 {
-  assert(pSnd, 128, "SOUND.CPP");
+  assert(pSnd, "SOUND.CPP", 128);
   if ( pSnd->DSB )
     pSnd->DSB->lpVtbl->Stop(pSnd->DSB);
 }
@@ -12,7 +12,7 @@ BOOL __fastcall snd_playing(TSnd *pSnd)
   int v2; // [esp+10h] [ebp-8h]
   int error_code; // [esp+14h] [ebp-4h]
 
-  assert(pSnd, 137, "SOUND.CPP");
+  assert(pSnd, "SOUND.CPP", 137);
   if ( !pSnd->DSB )
     return 0;
   error_code = pSnd->DSB->lpVtbl->GetStatus(pSnd->DSB, (LPDWORD)&v2);
@@ -29,7 +29,7 @@ void __fastcall snd_play_snd(TSnd *pSnd, int lVolume, int lPan)
   int error_codea; // [esp+14h] [ebp-4h]
   int error_codeb; // [esp+14h] [ebp-4h]
 
-  assert(pSnd, 154, "SOUND.CPP");
+  assert(pSnd, "SOUND.CPP", 154);
   if ( gbSoundOn && pSnd->DSB && !snd_playing(pSnd) )
   {
     v4 = value + lVolume;
@@ -77,7 +77,7 @@ BOOL __fastcall sound_file_reload(TSnd *sound_file, IDirectSoundBuffer *DSB)
   DWORD v10; // [esp+28h] [ebp-8h]
   int v11; // [esp+2Ch] [ebp-4h]
 
-  assert(sound_file, 84, "SOUND.CPP");
+  assert(sound_file, "SOUND.CPP", 84);
   if ( DSB || (result = sound_file->DSB->lpVtbl->Restore(sound_file->DSB)) == 0 )
   {
     if ( DSB )
@@ -97,7 +97,7 @@ BOOL __fastcall sound_file_reload(TSnd *sound_file, IDirectSoundBuffer *DSB)
       TermMsg("Unable to seek in sound file %s", sound_file->sound_path);
     if ( !SFileReadFile((int)DSB, (int)v9, v10, (int)&v11, 0) )
       TermMsg("Unable to read sound file %s", sound_file->sound_path);
-    assert(v10 == v11, 114, "SOUND.CPP");
+    assert(v10 == v11, "SOUND.CPP", 114);
     result = sound_file->DSB->lpVtbl->Unlock(sound_file->DSB, v9, v10, v5, v7);
     error_code = result;
     if ( result )
@@ -137,7 +137,7 @@ void __fastcall sound_CreateSoundBuffer(TSnd *sound_file)
   int error_code; // [esp+10h] [ebp-18h]
   DSBUFFERDESC v3; // [esp+14h] [ebp-14h]
 
-  assert(sglpDS, 187, "SOUND.CPP");
+  assert(sglpDS, "SOUND.CPP", 187);
   memset(&v3, 0, 0x14u);
   v3.dwSize = 20;
   v3.dwFlags = 194;
@@ -174,15 +174,15 @@ void __fastcall snd_init(HWND hWnd)
 
   sound_load_volume("Sound Volume", &value);
   sound_load_volume("Music Volume", &sglMusicVolume);
-  assert(!sglpDS, 303, "SOUND.CPP");
+  assert(!sglpDS, "SOUND.CPP", 303);
   if ( DirectSoundCreate(0, &sglpDS, 0) )
     sglpDS = 0;
   if ( sglpDS && !sglpDS->lpVtbl->SetCooperativeLevel(sglpDS, hWnd, 3) )
     sound_create_primary_buffer(0);
   v3 = SVidInitialize(sglpDS);
-  assert(!(sglpDS && !v3), 311, "SOUND.CPP");
+  assert(!(sglpDS && !v3), "SOUND.CPP", 311);
   v1 = SFileDdaInitialize(sglpDS);
-  assert(!(sglpDS && !v1), 314, "SOUND.CPP");
+  assert(!(sglpDS && !v1), "SOUND.CPP", 314);
   gbSndInited = sglpDS != 0;
 }
 
@@ -216,7 +216,7 @@ void __fastcall sound_create_primary_buffer(int music_track)
   int a3; // [esp+88h] [ebp-1Ch]
   WAVEFORMATEX wf; // [esp+90h] [ebp-14h]
 
-  assert(sglpDS, 251, "SOUND.CPP");
+  assert(sglpDS, "SOUND.CPP", 251);
   if ( !music_track )
   {
     memset(&v2, 0, 0x14u);
@@ -332,7 +332,7 @@ void __fastcall music_start(int nTrack)
 {
   int v1; // ST1C_4
 
-  assert((unsigned int)nTrack < 6, 389, "SOUND.CPP");
+  assert((unsigned int)nTrack < 6, "SOUND.CPP", 389);
   music_stop();
   if ( sglpDS && gbMusicOn )
   {
@@ -357,8 +357,8 @@ int __fastcall sound_get_or_set_music_volume(int volume)
 {
   if ( volume == 1 )
     return sglMusicVolume;
-  assert(volume >= -1600, 416, "SOUND.CPP");
-  assert(volume <= 0, 417, "SOUND.CPP");
+  assert(volume >= -1600, "SOUND.CPP", 416);
+  assert(volume <= 0, "SOUND.CPP", 417);
   sglMusicVolume = volume;
   if ( sgpMusicTrack )
     SFileDdaSetVolume(sgpMusicTrack, sglMusicVolume, 0);
@@ -370,8 +370,8 @@ int __fastcall sound_get_or_set_sound_volume(int volume)
 {
   if ( volume == 1 )
     return value;
-  assert(volume >= -1600, 430, "SOUND.CPP");
-  assert(volume <= 0, 431, "SOUND.CPP");
+  assert(volume >= -1600, "SOUND.CPP", 430);
+  assert(volume <= 0, "SOUND.CPP", 431);
   value = volume;
   return volume;
 }

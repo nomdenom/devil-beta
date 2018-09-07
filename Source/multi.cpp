@@ -6,8 +6,8 @@ void __fastcall NetSendLoPri(unsigned __int8 *pbMsg, unsigned __int8 bLen)
 
   size = bLen;
   packet = pbMsg;
-  assert(sgbNetInited, 173, "multi.cpp");
-  assert(bLen <= (unsigned int)(gdwNormalMsgSize - 8), 177, "multi.cpp");
+  assert(sgbNetInited, "multi.cpp", 173);
+  assert(bLen <= (unsigned int)(gdwNormalMsgSize - 8), "multi.cpp", 177);
   multi_copy_packet(packet_5FFCD8, pbMsg, bLen);
   multi_copy_packet(packet_5FF8D0, packet, size);
 }
@@ -43,17 +43,17 @@ void __fastcall NetSendHiPri_1(void *packet, BYTE size)
   int v15; // [esp+218h] [ebp-8h]
   char *bLen; // [esp+21Ch] [ebp-4h]
 
-  assert(sgbNetInited, 186, "multi.cpp");
+  assert(sgbNetInited, "multi.cpp", 186);
   if ( packet )
   {
-    assert(size <= (unsigned int)(gdwNormalMsgSize - 8), 189, "multi.cpp");
+    assert(size <= (unsigned int)(gdwNormalMsgSize - 8), "multi.cpp", 189);
     multi_copy_packet(&pbMsg, packet, size);
     multi_copy_packet(packet_5FF8D0, packet, size);
   }
   if ( !dword_5FF8BC )
   {
     dword_5FF8BC = 1;
-    assert((unsigned int)myplr < 4, 200, "multi.cpp");
+    assert((unsigned int)myplr < 4, "multi.cpp", 200);
     v11 = 26992;
     v7 = plr[myplr].WorldX;
     v8 = plr[myplr].WorldY;
@@ -114,10 +114,10 @@ void __fastcall NetSendHiPri(unsigned __int8 *pbMsg, unsigned __int8 bLen)
 //----- (0041C4E2) --------------------------------------------------------
 void __fastcall multi_recv_packet(void *packet, BYTE size, int *a3)
 {
-  assert(sgbNetInited, 235, "multi.cpp");
+  assert(sgbNetInited, "multi.cpp", 235);
   if ( packet )
   {
-    assert(size <= (unsigned int)(gdwNormalMsgSize - 8), 238, "multi.cpp");
+    assert(size <= (unsigned int)(gdwNormalMsgSize - 8), "multi.cpp", 238);
     multi_copy_packet(packet_5FF8D0, packet, size);
   }
 }
@@ -143,9 +143,9 @@ void __fastcall multi_send_msg_packet(int a1, unsigned __int8 *a2, unsigned __in
 
   packet = a2;
   v7 = a1;
-  assert(sgbNetInited, 247, "multi.cpp");
-  assert(a2, 248, "multi.cpp");
-  assert(len, 249, "multi.cpp");
+  assert(sgbNetInited, "multi.cpp", 247);
+  assert(a2, "multi.cpp", 248);
+  assert(len, "multi.cpp", 249);
   if ( (1 << myplr) & a1 )
     multi_copy_packet(packet_5FF8D0, a2, len);
   v12 = 26992;
@@ -154,7 +154,7 @@ void __fastcall multi_send_msg_packet(int a1, unsigned __int8 *a2, unsigned __in
   v10 = plr[myplr]._ptargx;
   v11 = plr[myplr]._ptargy;
   v15 = len + 8;
-  assert(gdwNormalMsgSize > v15, 265, "multi.cpp");
+  assert(gdwNormalMsgSize > v15, "multi.cpp", 265);
   v13 = v15;
   memcpy(&v14, packet, len);
   v16 = 1;
@@ -216,8 +216,8 @@ void __fastcall multi_41C8BA(BOOL a1)
       case 0:
         break;
       case 1:
-        assert(dword_5FE120[pnum], 440, "multi.cpp");
-        assert(dword_5FE0F0[pnum] == 4, 441, "multi.cpp");
+        assert(dword_5FE120[pnum], "multi.cpp", 440);
+        assert(dword_5FE0F0[pnum] == 4, "multi.cpp", 441);
         multi_41C9FB(pnum, *(_DWORD *)dword_5FE120[pnum]);
         break;
       case 2:
@@ -272,7 +272,7 @@ void __fastcall multi_41CA8A(int pnum)
       ;
     if ( myplr == i )
     {
-      assert(!gbBufferMsgs, 353, "multi.cpp");
+      assert(!gbBufferMsgs, "multi.cpp", 353);
       byte_5FF8C8[pnum] = 1;
     }
   }
@@ -285,7 +285,7 @@ int __fastcall multi_handle_delta()
   int a2; // [esp+Ch] [ebp-8h]
   int pfSendAsync; // [esp+10h] [ebp-4h]
 
-  assert(sgbNetInited, 474, "multi.cpp");
+  assert(sgbNetInited, "multi.cpp", 474);
   if ( gbGameDestroyed )
   {
     gbRunGame = 0;
@@ -377,21 +377,21 @@ void __cdecl multi_process_network_packets()
   v2 = &v7;
   NetSendHiPri((unsigned __int8 *)packet_5FF8D0, (unsigned int)&bLen);
   multi_handle_all_packets(myplr, (int)&bLen, 504 - v7);
-  assert(sgbNetInited, 554, "multi.cpp");
+  assert(sgbNetInited, "multi.cpp", 554);
   while ( SNetReceiveMessage(&pnum, &v8, &v6, v2) )
   {
     v4 = v8;
-    assert(v6 >= 8, 557, "multi.cpp");
-    assert(pnum < 4, 558, "multi.cpp");
-    assert(*((_WORD *)v8 + 2) == 26992, 559, "multi.cpp");
-    assert(*((unsigned __int16 *)v8 + 3) == v6, 560, "multi.cpp");
+    assert(v6 >= 8, "multi.cpp", 557);
+    assert(pnum < 4, "multi.cpp", 558);
+    assert(*((_WORD *)v8 + 2) == 26992, "multi.cpp", 559);
+    assert(*((unsigned __int16 *)v8 + 3) == v6, "multi.cpp", 560);
     plr[pnum]._pownerx = *v8;
     plr[pnum]._pownery = v4[1];
     if ( pnum != myplr )
     {
       if ( pnum != myplr )
       {
-        assert(gbBufferMsgs != 2, 573, "multi.cpp");
+        assert(gbBufferMsgs != 2, "multi.cpp", 573);
         if ( gbBufferMsgs != 1 && plr[pnum].plractive )
         {
           if ( plr[pnum].plrlevel != currlevel || plr[pnum]._pLvlChanging )
@@ -466,9 +466,9 @@ void __fastcall multi_41D36B(int pnum, char a2, PkPlayerStruct *a3, int a4)
   char *v14; // [esp+21Ch] [ebp-8h]
   int v15; // [esp+220h] [ebp-4h]
 
-  assert(myplr != pnum, 622, "multi.cpp");
-  assert(a3, 625, "multi.cpp");
-  assert((unsigned int)a4 <= 0xFFFF, 626, "multi.cpp");
+  assert(myplr != pnum, "multi.cpp", 622);
+  assert(a3, "multi.cpp", 625);
+  assert((unsigned int)a4 <= 0xFFFF, "multi.cpp", 626);
   v15 = 0;
   while ( a4 )
   {
@@ -485,7 +485,7 @@ void __fastcall multi_41D36B(int pnum, char a2, PkPlayerStruct *a3, int a4)
     if ( a4 >= (unsigned int)(gdwLargestMsgSize - 13) )
       v4 = gdwLargestMsgSize - 13;
     v13 = v4;
-    assert(v4 <= 0xFFFF, 645, "multi.cpp");
+    assert(v4 <= 0xFFFF, "multi.cpp", 645);
     *(_WORD *)(v14 + 3) = v13;
     memcpy(&v11[13], a3, *(unsigned __int16 *)(v14 + 3));
     v12 = 13;
@@ -567,15 +567,15 @@ void __stdcall multi_handle_events(void *a1)
   v2 = *(_DWORD *)a1;
   if ( v2 == 1 )
   {
-    assert(*((_DWORD *)a1 + 2), 772, "multi.cpp");
-    assert(*((_DWORD *)a1 + 3) == 4, 773, "multi.cpp");
+    assert(*((_DWORD *)a1 + 2), "multi.cpp", 772);
+    assert(*((_DWORD *)a1 + 3) == 4, "multi.cpp", 773);
     s = **((_DWORD **)a1 + 2);
     msg_5FF8B4_isprocessing = 0;
   }
   else if ( v2 != 2 && v2 == 3 )
   {
     v1 = *((_DWORD *)a1 + 1) == 0;
-    assert(*((_DWORD *)a1 + 1) < 4u, 785, "multi.cpp");
+    assert(*((_DWORD *)a1 + 1) < 4u, "multi.cpp", 785);
     byte_5FF8B0[*((_DWORD *)a1 + 1)] = 1;
   }
 }
@@ -617,7 +617,7 @@ int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
   }
   SetRndSeed(0);
   s = time(0);
-  assert(pfExitProgram, 849, "multi.cpp");
+  assert(pfExitProgram, "multi.cpp", 849);
   *pfExitProgram = 0;
   memset(v24, 0, 0x24u);
   *(_DWORD *)v24 = 36;
@@ -659,7 +659,7 @@ int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
       v4 = GetLastErr();
       TermMsg("SNetCreateGame1:\n%s", v4);
     }
-    assert(!v17, 906, "multi.cpp");
+    assert(!v17, "multi.cpp", 906);
     myplr = 0;
     gbMaxPlayers = 1;
   }
@@ -679,15 +679,15 @@ int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
     multi_event_handler(1);
     if ( !SNetSelectGame(1, v24, &v19, v23, &fileinfo, &v16) )
       return 0;
-    assert(v16 < 4, 932, "multi.cpp");
+    assert(v16 < 4, "multi.cpp", 932);
     if ( !SNetGetNumPlayers(&v15, &v11, &v12) )
     {
       v5 = GetLastErr();
       TermMsg("SNetGetNumPlayers:\n%s", v5);
     }
-    assert(v15 < 4, 937, "multi.cpp");
-    assert(v11 < 4, 938, "multi.cpp");
-    assert(!(!v12 || v12 > 4), 939, "multi.cpp");
+    assert(v15 < 4, "multi.cpp", 937);
+    assert(v11 < 4, "multi.cpp", 938);
+    assert(!(!v12 || v12 > 4), "multi.cpp", 939);
     v13 = 0;
     while ( v11 >= v15 )
     {
@@ -823,7 +823,7 @@ void __fastcall multi_player_joins(int pnum, TCmdPlrInfoHdr *cmd, int a3)
       {
         if ( plr[pnum].plractive )
         {
-          assert(!strcmp(plr[pnum]._pName, &netplr[982 * pnum + 8]), 1032, "multi.cpp");
+          assert(!strcmp(plr[pnum]._pName, &netplr[982 * pnum + 8]), "multi.cpp", 1032);
         }
         else
         {

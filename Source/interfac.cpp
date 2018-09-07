@@ -14,7 +14,7 @@ void __cdecl DrawCutscene()
 {
   unsigned int i; // [esp+Ch] [ebp-4h]
 
-  assert(sgpBackCel, 208, "Interfac.cpp");
+  assert(sgpBackCel, "Interfac.cpp", 208);
   CelDecodeOnly(64, 639, sgpBackCel, 1, 640);
   for ( i = 0; i < sgdwProgress; ++i )
     DrawProgress(
@@ -31,7 +31,7 @@ void __fastcall DrawProgress(int screen_x, int screen_y, int progress_id)
   char *v3; // [esp+14h] [ebp-8h]
   signed int i; // [esp+18h] [ebp-4h]
 
-  assert(gpBuffer, 192, "Interfac.cpp");
+  assert(gpBuffer, "Interfac.cpp", 192);
   v3 = &gpBuffer[screen_x + screen_y_times_768[screen_y]];
   for ( i = 0; i < 22; ++i )
   {
@@ -45,7 +45,7 @@ void __fastcall ShowProgress(int uMsg)
 {
   WNDPROC func; // [esp+14h] [ebp-4h]
 
-  assert(ghMainWnd, 256, "Interfac.cpp");
+  assert(ghMainWnd, "Interfac.cpp", 256);
   func = SetWindowProc(interfac_41F03E_wndproc);
   ClearScreenBuffer();
   scrollrt_draw_game_screen(1);
@@ -65,7 +65,7 @@ void __fastcall ShowProgress(int uMsg)
         DeltaSaveLevel();
       FreeGameMem();
       leveltype = gnLevelTypeTbl[++currlevel];
-      assert(plr[myplr].plrlevel == currlevel, 293, "Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, "Interfac.cpp", 293);
       IncProgress();
       LoadGameLevel(0, 0);
       IncProgress();
@@ -79,7 +79,7 @@ void __fastcall ShowProgress(int uMsg)
       IncProgress();
       FreeGameMem();
       leveltype = gnLevelTypeTbl[--currlevel];
-      assert(plr[myplr].plrlevel == currlevel, 308, "Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, "Interfac.cpp", 308);
       IncProgress();
       LoadGameLevel(0, 1);
       IncProgress();
@@ -131,7 +131,7 @@ void __fastcall ShowProgress(int uMsg)
       FreeGameMem();
       currlevel = plr[myplr].plrlevel;
       leveltype = gnLevelTypeTbl[currlevel];
-      assert(plr[myplr].plrlevel == currlevel, 358, "Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, "Interfac.cpp", 358);
       IncProgress();
       LoadGameLevel(0, 6);
       IncProgress();
@@ -145,7 +145,7 @@ void __fastcall ShowProgress(int uMsg)
       FreeGameMem();
       currlevel = plr[myplr].plrlevel;
       leveltype = gnLevelTypeTbl[currlevel];
-      assert(plr[myplr].plrlevel == currlevel, 372, "Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, "Interfac.cpp", 372);
       IncProgress();
       LoadGameLevel(0, 7);
       IncProgress();
@@ -159,7 +159,7 @@ void __fastcall ShowProgress(int uMsg)
       FreeGameMem();
       currlevel = plr[myplr].plrlevel;
       leveltype = gnLevelTypeTbl[currlevel];
-      assert(plr[myplr].plrlevel == currlevel, 386, "Interfac.cpp");
+      assert(plr[myplr].plrlevel == currlevel, "Interfac.cpp", 386);
       IncProgress();
       LoadGameLevel(0, 0);
       IncProgress();
@@ -179,10 +179,10 @@ void __fastcall ShowProgress(int uMsg)
     default:
       break;
   }
-  assert(ghMainWnd, 395, "Interfac.cpp");
+  assert(ghMainWnd, "Interfac.cpp", 395);
   PaletteFadeOut(8);
   FreeInterface();
-  assert(SetWindowProc(func) == interfac_41F03E_wndproc, 401, "Interfac.cpp");
+  assert(SetWindowProc(func) == interfac_41F03E_wndproc, "Interfac.cpp", 401);
   NetSendCmdLocParam1(1u, 0x38u, plr[myplr].WorldX, plr[myplr].WorldY, plr[myplr].plrlevel);
 }
 
@@ -196,7 +196,7 @@ void __cdecl FreeInterface()
 //----- (0041EB07) --------------------------------------------------------
 void __fastcall InitCutscene(int interface_mode)
 {
-  assert(!sgpBackCel, 58, "Interfac.cpp");
+  assert(!sgpBackCel, "Interfac.cpp", 58);
   switch ( interface_mode )
   {
     case 1026:
@@ -424,7 +424,7 @@ BOOL __fastcall mpqapi_open_archive(char *pszArchive, BOOL hidden)
   TMPQHeader a1; // [esp+14h] [ebp-24h]
   int NumberOfBytesRead; // [esp+34h] [ebp-4h]
 
-  assert(pszArchive, 382, "mpqapi.cpp");
+  assert(pszArchive, "mpqapi.cpp", 382);
   encrypt_init_lookup_table();
   hFile = CreateFileA(pszArchive, 0xC0000000, 0, 0, 3u, 0, 0);
   if ( hFile == (HANDLE)-1 )
@@ -442,11 +442,11 @@ BOOL __fastcall mpqapi_open_archive(char *pszArchive, BOOL hidden)
   memset(sgpBlockTbl, 0, 0x8000u);
   if ( a1.dwBlockTableSize )
   {
-    assert(a1.dwBlockTableSize == 2048, 422, "mpqapi.cpp");
-    assert(a1.dwBlockTablePos == 96, 423, "mpqapi.cpp");
+    assert(a1.dwBlockTableSize == 2048, "mpqapi.cpp", 422);
+    assert(a1.dwBlockTablePos == 96, "mpqapi.cpp", 423);
     if ( SetFilePointer(hFile, 96, 0, 0) == -1 || !ReadFile(hFile, sgpBlockTbl, 0x8000u, (LPDWORD)&NumberOfBytesRead, 0) )
       goto LABEL_30;
-    assert(NumberOfBytesRead == 0x8000, 428, "mpqapi.cpp");
+    assert(NumberOfBytesRead == 0x8000, "mpqapi.cpp", 428);
     v5 = encrypt_hash("(block table)", 3);
     encrypt_decrypt_block(sgpBlockTbl, 0x8000, v5);
   }
@@ -454,11 +454,11 @@ BOOL __fastcall mpqapi_open_archive(char *pszArchive, BOOL hidden)
   memset(sgpHashTbl, 255, 0x8000u);
   if ( !a1.dwHashTableSize )
     return 1;
-  assert(a1.dwHashTableSize == 2048, 443, "mpqapi.cpp");
-  assert(a1.dwHashTablePos == 32864, 444, "mpqapi.cpp");
+  assert(a1.dwHashTableSize == 2048, "mpqapi.cpp", 443);
+  assert(a1.dwHashTablePos == 32864, "mpqapi.cpp", 444);
   if ( SetFilePointer(hFile, 32864, 0, 0) != -1 && ReadFile(hFile, sgpHashTbl, 0x8000u, (LPDWORD)&NumberOfBytesRead, 0) )
   {
-    assert(NumberOfBytesRead == 0x8000, 449, "mpqapi.cpp");
+    assert(NumberOfBytesRead == 0x8000, "mpqapi.cpp", 449);
     v6 = encrypt_hash("(hash table)", 3);
     encrypt_decrypt_block(sgpHashTbl, 0x8000, v6);
     return 1;
@@ -475,7 +475,7 @@ BOOL __fastcall mpqapi_parse_archive_header(TMPQHeader *pHdr, int *pdwNextFileSt
   int v6; // [esp+18h] [ebp-8h]
   unsigned int v7; // [esp+1Ch] [ebp-4h]
 
-  assert(pHdr, 330, "mpqapi.cpp");
+  assert(pHdr, "mpqapi.cpp", 330);
   v6 = 0;
   v7 = GetFileSize(hFile, 0);
   *pdwNextFileStart = v7;
@@ -485,7 +485,7 @@ BOOL __fastcall mpqapi_parse_archive_header(TMPQHeader *pHdr, int *pdwNextFileSt
     {
       if ( ReadFile(hFile, pHdr, 0x20u, (LPDWORD)&NumberOfBytesRead, 0) )
       {
-        assert(NumberOfBytesRead == 32, 345, "mpqapi.cpp");
+        assert(NumberOfBytesRead == 32, "mpqapi.cpp", 345);
       }
       else
       {

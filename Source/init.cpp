@@ -44,7 +44,7 @@ void __cdecl dx_cleanup_42D257()
   }
   if ( lpDD )
   {
-    assert(ghMainWnd, 371, "init.cpp");
+    assert(ghMainWnd, "init.cpp", 371);
     lpDD->lpVtbl->SetCooperativeLevel(lpDD, ghMainWnd, 8);
     lpDD->lpVtbl->Release(lpDD);
     lpDD = 0;
@@ -93,7 +93,7 @@ void __fastcall dx_init_42D315(HWND hwnd)
     DDErrDlg(error_code, 422, "init.cpp");
   palette_init();
   v6 = SDrawManualInitialize(hwnd, lpDD, lpDDSPrimary, 0, 0, lpDDPalette, 0);
-  assert(v6, 428, "init.cpp");
+  assert(v6, "init.cpp", 428);
   GdiSetBatchLimit(1u);
   if ( !gpBuffer )
     gpBuffer = (char *)DiabloAllocPtr(503808, 434, "init.cpp");
@@ -103,7 +103,7 @@ void __fastcall dx_init_42D315(HWND hwnd)
 void __cdecl dx_reinit_42D562()
 {
   scrollrt_draw_cursor_back_buffer();
-  assert(ghMainWnd, 442, "init.cpp");
+  assert(ghMainWnd, "init.cpp", 442);
   dx_cleanup_42D257();
   drawpanflag = 255;
   dx_init_42D315(ghMainWnd);
@@ -451,7 +451,7 @@ void __cdecl init_get_file_info()
       if ( GetFileVersionInfoA(diablo_exe_path, 0, dwLen, lpData)
         && VerQueryValueA(lpData, "\\", (LPVOID *)&lpBuffer, &puLen) )
       {
-        assert(puLen >= 0x34, 573, "init.cpp");
+        assert(puLen >= 0x34, "init.cpp", 573);
         sprintf(
           "version unknown",
           "Version %d.%d.%d.%d",

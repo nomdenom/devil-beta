@@ -80,7 +80,7 @@ void __fastcall LoadPalette(char *pszFileName)
   int v5; // [esp+310h] [ebp-8h]
   int i; // [esp+314h] [ebp-4h]
 
-  assert(pszFileName, 135, "PALETTE.CPP");
+  assert(pszFileName, "PALETTE.CPP", 135);
   if ( !SFileOpenFile(pszFileName, &v5) )
     TermMsg("Unable to open file %s", pszFileName);
   SFileReadFile(v5, (int)&v2, 768, 0, 0);

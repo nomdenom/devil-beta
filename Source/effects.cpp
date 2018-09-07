@@ -55,7 +55,7 @@ void __fastcall InitMonsterSND(int monst)
           path = (char *)DiabloAllocPtr(v1 + 1, 223, "effects.cpp");
           strcpy(path, v5);
           v4 = sound_file_load(path);
-          assert(v4, 229, "effects.cpp");
+          assert(v4, "effects.cpp", 229);
           Monsters[monst].Snds[i][j] = v4;
         }
       }
@@ -148,7 +148,7 @@ void __fastcall PlaySFX(int psfx)
   unsigned int psfxa; // [esp+Ch] [ebp-4h]
 
   psfxa = RndSFX(psfx);
-  assert(psfxa < 0xE1, 367, "effects.cpp");
+  assert(psfxa < 0xE1, "effects.cpp", 367);
   PlaySFX_priv(&sgSFX[psfxa], 0, 0, 0);
 }
 
@@ -191,8 +191,8 @@ void __fastcall stream_play(_BYTE *a1, int a2, int a3)
   int v3; // ST20_4
   int lVolumea; // [esp+Ch] [ebp-Ch]
 
-  assert(a1, 115, "effects.cpp");
-  assert((*a1 & 2), 116, "effects.cpp");
+  assert(a1, "effects.cpp", 115);
+  assert((*a1 & 2), "effects.cpp", 116);
   sfx_stop();
   lVolumea = sound_get_or_set_sound_volume(1) + a2;
   if ( lVolumea >= -1600 )
@@ -271,7 +271,7 @@ void __fastcall PlaySfxLoc(int psfx, int x, int y)
   unsigned int psfxa; // [esp+10h] [ebp-4h]
 
   psfxa = RndSFX(psfx);
-  assert(psfxa < 0xE1, 377, "effects.cpp");
+  assert(psfxa < 0xE1, "effects.cpp", 377);
   PlaySFX_priv(&sgSFX[psfxa], 1, x, y);
 }
 

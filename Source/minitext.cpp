@@ -48,7 +48,7 @@ void __cdecl FreeQuestText()
 //----- (00412B51) --------------------------------------------------------
 void __cdecl InitQuestText()
 {
-  assert(!pMedTextCels, 691, "minitext.cpp");
+  assert(!pMedTextCels, "minitext.cpp", 691);
   pMedTextCels = LoadFileInMem("Data\\MedTextS.CEL", 0, 692, "minitext.cpp");
   pTextBoxCels = LoadFileInMem("Data\\TextBox.CEL", 0, 693, "minitext.cpp");
   qtextflag = 0;

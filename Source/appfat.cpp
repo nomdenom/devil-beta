@@ -560,7 +560,7 @@ LABEL_100:
   v3 = *(_DWORD *)"n 0x%x";
   LOWORD(v3) = *(_WORD *)"%x";
   v4 = aDderrUnknown0x[18];
-  assert((unsigned int)error_buf_len >= 0x1D, 329, "appfat.cpp");
+  assert((unsigned int)error_buf_len >= 0x1D, "appfat.cpp", 329);
   sprintf(error_buf, v6, error_code);
 }
 
@@ -659,7 +659,7 @@ LABEL_15:
   v3 = *(_DWORD *)"n 0x%x";
   LOWORD(v3) = *(_WORD *)"%x";
   v4 = aDserrUnknown0x[18];
-  assert((unsigned int)error_buf_len >= 0x1D, 391, "appfat.cpp");
+  assert((unsigned int)error_buf_len >= 0x1D, "appfat.cpp", 391);
   sprintf(error_buf, v6, error_code);
 }
 
@@ -716,7 +716,7 @@ void DrawDlg(char *pszFmt, ...)
   va_list va; // [esp+11Ch] [ebp+Ch]
 
   va_start(va, pszFmt);
-  assert(pszFmt, 500, "appfat.cpp");
+  assert(pszFmt, "appfat.cpp", 500);
   va_copy(arglist, va);
   wvsprintfA(&v1, pszFmt, va);
   arglist = 0;

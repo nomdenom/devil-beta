@@ -3,7 +3,7 @@ void __cdecl InitStores()
 {
   signed int i; // [esp+Ch] [ebp-4h]
 
-  assert(!pSTextBoxCels, 87, "stores.cpp");
+  assert(!pSTextBoxCels, "stores.cpp", 87);
   pSTextBoxCels = LoadFileInMem("Data\\TextBox2.CEL", 0, 88, "stores.cpp");
   pCelBuff = (char *)LoadFileInMem("Data\\PentSpn2.CEL", 0, 89, "stores.cpp");
   pSTextSlidCels = LoadFileInMem("Data\\TextSlid.CEL", 0, 90, "stores.cpp");
