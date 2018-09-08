@@ -22,7 +22,7 @@ void __cdecl sfx_stop()
     {
       if ( v2->pSnd )
       {
-        snd_stop_snd((TSnd *)v2->pSnd);
+        snd_stop_snd(v2->pSnd);
         v2->bFlags &= 0x7Fu;
       }
     }
@@ -153,7 +153,7 @@ void __fastcall PlaySFX(int psfx)
 }
 
 //----- (00467A9A) --------------------------------------------------------
-void __fastcall PlaySFX_priv(TSFX *a1, int a2, int x, int y)
+void __fastcall PlaySFX_priv(TSFX *pSFX, char loc, int x, int y)
 {
   int plPan; // [esp+14h] [ebp-8h]
   int plVolume; // [esp+18h] [ebp-4h]
@@ -164,21 +164,21 @@ void __fastcall PlaySFX_priv(TSFX *a1, int a2, int x, int y)
     {
       plPan = 0;
       plVolume = 0;
-      if ( !a2 || calc_snd_position(x, y, &plVolume, &plPan) )
+      if ( !loc || calc_snd_position(x, y, &plVolume, &plPan) )
       {
-        if ( a1->bFlags & 2 )
+        if ( pSFX->bFlags & 2 )
         {
-          stream_play(a1, plVolume, plPan);
+          stream_play(pSFX, plVolume, plPan);
         }
         else
         {
-          if ( !a1->pSnd )
+          if ( !pSFX->pSnd )
           {
-            a1->pSnd = (int)sound_file_load(a1->pszName);
-            if ( !(a1->bFlags & 1) )
-              a1->bFlags |= 4u;
+            pSFX->pSnd = sound_file_load(pSFX->pszName);
+            if ( !(pSFX->bFlags & 1) )
+              pSFX->bFlags |= 4u;
           }
-          snd_play_snd((TSnd *)a1->pSnd, plVolume, plPan);
+          snd_play_snd(pSFX->pSnd, plVolume, plPan);
         }
       }
     }
@@ -186,52 +186,52 @@ void __fastcall PlaySFX_priv(TSFX *a1, int a2, int x, int y)
 }
 
 //----- (00467B88) --------------------------------------------------------
-void __fastcall stream_play(_BYTE *a1, int a2, int a3)
+void __fastcall stream_play(TSFX *pSFX, int lVolume, int lPan)
 {
   int v3; // ST20_4
-  int lVolumea; // [esp+Ch] [ebp-Ch]
+  int lVolumeb; // [esp+Ch] [ebp-Ch]
 
-  assert(a1, "effects.cpp", 115);
-  assert((*a1 & 2), "effects.cpp", 116);
+  assert(pSFX, "effects.cpp", 115);
+  assert((pSFX->bFlags & 2), "effects.cpp", 116);
   sfx_stop();
-  lVolumea = sound_get_or_set_sound_volume(1) + a2;
-  if ( lVolumea >= -1600 )
+  lVolumeb = sound_get_or_set_sound_volume(1) + lVolume;
+  if ( lVolumeb >= -1600 )
   {
-    if ( lVolumea > 0 )
-      lVolumea = 0;
+    if ( lVolumeb > 0 )
+      lVolumeb = 0;
   }
   else
   {
-    lVolumea = -1600;
+    lVolumeb = -1600;
   }
   SFileEnableDirectAccess(0);
-  v3 = SFileOpenFile(*(_DWORD *)(a1 + 1), &sfx_stream);
+  v3 = SFileOpenFile(pSFX->pszName, &sfx_stream);
   SFileEnableDirectAccess(1);
   if ( v3 )
   {
     if ( SFileDdaBegin(sfx_stream, 0x40000, 0) )
     {
-      SFileDdaSetVolume(sfx_stream, lVolumea, a3);
+      SFileDdaSetVolume(sfx_stream, lVolumeb, lPan);
     }
     else
     {
       sfx_stop();
-      effects_467CB1((TSFX *)a1, lVolumea, a3);
+      effects_467CB1(pSFX, lVolumeb, lPan);
     }
   }
   else
   {
     sfx_stream = 0;
-    effects_467CB1((TSFX *)a1, lVolumea, a3);
+    effects_467CB1(pSFX, lVolumeb, lPan);
   }
 }
 
 //----- (00467CB1) --------------------------------------------------------
-void __fastcall effects_467CB1(TSFX *a1, int lVolume, int lPan)
+void __fastcall effects_467CB1(TSFX *pSFX, int lVolume, int lPan)
 {
-  a1->pSnd = (int)sound_file_load(a1->pszName);
-  a1->bFlags |= 0x84u;
-  snd_play_snd((TSnd *)a1->pSnd, lVolume, lPan);
+  pSFX->pSnd = sound_file_load(pSFX->pszName);
+  pSFX->bFlags |= 0x84u;
+  snd_play_snd(pSFX->pSnd, lVolume, lPan);
 }
 
 //----- (00467CFE) --------------------------------------------------------
@@ -297,7 +297,7 @@ void __cdecl effects_467E30()
     if ( !v0 )
       break;
     if ( v2->pSnd )
-      snd_stop_snd((TSnd *)v2->pSnd);
+      snd_stop_snd(v2->pSnd);
     ++v2;
   }
   effects_467E94();
@@ -319,9 +319,9 @@ void __cdecl effects_467E94()
       v0 = v1--;
       if ( !v0 )
         break;
-      if ( v2->bFlags & 4 && v2->pSnd && !snd_playing((TSnd *)v2->pSnd) )
+      if ( v2->bFlags & 4 && v2->pSnd && !snd_playing(v2->pSnd) )
       {
-        sound_file_cleanup((TSnd *)v2->pSnd);
+        sound_file_cleanup(v2->pSnd);
         v2->pSnd = 0;
         v2->bFlags &= 0xFBu;
         v2->bFlags &= 0x7Fu;
@@ -361,7 +361,7 @@ void __cdecl effects_467FE5()
     for ( i = 0; i < 0xE1; ++i )
     {
       if ( sgSFX[i].bFlags & 1 && !(sgSFX[i].bFlags & 2) && !sgSFX[i].pSnd )
-        sgSFX[i].pSnd = (int)sound_file_load(sgSFX[i].pszName);
+        sgSFX[i].pSnd = sound_file_load(sgSFX[i].pszName);
     }
   }
 }
@@ -376,7 +376,7 @@ void __cdecl effects_cleanup_sfx()
   {
     if ( sgSFX[i].pSnd )
     {
-      sound_file_cleanup((TSnd *)sgSFX[i].pSnd);
+      sound_file_cleanup(sgSFX[i].pSnd);
       sgSFX[i].pSnd = 0;
       sgSFX[i].bFlags &= 0xFBu;
       sgSFX[i].bFlags &= 0x7Fu;

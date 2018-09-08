@@ -163,20 +163,20 @@ void __cdecl GetLevelMTypes()
 void __fastcall InitMonsterGFX(int monst)
 {
   unsigned __int8 *v1; // eax
-  signed int v3; // [esp+10h] [ebp-110h]
-  char pszName; // [esp+14h] [ebp-10Ch]
+  signed int mtype; // [esp+10h] [ebp-110h]
+  char strBuff[256]; // [esp+14h] [ebp-10Ch]
   int j; // [esp+114h] [ebp-Ch]
   int i; // [esp+118h] [ebp-8h]
   DWORD *v7; // [esp+11Ch] [ebp-4h]
 
-  v3 = Monsters[monst].mtype;
+  mtype = Monsters[monst].mtype;
   for ( i = 0; i < 6; ++i )
   {
-    if ( (animletter[i] != 's' || monsterdata[v3].has_special) && monsterdata[v3].Frames[i] > 0 )
+    if ( (animletter[i] != 's' || monsterdata[mtype].has_special) && monsterdata[mtype].Frames[i] > 0 )
     {
-      sprintf(&pszName, monsterdata[v3].GraphicType, animletter[i]);
+      sprintf(strBuff, monsterdata[mtype].GraphicType, animletter[i]);
       assert(!Monsters[monst].Anims[i].CMem, "MONSTER.CPP", 414);
-      v1 = LoadFileInMem(&pszName, 0, 415, "MONSTER.CPP");
+      v1 = LoadFileInMem(strBuff, 0, 415, "MONSTER.CPP");
       Monsters[monst].Anims[i].CMem = v1;
       v7 = (DWORD *)Monsters[monst].Anims[i].CMem;
       if ( Monsters[monst].mtype != 108 || animletter[i] != 's' && animletter[i] != 'd' )
@@ -190,49 +190,49 @@ void __fastcall InitMonsterGFX(int monst)
           Monsters[monst].Anims[i].Frames[j] = (unsigned __int8 *)v7;
       }
     }
-    Monsters[monst].Anims[i].Rate = monsterdata[v3].Frames[i];
-    Monsters[monst].Anims[i].Delay = monsterdata[v3].Rate[i];
+    Monsters[monst].Anims[i].Rate = monsterdata[mtype].Frames[i];
+    Monsters[monst].Anims[i].Delay = monsterdata[mtype].Rate[i];
   }
-  Monsters[monst].flags_1 = monsterdata[v3].flags;
-  Monsters[monst].flags_2 = (monsterdata[v3].flags - 64) >> 1;
-  Monsters[monst].mMinHP = monsterdata[v3].mMinHP;
-  Monsters[monst].mMaxHP = monsterdata[v3].mMaxHP;
-  Monsters[monst].has_special = monsterdata[v3].has_special;
-  Monsters[monst].mAFNum = monsterdata[v3].mAFNum;
-  Monsters[monst].MData = &monsterdata[v3];
-  if ( monsterdata[v3].has_trans )
+  Monsters[monst].flags_1 = monsterdata[mtype].flags;
+  Monsters[monst].flags_2 = (monsterdata[mtype].flags - 64) >> 1;
+  Monsters[monst].mMinHP = monsterdata[mtype].mMinHP;
+  Monsters[monst].mMaxHP = monsterdata[mtype].mMaxHP;
+  Monsters[monst].has_special = monsterdata[mtype].has_special;
+  Monsters[monst].mAFNum = monsterdata[mtype].mAFNum;
+  Monsters[monst].MData = &monsterdata[mtype];
+  if ( monsterdata[mtype].has_trans )
   {
     Monsters[monst].trans_file = (char *)LoadFileInMem(
-                                           monsterdata[v3].TransFile,
+                                           monsterdata[mtype].TransFile,
                                            0,
                                            434,
                                            "MONSTER.CPP");
-    InitMonsterTRN(monst, monsterdata[v3].has_special);
+    InitMonsterTRN(monst, monsterdata[mtype].has_special);
     mem_free_dbg(Monsters[monst].trans_file, 436, "MONSTER.CPP");
     Monsters[monst].trans_file = 0;
   }
-  if ( v3 >= 60 && v3 <= 63 && !(MissileFileFlag & 1) )
+  if ( mtype >= 60 && mtype <= 63 && !(MissileFileFlag & 1) )
   {
     MissileFileFlag |= 1u;
     LoadMissileGFX(0x19u);
   }
-  if ( v3 >= 76 && v3 <= 79 && !(MissileFileFlag & 2) )
+  if ( mtype >= 76 && mtype <= 79 && !(MissileFileFlag & 2) )
   {
     MissileFileFlag |= 2u;
     LoadMissileGFX(0x16u);
   }
-  if ( v3 >= 100 && v3 <= 103 && !(MissileFileFlag & 4) )
+  if ( mtype >= 100 && mtype <= 103 && !(MissileFileFlag & 4) )
   {
     MissileFileFlag |= 4u;
     LoadMissileGFX(0x17u);
     LoadMissileGFX(0x18u);
   }
-  if ( v3 >= 72 && v3 <= 75 && !(MissileFileFlag & 8) )
+  if ( mtype >= 72 && mtype <= 75 && !(MissileFileFlag & 8) )
   {
     MissileFileFlag |= 8u;
     LoadMissileGFX(0x1Au);
   }
-  if ( v3 >= 46 && v3 <= 49 && !(MissileFileFlag & 0x10) )
+  if ( mtype >= 46 && mtype <= 49 && !(MissileFileFlag & 0x10) )
   {
     MissileFileFlag |= 0x10u;
     LoadMissileGFX(0x20u);
@@ -700,7 +700,7 @@ void __fastcall SetMapMonsters(char *pMap, int startx, int starty)
     {
       if ( *(_WORD *)v12 )
       {
-        v5 = AddMonsterType(MonstConvTbl[*(unsigned __int16 *)v12], 2);
+        v5 = AddMonsterType(*((char *)&monsterdata[109].mExp + *(unsigned __int16 *)v12 + 1), 2);
         i = nummonsters++;
         PlaceMonster(i, v5, startx + k + 16, starty + j + 16);
       }

@@ -1,32 +1,33 @@
 //----- (0042D180) --------------------------------------------------------
 BOOL requires_pentium()
 {
-  char v0; // fl
-  BOOL v2; // [esp+Ch] [ebp-28h]
+  BOOL v1; // [esp+Ch] [ebp-28h]
   SYSTEM_INFO SystemInfo; // [esp+10h] [ebp-24h]
 
-  v2 = 0;
+  v1 = 0;
   GetSystemInfo(&SystemInfo);
   if ( !SystemInfo.anonymous_0.anonymous_0.wProcessorArchitecture )
   {
     if ( SystemInfo.dwProcessorType >= 0x24A )
     {
-      v2 = 1;
+      v1 = 1;
     }
-    else if ( init_42D223(v0) )
+    else if ( init_42D223_pentium_check_hack() )
     {
-      v2 = 1;
+      v1 = 1;
     }
   }
-  if ( !v2 )
-    v2 = MessageBoxA(0, "Diablo requires at least a Pentium", "Diablo", 0x131u) == 1;
-  return v2;
+  if ( !v1 )
+    v1 = MessageBoxA(0, "Diablo requires at least a Pentium", "Diablo", 0x131u) == 1;
+  return v1;
 }
 
 //----- (0042D223) --------------------------------------------------------
-BOOL __usercall init_42D223@<eax>(char a1@<efl>)
+int __cdecl init_42D223_pentium_check_hack()
 {
-  return a1 == 2;
+  char v0; // fl
+
+  return 1;
 }
 
 //----- (0042D257) --------------------------------------------------------

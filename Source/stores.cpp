@@ -925,8 +925,8 @@ void __cdecl S_StartWRecharge()
     stextscrl = 1;
     stextsval = 0;
     stextsmax = plr[myplr]._pNumInv;
-    v0.offs016C = plr[myplr]._pGold;
-    sprintf(tempstr, "Recharge which item?            Your gold : %i", v0.offs016C);
+    v0.Xgold_unused = plr[myplr]._pGold;
+    sprintf(tempstr, "Recharge which item?            Your gold : %i", v0.Xgold_unused);
     AddSText(0, 1, 1u, tempstr, 3, 0);
     AddSLine(3);
     AddSLine(21);
@@ -936,8 +936,8 @@ void __cdecl S_StartWRecharge()
   else
   {
     stextscrl = 0;
-    v0.offs016C = plr[myplr]._pGold;
-    sprintf(tempstr, "You have nothing to recharge.            Your gold : %i", v0.offs016C);
+    v0.Xgold_unused = plr[myplr]._pGold;
+    sprintf(tempstr, "You have nothing to recharge.            Your gold : %i", v0.Xgold_unused);
     AddSText(0, 1, 1u, tempstr, 3, 0);
     AddSLine(3);
     AddSLine(21);

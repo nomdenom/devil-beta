@@ -203,8 +203,8 @@ void __fastcall CalcPlrItemVals(int p, BOOL Loadgfx)
         ihp += plr[p].InvBody[i]._iPLHP;
         imana += plr[p].InvBody[i]._iPLMana;
         spllvladd += plr[p].InvBody[i]._iSplLvlAdd;
-        splcost += plr[p].InvBody[i].V_iRequest_O_splcost;
-        spldur += plr[p].InvBody[i].V_iUid_O_spldur;
+        splcost += plr[p].InvBody[i]._pISplCost;
+        spldur += plr[p].InvBody[i]._pISplDur;
         enac += plr[p].InvBody[i]._iPLEnAc;
         fmin += plr[p].InvBody[i]._iFMinDam;
         fmax += plr[p].InvBody[i]._iFMaxDam;
@@ -947,11 +947,11 @@ void __fastcall GetOilMagic(int i, int lvl)
   {
     v7 = 5;
   }
-  strcpy(item[i]._iName, &aOilOfAccuracy[25 * v7]);
-  strcpy(item[i]._iIName, &aOilOfAccuracy[25 * v7]);
-  item[i]._iMiscId = oil_4C3378[v7];
-  item[i]._ivalue = oil_4C3350[v7];
-  item[i]._iIvalue = oil_4C3350[v7];
+  strcpy(item[i]._iName, Xoil_names[v7]);
+  strcpy(item[i]._iIName, Xoil_names[v7]);
+  item[i]._iMiscId = oil_4C3378_id[v7];
+  item[i]._ivalue = oil_4C3350_ivalue[v7];
+  item[i]._iIvalue = oil_4C3350_ivalue[v7];
 }
 
 //----- (00423E7C) --------------------------------------------------------
@@ -1000,8 +1000,8 @@ void __fastcall GetItemAttrs(int i, int idata, int lvl)
   item[i]._iPLGetHit = 0;
   item[i]._iPLLight = 0;
   item[i]._iSplLvlAdd = 0;
-  item[i].V_iRequest_O_splcost = 0;
-  item[i].V_iUid_O_spldur = 0;
+  item[i]._pISplCost = 0;
+  item[i]._pISplDur = 0;
   item[i]._iFMinDam = 0;
   item[i]._iFMaxDam = 0;
   item[i]._iLMinDam = 0;
@@ -1119,10 +1119,10 @@ void __fastcall SaveItemPower(int i, int power, int param1, int param2, int minv
       item[i]._iPLMR += pv;
       break;
     case 12:
-      item[i].V_iRequest_O_splcost = pv;
+      item[i]._pISplCost = pv;
       break;
     case 13:
-      item[i].V_iUid_O_spldur = pv;
+      item[i]._pISplDur = pv;
       break;
     case 14:
       item[i]._iSplLvlAdd = pv;
@@ -2575,10 +2575,10 @@ void __fastcall PrintItemPower(char power, ItemStruct *item)
       sprintf(tempstr, "Resist All : %+i%%", item->_iPLFR);
       break;
     case 12:
-      sprintf(tempstr, "spell cost -%i%% less mana", item->V_iRequest_O_splcost);
+      sprintf(tempstr, "spell cost -%i%% less mana", item->_pISplCost);
       break;
     case 13:
-      sprintf(tempstr, "spell duration: +%i%%", item->V_iUid_O_spldur);
+      sprintf(tempstr, "spell duration: +%i%%", item->_pISplDur);
       break;
     case 14:
       if ( item->_iSplLvlAdd == 1 )
@@ -3773,6 +3773,30 @@ void unused_sub_42CD40()
   for ( i = 0; i < 6; ++i )
     premiumitem[i]._itype = -1;
   SpawnPremium(30);
+}
+
+//----- (0042CD9D) --------------------------------------------------------
+void __cdecl unused_sub_42CD9D()
+{
+  signed int i; // [esp+Ch] [ebp-8h]
+  signed int j; // [esp+Ch] [ebp-8h]
+  int iv; // [esp+10h] [ebp-4h]
+
+  for ( i = 0; i < 40; ++i )
+  {
+    if ( plr[myplr].InvGrid[i] > 0 )
+    {
+      iv = plr[myplr].InvGrid[i] - 1;
+      if ( plr[myplr].InvList[iv]._itype == 11 )
+        RemoveInvItem(myplr, iv);
+    }
+  }
+  for ( j = 0; j < 8; ++j )
+  {
+    if ( plr[myplr].SpdList[j]._itype == 11 )
+      plr[myplr].SpdList[j]._itype = -1;
+  }
+  plr[myplr]._pGold = 0;
 }
 
 //----- (0042CFC5) --------------------------------------------------------
