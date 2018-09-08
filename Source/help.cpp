@@ -3,8 +3,8 @@ void __cdecl InitHelp()
 {
   helpflag = 0;
   Xhelpflag_2 = 0;
-  help_62748C = 0;
-  help_627900 = 0;
+  help_62748C_num = 0;
+  help_627900_num = 0;
 }
 
 //----- (0044E5F8) --------------------------------------------------------
@@ -55,7 +55,7 @@ void __cdecl DrawHelp()
   DrawQTextBack();
   PrintSString(0, 2, 1u, "Diablo Help", 3, 0);
   DrawSLine(5);
-  v7 = gszHelpText;
+  v7 = gszHelpText[0];
   for ( i = 0; i < help_select_line; ++i )
   {
     v5 = 0;
@@ -130,125 +130,104 @@ void __cdecl DrawHelp()
 }
 
 //----- (0044E985) --------------------------------------------------------
-signed int __fastcall PrintHelpModeStr(int a1)
+void __fastcall PrintHelpModeStr(int a1)
 {
-  signed int result; // eax
-  signed int v3; // [esp+10h] [ebp-10h]
+  signed int v2; // [esp+10h] [ebp-10h]
   signed int i; // [esp+14h] [ebp-Ch]
   int No; // [esp+18h] [ebp-8h]
-  char v6; // [esp+1Ch] [ebp-4h]
+  char v5; // [esp+1Ch] [ebp-4h]
 
-  No = dword_627498[35 * a1] + screen_y_times_768[dword_62749C[35 * a1] + 160] + 64;
-  v3 = strlen((const char *)&dword_627498[35 * a1 + 2]);
-  for ( i = 0; ; ++i )
+  No = Xhelpstruct[a1].x + screen_y_times_768[Xhelpstruct[a1].y + 160] + 64;
+  v2 = strlen(Xhelpstruct[a1].text);
+  for ( i = 0; i < v2; ++i )
   {
-    result = v3;
-    if ( i >= v3 )
-      break;
-    v6 = fontframe[byte_6274A0[140 * a1 + i] & 0x7F];
-    if ( v6 )
-      CPrintString(No, v6, byte_627520[140 * a1]);
-    No += fontkern[v6] + 1;
+    v5 = fontframe[Xhelpstruct[a1].text[i] & 0x7F];
+    if ( v5 )
+      CPrintString(No, v5, Xhelpstruct[a1].just);
+    No += fontkern[v5] + 1;
   }
-  return result;
 }
 
 //----- (0044EA77) --------------------------------------------------------
-int __stdcall help_44EA77(char *a1, char a2)
+void __fastcall help_44EA77_add(int x, int y, char *text, int just)
 {
-  int v2; // edx
-  int v3; // ecx
-  int result; // eax
-
-  if ( help_62748C < 8 )
+  if ( help_62748C_num < 8 )
   {
-    dword_627498[35 * help_62748C] = v3;
-    dword_62749C[35 * help_62748C] = v2;
-    result = (int)strcpy((char *)&dword_627498[35 * help_62748C + 2], a1);
-    LOBYTE(result) = a2;
-    byte_627520[140 * help_62748C++] = a2;
+    Xhelpstruct[help_62748C_num].x = x;
+    Xhelpstruct[help_62748C_num].y = y;
+    strcpy(Xhelpstruct[help_62748C_num].text, text);
+    Xhelpstruct[help_62748C_num++].just = just;
   }
-  return result;
 }
 
 //----- (0044EB1A) --------------------------------------------------------
-char __fastcall help_44EB1A(int a1, int a2, int a3, int a4, char a5)
+void __fastcall help_44EB1A_add(int a1, int a2, int a3, int a4, char a5)
 {
-  char result; // al
-
-  if ( help_627900 < 4 )
+  if ( help_627900_num < 4 )
   {
-    dword_627908[5 * help_627900] = a1;
-    dword_62790C[5 * help_627900] = a2;
-    dword_627910[5 * help_627900] = a3;
-    dword_627914[5 * help_627900] = a4;
-    result = a5;
-    byte_627918[20 * help_627900++] = a5;
+    Xhelpstruct2[help_627900_num].x1 = a1;
+    Xhelpstruct2[help_627900_num].y1 = a2;
+    Xhelpstruct2[help_627900_num].x2 = a3;
+    Xhelpstruct2[help_627900_num].y2 = a4;
+    Xhelpstruct2[help_627900_num++].field_10 = a5;
   }
-  return result;
 }
 
 //----- (0044EBA7) --------------------------------------------------------
-int helpmode_draw2()
+void __cdecl helpmode_draw2()
 {
-  int result; // eax
-  int i; // [esp+Ch] [ebp-4h]
-  int j; // [esp+Ch] [ebp-4h]
+  int a1; // [esp+Ch] [ebp-4h]
+  int a1a; // [esp+Ch] [ebp-4h]
 
-  for ( i = 0; help_627900 > i; ++i )
+  for ( a1 = 0; help_627900_num > a1; ++a1 )
     engine_draw_automap_pixels(
-      dword_627908[5 * i],
-      dword_62790C[5 * i],
-      dword_627910[5 * i],
-      dword_627914[5 * i],
-      byte_627918[20 * i]);
-  for ( j = 0; ; ++j )
-  {
-    result = j;
-    if ( help_62748C <= j )
-      break;
-    PrintHelpModeStr(j);
-  }
-  return result;
+      Xhelpstruct2[a1].x1,
+      Xhelpstruct2[a1].y1,
+      Xhelpstruct2[a1].x2,
+      Xhelpstruct2[a1].y2,
+      Xhelpstruct2[a1].field_10);
+  for ( a1a = 0; help_62748C_num > a1a; ++a1a )
+    PrintHelpModeStr(a1a);
 }
 
 //----- (0044EC51) --------------------------------------------------------
 void __fastcall help_44EC51(int x, int y)
 {
-  dword_6278F8 = 32 * (x - ViewX) - 32 * (y - ViewY) + 320;
-  dword_6278FC = 16 * (x - ViewX) + 16 * (y - ViewY) + 126;
+  help_6278F8_x = 32 * (x - ViewX) - 32 * (y - ViewY) + 320;
+  help_6278FC_y = 16 * (x - ViewX) + 16 * (y - ViewY) + 126;
 }
 
 //----- (0044ECB0) --------------------------------------------------------
 void __cdecl new_help_mode()
 {
-  help_627900 = 0;
-  help_62748C = 0;
-  help_44EA77("Help mode on", 3);
+  help_627900_num = 0;
+  help_62748C_num = 0;
+  help_44EA77_add(8, 20, "Help mode on", 3);
   if ( pcursmonst != -1 )
   {
     if ( currlevel )
     {
       help_44EC51(monster[pcursmonst]._mx, monster[pcursmonst]._my);
-      help_44EB1A(dword_6278F8, dword_6278FC, 318, 35, 225);
+      help_44EB1A_add(help_6278F8_x, help_6278FC_y, 318, 35, 225);
       strcpy(tempstr, "Left click to attack with weapon");
-      help_44EA77(tempstr, 2);
+      help_44EA77_add(320, 20, tempstr, 2);
       strcpy(tempstr, "Right click to attack with firebolt spell");
+      help_44EA77_add(320, 33, tempstr, 2);
     }
     else
     {
       help_44EC51(cursmx, cursmy);
-      help_44EB1A(dword_6278F8, dword_6278FC, dword_6278F8 + 30, dword_6278FC - 14, 225);
+      help_44EB1A_add(help_6278F8_x, help_6278FC_y, help_6278F8_x + 30, help_6278FC_y - 14, 225);
       strcpy(tempstr, "Left click to talk to person");
+      help_44EA77_add(help_6278F8_x + 32, help_6278FC_y - 16, tempstr, 2);
     }
-    help_44EA77(tempstr, 2);
   }
   if ( pcursobj != -1 )
   {
     help_44EC51(object[pcursobj]._ox, object[pcursobj]._oy);
-    help_44EB1A(dword_6278F8, dword_6278FC, dword_6278F8 + 30, dword_6278FC - 14, 241);
+    help_44EB1A_add(help_6278F8_x, help_6278FC_y, help_6278F8_x + 30, help_6278FC_y - 14, 241);
     strcpy(tempstr, "Left click to operate");
-    help_44EA77(tempstr, 0);
+    help_44EA77_add(help_6278F8_x + 32, help_6278FC_y - 16, tempstr, 0);
   }
 }
 

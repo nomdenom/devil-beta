@@ -2060,7 +2060,7 @@ void __fastcall DrawMain(int dwHgt, int draw_desc, int draw_hp, int draw_mana, i
   DDSURFACEDESC v54; // [esp+28h] [ebp-6Ch]
 
   h_ = dwHgt;
-  if ( window_activated )
+  if ( gbActive )
   {
     if ( lpDDSPrimary )
     {
@@ -2257,7 +2257,7 @@ void __cdecl DrawFPS()
   DWORD v4; // [esp+20h] [ebp-8h]
   int v5; // [esp+24h] [ebp-4h]
 
-  if ( frameflag && window_activated )
+  if ( frameflag && gbActive )
   {
     ++frameend;
     v4 = GetTickCount();

@@ -157,7 +157,7 @@ void __fastcall gamemenu_options(int a1)
   gamemenu_get_music();
   gamemenu_get_sound();
   gamemenu_get_gamma();
-  gmenu_call_proc(&sgOptionMenu);
+  gmenu_call_proc(sgOptionMenu);
 }
 
 //----- (00466BBC) --------------------------------------------------------
@@ -166,7 +166,7 @@ void __cdecl gamemenu_get_music()
   int v0; // eax
 
   v0 = sound_get_or_set_music_volume(1);
-  gamemenu_sound_music_toggle(music_toggle_names, gbMusicOn, &sgOptionMenu, v0);
+  gamemenu_sound_music_toggle(music_toggle_names, gbMusicOn, sgOptionMenu, v0);
 }
 
 //----- (00466BED) --------------------------------------------------------
@@ -192,7 +192,7 @@ void __cdecl gamemenu_get_sound()
   int v0; // eax
 
   v0 = sound_get_or_set_sound_volume(1);
-  gamemenu_sound_music_toggle(sound_toggle_names, gbSoundOn, &sgOptionMenu + 1, v0);
+  gamemenu_sound_music_toggle(sound_toggle_names, gbSoundOn, &sgOptionMenu[1], v0);
 }
 
 //----- (00466C9A) --------------------------------------------------------
@@ -200,9 +200,9 @@ void __cdecl gamemenu_get_gamma()
 {
   int v0; // eax
 
-  gmenu_slider_3(&unk_4D64D0, 15);
+  gmenu_slider_3(&sgOptionMenu[2], 15);
   v0 = UpdateGamma(0);
-  gmenu_slider_1(&unk_4D64D0, 30, 100, v0);
+  gmenu_slider_1(&sgOptionMenu[2], 30, 100, v0);
 }
 
 //----- (00466CD4) --------------------------------------------------------
@@ -227,7 +227,7 @@ void __fastcall gamemenu_music_volume(int a1)
   }
   else
   {
-    volume = gamemenu_slider_music_sound(&sgOptionMenu);
+    volume = gamemenu_slider_music_sound(sgOptionMenu);
     sound_get_or_set_music_volume(volume);
     if ( volume == -1600 )
     {
@@ -247,9 +247,9 @@ void __fastcall gamemenu_music_volume(int a1)
 }
 
 //----- (00466DAA) --------------------------------------------------------
-int __fastcall gamemenu_slider_music_sound(_DWORD *a1)
+int __fastcall gamemenu_slider_music_sound(TMenuItem *a1)
 {
-  return gmenu_slider_get((TMenuItem *)a1, -1600, 0);
+  return gmenu_slider_get(a1, -1600, 0);
 }
 
 //----- (00466DCF) --------------------------------------------------------
@@ -273,7 +273,7 @@ void __fastcall gamemenu_sound_volume(int a1)
   }
   else
   {
-    volume = gamemenu_slider_music_sound(&unk_4D64C4);
+    volume = gamemenu_slider_music_sound(&sgOptionMenu[1]);
     sound_get_or_set_sound_volume(volume);
     if ( volume == -1600 )
     {
@@ -314,6 +314,6 @@ void __fastcall gamemenu_gamma(int a1)
 //----- (00466EEB) --------------------------------------------------------
 int __cdecl gamemenu_slider_gamma()
 {
-  return gmenu_slider_get(&unk_4D64D0, 30, 100);
+  return gmenu_slider_get(&sgOptionMenu[2], 30, 100);
 }
 

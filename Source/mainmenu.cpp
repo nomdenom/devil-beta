@@ -23,7 +23,7 @@ LABEL_2:
   while ( !v3 )
   {
     v2 = 0;
-    if ( !UiMainMenuDialog("version unknown", &v2, sound_41464E) )
+    if ( !UiMainMenuDialog((int)"version unknown", (int)&v2, (int)sound_41464E) )
       TermMsg("Unable to display mainmenu");
     switch ( v2 )
     {

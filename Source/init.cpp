@@ -286,7 +286,7 @@ void __fastcall init_create_window(int nCmdShow)
 
   memset(&WndClass, 0, 0x28u);
   WndClass.style = 3;
-  WndClass.lpfnWndProc = init_redraw_window;
+  WndClass.lpfnWndProc = WindowProc;
   WndClass.hInstance = ghInst;
   WndClass.hIcon = LoadIconA(ghInst, (LPCSTR)0x7F00);
   WndClass.hCursor = LoadCursorA(0, (LPCSTR)0x7F00);
@@ -467,7 +467,7 @@ void __cdecl init_get_file_info()
 }
 
 //----- (0042E1AC) --------------------------------------------------------
-LRESULT __stdcall init_palette(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+LRESULT __stdcall MainWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
   if ( Msg > WM_ACTIVATEAPP )
   {
@@ -483,7 +483,7 @@ LRESULT __stdcall init_palette(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam
     switch ( Msg )
     {
       case WM_ACTIVATEAPP:
-        window_activated = wParam;
+        gbActive = wParam;
         if ( wParam )
           drawpanflag = 255;
         break;
@@ -501,14 +501,14 @@ LRESULT __stdcall init_palette(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam
 }
 
 //----- (0042E2B0) --------------------------------------------------------
-LRESULT __stdcall init_redraw_window(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+LRESULT __stdcall WindowProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
   LRESULT result; // eax
 
   if ( CurrentProc )
     result = CurrentProc(hWnd, Msg, wParam, lParam);
   else
-    result = init_palette(hWnd, Msg, wParam, lParam);
+    result = MainWndProc(hWnd, Msg, wParam, lParam);
   return result;
 }
 

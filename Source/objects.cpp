@@ -3284,7 +3284,7 @@ void __fastcall GetObjectStr(int i)
     case OBJ_SHRINER:
     case OBJ_L3RDOOR:
     case OBJ_PURIFYINGFTN:
-      sprintf(tempstr, "%s Shrine", off_4D60F8[object[i]._oVar1]);
+      sprintf(tempstr, "%s Shrine", shrinestrs[object[i]._oVar1]);
       strcpy(infostr, tempstr);
       break;
     case OBJ_SKELBOOK:

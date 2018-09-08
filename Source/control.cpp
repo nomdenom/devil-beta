@@ -959,11 +959,11 @@ void __cdecl DrawCtrlPan()
   }
   if ( numpanbtns == 8 )
   {
-    CelDecodeOnly(151, 634, pMultiBtns, dword_5FDBA8 + 1, 33);
+    CelDecodeOnly(151, 634, pMultiBtns, control_5FDBA8_frame + 1, 33);
     if ( FriendlyMode )
-      CelDecodeOnly(591, 634, pMultiBtns, dword_5FDBAC + 3, 33);
+      CelDecodeOnly(591, 634, pMultiBtns, control_5FDBAC_frame + 3, 33);
     else
-      CelDecodeOnly(591, 634, pMultiBtns, dword_5FDBAC + 5, 33);
+      CelDecodeOnly(591, 634, pMultiBtns, control_5FDBAC_frame + 5, 33);
   }
 }
 

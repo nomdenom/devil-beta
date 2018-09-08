@@ -185,7 +185,7 @@ void __fastcall multi_msg_countdown()
   {
     if ( plr[pnum].plractive )
     {
-      if ( byte_5FF8B0[pnum] )
+      if ( msg_5FF8B0_plractive[pnum] )
         multi_parse_turn(pnum);
     }
   }
@@ -199,8 +199,8 @@ void __fastcall multi_parse_turn(int pnum)
   DeactivatePortal(pnum);
   EventPlrMsg("Player '%s' just left the game", plr[pnum]._pName);
   plr[pnum].plractive = 0;
-  byte_5FF8B0[pnum] = 0;
-  byte_5FF8C8[pnum] = 0;
+  msg_5FF8B0_plractive[pnum] = 0;
+  multi_5FF8C8_hasdelta[pnum] = 0;
   --gbActivePlayers;
 }
 
@@ -232,9 +232,9 @@ void __fastcall multi_41C8BA(BOOL a1)
     }
     if ( a1 )
     {
-      if ( byte_5FF8C8[pnum] )
+      if ( multi_5FF8C8_hasdelta[pnum] )
       {
-        byte_5FF8C8[pnum] = 0;
+        multi_5FF8C8_hasdelta[pnum] = 0;
         DeltaExportData(pnum);
       }
     }
@@ -257,7 +257,7 @@ void __fastcall multi_41C9FB(int pnum, int a2)
     if ( v3 >= 0x3FFFFFFF )
       v3 = (unsigned __int16)v3;
     cur_turn = v3 + gdwTurnsInTransit;
-    dword_6000DC = 8 * v3 * byte_5FE0E8;
+    Xmulti_mon_ai_seed = 8 * v3 * byte_5FE0E8;
   }
 }
 
@@ -273,7 +273,7 @@ void __fastcall multi_41CA8A(int pnum)
     if ( myplr == i )
     {
       assert(!gbBufferMsgs, "multi.cpp", 353);
-      byte_5FF8C8[pnum] = 1;
+      multi_5FF8C8_hasdelta[pnum] = 1;
     }
   }
 }
@@ -342,7 +342,7 @@ void __cdecl multi_mon_seeds()
   signed int i; // [esp+Ch] [ebp-8h]
   unsigned int v1; // [esp+10h] [ebp-4h]
 
-  v1 = _rotr(++dword_6000DC, 8);
+  v1 = _rotr(++Xmulti_mon_ai_seed, 8);
   for ( i = 0; i < 200; ++i )
     monster[i]._mAISeed = v1 + i;
 }
@@ -576,7 +576,7 @@ void __stdcall multi_handle_events(void *a1)
   {
     v1 = *((_DWORD *)a1 + 1) == 0;
     assert(*((_DWORD *)a1 + 1) < 4u, "multi.cpp", 785);
-    byte_5FF8B0[*((_DWORD *)a1 + 1)] = 1;
+    msg_5FF8B0_plractive[*((_DWORD *)a1 + 1)] = 1;
   }
 }
 
@@ -641,8 +641,8 @@ int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
   *(_DWORD *)&v23[32] = &UiSoundCallback;
   msg_5FF8B4_isprocessing = 1;
   gbGameDestroyed = 0;
-  memset(byte_5FF8B0, 0, 4u);
-  memset(byte_5FF8C8, 0, 4u);
+  memset(msg_5FF8B0_plractive, 0, 4u);
+  memset(multi_5FF8C8_hasdelta, 0, 4u);
   memset(plr, 0, 0x15260u);
   memset(sgwPackPlrOffsetTbl, 0, 8u);
   SNetSetBasePlayer(0);
@@ -710,7 +710,7 @@ int __fastcall NetInit(int bSinglePlayer, int *pfExitProgram)
   dword_5FF8BC = 0;
   sync_clear_pkt();
   nthread_start(v6);
-  dword_6000DC = 0;
+  Xmulti_mon_ai_seed = 0;
   cur_turn = nthread_send_and_recv_turn(0, 1);
   pfile_read_player_from_save();
   NetSendCmd(1u, 3u);

@@ -325,7 +325,7 @@ void __fastcall InitCutscene(int interface_mode)
 LRESULT __stdcall interfac_41F03E_wndproc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 {
   if ( Msg != WM_SYSCOMMAND || wParam != SC_CLOSE )
-    return init_palette(hWnd, Msg, wParam, lParam);
+    return MainWndProc(hWnd, Msg, wParam, lParam);
   gbRunGame = 0;
   gbRunGameResult = 0;
   return 0;

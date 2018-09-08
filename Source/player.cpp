@@ -453,7 +453,7 @@ void __fastcall CreatePlayer(int pnum, char c)
   else
     v3 = plr[pnum]._pStrength * plr[pnum]._pLevel / 100;
   plr[pnum]._pDamageMod = v3;
-  plr[pnum]._pBaseToBlk = dword_4D8D60[c];
+  plr[pnum]._pBaseToBlk = ToBlkTbl[c];
   plr[pnum]._pHitPoints = plr[pnum]._pVitality << 6;
   if ( !plr[pnum]._pClass )
     plr[pnum]._pHitPoints *= 2;

@@ -203,11 +203,11 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
           break;
         case WM_SYSKEYDOWN:
           if ( sgbMouseDown || !PressSysKey(wParam) )
-            return init_palette(hWnd, uMsg, wParam, lParam);
+            return MainWndProc(hWnd, uMsg, wParam, lParam);
           result = 0;
           break;
         default:
-          return init_palette(hWnd, uMsg, wParam, lParam);
+          return MainWndProc(hWnd, uMsg, wParam, lParam);
       }
       return result;
     }
@@ -217,10 +217,10 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
       gbRunGameResult = 0;
       return 0;
     }
-    return init_palette(hWnd, uMsg, wParam, lParam);
+    return MainWndProc(hWnd, uMsg, wParam, lParam);
   }
   if ( uMsg > 0x409 )
-    return init_palette(hWnd, uMsg, wParam, lParam);
+    return MainWndProc(hWnd, uMsg, wParam, lParam);
   if ( uMsg >= 0x402 )
   {
     if ( (signed int)gbMaxPlayers > 1 )
@@ -284,7 +284,7 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         result = 0;
         break;
       default:
-        return init_palette(hWnd, uMsg, wParam, lParam);
+        return MainWndProc(hWnd, uMsg, wParam, lParam);
     }
   }
   return result;

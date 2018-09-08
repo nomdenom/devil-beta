@@ -6,7 +6,7 @@ void __fastcall play_movie(char *pszMovie, bool user_can_close)
   int v5; // [esp+2Ch] [ebp-8h]
   WNDPROC func; // [esp+30h] [ebp-4h]
 
-  if ( window_activated )
+  if ( gbActive )
   {
     assert(ghMainWnd, "movie.cpp", 69);
     func = SetWindowProc(MovieWndProc);
@@ -23,7 +23,7 @@ void __fastcall play_movie(char *pszMovie, bool user_can_close)
     }
     do
     {
-      if ( !movie_playing || !window_activated )
+      if ( !movie_playing || !gbActive )
         break;
       while ( PeekMessageA((LPMSG)&Msg, 0, 0, 0, 1u) )
       {
@@ -57,20 +57,20 @@ LRESULT __stdcall MovieWndProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam
     {
       dword_4DB908();
     }
-    return init_palette(hWnd, Msg, wParam, lParam);
+    return MainWndProc(hWnd, Msg, wParam, lParam);
   }
   if ( Msg > WM_TIMER )
   {
     if ( Msg != WM_LBUTTONDOWN && Msg != WM_RBUTTONDOWN )
-      return init_palette(hWnd, Msg, wParam, lParam);
+      return MainWndProc(hWnd, Msg, wParam, lParam);
 LABEL_3:
     movie_playing = 0;
-    return init_palette(hWnd, Msg, wParam, lParam);
+    return MainWndProc(hWnd, Msg, wParam, lParam);
   }
   if ( Msg != WM_TIMER )
   {
     if ( Msg != 258 )
-      return init_palette(hWnd, Msg, wParam, lParam);
+      return MainWndProc(hWnd, Msg, wParam, lParam);
     goto LABEL_3;
   }
   if ( dword_645124 )
@@ -79,7 +79,7 @@ LABEL_3:
     if ( !v4 )
       movie_playing = 0;
   }
-  return init_palette(hWnd, Msg, wParam, lParam);
+  return MainWndProc(hWnd, Msg, wParam, lParam);
 }
 
 //----- (0048251A) --------------------------------------------------------
@@ -96,7 +96,7 @@ void __fastcall movie_unused_482539(char *palette, char *a2)
   unsigned __int8 *pCelBuff; // [esp+14h] [ebp-4h]
 
   pszFileName = a2;
-  if ( window_activated )
+  if ( gbActive )
   {
     pCelBuff = LoadFileInMem(palette, 0, 122, "movie.cpp");
     if ( pCelBuff )

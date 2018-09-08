@@ -109,7 +109,7 @@ void __cdecl nthread_41B69A()
   HRESULT v3; // [esp+20h] [ebp-44h]
   char String; // [esp+24h] [ebp-40h]
 
-  if ( window_activated )
+  if ( gbActive )
   {
     assert((unsigned int)myplr < 4, "nthread.cpp", 176);
     v1[0] = "<%d> %d %d %d";
