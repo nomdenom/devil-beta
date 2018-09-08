@@ -1134,7 +1134,7 @@ void __cdecl CheckPanelInfo()
         }
         else
         {
-          strcpy(infostr, (&off_4C0638)[i]);
+          strcpy(infostr, PanBtnStr[i]);
         }
         infoclr = 0;
         panelflag = 1;

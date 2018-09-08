@@ -5,19 +5,21 @@ void __cdecl gamemenu_previous()
   {
     if ( dword_6180EC )
     {
-      dword_4D6420 |= 0x80000000;
-      dword_4D63E4 |= 0x80000000;
+      sgSingleMenu[2].dwFlags |= 0x80000000;
+      XsgSingleMenu_dead[3].dwFlags |= 0x80000000;
     }
     else
     {
-      dword_4D6420 &= 0x7FFFFFFFu;
-      dword_4D63E4 &= 0x7FFFFFFFu;
+      sgSingleMenu[2].dwFlags &= 0x7FFFFFFFu;
+      XsgSingleMenu_dead[3].dwFlags &= 0x7FFFFFFFu;
     }
-    gmenu_call_proc((char *)&unk_4D6408 + ((&unk_4D63C0 - &unk_4D6408) & ((deathflag != 0) - 1)));
+    gmenu_call_proc((TMenuItem *)((char *)sgSingleMenu
+                                + (((char *)XsgSingleMenu_dead - (char *)sgSingleMenu) & ((deathflag != 0) - 1))));
   }
   else
   {
-    gmenu_call_proc((char *)&unk_4D6478 + ((&unk_4D6448 - &unk_4D6478) & ((deathflag != 0) - 1)));
+    gmenu_call_proc((TMenuItem *)((char *)sgMultiMenu
+                                + (((char *)XsgMultiMenu_dead - (char *)sgMultiMenu) & ((deathflag != 0) - 1))));
   }
 }
 
@@ -155,40 +157,42 @@ void __fastcall gamemenu_options(int a1)
   gamemenu_get_music();
   gamemenu_get_sound();
   gamemenu_get_gamma();
-  gmenu_call_proc(&dword_4D64B8);
+  gmenu_call_proc(&sgOptionMenu);
 }
 
 //----- (00466BBC) --------------------------------------------------------
 void __cdecl gamemenu_get_music()
 {
-  sound_get_or_set_music_volume(1);
-  gamemenu_sound_music_toggle(&music_toggle_names, gbMusicOn, &dword_4D64B8);
+  int v0; // eax
+
+  v0 = sound_get_or_set_music_volume(1);
+  gamemenu_sound_music_toggle(music_toggle_names, gbMusicOn, &sgOptionMenu, v0);
 }
 
 //----- (00466BED) --------------------------------------------------------
-void __fastcall gamemenu_sound_music_toggle(_DWORD *a1, BYTE a2, DWORD *a3)
+void __fastcall gamemenu_sound_music_toggle(char **names, BYTE music, TMenuItem *menu_item, int volume)
 {
-  int gamma; // [esp+20h] [ebp+Ch]
-
   if ( gbSndInited )
   {
-    *a3 |= 0xC0000000;
-    a3[1] = *a1;
-    gmenu_slider_3((TMenuItem *)a3, 17);
-    gmenu_slider_1((TMenuItem *)a3, -1600, 0, gamma);
+    menu_item->dwFlags |= 0xC0000000;
+    menu_item->pszStr = *names;
+    gmenu_slider_3(menu_item, 17);
+    gmenu_slider_1(menu_item, -1600, 0, volume);
   }
   else
   {
-    *a3 &= 0x3FFFFFFFu;
-    a3[1] = a1[1];
+    menu_item->dwFlags &= 0x3FFFFFFFu;
+    menu_item->pszStr = names[1];
   }
 }
 
 //----- (00466C65) --------------------------------------------------------
 void __cdecl gamemenu_get_sound()
 {
-  sound_get_or_set_sound_volume(1);
-  gamemenu_sound_music_toggle(&off_4D6500, gbSoundOn, &dword_4D64B8 + 3);
+  int v0; // eax
+
+  v0 = sound_get_or_set_sound_volume(1);
+  gamemenu_sound_music_toggle(sound_toggle_names, gbSoundOn, &sgOptionMenu + 1, v0);
 }
 
 //----- (00466C9A) --------------------------------------------------------
@@ -196,9 +200,9 @@ void __cdecl gamemenu_get_gamma()
 {
   int v0; // eax
 
-  gmenu_slider_3(&pItem, 15);
+  gmenu_slider_3(&unk_4D64D0, 15);
   v0 = UpdateGamma(0);
-  gmenu_slider_1(&pItem, 30, 100, v0);
+  gmenu_slider_1(&unk_4D64D0, 30, 100, v0);
 }
 
 //----- (00466CD4) --------------------------------------------------------
@@ -223,7 +227,7 @@ void __fastcall gamemenu_music_volume(int a1)
   }
   else
   {
-    volume = gamemenu_slider_music_sound(&dword_4D64B8);
+    volume = gamemenu_slider_music_sound(&sgOptionMenu);
     sound_get_or_set_music_volume(volume);
     if ( volume == -1600 )
     {
@@ -269,7 +273,7 @@ void __fastcall gamemenu_sound_volume(int a1)
   }
   else
   {
-    volume = gamemenu_slider_music_sound(&dword_4D64C4);
+    volume = gamemenu_slider_music_sound(&unk_4D64C4);
     sound_get_or_set_sound_volume(volume);
     if ( volume == -1600 )
     {
@@ -310,6 +314,6 @@ void __fastcall gamemenu_gamma(int a1)
 //----- (00466EEB) --------------------------------------------------------
 int __cdecl gamemenu_slider_gamma()
 {
-  return gmenu_slider_get(&pItem, 30, 100);
+  return gmenu_slider_get(&unk_4D64D0, 30, 100);
 }
 

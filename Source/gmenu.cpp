@@ -63,11 +63,11 @@ BOOL __cdecl gmenu_exception()
 }
 
 //----- (0047A00A) --------------------------------------------------------
-void __fastcall gmenu_call_proc(void *a1)
+void __fastcall gmenu_call_proc(TMenuItem *a1)
 {
   TMenuItem *i; // [esp+10h] [ebp-4h]
 
-  gmenu_642C20_start = (TMenuItem *)a1;
+  gmenu_642C20_start = a1;
   gmenu_642C08 = 0;
   gmenu_642C2C = 0;
   if ( a1 )

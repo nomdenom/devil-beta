@@ -20,7 +20,7 @@ void __cdecl FreeGameMem()
 }
 
 //----- (00490CE9) --------------------------------------------------------
-void __fastcall run_game_loop(int uMsg)
+BOOL __fastcall run_game_loop(int uMsg)
 {
   const MSG Msg; // [esp+10h] [ebp-20h]
   WNDPROC func; // [esp+2Ch] [ebp-4h]
@@ -63,6 +63,7 @@ void __fastcall run_game_loop(int uMsg)
   func = SetWindowProc(func);
   assert(func == GM_Game, "DIABLO.CPP", 419);
   free_game();
+  return gbRunGameResult;
 }
 
 //----- (00490E61) --------------------------------------------------------
@@ -106,8 +107,7 @@ void __cdecl free_game()
 //----- (00490F61) --------------------------------------------------------
 int __fastcall diablo_init_menu(int a1, int bSinglePlayer)
 {
-  int v3; // eax
-  int v5; // [esp+18h] [ebp-8h]
+  int v3; // eax MAPDST
   int pfExitProgram; // [esp+1Ch] [ebp-4h]
 
   if ( !NetInit(bSinglePlayer, &pfExitProgram) )
@@ -116,19 +116,18 @@ int __fastcall diablo_init_menu(int a1, int bSinglePlayer)
   sound_414561();
   if ( !a1 && dword_6180EC )
   {
-    run_game_loop(1035);
+    v3 = run_game_loop(1035);
   }
   else
   {
     InitQuests();
     InitPortals();
-    run_game_loop(1034);
+    v3 = run_game_loop(1034);
   }
-  v5 = v3;
   NetClose();
-  if ( v5 )
+  if ( v3 )
     mainmenu_refresh_music();
-  return v5;
+  return v3;
 }
 
 //----- (00491008) --------------------------------------------------------
