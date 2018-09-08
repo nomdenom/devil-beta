@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (00401000) --------------------------------------------------------
 void __fastcall InitMonsterTRN(int monst, int special)
 {

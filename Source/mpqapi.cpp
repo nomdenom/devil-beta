@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0041F97C) --------------------------------------------------------
 void __fastcall mpqapi_remove_hash_entry(char *pszName)
 {

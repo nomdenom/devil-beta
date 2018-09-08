@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (00468CD0) --------------------------------------------------------
 void __fastcall SetPlayerGPtrs(DWORD *pData, DWORD *pAnim)
 {

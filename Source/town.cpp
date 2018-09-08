@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0044A530) --------------------------------------------------------
 void __fastcall town_clear_upper_buf(char *a1)
 {

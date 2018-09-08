@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0043AB00) --------------------------------------------------------
 BOOL __fastcall ReadWaveFile(int handle, WAVEFORMATEX *wf, int *len)
 {

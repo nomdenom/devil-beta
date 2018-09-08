@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (00484BF0) --------------------------------------------------------
 int __fastcall sync_all_monsters(TSyncHeader *packet, int size)
 {

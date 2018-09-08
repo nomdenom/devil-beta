@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0043A370) --------------------------------------------------------
 void __fastcall LoadL3Dungeon(char *sFileName, int vx, int vy)
 {

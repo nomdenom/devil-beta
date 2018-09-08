@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0047AAE0) --------------------------------------------------------
 void __fastcall encrypt_decrypt_block(void *block, int size, int key)
 {

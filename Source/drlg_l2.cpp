@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0047C790) --------------------------------------------------------
 BOOL __fastcall DRLG_L2PlaceMiniSet(unsigned __int8 *miniset, int tmin, int tmax, int cx, int cy, bool setview, int ldir)
 {

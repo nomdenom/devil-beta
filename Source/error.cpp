@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0045C280) --------------------------------------------------------
 void __fastcall InitDiabloMsg(char e)
 {

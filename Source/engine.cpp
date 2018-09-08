@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0048E700) --------------------------------------------------------
 void __fastcall CelDrawDatOnly(char *pDecodeTo, char *pRLEBytes, int dwRLESize, int dwRLEWdt)
 {

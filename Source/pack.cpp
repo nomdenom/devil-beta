@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (00468420) --------------------------------------------------------
 void __fastcall PackPlayer(PkPlayerStruct *pPack, int pnum)
 {

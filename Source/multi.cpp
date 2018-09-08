@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0041C0B0) --------------------------------------------------------
 void __fastcall NetSendLoPri(unsigned __int8 *pbMsg, unsigned __int8 bLen)
 {

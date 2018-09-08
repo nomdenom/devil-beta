@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0047AFD0) --------------------------------------------------------
 int __fastcall codec_decode(void *pbSrcDst, int size, char *pszPassword)
 {

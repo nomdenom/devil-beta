@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0045B6D0) --------------------------------------------------------
 int __fastcall GetManaAmount(int id, int sn)
 {

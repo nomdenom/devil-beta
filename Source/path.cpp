@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (00413020) --------------------------------------------------------
 int __fastcall FindPath(int pnum, int sx, int sy, int dx, int dy, char *path)
 {

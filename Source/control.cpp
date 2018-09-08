@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (00414980) --------------------------------------------------------
 void __fastcall DrawSpellCel(int xp, int yp, char *Trans, int nCel, int w)
 {

@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (004579F0) --------------------------------------------------------
 int __fastcall GetActiveTowner(int t)
 {

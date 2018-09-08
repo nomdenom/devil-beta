@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (004A048C) --------------------------------------------------------
 void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
 {

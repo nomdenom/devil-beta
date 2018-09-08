@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0043AE00) --------------------------------------------------------
 int __fastcall FindClosest(int sx, int sy, int rad)
 {

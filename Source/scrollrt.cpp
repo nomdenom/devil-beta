@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (004880B0) --------------------------------------------------------
 void __fastcall DrawMissile(int x, int y, int sx, int sy, int a5, int a6, int del_flag)
 {

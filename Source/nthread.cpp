@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (0041B390) --------------------------------------------------------
 int __fastcall nthread_send_and_recv_turn(int cur_turn, int turn_delta)
 {

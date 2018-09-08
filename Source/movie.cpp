@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (00482290) --------------------------------------------------------
 void __fastcall play_movie(char *pszMovie, bool user_can_close)
 {

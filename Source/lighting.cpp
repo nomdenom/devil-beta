@@ -1,3 +1,5 @@
+#include "all.h"
+
 //----- (00437B50) --------------------------------------------------------
 // NOTE: Argument types differ from PSX
 void __fastcall SetLightFX(int *x, int *y, int *s_r, int *s_g, int *s_b, int *d_r, int *d_g, int *d_b)
