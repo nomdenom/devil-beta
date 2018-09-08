@@ -285,7 +285,6 @@ void __fastcall CelDecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_
           {
 LABEL_19:
             v11 = v10 & 1;
-            v21 = v10 >> 1;
             if ( !v11 )
               goto LABEL_28;
             _AL = *src;
@@ -296,7 +295,7 @@ LABEL_19:
             if ( v21 )
             {
 LABEL_28:
-              do
+              for (v21 = v10 >> 1; v21; --v21)
               {
                 _EAX = *(_DWORD *)src;
                 src += 4;
@@ -307,9 +306,7 @@ LABEL_28:
                 ASM_XLAT();
                 *v25 = _EAX;
                 dst = v25 + 2;
-                --v21;
               }
-              while ( v21 );
             }
             goto LABEL_22;
           }
@@ -326,7 +323,6 @@ LABEL_28:
           {
 LABEL_12:
             v11 = v10 & 1;
-            v12 = v10 >> 1;
             if ( !v11 )
               goto LABEL_29;
             v13 = src + 1;
@@ -339,7 +335,7 @@ LABEL_12:
             if ( v12 )
             {
 LABEL_29:
-              do
+              for (v12 = v10 >> 1; v12; --v12)
               {
                 _EAX = *(_DWORD *)src;
                 src += 4;
@@ -352,9 +348,7 @@ LABEL_29:
                 ASM_XLAT();
                 *v18 = _EAX;
                 dst = v18 + 1;
-                --v12;
               }
-              while ( v12 );
             }
             goto LABEL_22;
           }
@@ -574,7 +568,7 @@ void __fastcall Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_conte
           goto LABEL_18;
       }
       v7 -= v8;
-      if ( (unsigned int)dst < screen_buf_end )
+      if ( dst < (char *)gpBufEnd )
       {
         v9 = v8 >> 1;
         if ( !(v8 & 1) || (*dst = *src, ++src, ++dst, v9) )
@@ -692,7 +686,7 @@ void __fastcall Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_
           goto LABEL_14;
       }
       v7 -= v8;
-      if ( (unsigned int)v5 < screen_buf_end )
+      if ( v5 < (char *)gpBufEnd )
       {
         v9 = v7;
         Cel2DecDatLightEntry(v8, v7);
@@ -805,7 +799,7 @@ void __fastcall Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame
         v26 = v6;
         _EBX = v28;
         v7 -= v8;
-        if ( v5 < screen_buf_end )
+        if ( v5 < (unsigned int)gpBufEnd )
         {
           if ( (v5 & 1) == v27 )
           {
@@ -818,7 +812,6 @@ void __fastcall Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame
             {
 LABEL_21:
               v11 = v10 & 1;
-              v21 = v10 >> 1;
               if ( !v11 )
                 goto LABEL_30;
               _AL = *v4;
@@ -829,7 +822,7 @@ LABEL_21:
               if ( v21 )
               {
 LABEL_30:
-                do
+                for (v21 = v10 >> 1; v21; --v21)
                 {
                   _EAX = *(_DWORD *)v4;
                   v4 += 4;
@@ -840,9 +833,7 @@ LABEL_30:
                   ASM_XLAT();
                   *v25 = _EAX;
                   v5 = (unsigned int)(v25 + 2);
-                  --v21;
                 }
-                while ( v21 );
               }
               goto LABEL_24;
             }
@@ -859,7 +850,6 @@ LABEL_30:
             {
 LABEL_14:
               v11 = v10 & 1;
-              v12 = v10 >> 1;
               if ( !v11 )
                 goto LABEL_31;
               v13 = v4 + 1;
@@ -872,7 +862,7 @@ LABEL_14:
               if ( v12 )
               {
 LABEL_31:
-                do
+                for (v12 = v10 >> 1; v12; --v12)
                 {
                   _EAX = *(_DWORD *)v4;
                   v4 += 4;
@@ -885,9 +875,7 @@ LABEL_31:
                   ASM_XLAT();
                   *v18 = _EAX;
                   v5 = (unsigned int)(v18 + 1);
-                  --v12;
                 }
-                while ( v12 );
               }
               goto LABEL_24;
             }
@@ -1046,7 +1034,7 @@ void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, 
             goto LABEL_26;
         }
         v12 -= v14;
-        if ( (unsigned int)v10 < screen_buf_end )
+        if ( v10 < (char *)gpBufEnd )
         {
           do
           {
@@ -1185,8 +1173,7 @@ void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCel
             goto LABEL_19;
         }
         v11 -= v12;
-        v13 = v12;
-        do
+        for (v13 = v12; v13; --v13)
         {
           v14 = *v9++;
           if ( v14 )
@@ -1197,9 +1184,7 @@ void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCel
             v10[768] = colour;
           }
           ++v10;
-          --v13;
-        }
-        while ( v13 );
+      }
       }
       while ( v11 );
 LABEL_19:
@@ -1258,12 +1243,11 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
             goto LABEL_27;
         }
         v11 -= v12;
-        if ( (unsigned int)v10 < screen_buf_end )
+        if ( v10 < (char *)gpBufEnd )
         {
-          if ( (unsigned int)v10 >= screen_buf_end - 768 )
+          if ( v10 >= (char *)gpBufEnd - 768 )
           {
-            v15 = v12;
-            do
+            for (v15 = v12; v15; --v15)
             {
               v16 = *v9++;
               if ( v16 )
@@ -1273,14 +1257,11 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
                 v10[1] = colour;
               }
               ++v10;
-              --v15;
             }
-            while ( v15 );
           }
           else
           {
-            v13 = v12;
-            do
+            for (v13 = v12; v13; --v13)
             {
               v14 = *v9++;
               if ( v14 )
@@ -1291,9 +1272,7 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
                 v10[768] = colour;
               }
               ++v10;
-              --v13;
             }
-            while ( v13 );
           }
         }
         else
@@ -1339,15 +1318,12 @@ void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
       if ( (v8 & 0x80u) == 0 )
       {
         v5 -= v8;
-        v9 = v8;
-        do
+        for (v9 = v8; v9; --v9)
         {
           _AL = *v4++;
           ASM_XLAT();
           *v6++ = _AL;
-          --v9;
         }
-        while ( v9 );
         if ( !v5 )
           break;
       }
@@ -1363,7 +1339,7 @@ void __fastcall ENG_set_pixel(int screen_x, int screen_y, char pixel)
   if ( screen_y >= 0 && screen_y < 640 && screen_x >= 64 && screen_x < 704 )
   {
     v3 = &gpBuffer[screen_x + screen_y_times_768[screen_y]];
-    if ( (unsigned int)v3 < screen_buf_end )
+    if ( v3 < (char *)gpBufEnd )
       *v3 = pixel;
   }
 }
@@ -1379,7 +1355,7 @@ void __fastcall engine_draw_pixel(int x, int y)
       return;
     v2 = &gpBuffer[y + screen_y_times_768[x]];
 LABEL_18:
-    if ( (unsigned int)v2 < screen_buf_end )
+    if ( v2 < (char *)gpBufEnd )
       *v2 = byte_649AF8;
     return;
   }

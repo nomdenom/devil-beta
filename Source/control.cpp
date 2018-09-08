@@ -43,7 +43,6 @@ void __fastcall DrawSpellCel(int xp, int yp, char *Trans, int nCel, int w)
           continue;
       }
       v14 = v11 & 1;
-      v15 = v11 >> 1;
       if ( !v14 )
         goto LABEL_15;
       _AX = *(_WORD *)v6;
@@ -56,7 +55,7 @@ void __fastcall DrawSpellCel(int xp, int yp, char *Trans, int nCel, int w)
       if ( v15 )
       {
 LABEL_15:
-        do
+        for (v15 = v11 >> 1; v15; --v15)
         {
           _EAX = *(_DWORD *)v6;
           v6 += 4;
@@ -69,9 +68,7 @@ LABEL_15:
           ASM_XLAT();
           *(_DWORD *)v7 = __ROR4__(_EAX, 8);
           v7 += 4;
-          --v15;
         }
-        while ( v15 );
       }
     }
     while ( v9 );
@@ -450,8 +447,7 @@ void __fastcall CPrintString(int No, char frame, char Just)
               goto LABEL_28;
           }
           v12 -= v13;
-          v14 = v13;
-          do
+          for (v14 = v13; v14; --v14)
           {
             v15 = *v4++;
             if ( v15 > 0xFDu )
@@ -463,9 +459,7 @@ void __fastcall CPrintString(int No, char frame, char Just)
               v15 -= 62;
             }
             *v5++ = v15;
-            --v14;
-          }
-          while ( v14 );
+        }
         }
         while ( v12 );
 LABEL_28:
@@ -492,16 +486,13 @@ LABEL_28:
               goto LABEL_39;
           }
           v16 -= v17;
-          v18 = v17;
-          do
+          for (v18 = v17; v18; --v18)
           {
             v19 = *v4++;
             if ( (unsigned __int8)v19 >= 0xF0u )
               v19 -= 16;
             *v5++ = v19;
-            --v18;
-          }
-          while ( v18 );
+        }
         }
         while ( v16 );
 LABEL_39:
@@ -528,8 +519,7 @@ LABEL_39:
               goto LABEL_52;
           }
           v20 -= v21;
-          v22 = v21;
-          do
+          for (v22 = v21; v22; --v22)
           {
             v23 = *v4++;
             if ( (unsigned __int8)v23 >= 0xF0u )
@@ -540,9 +530,7 @@ LABEL_39:
                 v23 -= 46;
             }
             *v5++ = v23;
-            --v22;
-          }
-          while ( v22 );
+        }
         }
         while ( v20 );
 LABEL_52:
@@ -627,8 +615,7 @@ void __fastcall DrawPanelBox(int x, int y, WORD w, WORD h, int sx, int sy)
 
   v6 = &pBtmBuff[640 * y + x];
   v7 = &gpBuffer[768 * sy + sx];
-  v8 = h;
-  do
+  for (v8 = h; v8; --v8)
   {
     v9 = (unsigned int)w >> 1;
     if ( !(w & 1) || (*v7 = *v6, ++v6, ++v7, v9) )
@@ -644,9 +631,7 @@ void __fastcall DrawPanelBox(int x, int y, WORD w, WORD h, int sx, int sy)
     }
     v6 = &v6[-w + 640];
     v7 = &v7[-w + 768];
-    --v8;
   }
-  while ( v8 );
 }
 
 //----- (00415CA7) --------------------------------------------------------
@@ -664,15 +649,12 @@ void __fastcall SetFlaskHeight(char *buf, int min, int max, int c, int r)
 
   v5 = &buf[88 * min];
   v6 = &gpBuffer[768 * r + c];
-  v7 = max - min;
-  do
+  for (v7 = max - min; v7; --v7)
   {
     qmemcpy(v6, v5, 88u);
     v5 += 88;
     v6 += 768;
-    --v7;
   }
-  while ( v7 );
 }
 
 //----- (00415D26) --------------------------------------------------------
@@ -686,8 +668,7 @@ void __fastcall DrawFlask(char *Xbuf, int a2, int Xbufof, char *Xgbuf, int Xgbuf
 
   v6 = &Xbuf[Xbufof];
   v7 = &Xgbuf[Xgbufoffset];
-  v8 = a6;
-  do
+  for (v8 = a6; v8; --v8)
   {
     for (v9 = 59; v9; --v9)
     {
@@ -698,9 +679,7 @@ void __fastcall DrawFlask(char *Xbuf, int a2, int Xbufof, char *Xgbuf, int Xgbuf
     }
     v6 = &v6[a2 - 59];
     v7 += 709;
-    --v8;
   }
-  while ( v8 );
 }
 
 //----- (00415D76) --------------------------------------------------------

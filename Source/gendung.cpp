@@ -47,7 +47,7 @@ void __cdecl FillSolidBlockTbls()
       nTransTable[i] = 1;
     if ( v0 < 0 )
       nTrapTable[i] = 1;
-    block_lvidD[i] = (unsigned __int8)(v0 & 0x70) >> 4;
+    block_lvid[i] = (unsigned __int8)(v0 & 0x70) >> 4;
   }
   mem_free_dbg(ptr, 149, "GENDUNG.CPP");
 }
@@ -140,12 +140,12 @@ void __cdecl gendung_418D91()
   for ( n = 0; v19 > n; ++n )
   {
     v37 = gendung_576C90[n];
-    gendung_57F6D0[16 * n] = v37;
+    speed_cel_frame_num_from_light_index_frame_num[0][16 * n] = v37;
     if ( gendung_4ED5B0[n] == 4096 )
     {
       for ( ii = 1; v35 > ii; ++ii )
       {
-        gendung_57F6D0[16 * n + ii] = v31;
+        speed_cel_frame_num_from_light_index_frame_num[0][16 * n + ii] = v31;
         v6 = (char *)pDungeonCels + *((_DWORD *)pDungeonCels + v37);
         v7 = (char *)pSpeedCels + v31;
         _EBX = &pLightTbl[256 * ii];
@@ -168,15 +168,12 @@ void __cdecl gendung_418D91()
                 goto LABEL_51;
             }
             v10 -= v11;
-            v12 = v11;
-            do
+            for (v12 = v11; v12; --v12)
             {
               _AL = *v6++;
               ASM_XLAT();
               *v7++ = _AL;
-              --v12;
-            }
-            while ( v12 );
+          }
           }
           while ( v10 );
 LABEL_51:
@@ -191,7 +188,7 @@ LABEL_51:
       v34 = gendung_58E2F0[n];
       for ( jj = 1; v35 > jj; ++jj )
       {
-        gendung_57F6D0[16 * n + jj] = v31;
+        speed_cel_frame_num_from_light_index_frame_num[0][16 * n + jj] = v31;
         v0 = (char *)pDungeonCels + *((_DWORD *)pDungeonCels + v37);
         v1 = (char *)pSpeedCels + v31;
         _EBX = &pLightTbl[256 * jj];

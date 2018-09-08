@@ -481,7 +481,7 @@ void __fastcall Theme_SkelRoom(int t)
   {
     AddObject(OBJ_BANNERL, ox + 1, oy + 1);
   }
-  if ( !dungeon[39][112 * ox + 37 + oy] )
+  if ( !dObject[ox][oy - 3] )
     AddObject(OBJ_SKELBOOK, ox, oy - 2);
   if ( !dObject[ox][oy + 3] )
     AddObject(OBJ_SKELBOOK, ox, oy + 2);

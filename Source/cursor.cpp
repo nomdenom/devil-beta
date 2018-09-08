@@ -597,14 +597,14 @@ void __cdecl scrollrt_draw_cursor_back_buffer()
 {
   char *v0; // [esp+Ch] [ebp-Ch]
   int i; // [esp+10h] [ebp-8h]
-  char *v2; // [esp+14h] [ebp-4h]
+  unsigned __int8 *v2; // [esp+14h] [ebp-4h]
 
   if ( cursor_dword_647724_buf1 )
   {
-    v2 = (char *)cursor_dword_647724_buf1;
+    v2 = (unsigned __int8 *)cursor_dword_647724_buf1;
     v0 = sgSaveBack;
-    screen_buf_end = (int)&gpBuffer[screen_y_times_768[640] - 2 - cursW];
-    for ( i = 0; cursH + 2 > i && screen_buf_end > (unsigned int)v0 && screen_buf_end > (unsigned int)v2; ++i )
+    gpBufEnd = (unsigned __int8 *)&gpBuffer[screen_y_times_768[640] - 2 - cursW];
+    for ( i = 0; cursH + 2 > i && gpBufEnd > (unsigned __int8 *)v0 && gpBufEnd > v2; ++i )
     {
       memcpy(v2, v0, cursW + 2);
       v0 += cursW + 2;
@@ -658,8 +658,8 @@ void __cdecl scrollrt_draw_cursor_item()
   cursor_dword_645724_buf2 = (int)&gpBuffer[768 * (sgdwCursY + 160) + 64 + sgdwCursX];
   v0 = &gpBuffer[768 * (sgdwCursY + 160) + 64 + sgdwCursX];
   v5 = sgSaveBack;
-  screen_buf_end = (int)&gpBuffer[screen_y_times_768[640] - v4];
-  for ( i = 0; v2 > i && (unsigned int)v0 < screen_buf_end; ++i )
+  gpBufEnd = (unsigned __int8 *)&gpBuffer[screen_y_times_768[640] - v4];
+  for ( i = 0; v2 > i && v0 < (char *)gpBufEnd; ++i )
   {
     memcpy(v5, v0, v4);
     v5 += v4;
