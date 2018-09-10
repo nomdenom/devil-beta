@@ -42,7 +42,7 @@ TARGETS = [
     [0x43AE00, "missiles"],
     [0x401000, "monster"],
     [0x482290, "movie"],
-    [0x41F97C, "mpqapi"],
+    [0x41f1a8, "mpqapi"],
     [0x494540, "msg"],
     [0x41C0B0, "multi"],
     [0x41B390, "nthread"],
@@ -133,7 +133,7 @@ source_file.each_line do |l|
             stage = :data
         end
     end
-    
+
     if $out_file
         l = rewrite_generic l
         if stage == :code
@@ -187,7 +187,7 @@ header_file.each_line do |l|
         end
 
         # l = l.gsub(/\b_(BYTE|WORD|DWORD)\b/, "\\1")
-        
+
         (types[type_no] ||= []) << l
     end
 end
