@@ -2385,7 +2385,7 @@ void __cdecl S_HealerEnter()
     case 12:
       plr[myplr]._pHitPoints = plr[myplr]._pMaxHP;
       plr[myplr]._pHPBase = plr[myplr]._pMaxHPBase;
-      drawmanaflag = 1;
+      drawhpflag = 1;
       break;
     case 14:
       StartStore(16);

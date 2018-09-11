@@ -839,8 +839,8 @@ void __cdecl InitControlPan()
   pDurIcons = LoadFileInMem("Items\\DurIcons.CEL", 0, 1065, "CONTROL.CPP");
   strcpy(infostr, empty_string_0);
   j_ClearPanel();
-  drawmanaflag = 1;
   drawhpflag = 1;
+  drawmanaflag = 1;
   chrflag = 0;
   spselflag = 0;
   pSpellBkCel = LoadFileInMem("Data\\SpellBk.CEL", 0, 1074, "CONTROL.CPP");
@@ -875,8 +875,8 @@ void __cdecl InitControlPan()
 //----- (00416813) --------------------------------------------------------
 void __cdecl control_416813()
 {
-  drawmanaflag = 1;
   drawhpflag = 1;
+  drawmanaflag = 1;
   drawbtnflag = 1;
 }
 

@@ -68,7 +68,7 @@ void __fastcall UseMana(int id, int sn)
         v2 = GetManaAmount(id, sn);
         plr[id]._pMana -= v2;
         plr[id]._pManaBase -= v2;
-        drawhpflag = 1;
+        drawmanaflag = 1;
         break;
       case 2:
         RemoveScroll(id);
@@ -134,8 +134,8 @@ void __fastcall DoResurrect(int pnum, int rid)
     {
       deathflag = 0;
       gamemenu_off();
-      drawmanaflag = 1;
       drawhpflag = 1;
+      drawmanaflag = 1;
     }
     plr[rid]._pInvincible = 0;
     SetPlayerHitPoints(rid, 64);
@@ -176,7 +176,7 @@ void __fastcall DoHealOther(int pnum, int rid)
     plr[rid]._pHPBase += v4;
     if ( plr[rid]._pMaxHPBase < plr[rid]._pHPBase )
       plr[rid]._pHPBase = plr[rid]._pMaxHPBase;
-    drawmanaflag = 1;
+    drawhpflag = 1;
   }
 }
 

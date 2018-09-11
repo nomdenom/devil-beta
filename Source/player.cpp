@@ -563,7 +563,7 @@ void __fastcall NextPlrLevel(int pnum)
   plr[pnum]._pMaxHPBase += v2;
   plr[pnum]._pHPBase = plr[pnum]._pMaxHPBase;
   if ( myplr == pnum )
-    drawmanaflag = 1;
+    drawhpflag = 1;
   v3 = plr[pnum]._pBaseMag / 10 << 6;
   if ( plr[pnum]._pClass == 2 )
     v3 = plr[pnum]._pBaseMag / 10 << 7;
@@ -577,7 +577,7 @@ void __fastcall NextPlrLevel(int pnum)
     plr[pnum]._pManaBase = plr[pnum]._pMaxManaBase;
   }
   if ( myplr == pnum )
-    drawhpflag = 1;
+    drawmanaflag = 1;
 }
 
 //----- (0046BD41) --------------------------------------------------------
@@ -1389,7 +1389,7 @@ void __fastcall StartPlrHit(int pnum, int dam)
   if ( !plr[pnum]._pInvincible || plr[pnum]._pHitPoints )
   {
     PlaySfxLoc(48, plr[pnum].WorldX, plr[pnum].WorldY);
-    drawmanaflag = 1;
+    drawhpflag = 1;
     if ( plr[pnum]._pLevel <= dam >> 6 )
     {
       dir = plr[pnum]._pdir;
@@ -1493,7 +1493,7 @@ void __fastcall StartPlayerKill(int pnum)
       }
       DropHalfPlayersGold(pnum);
       CalcPlrInv(pnum, 0);
-      drawmanaflag = 1;
+      drawhpflag = 1;
       deathdelay = 30;
     }
   }
@@ -2047,7 +2047,7 @@ BOOL __fastcall PlrHitMonst(int pnum, int m)
         plr[pnum]._pHPBase += v8;
         if ( plr[pnum]._pMaxHPBase < plr[pnum]._pHPBase )
           plr[pnum]._pHPBase = plr[pnum]._pMaxHPBase;
-        drawmanaflag = 1;
+        drawhpflag = 1;
       }
       if ( plr[pnum]._pIFlags & 0x6000 && !(plr[pnum]._pIFlags & 0x8000000) )
       {
@@ -2061,7 +2061,7 @@ BOOL __fastcall PlrHitMonst(int pnum, int m)
         plr[pnum]._pManaBase += v8;
         if ( plr[pnum]._pManaBase > plr[pnum]._pMaxManaBase )
           plr[pnum]._pManaBase = plr[pnum]._pMaxManaBase;
-        drawhpflag = 1;
+        drawmanaflag = 1;
       }
       if ( plr[pnum]._pIFlags & 0x18000 )
       {
@@ -2075,7 +2075,7 @@ BOOL __fastcall PlrHitMonst(int pnum, int m)
         plr[pnum]._pHPBase += v8;
         if ( plr[pnum]._pMaxHPBase < plr[pnum]._pHPBase )
           plr[pnum]._pHPBase = plr[pnum]._pMaxHPBase;
-        drawmanaflag = 1;
+        drawhpflag = 1;
       }
       if ( plr[pnum]._pIFlags & 0x100 )
         monster[m]._mFlags |= 8u;
@@ -2165,7 +2165,7 @@ BOOL __fastcall PlrHitPlr(int pnum, char p)
         plr[pnum]._pHPBase += v9;
         if ( plr[pnum]._pMaxHPBase < plr[pnum]._pHPBase )
           plr[pnum]._pHPBase = plr[pnum]._pMaxHPBase;
-        drawmanaflag = 1;
+        drawhpflag = 1;
       }
       if ( pnum == myplr )
         NetSendCmdDamage(1u, p, dwDama);
@@ -2884,13 +2884,13 @@ void __cdecl ProcessPlayers()
             SetPlayerHitPoints(pnum, 0);
             SyncPlrKill(pnum);
           }
-          drawmanaflag = 1;
+          drawhpflag = 1;
         }
         if ( plr[pnum]._pIFlags & 0x8000000 && plr[pnum]._pManaBase > 0 )
         {
           plr[pnum]._pManaBase -= plr[pnum]._pMana;
           plr[pnum]._pMana = 0;
-          drawhpflag = 1;
+          drawmanaflag = 1;
         }
       }
       v0 = 0;

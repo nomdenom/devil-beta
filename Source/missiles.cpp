@@ -1710,7 +1710,7 @@ BOOL __fastcall PlayerMHit(int pnum, int m, int dist, int mind, int maxd, int mt
     if ( (signed int)(plr[pnum]._pHitPoints & 0xFFFFFFC0) > 0 )
     {
       PlaySfxLoc(48, plr[pnum].WorldX, plr[pnum].WorldY);
-      drawmanaflag = 1;
+      drawhpflag = 1;
     }
     else
     {
@@ -2669,7 +2669,7 @@ void __fastcall AddFlare(int mi, int sx, int sy, int dx, int dy, int midir, int 
       v12 = 1;
     plr[id]._pHitPoints -= v12 << 6;
     plr[id]._pHPBase -= v12 << 6;
-    drawmanaflag = 1;
+    drawhpflag = 1;
     if ( plr[id]._pHitPoints <= 0 )
     {
       plr[id]._pHitPoints = 0;
@@ -2864,7 +2864,7 @@ void __fastcall AddHeal(int mi, int sx, int sy, int dx, int dy, int midir, int m
   if ( plr[id]._pMaxHPBase < plr[id]._pHPBase )
     plr[id]._pHPBase = plr[id]._pMaxHPBase;
   UseMana(id, 2);
-  drawmanaflag = 1;
+  drawhpflag = 1;
   missile[mi]._miDelFlag = 1;
   PutMissile(mi);
 }
@@ -3194,7 +3194,7 @@ void __fastcall AddBoneSpirit(int mi, int sx, int sy, int dx, int dy, int midir,
     UseMana(id, 36);
     plr[id]._pHitPoints -= 1536;
     plr[id]._pHPBase -= 1536;
-    drawmanaflag = 1;
+    drawhpflag = 1;
     if ( plr[id]._pHitPoints <= 0 )
     {
       plr[id]._pHitPoints = 0;
@@ -3887,8 +3887,8 @@ void __fastcall MI_Manashield(int i)
       v5 -= v5 >> 3;
     if ( v5 < 0 )
       v5 = 0;
-    drawhpflag = 1;
     drawmanaflag = 1;
+    drawhpflag = 1;
     if ( plr[id]._pMana < v5 )
     {
       plr[id]._pHitPoints -= v5 - plr[id]._pMana;

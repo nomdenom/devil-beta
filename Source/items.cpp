@@ -364,8 +364,8 @@ void __fastcall CalcPlrItemVals(int p, BOOL Loadgfx)
   {
     plr[p]._pgfxnum = g;
   }
-  drawhpflag = 1;
   drawmanaflag = 1;
+  drawhpflag = 1;
 }
 
 //----- (00421E5E) --------------------------------------------------------
@@ -1193,11 +1193,11 @@ void __fastcall SaveItemPower(int i, int power, int param1, int param2, int minv
       break;
     case 33:
       item[i]._iPLMana += pv << 6;
-      drawhpflag = 1;
+      drawmanaflag = 1;
       break;
     case 34:
       item[i]._iPLMana -= pv << 6;
-      drawhpflag = 1;
+      drawmanaflag = 1;
       break;
     case 35:
       v7 = pv * item[i]._iMaxDur / 100;
@@ -1238,7 +1238,7 @@ void __fastcall SaveItemPower(int i, int power, int param1, int param2, int minv
       break;
     case 46:
       item[i]._iFlags |= 0x8000000u;
-      drawhpflag = 1;
+      drawmanaflag = 1;
       break;
     case 47:
       item[i]._iFlags |= 0x100u;
@@ -1257,14 +1257,14 @@ void __fastcall SaveItemPower(int i, int power, int param1, int param2, int minv
         item[i]._iFlags |= 0x2000u;
       if ( param1 == 10 )
         item[i]._iFlags |= 0x4000u;
-      drawhpflag = 1;
+      drawmanaflag = 1;
       break;
     case 56:
       if ( param1 == 5 )
         item[i]._iFlags |= 0x8000u;
       if ( param1 == 10 )
         item[i]._iFlags |= 0x10000u;
-      drawmanaflag = 1;
+      drawhpflag = 1;
       break;
     case 57:
       break;
@@ -3078,7 +3078,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
     case 2:
       plr[p]._pHitPoints = plr[p]._pMaxHP;
       plr[p]._pHPBase = plr[p]._pMaxHPBase;
-      drawmanaflag = 1;
+      drawhpflag = 1;
       break;
     case 3:
     case 28:
@@ -3094,7 +3094,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
       plr[p]._pHPBase += v;
       if ( plr[p]._pMaxHPBase < plr[p]._pHPBase )
         plr[p]._pHPBase = plr[p]._pMaxHPBase;
-      drawmanaflag = 1;
+      drawhpflag = 1;
       break;
     case 6:
       v4 = plr[p]._pMaxMana >> 8;
@@ -3111,7 +3111,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
         plr[p]._pManaBase += va;
         if ( plr[p]._pManaBase > plr[p]._pMaxManaBase )
           plr[p]._pManaBase = plr[p]._pMaxManaBase;
-        drawhpflag = 1;
+        drawmanaflag = 1;
       }
       break;
     case 7:
@@ -3119,7 +3119,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
       {
         plr[p]._pMana = plr[p]._pMaxMana;
         plr[p]._pManaBase = plr[p]._pMaxManaBase;
-        drawhpflag = 1;
+        drawmanaflag = 1;
       }
       break;
     case 8:
@@ -3178,7 +3178,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
       plr[p]._pHPBase += vb;
       if ( plr[p]._pMaxHPBase < plr[p]._pHPBase )
         plr[p]._pHPBase = plr[p]._pMaxHPBase;
-      drawmanaflag = 1;
+      drawhpflag = 1;
       v14 = plr[p]._pMaxMana >> 8;
       vc = ((v14 >> 1) + random(40, v14)) << 6;
       if ( plr[p]._pClass == 2 )
@@ -3193,18 +3193,18 @@ void __fastcall UseItem(int p, int Mid, int spl)
         plr[p]._pManaBase += vc;
         if ( plr[p]._pManaBase > plr[p]._pMaxManaBase )
           plr[p]._pManaBase = plr[p]._pMaxManaBase;
-        drawhpflag = 1;
+        drawmanaflag = 1;
       }
       break;
     case 19:
       plr[p]._pHitPoints = plr[p]._pMaxHP;
       plr[p]._pHPBase = plr[p]._pMaxHPBase;
-      drawmanaflag = 1;
+      drawhpflag = 1;
       if ( !(plr[p]._pIFlags & 0x8000000) )
       {
         plr[p]._pMana = plr[p]._pMaxMana;
         plr[p]._pManaBase = plr[p]._pMaxManaBase;
-        drawhpflag = 1;
+        drawmanaflag = 1;
       }
       break;
     case 21:
@@ -3254,7 +3254,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
       plr[p]._pManaBase += spelldata[spl].sManaCost << 6;
       if ( plr[p]._pManaBase > plr[p]._pMaxManaBase )
         plr[p]._pManaBase = plr[p]._pMaxManaBase;
-      drawhpflag = 1;
+      drawmanaflag = 1;
       break;
     case 31:
     case 32:

@@ -2292,8 +2292,8 @@ void __cdecl DrawAndBlit()
 
   if ( drawpanflag == 255 )
   {
-    drawmanaflag = 1;
     drawhpflag = 1;
+    drawmanaflag = 1;
     drawbtnflag = 1;
     draw_btn = 1;
     draw_hp = 0;
@@ -2315,9 +2315,9 @@ void __cdecl DrawAndBlit()
     T_DrawView(ViewX, ViewY);
   if ( v1 )
     ClearCtrlPan();
-  if ( drawmanaflag )
-    UpdateLifeFlask();
   if ( drawhpflag )
+    UpdateLifeFlask();
+  if ( drawmanaflag )
     UpdateManaFlask();
   if ( drawbtnflag )
     DrawCtrlPan();
@@ -2330,10 +2330,10 @@ void __cdecl DrawAndBlit()
   }
   if ( !PauseMode )
     scrollrt_draw_cursor_item();
-  DrawMain(dwHgt, 1, draw_hp, drawmanaflag, drawhpflag, draw_btn, drawbtnflag);
+  DrawMain(dwHgt, 1, draw_hp, drawhpflag, drawmanaflag, draw_btn, drawbtnflag);
   drawpanflag = 0;
-  drawmanaflag = 0;
   drawhpflag = 0;
+  drawmanaflag = 0;
   drawbtnflag = 0;
   draw_btn = 0;
 }

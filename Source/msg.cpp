@@ -1428,7 +1428,7 @@ int __fastcall ParseCmd(int pnum, char *pCmd)
       assert(gbBufferMsgs != 2, "msg.cpp", 1970);
       if ( (unsigned __int8)pCmd[1] == myplr && gbBufferMsgs != 1 )
       {
-        drawmanaflag = 1;
+        drawhpflag = 1;
         plr[myplr]._pHitPoints -= *(_DWORD *)(pCmd + 2);
         plr[myplr]._pHPBase -= *(_DWORD *)(pCmd + 2);
         if ( plr[myplr]._pHitPoints > plr[myplr]._pMaxHP )
