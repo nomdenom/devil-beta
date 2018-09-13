@@ -837,7 +837,7 @@ void __fastcall M_CheckEFlag(int i)
   v4 = monster[i]._my + 1;
   v2 = 0;
   for ( j = 2; j < 10; ++j )
-    v2 |= dpiece_defs_map_2[0][16 * v1][16 * v4 + j];
+    v2 |= dpiece_defs_map_2[v1][v4][j];
   if ( dArch[v1][v4] | v2 )
     monster[i]._meflag = 1;
   else

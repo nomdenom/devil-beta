@@ -780,9 +780,9 @@ void __fastcall InitPlayerLoc(int pnum, BOOL flag)
   int x; // [esp+14h] [ebp-14h]
   int xa; // [esp+14h] [ebp-14h]
   int xb; // [esp+14h] [ebp-14h]
-  char *v7; // [esp+18h] [ebp-10h]
-  char *v8; // [esp+18h] [ebp-10h]
-  char *v9; // [esp+18h] [ebp-10h]
+  SHORT *v7; // [esp+18h] [ebp-10h]
+  SHORT *v8; // [esp+18h] [ebp-10h]
+  SHORT *v9; // [esp+18h] [ebp-10h]
   int v10; // [esp+1Ch] [ebp-Ch]
   int v11; // [esp+1Ch] [ebp-Ch]
   int v12; // [esp+1Ch] [ebp-Ch]
@@ -796,9 +796,9 @@ void __fastcall InitPlayerLoc(int pnum, BOOL flag)
   x = plr[pnum].WorldX - 1;
   y = plr[pnum].WorldY + 1;
   v10 = 0;
-  v7 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y);
+  v7 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)];
   for ( i = 2; i < 10; ++i )
-    v10 |= *(unsigned __int16 *)&v7[2 * i];
+    v10 |= (unsigned __int16)v7[i];
   if ( (unsigned __int8)nSolidTable[dPiece[x][y]] | dArch[x][y] | v10 )
     plr[pnum]._peflag = 1;
   else
@@ -808,17 +808,17 @@ void __fastcall InitPlayerLoc(int pnum, BOOL flag)
     xa = plr[pnum].WorldX;
     ya = plr[pnum].WorldY + 2;
     v11 = 0;
-    v8 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(plr[pnum].WorldX, ya);
+    v8 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(plr[pnum].WorldX, ya)];
     for ( j = 2; j < 10; ++j )
-      v11 |= *(unsigned __int16 *)&v8[2 * j];
+      v11 |= (unsigned __int16)v8[j];
     if ( !(dArch[xa][ya] | v11) )
     {
       xb = plr[pnum].WorldX - 2;
       yb = plr[pnum].WorldY + 1;
       v12 = 0;
-      v9 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(xb, yb);
+      v9 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(xb, yb)];
       for ( k = 2; k < 10; ++k )
-        v12 |= *(unsigned __int16 *)&v9[2 * k];
+        v12 |= (unsigned __int16)v9[k];
       if ( dArch[xb][yb] | v12 )
         plr[pnum]._peflag = 2;
     }

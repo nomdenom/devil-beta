@@ -67,7 +67,7 @@ void __cdecl gendung_418D91()
   int v11; // eax
   int v12; // ecx
   int v15; // [esp-4h] [ebp-40h]
-  char *v16; // [esp+Ch] [ebp-30h]
+  WORD *v16; // [esp+Ch] [ebp-30h]
   unsigned __int16 i1; // [esp+10h] [ebp-2Ch]
   int v18; // [esp+14h] [ebp-28h]
   int v19; // [esp+14h] [ebp-28h]
@@ -105,7 +105,7 @@ void __cdecl gendung_418D91()
     {
       for ( l = 0; v20 > l; ++l )
       {
-        v36 = dpiece_defs_map_2[0][16 * k][16 * j + l];
+        v36 = dpiece_defs_map_2[k][j][l];
         if ( v36 )
         {
           ++gendung_57D6B8[v36 & 0xFFF];
@@ -210,16 +210,16 @@ LABEL_51:
     {
       if ( dPiece[mm][ll] )
       {
-        v16 = (char *)dpiece_defs_map_2 + 3584 * mm + 32 * ll;
+        v16 = dpiece_defs_map_2[mm][ll];
         for ( nn = 0; v20 > nn; ++nn )
         {
-          if ( *(_WORD *)&v16[2 * nn] )
+          if ( v16[nn] )
           {
             for ( i1 = 0; i1 < v19; ++i1 )
             {
-              if ( (*(_WORD *)&v16[2 * nn] & 0xFFF) == gendung_576C90[i1] )
+              if ( (v16[nn] & 0xFFF) == gendung_576C90[i1] )
               {
-                *(_WORD *)&v16[2 * nn] = i1 + gendung_4ED5B0[i1] + -32768;
+                v16[nn] = i1 + gendung_4ED5B0[i1] + -32768;
                 i1 = v19;
               }
             }
@@ -298,10 +298,7 @@ void __cdecl gendung_4192C2()
   for ( x = 0; x < 112; ++x )
   {
     for ( y = 0; y < 112; ++y )
-      qmemcpy(
-        (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y),
-        (char *)dpiece_defs_map_2 + 3584 * x + 32 * y,
-        0x20u);
+      qmemcpy(dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)], dpiece_defs_map_2[x][y], sizeof(SHORT[16]));
   }
 }
 
@@ -333,7 +330,7 @@ void __cdecl SetDungeonMicros()
     for ( j = 0; j < 112; ++j )
     {
       v3 = dPiece[j][i];
-      v0 = (WORD *)((char *)dpiece_defs_map_2 + 3584 * j + 32 * i);
+      v0 = dpiece_defs_map_2[j][i];
       if ( v3 )
       {
         v4 = v3 - 1;

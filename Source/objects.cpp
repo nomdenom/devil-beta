@@ -1477,15 +1477,15 @@ void __cdecl ProcessObjects()
 //----- (00460783) --------------------------------------------------------
 void __fastcall ObjSetMicro(int dx, int dy, int pn)
 {
-  char *v3; // [esp+14h] [ebp-Ch]
+  SHORT *v3; // [esp+14h] [ebp-Ch]
   signed int i; // [esp+18h] [ebp-8h]
   char *v5; // [esp+1Ch] [ebp-4h]
 
   dPiece[dx][dy] = pn;
-  v3 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(dx, dy);
+  v3 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(dx, dy)];
   v5 = (char *)pLevelPieces + 20 * (pn - 1);
   for ( i = 0; i < 10; ++i )
-    *(_WORD *)&v3[2 * i] = *(_WORD *)&v5[2 * ((i & 1) + 8 - (i & 0xE))];
+    v3[i] = *(_WORD *)&v5[2 * ((i & 1) + 8 - (i & 0xE))];
 }
 
 //----- (00460827) --------------------------------------------------------
@@ -1498,8 +1498,8 @@ void __fastcall objects_set_door_piece(int x, int y)
   v4 = dPiece[x][y] - 1;
   v5 = *((_WORD *)pLevelPieces + 10 * (unsigned __int16)v4 + 8);
   v6 = *((_WORD *)pLevelPieces + 10 * (unsigned __int16)v4 + 9);
-  dpiece_defs_map_1[0][0][16 * gendung_get_dpiece_num_from_coord(x, y)] = v5;
-  dpiece_defs_map_1[0][0][16 * gendung_get_dpiece_num_from_coord(x, y) + 1] = v6;
+  dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)][0] = v5;
+  dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)][1] = v6;
 }
 
 //----- (004608C7) --------------------------------------------------------

@@ -419,12 +419,12 @@ void __fastcall scrollrt_draw_lower(int x, int y, int sx, int sy, int a5, int so
   unsigned __int8 *a1k; // [esp+1Ch] [ebp-10h]
   unsigned __int8 *a1l; // [esp+1Ch] [ebp-10h]
   int v22; // [esp+20h] [ebp-Ch]
-  _WORD *v23; // [esp+24h] [ebp-8h]
+  SHORT *v23; // [esp+24h] [ebp-8h]
   signed int i; // [esp+28h] [ebp-4h]
 
   ya = y;
   xa = x;
-  v23 = (_WORD *)((char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y));
+  v23 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)];
   if ( some_flag )
   {
     if ( (unsigned int)ya < 0x70 && (unsigned int)xa < 0x70 )
@@ -878,7 +878,7 @@ void __fastcall DrawClippedObject(int x, int y, int a3, int a4, int pre_flag, in
 void __fastcall scrollrt_draw_clipped_e_flag(char *buffer, int x, int y, int a4, int a5)
 {
   int v7; // [esp+14h] [ebp-18h]
-  _WORD *v8; // [esp+18h] [ebp-14h]
+  SHORT *v8; // [esp+18h] [ebp-14h]
   unsigned __int8 *pbDst; // [esp+1Ch] [ebp-10h]
   int v10; // [esp+20h] [ebp-Ch]
   int v11; // [esp+24h] [ebp-8h]
@@ -890,7 +890,7 @@ void __fastcall scrollrt_draw_clipped_e_flag(char *buffer, int x, int y, int a4,
   level_piece_id = dPiece[x][y];
   light_table_index = dTransVal[x][y];
   cel_transparency_active = (unsigned __int8)(nTransTable[level_piece_id] & TransList[dung_map[x][y]]);
-  v8 = (_WORD *)((char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y));
+  v8 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)];
   arch_draw_type = 1;
   LOWORD(level_cel_block) = *v8;
   if ( (_WORD)level_cel_block )
@@ -928,14 +928,14 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
   unsigned __int8 *a1b; // [esp+1Ch] [ebp-14h]
   int v13; // [esp+20h] [ebp-10h]
   int v14; // [esp+24h] [ebp-Ch]
-  char *v15; // [esp+28h] [ebp-8h]
+  SHORT *v15; // [esp+28h] [ebp-8h]
   int i; // [esp+2Ch] [ebp-4h]
   int v17; // [esp+2Ch] [ebp-4h]
   int j; // [esp+2Ch] [ebp-4h]
 
   ya = y;
   xa = x;
-  v15 = (char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y);
+  v15 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)];
   v13 = 2 * a6 + 2;
   if ( some_flag )
   {
@@ -951,7 +951,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
         {
           if ( i >= a6 )
           {
-            LOWORD(level_cel_block) = *(_WORD *)&v15[4 * i + 6];
+            LOWORD(level_cel_block) = v15[2 * i + 3];
             if ( (_WORD)level_cel_block )
               drawLowerScreen(a1);
           }
@@ -973,7 +973,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
     --ya;
     sx += 64;
     --a5;
-    v15 += 32;
+    v15 += 16;
   }
   v14 = a5;
   while ( 1 )
@@ -994,10 +994,10 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
         {
           if ( v17 >= a6 )
           {
-            LOWORD(level_cel_block) = *(_WORD *)&v15[4 * v17 + 4];
+            LOWORD(level_cel_block) = v15[2 * v17 + 2];
             if ( (_WORD)level_cel_block )
               drawLowerScreen(a1a);
-            LOWORD(level_cel_block) = *(_WORD *)&v15[4 * v17 + 6];
+            LOWORD(level_cel_block) = v15[2 * v17 + 3];
             if ( (_WORD)level_cel_block )
               drawLowerScreen(a1a + 32);
           }
@@ -1019,7 +1019,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
     ++xa;
     --ya;
     sx += 64;
-    v15 += 32;
+    v15 += 16;
   }
   if ( some_flag )
   {
@@ -1035,7 +1035,7 @@ void __fastcall scrollrt_draw_lower_2(int x, int y, int sx, int sy, int a5, int 
         {
           if ( j >= a6 )
           {
-            LOWORD(level_cel_block) = *(_WORD *)&v15[4 * j + 4];
+            LOWORD(level_cel_block) = v15[2 * j + 2];
             if ( (_WORD)level_cel_block )
               drawLowerScreen(a1b);
           }
@@ -1237,7 +1237,7 @@ void __fastcall scrollrt_draw_clipped_dungeon_2(char *buffer, int x, int y, int 
 void __fastcall scrollrt_draw_clipped_e_flag_2(char *buffer, int x, int y, int a4, signed int a5, int sx, int sy)
 {
   int v9; // [esp+18h] [ebp-14h]
-  _WORD *v10; // [esp+1Ch] [ebp-10h]
+  SHORT *v10; // [esp+1Ch] [ebp-10h]
   unsigned __int8 *a1; // [esp+20h] [ebp-Ch]
   unsigned __int8 *a1a; // [esp+20h] [ebp-Ch]
   int v13; // [esp+24h] [ebp-8h]
@@ -1250,7 +1250,7 @@ void __fastcall scrollrt_draw_clipped_e_flag_2(char *buffer, int x, int y, int a
   light_table_index = dTransVal[x][y];
   a1 = (unsigned __int8 *)&buffer[24576 * a4];
   cel_transparency_active = (unsigned __int8)(nTransTable[level_piece_id] & TransList[dung_map[x][y]]);
-  v10 = (_WORD *)((char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y));
+  v10 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)];
   switch ( a4 )
   {
     case 0:
@@ -1316,13 +1316,13 @@ void __fastcall scrollrt_draw_upper(int x, int y, int sx, int sy, int a5, int a6
   unsigned __int8 *a1g; // [esp+18h] [ebp-14h]
   unsigned __int8 *a1h; // [esp+18h] [ebp-14h]
   int i; // [esp+1Ch] [ebp-10h]
-  _WORD *v19; // [esp+20h] [ebp-Ch]
+  SHORT *v19; // [esp+20h] [ebp-Ch]
   int j; // [esp+24h] [ebp-8h]
   int v21; // [esp+28h] [ebp-4h]
 
   ya = y;
   xa = x;
-  v19 = (_WORD *)((char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y));
+  v19 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)];
   v21 = 2 * a6 + 2;
   if ( v21 > 8 )
     v21 = 8;
@@ -1794,7 +1794,7 @@ void __fastcall DrawObject(int x, int y, int a3, int a4, int pre_flag, int a6, i
 void __fastcall scrollrt_draw_e_flag(char *buffer, int x, int y, int a4, int a5, int sx, int sy)
 {
   int v9; // [esp+14h] [ebp-18h]
-  _WORD *v10; // [esp+18h] [ebp-14h]
+  SHORT *v10; // [esp+18h] [ebp-14h]
   unsigned __int8 *a1; // [esp+1Ch] [ebp-10h]
   int v12; // [esp+20h] [ebp-Ch]
   int v13; // [esp+24h] [ebp-8h]
@@ -1807,7 +1807,7 @@ void __fastcall scrollrt_draw_e_flag(char *buffer, int x, int y, int a4, int a5,
   light_table_index = dTransVal[x][y];
   a1 = (unsigned __int8 *)buffer;
   cel_transparency_active = (unsigned __int8)(nTransTable[level_piece_id] & TransList[dung_map[x][y]]);
-  v10 = (_WORD *)((char *)dpiece_defs_map_1 + 32 * gendung_get_dpiece_num_from_coord(x, y));
+  v10 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(x, y)];
   arch_draw_type = 1;
   LOWORD(level_cel_block) = *v10;
   if ( (_WORD)level_cel_block )
