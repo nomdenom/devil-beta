@@ -99,7 +99,7 @@ void __fastcall dx_init_42D315(HWND hwnd)
   assert(v6, "init.cpp", 428);
   GdiSetBatchLimit(1u);
   if ( !gpBuffer )
-    gpBuffer = (char *)DiabloAllocPtr(503808, 434, "init.cpp");
+    gpBuffer = (BYTE *)DiabloAllocPtr(503808, 434, "init.cpp");
 }
 
 //----- (0042D562) --------------------------------------------------------

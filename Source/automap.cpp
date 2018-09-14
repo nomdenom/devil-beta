@@ -498,7 +498,7 @@ void __cdecl DrawAutomap()
 
   if ( leveltype == 1 || leveltype == 2 || leveltype == 3 )
   {
-    gpBufEnd = (unsigned __int8 *)(gpBuffer + 393216);
+    gpBufEnd = gpBuffer + 393216;
     automap_628B38_x = (ViewX - 16) >> 1;
     while ( automap_628B38_x + AutoMapXOfs < 0 )
       ++AutoMapXOfs;

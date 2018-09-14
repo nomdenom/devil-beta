@@ -7,7 +7,7 @@ void __cdecl InitStores()
 
   assert(!pSTextBoxCels, "stores.cpp", 87);
   pSTextBoxCels = LoadFileInMem("Data\\TextBox2.CEL", 0, 88, "stores.cpp");
-  pCelBuff = (char *)LoadFileInMem("Data\\PentSpn2.CEL", 0, 89, "stores.cpp");
+  pCelBuff = LoadFileInMem("Data\\PentSpn2.CEL", 0, 89, "stores.cpp");
   pSTextSlidCels = LoadFileInMem("Data\\TextSlid.CEL", 0, 90, "stores.cpp");
   ClearSText(0, 24);
   stextflag = 0;
@@ -67,7 +67,7 @@ void __cdecl FreeStoreMem()
 //----- (0042E5A8) --------------------------------------------------------
 void __cdecl DrawSTextBack()
 {
-  char *v0; // edi
+  BYTE *v0; // edi
   signed int v1; // edx
   signed int v2; // ecx
   int v3; // edi
@@ -92,7 +92,7 @@ void __cdecl DrawSTextBack()
       *v5 = 0;
       v3 = (int)(v5 + 1);
     }
-    v0 = (char *)(v3 - 1032);
+    v0 = (BYTE *)(v3 - 1032);
   }
   
   for (v6 = 132; v6; --v6)
@@ -184,11 +184,11 @@ void __fastcall PrintSString(int x, int y, unsigned __int8 cjustflag, char *str,
 //----- (0042E90E) --------------------------------------------------------
 void __fastcall DrawSLine(int y)
 {
-  char *v1; // esi
-  char *v2; // edi
+  BYTE *v1; // esi
+  BYTE *v2; // edi
   signed int v3; // edx
-  char *v4; // edi
-  char *v5; // esi
+  BYTE *v4; // edi
+  BYTE *v5; // esi
   signed int v6; // [esp+10h] [ebp-14h]
   int v7; // [esp+14h] [ebp-10h]
   signed int v8; // [esp+18h] [ebp-Ch]

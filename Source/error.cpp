@@ -31,7 +31,7 @@ void __cdecl ClrDiabloMsg()
 //----- (0045C355) --------------------------------------------------------
 void __cdecl DrawDiabloMsg()
 {
-  char *v0; // edi
+  BYTE *v0; // edi
   signed int v1; // edx
   signed int v2; // ecx
   int v3; // edi
@@ -81,7 +81,7 @@ void __cdecl DrawDiabloMsg()
       *v5 = 0;
       v3 = (int)(v5 + 1);
     }
-    v0 = (char *)(v3 - 1146);
+    v0 = (BYTE *)(v3 - 1146);
   }
   switch ( msgflag )
   {

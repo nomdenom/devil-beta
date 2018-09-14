@@ -49,7 +49,7 @@ void __fastcall LoadL3Dungeon(char *sFileName, int vx, int vy)
   ViewX = 31;
   ViewY = 83;
   SetMapMonsters((char *)pMap, 0, 0);
-  SetMapObjects((char *)pMap, 0, 0);
+  SetMapObjects(pMap, 0, 0);
   for ( nYPosb = 0; nYPosb < 112; ++nYPosb )
   {
     for ( nXPosb = 0; nXPosb < 112; ++nXPosb )

@@ -1,23 +1,23 @@
 #include "all.h"
 
 //----- (004A048C) --------------------------------------------------------
-void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
+void __fastcall drawTopArchesUpperScreen(BYTE *pbDst)
 {
   int v1; // edx
-  unsigned __int8 *tmp_pbDst; // edi
+  BYTE *tmp_pbDst; // edi
   _BYTE *pdung_cels2; // esi
   BYTE *l_tbl; // ebx
   __int16 cel_type_16; // ax
-  unsigned __int8 *pdung_cels; // esi
+  BYTE *pdung_cels; // esi
   __int16 v7; // ax
-  unsigned int v8; // eax
+  DWORD v8; // eax
   unsigned __int8 *v9; // esi
-  unsigned int v10; // eax
+  DWORD v10; // eax
   int v11; // eax
   signed int v12; // ebp
   signed int v13; // ecx
   unsigned int v14; // eax
-  unsigned __int8 *v15; // edi
+  BYTE *v15; // edi
   signed int v16; // ecx
   int v17; // eax
   signed int v18; // ebp
@@ -36,7 +36,7 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   unsigned int v31; // ecx
   unsigned int v32; // eax
   signed int v33; // ebp
-  unsigned __int8 *v34; // edi
+  BYTE *v34; // edi
   unsigned int v35; // ecx
   int v36; // edx
   unsigned int v37; // ecx
@@ -52,7 +52,7 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   unsigned int v47; // eax
   unsigned __int8 v48; // of
   signed int v49; // ebp
-  unsigned __int8 *v50; // edi
+  BYTE *v50; // edi
   unsigned int v51; // ecx
   int v52; // edx
   unsigned int v53; // ecx
@@ -91,7 +91,7 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   unsigned int v86; // ecx
   unsigned int v87; // eax
   signed int v88; // ebp
-  unsigned __int8 *v89; // edi
+  BYTE *v89; // edi
   unsigned int v90; // ecx
   int v91; // edx
   unsigned int v92; // ecx
@@ -107,7 +107,7 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   signed int v102; // ebp
   signed int v103; // ecx
   unsigned int v104; // eax
-  unsigned __int8 *v105; // edi
+  BYTE *v105; // edi
   signed int v106; // ecx
   int v107; // eax
   signed int v108; // ebp
@@ -125,14 +125,14 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   signed int v120; // ebp
   signed int v121; // ecx
   unsigned int v122; // eax
-  unsigned __int8 *v123; // edi
+  BYTE *v123; // edi
   signed int v124; // ecx
   int v125; // eax
   signed int v126; // edx
   signed int v127; // ecx
   int v128; // eax
-  unsigned __int8 *v129; // edi
-  unsigned __int8 *v130; // edi
+  BYTE *v129; // edi
+  BYTE *v130; // edi
   signed int v131; // ecx
   int v132; // eax
   _BYTE *v133; // edi
@@ -141,18 +141,18 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   unsigned int v136; // eax
   unsigned int v137; // ecx
   unsigned int v138; // ecx
-  unsigned __int8 *v139; // esi
-  unsigned __int8 *v140; // edi
-  unsigned __int8 v141; // al
+  BYTE *v139; // esi
+  BYTE *v140; // edi
+  BYTE v141; // al
   int v142; // eax
-  unsigned __int8 *v143; // edi
-  unsigned __int8 v144; // al
+  BYTE *v143; // edi
+  BYTE v144; // al
   unsigned int v145; // ecx
-  unsigned __int8 v146; // al
+  BYTE v146; // al
   int v147; // eax
-  unsigned __int8 *v148; // edi
+  BYTE *v148; // edi
   signed int v149; // edx
-  unsigned __int8 *v150; // edi
+  BYTE *v150; // edi
   unsigned int v151; // ecx
   int v152; // eax
   unsigned int v153; // ecx
@@ -164,7 +164,7 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   int v159; // eax
   _BYTE *v160; // edi
   signed int v161; // edx
-  unsigned __int8 *v162; // edi
+  BYTE *v162; // edi
   unsigned int v163; // ecx
   int v164; // eax
   unsigned int v165; // ecx
@@ -181,26 +181,26 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   char v176; // bp
   unsigned int i; // ecx
   int v178; // eax
-  unsigned __int8 *v179; // edi
+  BYTE *v179; // edi
   int v180; // ebp
-  unsigned __int8 *v181; // edi
+  BYTE *v181; // edi
   unsigned int j; // ecx
   int v183; // eax
-  unsigned __int8 *v184; // edi
+  BYTE *v184; // edi
   __int16 v185; // ax
   signed int v186; // edx
   unsigned int v187; // ecx
   int v188; // eax
   unsigned int k; // ecx
   int v190; // eax
-  unsigned __int8 *v191; // edi
-  unsigned __int8 *v192; // edi
+  BYTE *v191; // edi
+  BYTE *v192; // edi
   unsigned int l; // ecx
   int v194; // eax
-  unsigned __int8 *v195; // edi
+  BYTE *v195; // edi
   __int16 v196; // ax
   signed int v197; // edx
-  unsigned __int8 *v198; // edi
+  BYTE *v198; // edi
   unsigned int v199; // ecx
   int v200; // eax
   unsigned int v201; // ecx
@@ -214,8 +214,8 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   signed int v209; // edx
   signed int v210; // ecx
   int v211; // eax
-  unsigned __int8 *v212; // edi
-  unsigned __int8 *v213; // edi
+  BYTE *v212; // edi
+  BYTE *v213; // edi
   signed int v214; // ecx
   int v215; // eax
   _BYTE *v216; // edi
@@ -224,39 +224,39 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   int v219; // eax
   unsigned int m; // ecx
   int v221; // eax
-  unsigned __int8 *v222; // edi
-  unsigned __int8 *v223; // edi
+  BYTE *v222; // edi
+  BYTE *v223; // edi
   unsigned int n; // ecx
   int v225; // eax
-  unsigned __int8 *v226; // edi
+  BYTE *v226; // edi
   __int16 v227; // ax
   signed int v228; // edx
   signed int v229; // ecx
   int v230; // eax
-  unsigned __int8 *v231; // edi
-  unsigned __int8 *v232; // edi
+  BYTE *v231; // edi
+  BYTE *v232; // edi
   signed int v233; // ecx
   int v234; // eax
   _BYTE *v235; // edi
   signed int v236; // edx
   signed int v237; // ecx
-  unsigned __int8 *v238; // edi
+  BYTE *v238; // edi
   signed int v239; // ecx
   signed int v240; // ebp
   signed int v241; // edx
   unsigned int v242; // eax
   unsigned int v243; // ecx
   unsigned int v244; // ecx
-  unsigned __int8 *v245; // edi
+  BYTE *v245; // edi
   unsigned int v246; // ecx
   signed int ii; // edx
-  unsigned __int8 *v248; // edi
+  BYTE *v248; // edi
   unsigned int v249; // ecx
   unsigned int v250; // ecx
   _BYTE *v251; // edi
   unsigned int v252; // ecx
   signed int v253; // edx
-  unsigned __int8 *v254; // edi
+  BYTE *v254; // edi
   unsigned int v255; // ecx
   unsigned int v256; // ecx
   _BYTE *v257; // edi
@@ -264,45 +264,45 @@ void __fastcall drawTopArchesUpperScreen(unsigned __int8 *pbDst)
   signed int jj; // edx
   unsigned int v260; // ecx
   unsigned int v261; // ecx
-  unsigned __int8 *v262; // edi
+  BYTE *v262; // edi
   unsigned int v263; // ecx
-  unsigned __int8 *v264; // edi
+  BYTE *v264; // edi
   signed int v265; // edx
   unsigned int v266; // ecx
   unsigned int v267; // ecx
   _BYTE *v268; // edi
   unsigned int v269; // ecx
   signed int kk; // edx
-  unsigned __int8 *v271; // edi
+  BYTE *v271; // edi
   unsigned int v272; // ecx
   unsigned int v273; // ecx
   _BYTE *v274; // edi
   unsigned int v275; // ecx
   signed int v276; // edx
   signed int v277; // ecx
-  unsigned __int8 *v278; // edi
+  BYTE *v278; // edi
   signed int v279; // ecx
   signed int ll; // edx
   unsigned int v281; // ecx
   unsigned int v282; // ecx
-  unsigned __int8 *v283; // edi
+  BYTE *v283; // edi
   unsigned int v284; // ecx
-  unsigned __int8 *v285; // edi
+  BYTE *v285; // edi
   signed int v286; // edx
   signed int v287; // ecx
-  unsigned __int8 *v288; // edi
+  BYTE *v288; // edi
   signed int v289; // ecx
   int v290; // [esp-14h] [ebp-18h]
   int v291; // [esp-14h] [ebp-18h]
 
-  gpCelFrame = (unsigned __int8 *)speed_cel_frame_num_from_light_index_frame_num;
+  gpCelFrame = (BYTE *)speed_cel_frame_num_from_light_index_frame_num;
   tmp_pbDst = pbDst;
   if ( !(_BYTE)light_table_index )
   {
     if ( level_cel_block & 0x8000 )
       level_cel_block = *(_DWORD *)&gpCelFrame[64 * (level_cel_block & 0xFFF)]
                       + (unsigned __int16)(level_cel_block & 0xF000);
-    pdung_cels = (unsigned __int8 *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
+    pdung_cels = (BYTE *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
     v8 = level_cel_block;
     LOBYTE(v8) = BYTE1(v8);
     v7 = ((v8 >> 4) & 7) + 8;
@@ -1457,8 +1457,7 @@ LABEL_67:
       }
       return;
     }
-    pdung_cels = (unsigned __int8 *)pSpeedCels
-               + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
+    pdung_cels = (BYTE *)pSpeedCels + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
     v7 = (unsigned __int8)(BYTE1(level_cel_block) >> 4);
 LABEL_11:
     if ( v7 == 8 )
@@ -2509,16 +2508,16 @@ LABEL_391:
 }
 
 //----- (004A1AB9) --------------------------------------------------------
-void __fastcall drawBottomArchesUpperScreen(unsigned __int8 *pbDst, unsigned int *pMask)
+void __fastcall drawBottomArchesUpperScreen(BYTE *pbDst, unsigned int *pMask)
 {
-  unsigned __int8 *tmp_pbDst; // edi
+  BYTE *tmp_pbDst; // edi
   char *pdung_cels2; // esi
   __int16 v5; // ax
-  unsigned __int8 *pdung_cels; // esi
+  BYTE *pdung_cels; // esi
   __int16 v7; // ax
-  unsigned int v8; // eax
+  DWORD v8; // eax
   unsigned __int8 *v9; // esi
-  unsigned int v10; // eax
+  DWORD v10; // eax
   int v11; // eax
   int v12; // edx
   unsigned int v13; // edx
@@ -2531,18 +2530,18 @@ void __fastcall drawBottomArchesUpperScreen(unsigned __int8 *pbDst, unsigned int
   int v22; // ecx
   int v23; // edx
   signed int v26; // edx
-  unsigned __int8 *v27; // edi
+  BYTE *v27; // edi
   unsigned int v28; // ecx
   unsigned __int8 v31; // of
   signed int v32; // edx
-  unsigned __int8 *v33; // edi
+  BYTE *v33; // edi
   unsigned int v34; // ecx
   signed int v37; // edx
   unsigned int l; // ecx
   signed int v41; // edx
   unsigned int m; // ecx
   signed int v45; // edx
-  unsigned __int8 *v46; // edi
+  BYTE *v46; // edi
   unsigned int v47; // ecx
   int v50; // edx
   unsigned int v51; // edx
@@ -2555,21 +2554,21 @@ void __fastcall drawBottomArchesUpperScreen(unsigned __int8 *pbDst, unsigned int
   int v64; // edx
   unsigned int v65; // edx
   signed int v66; // ecx
-  unsigned __int8 v67; // al
+  BYTE v67; // al
   int v68; // ecx
   signed int v69; // edx
   int v70; // eax
   int v71; // edx
   int v72; // edx
   int v73; // ecx
-  unsigned __int8 v74; // al
+  BYTE v74; // al
   signed int v75; // edx
-  unsigned __int8 *v76; // edi
+  BYTE *v76; // edi
   unsigned int v77; // ecx
   __int16 v78; // ax
   int v79; // eax
   signed int v80; // edx
-  unsigned __int8 *v81; // edi
+  BYTE *v81; // edi
   unsigned int v82; // ecx
   __int16 v83; // ax
   int v84; // eax
@@ -2582,14 +2581,14 @@ void __fastcall drawBottomArchesUpperScreen(unsigned __int8 *pbDst, unsigned int
   int v91; // eax
   __int16 v92; // ax
   signed int v93; // edx
-  unsigned __int8 *v94; // edi
+  BYTE *v94; // edi
   unsigned int v95; // ecx
   __int16 v96; // ax
   int v97; // eax
   int v98; // edx
   unsigned int v99; // edx
   signed int v100; // ecx
-  unsigned __int8 v101; // al
+  BYTE v101; // al
   signed int v102; // edx
   unsigned int k; // ecx
   int v104; // eax
@@ -2597,7 +2596,7 @@ void __fastcall drawBottomArchesUpperScreen(unsigned __int8 *pbDst, unsigned int
   int v106; // edx
   unsigned int v107; // edx
   signed int v108; // ecx
-  unsigned __int8 v109; // al
+  BYTE v109; // al
   int v110; // edx
   unsigned int v111; // edx
   signed int v112; // ecx
@@ -2608,25 +2607,25 @@ void __fastcall drawBottomArchesUpperScreen(unsigned __int8 *pbDst, unsigned int
   int v117; // edx
   int v118; // ecx
   signed int v119; // edx
-  unsigned __int8 *v120; // edi
+  BYTE *v120; // edi
   unsigned int v121; // ecx
   signed int v122; // edx
-  unsigned __int8 *v123; // edi
+  BYTE *v123; // edi
   unsigned int v124; // ecx
   signed int v125; // edx
   unsigned int v126; // ecx
-  unsigned __int8 *v127; // edi
+  BYTE *v127; // edi
   signed int v128; // edx
   unsigned int v129; // ecx
   signed int v130; // edx
-  unsigned __int8 *v131; // edi
+  BYTE *v131; // edi
   unsigned int v132; // ecx
   int v133; // edx
   unsigned int v134; // edx
   signed int v135; // ecx
   signed int v136; // edx
   unsigned int v137; // ecx
-  unsigned __int8 *v138; // edi
+  BYTE *v138; // edi
   int v139; // edx
   unsigned int v140; // edx
   signed int v141; // ecx
@@ -2646,7 +2645,7 @@ void __fastcall drawBottomArchesUpperScreen(unsigned __int8 *pbDst, unsigned int
   int v155; // [esp-4h] [ebp-10h]
   int v156; // [esp-4h] [ebp-10h]
 
-  gpCelFrame = (unsigned __int8 *)speed_cel_frame_num_from_light_index_frame_num;
+  gpCelFrame = (BYTE *)speed_cel_frame_num_from_light_index_frame_num;
   tmp_pbDst = pbDst;
   gpDrawMask = pMask;
   if ( !(_BYTE)light_table_index )
@@ -2654,7 +2653,7 @@ void __fastcall drawBottomArchesUpperScreen(unsigned __int8 *pbDst, unsigned int
     if ( level_cel_block & 0x8000 )
       level_cel_block = *(_DWORD *)&gpCelFrame[64 * (level_cel_block & 0xFFF)]
                       + (unsigned __int16)(level_cel_block & 0xF000);
-    pdung_cels = (unsigned __int8 *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
+    pdung_cels = (BYTE *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
     v8 = level_cel_block;
     LOBYTE(v8) = BYTE1(v8);
     v7 = ((v8 >> 4) & 7) + 8;
@@ -3370,8 +3369,7 @@ LABEL_187:
       while ( v153 != 1 );
       return;
     }
-    pdung_cels = (unsigned __int8 *)pSpeedCels
-               + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
+    pdung_cels = (BYTE *)pSpeedCels + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
     v7 = (unsigned __int8)(BYTE1(level_cel_block) >> 4);
     goto LABEL_12;
   }
@@ -3633,37 +3631,37 @@ LABEL_208:
 }
 
 //----- (004A26F1) --------------------------------------------------------
-void __fastcall drawUpperScreen(unsigned __int8 *pbDst)
+void __fastcall drawUpperScreen(BYTE *pbDst)
 {
   int v1; // edx
   char v2; // al
   char v3; // al
-  unsigned __int8 *tmp_pbDst; // edi
+  BYTE *tmp_pbDst; // edi
   _BYTE *pdung_cels2; // esi
   BYTE *l_tbl; // ebx
   __int16 v7; // ax
-  unsigned __int8 *pdung_cels; // esi
+  BYTE *pdung_cels; // esi
   __int16 v9; // ax
-  unsigned int v10; // eax
+  DWORD v10; // eax
   unsigned __int8 *pdung_cels3; // esi
-  unsigned int v12; // eax
+  DWORD v12; // eax
   int v13; // edx
   char v14; // cl
   int v15; // eax
-  unsigned __int8 v16; // ch
-  unsigned __int8 v17; // ch
-  unsigned __int8 v18; // ch
+  BYTE v16; // ch
+  BYTE v17; // ch
+  BYTE v18; // ch
   signed int v19; // ebp
   signed int v20; // edx
   int v21; // eax
   int v22; // edx
   char v23; // cl
   int v24; // eax
-  unsigned __int8 v25; // ch
-  unsigned __int8 v26; // ch
-  unsigned __int8 v27; // ch
+  BYTE v25; // ch
+  BYTE v26; // ch
+  BYTE v27; // ch
   signed int v28; // ebp
-  unsigned __int8 *v29; // edi
+  BYTE *v29; // edi
   char v30; // cl
   int v31; // edx
   int v32; // eax
@@ -3672,7 +3670,7 @@ void __fastcall drawUpperScreen(unsigned __int8 *pbDst)
   BYTE v35; // ch
   unsigned __int8 v36; // of
   signed int v37; // ebp
-  unsigned __int8 *v38; // edi
+  BYTE *v38; // edi
   char v39; // cl
   int v40; // edx
   int v41; // eax
@@ -3682,17 +3680,17 @@ void __fastcall drawUpperScreen(unsigned __int8 *pbDst)
   signed int v45; // ebp
   char m; // cl
   int v47; // eax
-  unsigned __int8 v48; // ch
-  unsigned __int8 v49; // ch
-  unsigned __int8 v50; // ch
+  BYTE v48; // ch
+  BYTE v49; // ch
+  BYTE v50; // ch
   signed int v51; // ebp
   char n; // cl
   int v53; // eax
-  unsigned __int8 v54; // ch
-  unsigned __int8 v55; // ch
-  unsigned __int8 v56; // ch
+  BYTE v54; // ch
+  BYTE v55; // ch
+  BYTE v56; // ch
   signed int v57; // ebp
-  unsigned __int8 *v58; // edi
+  BYTE *v58; // edi
   char v59; // cl
   int v60; // edx
   int v61; // eax
@@ -3702,21 +3700,21 @@ void __fastcall drawUpperScreen(unsigned __int8 *pbDst)
   signed int v65; // ebp
   char v66; // cl
   int v67; // eax
-  unsigned __int8 v68; // ch
-  unsigned __int8 v69; // ch
-  unsigned __int8 v70; // ch
+  BYTE v68; // ch
+  BYTE v69; // ch
+  BYTE v70; // ch
   signed int v71; // ebp
   char ii; // cl
   int v73; // eax
-  unsigned __int8 v74; // ch
-  unsigned __int8 v75; // ch
-  unsigned __int8 v76; // ch
+  BYTE v74; // ch
+  BYTE v75; // ch
+  BYTE v76; // ch
   signed int v77; // ebp
   char v78; // cl
   int v79; // eax
-  unsigned __int8 v80; // ch
-  unsigned __int8 v81; // ch
-  unsigned __int8 v82; // ch
+  BYTE v80; // ch
+  BYTE v81; // ch
+  BYTE v82; // ch
   signed int v83; // edx
   signed int v84; // ecx
   int v85; // eax
@@ -3724,18 +3722,18 @@ void __fastcall drawUpperScreen(unsigned __int8 *pbDst)
   signed int v87; // edx
   unsigned int v88; // eax
   unsigned int v89; // ecx
-  unsigned __int8 v90; // al
+  BYTE v90; // al
   char v91; // cf
   unsigned int v92; // ecx
   __int16 v93; // ax
   int v94; // eax
   signed int v95; // edx
-  unsigned __int8 *v96; // edi
+  BYTE *v96; // edi
   unsigned int v97; // ecx
   __int16 v98; // ax
   int v99; // eax
   signed int v100; // edx
-  unsigned __int8 *v101; // edi
+  BYTE *v101; // edi
   unsigned int v102; // ecx
   __int16 v103; // ax
   int v104; // eax
@@ -3748,7 +3746,7 @@ void __fastcall drawUpperScreen(unsigned __int8 *pbDst)
   int v111; // eax
   __int16 v112; // ax
   signed int v113; // edx
-  unsigned __int8 *v114; // edi
+  BYTE *v114; // edi
   unsigned int v115; // ecx
   __int16 v116; // ax
   int v117; // eax
@@ -3770,24 +3768,24 @@ void __fastcall drawUpperScreen(unsigned __int8 *pbDst)
   unsigned int v133; // ecx
   unsigned int v134; // ecx
   signed int v135; // edx
-  unsigned __int8 *v136; // edi
+  BYTE *v136; // edi
   unsigned int v137; // ecx
   signed int v138; // edx
-  unsigned __int8 *v139; // edi
+  BYTE *v139; // edi
   unsigned int v140; // ecx
   signed int v141; // edx
   unsigned int v142; // ecx
-  unsigned __int8 *v143; // edi
+  BYTE *v143; // edi
   signed int v144; // edx
   unsigned int v145; // ecx
   signed int v146; // edx
-  unsigned __int8 *v147; // edi
+  BYTE *v147; // edi
   unsigned int v148; // ecx
   signed int v149; // edx
   signed int v150; // ecx
   signed int v151; // edx
   unsigned int v152; // ecx
-  unsigned __int8 *v153; // edi
+  BYTE *v153; // edi
   signed int v154; // edx
   signed int v155; // ecx
   int l; // [esp-14h] [ebp-18h]
@@ -3820,14 +3818,14 @@ void __fastcall drawUpperScreen(unsigned __int8 *pbDst)
       }
     }
   }
-  gpCelFrame = (unsigned __int8 *)speed_cel_frame_num_from_light_index_frame_num;
+  gpCelFrame = (BYTE *)speed_cel_frame_num_from_light_index_frame_num;
   tmp_pbDst = pbDst;
   if ( !(_BYTE)light_table_index )
   {
     if ( level_cel_block & 0x8000 )
       level_cel_block = *(_DWORD *)&gpCelFrame[64 * (level_cel_block & 0xFFF)]
                       + (unsigned __int16)(level_cel_block & 0xF000);
-    pdung_cels = (unsigned __int8 *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
+    pdung_cels = (BYTE *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
     v10 = level_cel_block;
     LOBYTE(v10) = BYTE1(v10);
     v9 = ((v10 >> 4) & 7) + 8;
@@ -4552,8 +4550,7 @@ LABEL_58:
       }
       return;
     }
-    pdung_cels = (unsigned __int8 *)pSpeedCels
-               + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
+    pdung_cels = (BYTE *)pSpeedCels + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
     v9 = (unsigned __int16)level_cel_block >> 12;
     goto LABEL_22;
   }
@@ -4561,7 +4558,7 @@ LABEL_58:
     level_cel_block = *(_DWORD *)&gpCelFrame[64 * (level_cel_block & 0xFFF)]
                     + (unsigned __int16)(level_cel_block & 0xF000);
   pdung_cels3 = (unsigned __int8 *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
-  v12 = ((unsigned int)level_cel_block >> 12) & 7;
+  v12 = (level_cel_block >> 12) & 7;
   if ( v12 )
   {
     switch ( (_WORD)v12 )
@@ -4823,23 +4820,23 @@ LABEL_205:
 }
 
 //----- (004A3364) --------------------------------------------------------
-void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
+void __fastcall drawTopArchesLowerScreen(BYTE *pbDst)
 {
   int v1; // edx
-  unsigned int tmp_pbDst; // edi
+  BYTE *tmp_pbDst; // edi
   _BYTE *pdung_cels3; // esi
   BYTE *l_tbl; // ebx
   __int16 v5; // ax
-  char *pdung_cels; // esi
+  BYTE *pdung_cels; // esi
   __int16 v7; // ax
-  unsigned int v8; // eax
+  DWORD v8; // eax
   char *pdung_cels2; // esi
-  unsigned int v10; // eax
+  DWORD v10; // eax
   int v11; // eax
   signed int v12; // ebp
   signed int v13; // ecx
   unsigned int v14; // eax
-  unsigned __int8 *v15; // edi
+  BYTE *v15; // edi
   signed int v16; // ecx
   int v17; // eax
   int v18; // ecx
@@ -4860,7 +4857,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   signed int v33; // eax
   unsigned int v34; // ecx
   int v35; // eax
-  _BYTE *v36; // edi
+  BYTE *v36; // edi
   unsigned int v37; // ecx
   int v38; // edx
   unsigned int v39; // ecx
@@ -4879,7 +4876,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   signed int v52; // eax
   unsigned int v53; // ecx
   int v54; // eax
-  _BYTE *v55; // edi
+  BYTE *v55; // edi
   unsigned int v56; // ecx
   int v57; // edx
   unsigned int v58; // ecx
@@ -4927,7 +4924,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   signed int v100; // eax
   unsigned int v101; // ecx
   int v102; // eax
-  _BYTE *v103; // edi
+  BYTE *v103; // edi
   unsigned int v104; // ecx
   unsigned int v105; // ecx
   unsigned int v106; // ecx
@@ -4942,7 +4939,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   signed int v115; // ebp
   signed int v116; // ecx
   unsigned int v117; // eax
-  unsigned __int8 *v118; // edi
+  BYTE *v118; // edi
   signed int v119; // ecx
   int v120; // eax
   int v121; // ebp
@@ -4963,14 +4960,14 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   signed int v136; // ebp
   signed int v137; // ecx
   unsigned int v138; // eax
-  unsigned __int8 *v139; // edi
+  BYTE *v139; // edi
   signed int v140; // ecx
   int v141; // eax
   signed int v142; // edx
   signed int v143; // ecx
   int v144; // eax
-  _BYTE *v145; // edi
-  unsigned __int8 *v146; // edi
+  BYTE *v145; // edi
+  BYTE *v146; // edi
   signed int v147; // ecx
   int v148; // eax
   _BYTE *v149; // edi
@@ -4979,21 +4976,21 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   unsigned int v152; // eax
   unsigned int v153; // ecx
   unsigned int v154; // ecx
-  char *v155; // esi
-  _BYTE *v156; // edi
-  char v157; // al
+  BYTE *v155; // esi
+  BYTE *v156; // edi
+  BYTE v157; // al
   int v158; // eax
-  _BYTE *v159; // edi
-  char v160; // al
+  BYTE *v159; // edi
+  BYTE v160; // al
   unsigned int v161; // ecx
-  char v162; // al
+  BYTE v162; // al
   int v163; // eax
-  _BYTE *v164; // edi
+  BYTE *v164; // edi
   int v165; // edx
   signed int v166; // eax
   unsigned int v167; // ecx
   int v168; // eax
-  _BYTE *v169; // edi
+  BYTE *v169; // edi
   unsigned int v170; // ecx
   int v171; // eax
   unsigned int v172; // ecx
@@ -5008,7 +5005,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   signed int v181; // eax
   unsigned int v182; // ecx
   int v183; // eax
-  _BYTE *v184; // edi
+  BYTE *v184; // edi
   unsigned int v185; // ecx
   int v186; // eax
   unsigned int v187; // ecx
@@ -5027,11 +5024,11 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   int v200; // eax
   unsigned int ii; // ecx
   int v202; // eax
-  _BYTE *v203; // edi
-  _BYTE *v204; // edi
+  BYTE *v203; // edi
+  BYTE *v204; // edi
   unsigned int jj; // ecx
   int v206; // eax
-  _BYTE *v207; // edi
+  BYTE *v207; // edi
   __int16 v208; // ax
   int v209; // edx
   signed int v210; // eax
@@ -5041,17 +5038,17 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   int v214; // eax
   unsigned int kk; // ecx
   int v216; // eax
-  _BYTE *v217; // edi
-  _BYTE *v218; // edi
+  BYTE *v217; // edi
+  BYTE *v218; // edi
   unsigned int ll; // ecx
   int v220; // eax
-  _BYTE *v221; // edi
+  BYTE *v221; // edi
   __int16 v222; // ax
   int v223; // edx
   signed int v224; // eax
   unsigned int v225; // ecx
   int v226; // eax
-  _BYTE *v227; // edi
+  BYTE *v227; // edi
   unsigned int v228; // ecx
   int v229; // eax
   unsigned int v230; // ecx
@@ -5065,8 +5062,8 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   signed int v238; // edx
   signed int v239; // ecx
   int v240; // eax
-  _BYTE *v241; // edi
-  unsigned __int8 *v242; // edi
+  BYTE *v241; // edi
+  BYTE *v242; // edi
   signed int v243; // ecx
   int v244; // eax
   _BYTE *v245; // edi
@@ -5078,39 +5075,39 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   int v251; // eax
   unsigned int m; // ecx
   int v253; // eax
-  _BYTE *v254; // edi
-  _BYTE *v255; // edi
+  BYTE *v254; // edi
+  BYTE *v255; // edi
   unsigned int n; // ecx
   int v257; // eax
-  _BYTE *v258; // edi
+  BYTE *v258; // edi
   __int16 v259; // ax
   signed int v260; // edx
   signed int v261; // ecx
   int v262; // eax
-  _BYTE *v263; // edi
-  unsigned __int8 *v264; // edi
+  BYTE *v263; // edi
+  BYTE *v264; // edi
   signed int v265; // ecx
   int v266; // eax
   _BYTE *v267; // edi
   signed int v268; // edx
   signed int v269; // ecx
-  unsigned __int8 *v270; // edi
+  BYTE *v270; // edi
   signed int v271; // ecx
   int v272; // ecx
   signed int v273; // edx
   unsigned int v274; // eax
   unsigned int v275; // ecx
   unsigned int v276; // ecx
-  _BYTE *v277; // edi
+  BYTE *v277; // edi
   unsigned int v278; // ecx
   signed int i; // edx
-  _BYTE *v280; // edi
+  BYTE *v280; // edi
   unsigned int v281; // ecx
   unsigned int v282; // ecx
   _BYTE *v283; // edi
   unsigned int v284; // ecx
   signed int v285; // edx
-  _BYTE *v286; // edi
+  BYTE *v286; // edi
   unsigned int v287; // ecx
   unsigned int v288; // ecx
   _BYTE *v289; // edi
@@ -5118,46 +5115,46 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
   signed int j; // edx
   unsigned int v292; // ecx
   unsigned int v293; // ecx
-  _BYTE *v294; // edi
+  BYTE *v294; // edi
   unsigned int v295; // ecx
-  unsigned __int8 *v296; // edi
+  BYTE *v296; // edi
   signed int v297; // edx
   unsigned int v298; // ecx
   unsigned int v299; // ecx
   _BYTE *v300; // edi
   unsigned int v301; // ecx
   signed int k; // edx
-  _BYTE *v303; // edi
+  BYTE *v303; // edi
   unsigned int v304; // ecx
   unsigned int v305; // ecx
   _BYTE *v306; // edi
   unsigned int v307; // ecx
   signed int v308; // edx
   signed int v309; // ecx
-  unsigned __int8 *v310; // edi
+  BYTE *v310; // edi
   signed int v311; // ecx
   signed int l; // edx
   unsigned int v313; // ecx
   unsigned int v314; // ecx
-  _BYTE *v315; // edi
+  BYTE *v315; // edi
   unsigned int v316; // ecx
-  unsigned int v317; // edi
+  BYTE *v317; // edi
   signed int v318; // edx
   signed int v319; // ecx
-  unsigned __int8 *v320; // edi
+  BYTE *v320; // edi
   signed int v321; // ecx
   int v322; // [esp-14h] [ebp-18h]
   int v323; // [esp-10h] [ebp-14h]
   int v324; // [esp-10h] [ebp-14h]
 
-  gpCelFrame = (unsigned __int8 *)speed_cel_frame_num_from_light_index_frame_num;
-  tmp_pbDst = (unsigned int)pbDst;
+  gpCelFrame = (BYTE *)speed_cel_frame_num_from_light_index_frame_num;
+  tmp_pbDst = pbDst;
   if ( !(_BYTE)light_table_index )
   {
     if ( level_cel_block & 0x8000 )
       level_cel_block = *(_DWORD *)&gpCelFrame[64 * (level_cel_block & 0xFFF)]
                       + (unsigned __int16)(level_cel_block & 0xF000);
-    pdung_cels = (char *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
+    pdung_cels = (BYTE *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
     v8 = level_cel_block;
     LOBYTE(v8) = BYTE1(v8);
     v7 = ((v8 >> 4) & 7) + 8;
@@ -5177,13 +5174,13 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
       v268 = 16;
       do
       {
-        if ( tmp_pbDst < (unsigned int)gpBufEnd )
+        if ( tmp_pbDst < gpBufEnd )
         {
           v269 = 8;
           do
           {
-            *(_BYTE *)(tmp_pbDst + 1) = 0;
-            *(_BYTE *)(tmp_pbDst + 3) = 0;
+            tmp_pbDst[1] = 0;
+            tmp_pbDst[3] = 0;
             tmp_pbDst += 4;
             --v269;
           }
@@ -5194,7 +5191,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
           pdung_cels2 += 32;
           tmp_pbDst += 32;
         }
-        v270 = (unsigned __int8 *)(tmp_pbDst - 800);
+        v270 = tmp_pbDst - 800;
         if ( v270 < gpBufEnd )
         {
           v271 = 8;
@@ -5212,7 +5209,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
           pdung_cels2 += 32;
           v270 += 32;
         }
-        tmp_pbDst = (unsigned int)(v270 - 800);
+        tmp_pbDst = v270 - 800;
         --v268;
       }
       while ( v268 );
@@ -5226,9 +5223,9 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
           WorldBoolFlag = 0;
           for ( i = 30; ; i -= 2 )
           {
-            if ( tmp_pbDst < (unsigned int)gpBufEnd )
+            if ( tmp_pbDst < gpBufEnd )
             {
-              v280 = (_BYTE *)(i + tmp_pbDst);
+              v280 = &tmp_pbDst[i];
               v281 = 32 - i;
               WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
               if ( WorldBoolFlag )
@@ -5267,18 +5264,18 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
             else
             {
               pdung_cels2 = &pdung_cels2[-i + 32];
-              v280 = (_BYTE *)(tmp_pbDst + 32);
+              v280 = tmp_pbDst + 32;
             }
-            tmp_pbDst = (unsigned int)(v280 - 800);
+            tmp_pbDst = v280 - 800;
             if ( !i )
               break;
           }
           v285 = 2;
           do
           {
-            if ( tmp_pbDst < (unsigned int)gpBufEnd )
+            if ( tmp_pbDst < gpBufEnd )
             {
-              v286 = (_BYTE *)(v285 + tmp_pbDst);
+              v286 = &tmp_pbDst[v285];
               v287 = 32 - v285;
               WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
               if ( WorldBoolFlag )
@@ -5317,9 +5314,9 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
             else
             {
               pdung_cels2 = &pdung_cels2[-v285 + 32];
-              v286 = (_BYTE *)(tmp_pbDst + 32);
+              v286 = tmp_pbDst + 32;
             }
-            tmp_pbDst = (unsigned int)(v286 - 800);
+            tmp_pbDst = v286 - 800;
             v285 += 2;
           }
           while ( v285 != 32 );
@@ -5328,7 +5325,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
           WorldBoolFlag = 0;
           for ( j = 30; ; j -= 2 )
           {
-            if ( tmp_pbDst < (unsigned int)gpBufEnd )
+            if ( tmp_pbDst < gpBufEnd )
             {
               v292 = 32 - j;
               WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
@@ -5336,12 +5333,12 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
               {
                 v22 = __CFSHR__(v292, 2);
                 v293 = v292 >> 2;
-                if ( !v22 || (v294 = (_BYTE *)(tmp_pbDst + 1), *v294 = 0, tmp_pbDst = (unsigned int)(v294 + 1), v293) )
+                if ( !v22 || (v294 = tmp_pbDst + 1, *v294 = 0, tmp_pbDst = v294 + 1, v293) )
                 {
                   do
                   {
-                    *(_BYTE *)(tmp_pbDst + 1) = 0;
-                    *(_BYTE *)(tmp_pbDst + 3) = 0;
+                    tmp_pbDst[1] = 0;
+                    tmp_pbDst[3] = 0;
                     tmp_pbDst += 4;
                     --v293;
                   }
@@ -5352,12 +5349,12 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
               {
                 v22 = __CFSHR__(v292, 2);
                 v295 = v292 >> 2;
-                if ( !v22 || (*(_BYTE *)tmp_pbDst = 0, tmp_pbDst += 2, v295) )
+                if ( !v22 || (*tmp_pbDst = 0, tmp_pbDst += 2, v295) )
                 {
                   do
                   {
-                    *(_BYTE *)tmp_pbDst = 0;
-                    *(_BYTE *)(tmp_pbDst + 2) = 0;
+                    *tmp_pbDst = 0;
+                    tmp_pbDst[2] = 0;
                     tmp_pbDst += 4;
                     --v295;
                   }
@@ -5368,12 +5365,12 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
             else
             {
               pdung_cels2 = &pdung_cels2[-j + 32];
-              tmp_pbDst = tmp_pbDst + 32 - j;
+              tmp_pbDst = &tmp_pbDst[-j + 32];
             }
-            v296 = (unsigned __int8 *)(tmp_pbDst - 800);
+            v296 = tmp_pbDst - 800;
             if ( !j )
               break;
-            tmp_pbDst = (unsigned int)&v296[j];
+            tmp_pbDst = &v296[j];
           }
           v297 = 2;
           do
@@ -5429,9 +5426,9 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
           WorldBoolFlag = 0;
           for ( k = 30; ; k -= 2 )
           {
-            if ( tmp_pbDst < (unsigned int)gpBufEnd )
+            if ( tmp_pbDst < gpBufEnd )
             {
-              v303 = (_BYTE *)(k + tmp_pbDst);
+              v303 = &tmp_pbDst[k];
               v304 = 32 - k;
               WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
               if ( WorldBoolFlag )
@@ -5470,22 +5467,22 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
             else
             {
               pdung_cels2 = &pdung_cels2[-k + 32];
-              v303 = (_BYTE *)(tmp_pbDst + 32);
+              v303 = tmp_pbDst + 32;
             }
-            tmp_pbDst = (unsigned int)(v303 - 800);
+            tmp_pbDst = v303 - 800;
             if ( !k )
               break;
           }
           v308 = 8;
           do
           {
-            if ( tmp_pbDst < (unsigned int)gpBufEnd )
+            if ( tmp_pbDst < gpBufEnd )
             {
               v309 = 8;
               do
               {
-                *(_BYTE *)(tmp_pbDst + 1) = 0;
-                *(_BYTE *)(tmp_pbDst + 3) = 0;
+                tmp_pbDst[1] = 0;
+                tmp_pbDst[3] = 0;
                 tmp_pbDst += 4;
                 --v309;
               }
@@ -5496,7 +5493,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
               pdung_cels2 += 32;
               tmp_pbDst += 32;
             }
-            v310 = (unsigned __int8 *)(tmp_pbDst - 800);
+            v310 = tmp_pbDst - 800;
             if ( v310 < gpBufEnd )
             {
               v311 = 8;
@@ -5514,7 +5511,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
               pdung_cels2 += 32;
               v310 += 32;
             }
-            tmp_pbDst = (unsigned int)(v310 - 800);
+            tmp_pbDst = v310 - 800;
             --v308;
           }
           while ( v308 );
@@ -5523,7 +5520,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
           WorldBoolFlag = 0;
           for ( l = 30; ; l -= 2 )
           {
-            if ( tmp_pbDst < (unsigned int)gpBufEnd )
+            if ( tmp_pbDst < gpBufEnd )
             {
               v313 = 32 - l;
               WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
@@ -5531,12 +5528,12 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
               {
                 v22 = __CFSHR__(v313, 2);
                 v314 = v313 >> 2;
-                if ( !v22 || (v315 = (_BYTE *)(tmp_pbDst + 1), *v315 = 0, tmp_pbDst = (unsigned int)(v315 + 1), v314) )
+                if ( !v22 || (v315 = tmp_pbDst + 1, *v315 = 0, tmp_pbDst = v315 + 1, v314) )
                 {
                   do
                   {
-                    *(_BYTE *)(tmp_pbDst + 1) = 0;
-                    *(_BYTE *)(tmp_pbDst + 3) = 0;
+                    tmp_pbDst[1] = 0;
+                    tmp_pbDst[3] = 0;
                     tmp_pbDst += 4;
                     --v314;
                   }
@@ -5547,12 +5544,12 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
               {
                 v22 = __CFSHR__(v313, 2);
                 v316 = v313 >> 2;
-                if ( !v22 || (*(_BYTE *)tmp_pbDst = 0, tmp_pbDst += 2, v316) )
+                if ( !v22 || (*tmp_pbDst = 0, tmp_pbDst += 2, v316) )
                 {
                   do
                   {
-                    *(_BYTE *)tmp_pbDst = 0;
-                    *(_BYTE *)(tmp_pbDst + 2) = 0;
+                    *tmp_pbDst = 0;
+                    tmp_pbDst[2] = 0;
                     tmp_pbDst += 4;
                     --v316;
                   }
@@ -5563,23 +5560,23 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
             else
             {
               pdung_cels2 = &pdung_cels2[-l + 32];
-              tmp_pbDst = tmp_pbDst + 32 - l;
+              tmp_pbDst = &tmp_pbDst[-l + 32];
             }
             v317 = tmp_pbDst - 800;
             if ( !l )
               break;
-            tmp_pbDst = l + v317;
+            tmp_pbDst = &v317[l];
           }
           v318 = 8;
           do
           {
-            if ( v317 < (unsigned int)gpBufEnd )
+            if ( v317 < gpBufEnd )
             {
               v319 = 8;
               do
               {
-                *(_BYTE *)(v317 + 1) = 0;
-                *(_BYTE *)(v317 + 3) = 0;
+                v317[1] = 0;
+                v317[3] = 0;
                 v317 += 4;
                 --v319;
               }
@@ -5590,7 +5587,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
               pdung_cels2 += 32;
               v317 += 32;
             }
-            v320 = (unsigned __int8 *)(v317 - 800);
+            v320 = v317 - 800;
             if ( v320 < gpBufEnd )
             {
               v321 = 8;
@@ -5608,7 +5605,7 @@ void __fastcall drawTopArchesLowerScreen(unsigned __int8 *pbDst)
               pdung_cels2 += 32;
               v320 += 32;
             }
-            v317 = (unsigned int)(v320 - 800);
+            v317 = v320 - 800;
             --v318;
           }
           while ( v318 );
@@ -5643,10 +5640,10 @@ LABEL_433:
         }
       }
       v273 -= v274;
-      if ( tmp_pbDst < (unsigned int)gpBufEnd )
+      if ( tmp_pbDst < gpBufEnd )
       {
         pdung_cels2 += v274;
-        if ( (tmp_pbDst & 1) == WorldBoolFlag )
+        if ( ((unsigned __int8)tmp_pbDst & 1) == WorldBoolFlag )
         {
           v275 = v274 >> 1;
           if ( !(v274 & 1) )
@@ -5657,12 +5654,12 @@ LABEL_433:
 LABEL_427:
             v22 = v275 & 1;
             v278 = v275 >> 1;
-            if ( !v22 || (*(_BYTE *)tmp_pbDst = 0, tmp_pbDst += 2, v278) )
+            if ( !v22 || (*tmp_pbDst = 0, tmp_pbDst += 2, v278) )
             {
               do
               {
-                *(_BYTE *)tmp_pbDst = 0;
-                *(_BYTE *)(tmp_pbDst + 2) = 0;
+                *tmp_pbDst = 0;
+                tmp_pbDst[2] = 0;
                 tmp_pbDst += 4;
                 --v278;
               }
@@ -5676,18 +5673,18 @@ LABEL_427:
           v275 = v274 >> 1;
           if ( !(v274 & 1) )
             goto LABEL_427;
-          *(_BYTE *)tmp_pbDst++ = 0;
+          *tmp_pbDst++ = 0;
           if ( v275 )
           {
 LABEL_420:
             v22 = v275 & 1;
             v276 = v275 >> 1;
-            if ( !v22 || (v277 = (_BYTE *)(tmp_pbDst + 1), *v277 = 0, tmp_pbDst = (unsigned int)(v277 + 1), v276) )
+            if ( !v22 || (v277 = tmp_pbDst + 1, *v277 = 0, tmp_pbDst = v277 + 1, v276) )
             {
               do
               {
-                *(_BYTE *)(tmp_pbDst + 1) = 0;
-                *(_BYTE *)(tmp_pbDst + 3) = 0;
+                tmp_pbDst[1] = 0;
+                tmp_pbDst[3] = 0;
                 tmp_pbDst += 4;
                 --v276;
               }
@@ -5717,7 +5714,7 @@ LABEL_430:
       v12 = 16;
       do
       {
-        if ( tmp_pbDst < (unsigned int)gpBufEnd )
+        if ( tmp_pbDst < gpBufEnd )
         {
           v13 = 8;
           do
@@ -5726,11 +5723,11 @@ LABEL_430:
             pdung_cels3 += 4;
             LOBYTE(v1) = BYTE1(v14);
             v14 >>= 16;
-            *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+            tmp_pbDst[1] = l_tbl[v1];
             LOBYTE(v1) = BYTE1(v14);
             tmp_pbDst += 4;
             --v13;
-            *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+            *(tmp_pbDst - 1) = l_tbl[v1];
           }
           while ( v13 );
         }
@@ -5739,7 +5736,7 @@ LABEL_430:
           pdung_cels3 += 32;
           tmp_pbDst += 32;
         }
-        v15 = (unsigned __int8 *)(tmp_pbDst - 800);
+        v15 = tmp_pbDst - 800;
         if ( v15 < gpBufEnd )
         {
           v16 = 8;
@@ -5761,7 +5758,7 @@ LABEL_430:
           pdung_cels3 += 32;
           v15 += 32;
         }
-        tmp_pbDst = (unsigned int)(v15 - 800);
+        tmp_pbDst = v15 - 800;
         --v12;
       }
       while ( v12 );
@@ -5789,9 +5786,9 @@ LABEL_430:
               goto LABEL_69;
           }
           v19 -= v20;
-          if ( tmp_pbDst < (unsigned int)gpBufEnd )
+          if ( tmp_pbDst < gpBufEnd )
           {
-            if ( (tmp_pbDst & 1) == WorldBoolFlag )
+            if ( ((unsigned __int8)tmp_pbDst & 1) == WorldBoolFlag )
             {
               v21 = v20 >> 1;
               if ( v20 & 1 )
@@ -5804,7 +5801,7 @@ LABEL_430:
                 {
                   LOBYTE(v1) = *pdung_cels3;
                   pdung_cels3 += 2;
-                  *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                  *tmp_pbDst = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v25 )
@@ -5814,11 +5811,11 @@ LABEL_430:
                     v26 = *(_DWORD *)pdung_cels3;
                     pdung_cels3 += 4;
                     LOBYTE(v1) = v26;
-                    *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                    *tmp_pbDst = l_tbl[v1];
                     LOBYTE(v1) = BYTE2(v26);
                     tmp_pbDst += 4;
                     --v25;
-                    *(_BYTE *)(tmp_pbDst - 2) = l_tbl[v1];
+                    *(tmp_pbDst - 2) = l_tbl[v1];
                   }
                   while ( v25 );
                 }
@@ -5831,7 +5828,7 @@ LABEL_430:
                 {
                   LOBYTE(v1) = pdung_cels3[1];
                   pdung_cels3 += 2;
-                  *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                  tmp_pbDst[1] = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v23 )
@@ -5842,11 +5839,11 @@ LABEL_430:
                     pdung_cels3 += 4;
                     LOBYTE(v1) = BYTE1(v24);
                     v24 >>= 16;
-                    *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                    tmp_pbDst[1] = l_tbl[v1];
                     LOBYTE(v1) = BYTE1(v24);
                     tmp_pbDst += 4;
                     --v23;
-                    *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                    *(tmp_pbDst - 1) = l_tbl[v1];
                   }
                   while ( v23 );
                 }
@@ -5858,14 +5855,14 @@ LABEL_430:
               if ( v20 & 1 )
               {
                 LOBYTE(v1) = *pdung_cels3++;
-                *(_BYTE *)tmp_pbDst++ = l_tbl[v1];
+                *tmp_pbDst++ = l_tbl[v1];
                 v22 = v27 & 1;
                 v30 = v20 >> 2;
                 if ( v22 )
                 {
                   LOBYTE(v1) = pdung_cels3[1];
                   pdung_cels3 += 2;
-                  *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                  tmp_pbDst[1] = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v30 )
@@ -5876,11 +5873,11 @@ LABEL_430:
                     pdung_cels3 += 4;
                     LOBYTE(v1) = BYTE1(v31);
                     v31 >>= 16;
-                    *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                    tmp_pbDst[1] = l_tbl[v1];
                     LOBYTE(v1) = BYTE1(v31);
                     tmp_pbDst += 4;
                     --v30;
-                    *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                    *(tmp_pbDst - 1) = l_tbl[v1];
                   }
                   while ( v30 );
                 }
@@ -5893,7 +5890,7 @@ LABEL_430:
                 {
                   LOBYTE(v1) = *pdung_cels3;
                   pdung_cels3 += 2;
-                  *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                  *tmp_pbDst = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v28 )
@@ -5903,11 +5900,11 @@ LABEL_430:
                     v29 = *(_DWORD *)pdung_cels3;
                     pdung_cels3 += 4;
                     LOBYTE(v1) = v29;
-                    *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                    *tmp_pbDst = l_tbl[v1];
                     LOBYTE(v1) = BYTE2(v29);
                     tmp_pbDst += 4;
                     --v28;
-                    *(_BYTE *)(tmp_pbDst - 2) = l_tbl[v1];
+                    *(tmp_pbDst - 2) = l_tbl[v1];
                   }
                   while ( v28 );
                 }
@@ -5942,13 +5939,13 @@ LABEL_69:
             v122 = (unsigned int)(pbDst - gpBufEnd + 1023) >> 8;
             if ( v122 > 45 )
             {
-              tmp_pbDst = (unsigned int)(pbDst - 12288);
+              tmp_pbDst = pbDst - 12288;
               pdung_cels3 += 288;
 LABEL_249:
               v136 = 8;
               do
               {
-                if ( tmp_pbDst < (unsigned int)gpBufEnd )
+                if ( tmp_pbDst < gpBufEnd )
                 {
                   v137 = 8;
                   do
@@ -5957,11 +5954,11 @@ LABEL_249:
                     pdung_cels3 += 4;
                     LOBYTE(v1) = BYTE1(v138);
                     v138 >>= 16;
-                    *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                    tmp_pbDst[1] = l_tbl[v1];
                     LOBYTE(v1) = BYTE1(v138);
                     tmp_pbDst += 4;
                     --v137;
-                    *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                    *(tmp_pbDst - 1) = l_tbl[v1];
                   }
                   while ( v137 );
                 }
@@ -5970,7 +5967,7 @@ LABEL_249:
                   pdung_cels3 += 32;
                   tmp_pbDst += 32;
                 }
-                v139 = (unsigned __int8 *)(tmp_pbDst - 800);
+                v139 = tmp_pbDst - 800;
                 if ( v139 < gpBufEnd )
                 {
                   v140 = 8;
@@ -5992,7 +5989,7 @@ LABEL_249:
                   pdung_cels3 += 32;
                   v139 += 32;
                 }
-                tmp_pbDst = (unsigned int)(v139 - 800);
+                tmp_pbDst = v139 - 800;
                 --v136;
               }
               while ( v136 );
@@ -6024,7 +6021,7 @@ LABEL_249:
                 {
                   LOBYTE(v1) = *pdung_cels3;
                   pdung_cels3 += 2;
-                  *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                  *tmp_pbDst = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v129 )
@@ -6034,11 +6031,11 @@ LABEL_249:
                     v130 = *(_DWORD *)pdung_cels3;
                     pdung_cels3 += 4;
                     LOBYTE(v1) = v130;
-                    *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                    *tmp_pbDst = l_tbl[v1];
                     LOBYTE(v1) = BYTE2(v130);
                     tmp_pbDst += 4;
                     --v129;
-                    *(_BYTE *)(tmp_pbDst - 2) = l_tbl[v1];
+                    *(tmp_pbDst - 2) = l_tbl[v1];
                   }
                   while ( v129 );
                 }
@@ -6051,7 +6048,7 @@ LABEL_249:
                 {
                   LOBYTE(v1) = pdung_cels3[1];
                   pdung_cels3 += 2;
-                  *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                  tmp_pbDst[1] = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v127 )
@@ -6062,11 +6059,11 @@ LABEL_249:
                     pdung_cels3 += 4;
                     LOBYTE(v1) = BYTE1(v128);
                     v128 >>= 16;
-                    *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                    tmp_pbDst[1] = l_tbl[v1];
                     LOBYTE(v1) = BYTE1(v128);
                     tmp_pbDst += 4;
                     --v127;
-                    *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                    *(tmp_pbDst - 1) = l_tbl[v1];
                   }
                   while ( v127 );
                 }
@@ -6081,14 +6078,14 @@ LABEL_249:
               if ( v22 )
               {
                 LOBYTE(v1) = *pdung_cels3++;
-                *(_BYTE *)tmp_pbDst++ = l_tbl[v1];
+                *tmp_pbDst++ = l_tbl[v1];
                 v22 = v131 & 1;
                 v134 = v131 >> 1;
                 if ( v22 )
                 {
                   LOBYTE(v1) = pdung_cels3[1];
                   pdung_cels3 += 2;
-                  *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                  tmp_pbDst[1] = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v134 )
@@ -6099,11 +6096,11 @@ LABEL_249:
                     pdung_cels3 += 4;
                     LOBYTE(v1) = BYTE1(v135);
                     v135 >>= 16;
-                    *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                    tmp_pbDst[1] = l_tbl[v1];
                     LOBYTE(v1) = BYTE1(v135);
                     tmp_pbDst += 4;
                     --v134;
-                    *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                    *(tmp_pbDst - 1) = l_tbl[v1];
                   }
                   while ( v134 );
                 }
@@ -6116,7 +6113,7 @@ LABEL_249:
                 {
                   LOBYTE(v1) = *pdung_cels3;
                   pdung_cels3 += 2;
-                  *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                  *tmp_pbDst = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v132 )
@@ -6126,11 +6123,11 @@ LABEL_249:
                     v133 = *(_DWORD *)pdung_cels3;
                     pdung_cels3 += 4;
                     LOBYTE(v1) = v133;
-                    *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                    *tmp_pbDst = l_tbl[v1];
                     LOBYTE(v1) = BYTE2(v133);
                     tmp_pbDst += 4;
                     --v132;
-                    *(_BYTE *)(tmp_pbDst - 2) = l_tbl[v1];
+                    *(tmp_pbDst - 2) = l_tbl[v1];
                   }
                   while ( v132 );
                 }
@@ -6138,7 +6135,7 @@ LABEL_249:
               v1 = (unsigned __int8)pdung_cels3 & 2;
               pdung_cels3 += v1;
             }
-            tmp_pbDst = v121 + tmp_pbDst - 800;
+            tmp_pbDst = &tmp_pbDst[v121 - 800];
             v50 = __OFSUB__(v121, 2);
             v121 -= 2;
           }
@@ -6152,13 +6149,13 @@ LABEL_249:
           v100 = (unsigned int)(pbDst - gpBufEnd + 1023) >> 8;
           if ( v100 > 45 )
           {
-            tmp_pbDst = (unsigned int)(pbDst - 12288);
+            tmp_pbDst = pbDst - 12288;
             pdung_cels3 += 288;
 LABEL_210:
             v115 = 8;
             do
             {
-              if ( tmp_pbDst < (unsigned int)gpBufEnd )
+              if ( tmp_pbDst < gpBufEnd )
               {
                 v116 = 8;
                 do
@@ -6167,11 +6164,11 @@ LABEL_210:
                   pdung_cels3 += 4;
                   LOBYTE(v1) = BYTE1(v117);
                   v117 >>= 16;
-                  *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                  tmp_pbDst[1] = l_tbl[v1];
                   LOBYTE(v1) = BYTE1(v117);
                   tmp_pbDst += 4;
                   --v116;
-                  *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                  *(tmp_pbDst - 1) = l_tbl[v1];
                 }
                 while ( v116 );
               }
@@ -6180,7 +6177,7 @@ LABEL_210:
                 pdung_cels3 += 32;
                 tmp_pbDst += 32;
               }
-              v118 = (unsigned __int8 *)(tmp_pbDst - 800);
+              v118 = tmp_pbDst - 800;
               if ( v118 < gpBufEnd )
               {
                 v119 = 8;
@@ -6202,7 +6199,7 @@ LABEL_210:
                 pdung_cels3 += 32;
                 v118 += 32;
               }
-              tmp_pbDst = (unsigned int)(v118 - 800);
+              tmp_pbDst = v118 - 800;
               --v115;
             }
             while ( v115 );
@@ -6218,7 +6215,7 @@ LABEL_210:
         }
         do
         {
-          v103 = (_BYTE *)(v99 + tmp_pbDst);
+          v103 = &tmp_pbDst[v99];
           v104 = 32 - v99;
           WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
           if ( WorldBoolFlag )
@@ -6349,7 +6346,7 @@ LABEL_210:
               }
             }
           }
-          tmp_pbDst = (unsigned int)(v103 - 800);
+          tmp_pbDst = v103 - 800;
           v50 = __OFSUB__(v99, 2);
           v99 -= 2;
         }
@@ -6363,13 +6360,13 @@ LABEL_210:
         v70 = (unsigned int)(pbDst - gpBufEnd + 1023) >> 8;
         if ( v70 > 45 )
         {
-          tmp_pbDst = (unsigned int)(pbDst - 12288);
+          tmp_pbDst = pbDst - 12288;
           pdung_cels3 += 288;
 LABEL_154:
           v84 = 2;
-          if ( tmp_pbDst >= (unsigned int)gpBufEnd )
+          if ( tmp_pbDst >= gpBufEnd )
           {
-            v85 = (tmp_pbDst - (unsigned int)gpBufEnd + 1023) >> 8;
+            v85 = (unsigned int)(tmp_pbDst - gpBufEnd + 1023) >> 8;
             if ( v85 > 42 )
               return;
             v86 = WorldTbl3x16[v85];
@@ -6398,7 +6395,7 @@ LABEL_154:
                 {
                   LOBYTE(v1) = *pdung_cels3;
                   pdung_cels3 += 2;
-                  *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                  *tmp_pbDst = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v92 )
@@ -6408,11 +6405,11 @@ LABEL_154:
                     v93 = *(_DWORD *)pdung_cels3;
                     pdung_cels3 += 4;
                     LOBYTE(v1) = v93;
-                    *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                    *tmp_pbDst = l_tbl[v1];
                     LOBYTE(v1) = BYTE2(v93);
                     tmp_pbDst += 4;
                     --v92;
-                    *(_BYTE *)(tmp_pbDst - 2) = l_tbl[v1];
+                    *(tmp_pbDst - 2) = l_tbl[v1];
                   }
                   while ( v92 );
                 }
@@ -6425,7 +6422,7 @@ LABEL_154:
                 {
                   LOBYTE(v1) = pdung_cels3[1];
                   pdung_cels3 += 2;
-                  *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                  tmp_pbDst[1] = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v90 )
@@ -6436,11 +6433,11 @@ LABEL_154:
                     pdung_cels3 += 4;
                     LOBYTE(v1) = BYTE1(v91);
                     v91 >>= 16;
-                    *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                    tmp_pbDst[1] = l_tbl[v1];
                     LOBYTE(v1) = BYTE1(v91);
                     tmp_pbDst += 4;
                     --v90;
-                    *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                    *(tmp_pbDst - 1) = l_tbl[v1];
                   }
                   while ( v90 );
                 }
@@ -6455,14 +6452,14 @@ LABEL_154:
               if ( v22 )
               {
                 LOBYTE(v1) = *pdung_cels3++;
-                *(_BYTE *)tmp_pbDst++ = l_tbl[v1];
+                *tmp_pbDst++ = l_tbl[v1];
                 v22 = v94 & 1;
                 v97 = v94 >> 1;
                 if ( v22 )
                 {
                   LOBYTE(v1) = pdung_cels3[1];
                   pdung_cels3 += 2;
-                  *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                  tmp_pbDst[1] = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v97 )
@@ -6473,11 +6470,11 @@ LABEL_154:
                     pdung_cels3 += 4;
                     LOBYTE(v1) = BYTE1(v98);
                     v98 >>= 16;
-                    *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                    tmp_pbDst[1] = l_tbl[v1];
                     LOBYTE(v1) = BYTE1(v98);
                     tmp_pbDst += 4;
                     --v97;
-                    *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                    *(tmp_pbDst - 1) = l_tbl[v1];
                   }
                   while ( v97 );
                 }
@@ -6490,7 +6487,7 @@ LABEL_154:
                 {
                   LOBYTE(v1) = *pdung_cels3;
                   pdung_cels3 += 2;
-                  *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                  *tmp_pbDst = l_tbl[v1];
                   tmp_pbDst += 2;
                 }
                 if ( (_BYTE)v95 )
@@ -6500,11 +6497,11 @@ LABEL_154:
                     v96 = *(_DWORD *)pdung_cels3;
                     pdung_cels3 += 4;
                     LOBYTE(v1) = v96;
-                    *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                    *tmp_pbDst = l_tbl[v1];
                     LOBYTE(v1) = BYTE2(v96);
                     tmp_pbDst += 4;
                     --v95;
-                    *(_BYTE *)(tmp_pbDst - 2) = l_tbl[v1];
+                    *(tmp_pbDst - 2) = l_tbl[v1];
                   }
                   while ( v95 );
                 }
@@ -6512,7 +6509,7 @@ LABEL_154:
               v1 = (unsigned __int8)pdung_cels3 & 2;
               pdung_cels3 += v1;
             }
-            tmp_pbDst = v84 + tmp_pbDst - 800;
+            tmp_pbDst = &tmp_pbDst[v84 - 800];
             v84 += 2;
           }
           while ( v84 != 32 );
@@ -6544,7 +6541,7 @@ LABEL_154:
             {
               LOBYTE(v1) = *pdung_cels3;
               pdung_cels3 += 2;
-              *(_BYTE *)tmp_pbDst = l_tbl[v1];
+              *tmp_pbDst = l_tbl[v1];
               tmp_pbDst += 2;
             }
             if ( (_BYTE)v77 )
@@ -6554,11 +6551,11 @@ LABEL_154:
                 v78 = *(_DWORD *)pdung_cels3;
                 pdung_cels3 += 4;
                 LOBYTE(v1) = v78;
-                *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                *tmp_pbDst = l_tbl[v1];
                 LOBYTE(v1) = BYTE2(v78);
                 tmp_pbDst += 4;
                 --v77;
-                *(_BYTE *)(tmp_pbDst - 2) = l_tbl[v1];
+                *(tmp_pbDst - 2) = l_tbl[v1];
               }
               while ( v77 );
             }
@@ -6571,7 +6568,7 @@ LABEL_154:
             {
               LOBYTE(v1) = pdung_cels3[1];
               pdung_cels3 += 2;
-              *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+              tmp_pbDst[1] = l_tbl[v1];
               tmp_pbDst += 2;
             }
             if ( (_BYTE)v75 )
@@ -6582,11 +6579,11 @@ LABEL_154:
                 pdung_cels3 += 4;
                 LOBYTE(v1) = BYTE1(v76);
                 v76 >>= 16;
-                *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                tmp_pbDst[1] = l_tbl[v1];
                 LOBYTE(v1) = BYTE1(v76);
                 tmp_pbDst += 4;
                 --v75;
-                *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                *(tmp_pbDst - 1) = l_tbl[v1];
               }
               while ( v75 );
             }
@@ -6601,14 +6598,14 @@ LABEL_154:
           if ( v22 )
           {
             LOBYTE(v1) = *pdung_cels3++;
-            *(_BYTE *)tmp_pbDst++ = l_tbl[v1];
+            *tmp_pbDst++ = l_tbl[v1];
             v22 = v79 & 1;
             v82 = v79 >> 1;
             if ( v22 )
             {
               LOBYTE(v1) = pdung_cels3[1];
               pdung_cels3 += 2;
-              *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+              tmp_pbDst[1] = l_tbl[v1];
               tmp_pbDst += 2;
             }
             if ( (_BYTE)v82 )
@@ -6619,11 +6616,11 @@ LABEL_154:
                 pdung_cels3 += 4;
                 LOBYTE(v1) = BYTE1(v83);
                 v83 >>= 16;
-                *(_BYTE *)(tmp_pbDst + 1) = l_tbl[v1];
+                tmp_pbDst[1] = l_tbl[v1];
                 LOBYTE(v1) = BYTE1(v83);
                 tmp_pbDst += 4;
                 --v82;
-                *(_BYTE *)(tmp_pbDst - 1) = l_tbl[v1];
+                *(tmp_pbDst - 1) = l_tbl[v1];
               }
               while ( v82 );
             }
@@ -6636,7 +6633,7 @@ LABEL_154:
             {
               LOBYTE(v1) = *pdung_cels3;
               pdung_cels3 += 2;
-              *(_BYTE *)tmp_pbDst = l_tbl[v1];
+              *tmp_pbDst = l_tbl[v1];
               tmp_pbDst += 2;
             }
             if ( (_BYTE)v80 )
@@ -6646,11 +6643,11 @@ LABEL_154:
                 v81 = *(_DWORD *)pdung_cels3;
                 pdung_cels3 += 4;
                 LOBYTE(v1) = v81;
-                *(_BYTE *)tmp_pbDst = l_tbl[v1];
+                *tmp_pbDst = l_tbl[v1];
                 LOBYTE(v1) = BYTE2(v81);
                 tmp_pbDst += 4;
                 --v80;
-                *(_BYTE *)(tmp_pbDst - 2) = l_tbl[v1];
+                *(tmp_pbDst - 2) = l_tbl[v1];
               }
               while ( v80 );
             }
@@ -6658,7 +6655,7 @@ LABEL_154:
           v1 = (unsigned __int8)pdung_cels3 & 2;
           pdung_cels3 += v1;
         }
-        tmp_pbDst = v69 + tmp_pbDst - 800;
+        tmp_pbDst = &tmp_pbDst[v69 - 800];
         v50 = __OFSUB__(v69, 2);
         v69 -= 2;
       }
@@ -6672,13 +6669,13 @@ LABEL_154:
       v33 = (unsigned int)(pbDst - gpBufEnd + 1023) >> 8;
       if ( v33 > 45 )
       {
-        tmp_pbDst = (unsigned int)(pbDst - 12288);
+        tmp_pbDst = pbDst - 12288;
         pdung_cels3 += 288;
 LABEL_98:
         v51 = 2;
-        if ( tmp_pbDst >= (unsigned int)gpBufEnd )
+        if ( tmp_pbDst >= gpBufEnd )
         {
-          v52 = (tmp_pbDst - (unsigned int)gpBufEnd + 1023) >> 8;
+          v52 = (unsigned int)(tmp_pbDst - gpBufEnd + 1023) >> 8;
           if ( v52 > 42 )
             return;
           v53 = WorldTbl3x16[v52];
@@ -6691,7 +6688,7 @@ LABEL_98:
         }
         do
         {
-          v55 = (_BYTE *)(v51 + tmp_pbDst);
+          v55 = &tmp_pbDst[v51];
           v56 = 32 - v51;
           WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
           if ( WorldBoolFlag )
@@ -6822,7 +6819,7 @@ LABEL_98:
               }
             }
           }
-          tmp_pbDst = (unsigned int)(v55 - 800);
+          tmp_pbDst = v55 - 800;
           v51 += 2;
         }
         while ( v51 != 32 );
@@ -6838,7 +6835,7 @@ LABEL_98:
     }
     do
     {
-      v36 = (_BYTE *)(v32 + tmp_pbDst);
+      v36 = &tmp_pbDst[v32];
       v37 = 32 - v32;
       WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
       if ( WorldBoolFlag )
@@ -6969,14 +6966,14 @@ LABEL_98:
           }
         }
       }
-      tmp_pbDst = (unsigned int)(v36 - 800);
+      tmp_pbDst = v36 - 800;
       v50 = __OFSUB__(v32, 2);
       v32 -= 2;
     }
     while ( !((v32 < 0) ^ v50) );
     goto LABEL_98;
   }
-  pdung_cels = (char *)pSpeedCels + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
+  pdung_cels = (BYTE *)pSpeedCels + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
   v7 = (unsigned __int8)(BYTE1(level_cel_block) >> 4);
 LABEL_11:
   switch ( v7 )
@@ -6985,19 +6982,19 @@ LABEL_11:
       v142 = 16;
       do
       {
-        if ( tmp_pbDst < (unsigned int)gpBufEnd )
+        if ( tmp_pbDst < gpBufEnd )
         {
           v143 = 8;
           do
           {
             v144 = *(_DWORD *)pdung_cels;
             pdung_cels += 4;
-            v145 = (_BYTE *)(tmp_pbDst + 1);
+            v145 = tmp_pbDst + 1;
             v144 = __ROR4__(v144, 8);
             *v145 = v144;
             v145 += 2;
             *v145 = __ROR4__(v144, 16);
-            tmp_pbDst = (unsigned int)(v145 + 1);
+            tmp_pbDst = v145 + 1;
             --v143;
           }
           while ( v143 );
@@ -7007,7 +7004,7 @@ LABEL_11:
           pdung_cels += 32;
           tmp_pbDst += 32;
         }
-        v146 = (unsigned __int8 *)(tmp_pbDst - 800);
+        v146 = tmp_pbDst - 800;
         if ( v146 < gpBufEnd )
         {
           v147 = 8;
@@ -7028,7 +7025,7 @@ LABEL_11:
           pdung_cels += 32;
           v146 += 32;
         }
-        tmp_pbDst = (unsigned int)(v146 - 800);
+        tmp_pbDst = v146 - 800;
         --v142;
       }
       while ( v142 );
@@ -7044,13 +7041,13 @@ LABEL_11:
         {
           while ( 1 )
           {
-            v152 = (unsigned __int8)*pdung_cels++;
+            v152 = *pdung_cels++;
             if ( (v152 & 0x80u) != 0 )
               break;
             v151 -= v152;
-            if ( tmp_pbDst < (unsigned int)gpBufEnd )
+            if ( tmp_pbDst < gpBufEnd )
             {
-              if ( (tmp_pbDst & 1) == WorldBoolFlag )
+              if ( ((unsigned __int8)tmp_pbDst & 1) == WorldBoolFlag )
               {
                 v153 = v152 >> 1;
                 if ( !(v152 & 1) )
@@ -7062,16 +7059,16 @@ LABEL_11:
 LABEL_287:
                   v22 = v153 & 1;
                   v161 = v153 >> 1;
-                  if ( !v22 || (v162 = *pdung_cels, pdung_cels += 2, *(_BYTE *)tmp_pbDst = v162, tmp_pbDst += 2, v161) )
+                  if ( !v22 || (v162 = *pdung_cels, pdung_cels += 2, *tmp_pbDst = v162, tmp_pbDst += 2, v161) )
                   {
                     do
                     {
                       v163 = *(_DWORD *)pdung_cels;
                       pdung_cels += 4;
-                      *(_BYTE *)tmp_pbDst = v163;
-                      v164 = (_BYTE *)(tmp_pbDst + 2);
+                      *tmp_pbDst = v163;
+                      v164 = tmp_pbDst + 2;
                       *v164 = __ROR4__(v163, 16);
-                      tmp_pbDst = (unsigned int)(v164 + 2);
+                      tmp_pbDst = v164 + 2;
                       --v161;
                     }
                     while ( v161 );
@@ -7085,7 +7082,7 @@ LABEL_287:
                 if ( !(v152 & 1) )
                   goto LABEL_287;
                 v160 = *pdung_cels++;
-                *(_BYTE *)tmp_pbDst++ = v160;
+                *tmp_pbDst++ = v160;
                 if ( v153 )
                 {
 LABEL_280:
@@ -7093,23 +7090,23 @@ LABEL_280:
                   v154 = v153 >> 1;
                   if ( !v22
                     || (v155 = pdung_cels + 1,
-                        v156 = (_BYTE *)(tmp_pbDst + 1),
+                        v156 = tmp_pbDst + 1,
                         v157 = *v155,
                         pdung_cels = v155 + 1,
                         *v156 = v157,
-                        tmp_pbDst = (unsigned int)(v156 + 1),
+                        tmp_pbDst = v156 + 1,
                         v154) )
                   {
                     do
                     {
                       v158 = *(_DWORD *)pdung_cels;
                       pdung_cels += 4;
-                      v159 = (_BYTE *)(tmp_pbDst + 1);
+                      v159 = tmp_pbDst + 1;
                       v158 = __ROR4__(v158, 8);
                       *v159 = v158;
                       v159 += 2;
                       *v159 = __ROR4__(v158, 16);
-                      tmp_pbDst = (unsigned int)(v159 + 1);
+                      tmp_pbDst = v159 + 1;
                       --v154;
                     }
                     while ( v154 );
@@ -7147,13 +7144,13 @@ LABEL_293:
         v166 = (unsigned int)(pbDst - gpBufEnd + 1023) >> 8;
         if ( v166 > 45 )
         {
-          tmp_pbDst = (unsigned int)(pbDst - 12288);
+          tmp_pbDst = pbDst - 12288;
           pdung_cels += 288;
 LABEL_308:
           v180 = 2;
-          if ( tmp_pbDst >= (unsigned int)gpBufEnd )
+          if ( tmp_pbDst >= gpBufEnd )
           {
-            v181 = (tmp_pbDst - (unsigned int)gpBufEnd + 1023) >> 8;
+            v181 = (unsigned int)(tmp_pbDst - gpBufEnd + 1023) >> 8;
             if ( v181 > 42 )
               return;
             v182 = WorldTbl3x16[v181];
@@ -7166,7 +7163,7 @@ LABEL_308:
           }
           do
           {
-            v184 = (_BYTE *)(v180 + tmp_pbDst);
+            v184 = &tmp_pbDst[v180];
             v185 = 32 - v180;
             v186 = ((_BYTE)WorldBoolFlag + 1) & 1;
             WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
@@ -7216,7 +7213,7 @@ LABEL_308:
                 while ( v191 );
               }
             }
-            tmp_pbDst = (unsigned int)(v184 - 800);
+            tmp_pbDst = v184 - 800;
             v180 += 2;
           }
           while ( v180 != 32 );
@@ -7232,7 +7229,7 @@ LABEL_308:
       }
       do
       {
-        v169 = (_BYTE *)(v165 + tmp_pbDst);
+        v169 = &tmp_pbDst[v165];
         v170 = 32 - v165;
         v171 = ((_BYTE)WorldBoolFlag + 1) & 1;
         WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
@@ -7282,7 +7279,7 @@ LABEL_308:
             while ( v176 );
           }
         }
-        tmp_pbDst = (unsigned int)(v169 - 800);
+        tmp_pbDst = v169 - 800;
         v50 = __OFSUB__(v165, 2);
         v165 -= 2;
       }
@@ -7300,25 +7297,25 @@ LABEL_308:
         v247 = (unsigned int)(pbDst - gpBufEnd + 1023) >> 8;
         if ( v247 > 45 )
         {
-          tmp_pbDst = (unsigned int)(pbDst - 12288);
+          tmp_pbDst = pbDst - 12288;
           pdung_cels += 288;
 LABEL_389:
           v260 = 8;
           do
           {
-            if ( tmp_pbDst < (unsigned int)gpBufEnd )
+            if ( tmp_pbDst < gpBufEnd )
             {
               v261 = 8;
               do
               {
                 v262 = *(_DWORD *)pdung_cels;
                 pdung_cels += 4;
-                v263 = (_BYTE *)(tmp_pbDst + 1);
+                v263 = tmp_pbDst + 1;
                 v262 = __ROR4__(v262, 8);
                 *v263 = v262;
                 v263 += 2;
                 *v263 = __ROR4__(v262, 16);
-                tmp_pbDst = (unsigned int)(v263 + 1);
+                tmp_pbDst = v263 + 1;
                 --v261;
               }
               while ( v261 );
@@ -7328,7 +7325,7 @@ LABEL_389:
               pdung_cels += 32;
               tmp_pbDst += 32;
             }
-            v264 = (unsigned __int8 *)(tmp_pbDst - 800);
+            v264 = tmp_pbDst - 800;
             if ( v264 < gpBufEnd )
             {
               v265 = 8;
@@ -7349,7 +7346,7 @@ LABEL_389:
               pdung_cels += 32;
               v264 += 32;
             }
-            tmp_pbDst = (unsigned int)(v264 - 800);
+            tmp_pbDst = v264 - 800;
             --v260;
           }
           while ( v260 );
@@ -7374,21 +7371,21 @@ LABEL_389:
           {
             v253 = *(_DWORD *)pdung_cels;
             pdung_cels += 4;
-            v254 = (_BYTE *)(tmp_pbDst + 1);
+            v254 = tmp_pbDst + 1;
             v253 = __ROR4__(v253, 8);
             *v254 = v253;
             v254 += 2;
             v251 = __ROR4__(v253, 16);
             *v254 = v251;
-            tmp_pbDst = (unsigned int)(v254 + 1);
+            tmp_pbDst = v254 + 1;
           }
           if ( (32 - (_BYTE)v246) & 2 )
           {
             LOWORD(v251) = *(_WORD *)pdung_cels;
             pdung_cels += 4;
-            v255 = (_BYTE *)(tmp_pbDst + 1);
+            v255 = tmp_pbDst + 1;
             *v255 = __ROR4__(v251, 8);
-            tmp_pbDst = (unsigned int)(v255 + 1);
+            tmp_pbDst = v255 + 1;
           }
         }
         else
@@ -7397,20 +7394,20 @@ LABEL_389:
           {
             v257 = *(_DWORD *)pdung_cels;
             pdung_cels += 4;
-            *(_BYTE *)tmp_pbDst = v257;
-            v258 = (_BYTE *)(tmp_pbDst + 2);
+            *tmp_pbDst = v257;
+            v258 = tmp_pbDst + 2;
             *v258 = __ROR4__(v257, 16);
-            tmp_pbDst = (unsigned int)(v258 + 2);
+            tmp_pbDst = v258 + 2;
           }
           if ( (32 - (_BYTE)v246) & 2 )
           {
             v259 = *(_WORD *)pdung_cels;
             pdung_cels += 4;
-            *(_BYTE *)tmp_pbDst = v259;
+            *tmp_pbDst = v259;
             tmp_pbDst += 2;
           }
         }
-        tmp_pbDst = v246 + tmp_pbDst - 800;
+        tmp_pbDst = &tmp_pbDst[v246 - 800];
         v50 = __OFSUB__(v246, 2);
         v246 -= 2;
       }
@@ -7424,25 +7421,25 @@ LABEL_389:
       v224 = (unsigned int)(pbDst - gpBufEnd + 1023) >> 8;
       if ( v224 > 45 )
       {
-        tmp_pbDst = (unsigned int)(pbDst - 12288);
+        tmp_pbDst = pbDst - 12288;
         pdung_cels += 288;
 LABEL_364:
         v238 = 8;
         do
         {
-          if ( tmp_pbDst < (unsigned int)gpBufEnd )
+          if ( tmp_pbDst < gpBufEnd )
           {
             v239 = 8;
             do
             {
               v240 = *(_DWORD *)pdung_cels;
               pdung_cels += 4;
-              v241 = (_BYTE *)(tmp_pbDst + 1);
+              v241 = tmp_pbDst + 1;
               v240 = __ROR4__(v240, 8);
               *v241 = v240;
               v241 += 2;
               *v241 = __ROR4__(v240, 16);
-              tmp_pbDst = (unsigned int)(v241 + 1);
+              tmp_pbDst = v241 + 1;
               --v239;
             }
             while ( v239 );
@@ -7452,7 +7449,7 @@ LABEL_364:
             pdung_cels += 32;
             tmp_pbDst += 32;
           }
-          v242 = (unsigned __int8 *)(tmp_pbDst - 800);
+          v242 = tmp_pbDst - 800;
           if ( v242 < gpBufEnd )
           {
             v243 = 8;
@@ -7473,7 +7470,7 @@ LABEL_364:
             pdung_cels += 32;
             v242 += 32;
           }
-          tmp_pbDst = (unsigned int)(v242 - 800);
+          tmp_pbDst = v242 - 800;
           --v238;
         }
         while ( v238 );
@@ -7489,7 +7486,7 @@ LABEL_364:
     }
     do
     {
-      v227 = (_BYTE *)(v223 + tmp_pbDst);
+      v227 = &tmp_pbDst[v223];
       v228 = 32 - v223;
       v229 = ((_BYTE)WorldBoolFlag + 1) & 1;
       WorldBoolFlag = ((_BYTE)WorldBoolFlag + 1) & 1;
@@ -7539,7 +7536,7 @@ LABEL_364:
           while ( v234 );
         }
       }
-      tmp_pbDst = (unsigned int)(v227 - 800);
+      tmp_pbDst = v227 - 800;
       v50 = __OFSUB__(v223, 2);
       v223 -= 2;
     }
@@ -7572,21 +7569,21 @@ LABEL_326:
         {
           v202 = *(_DWORD *)pdung_cels;
           pdung_cels += 4;
-          v203 = (_BYTE *)(tmp_pbDst + 1);
+          v203 = tmp_pbDst + 1;
           v202 = __ROR4__(v202, 8);
           *v203 = v202;
           v203 += 2;
           v200 = __ROR4__(v202, 16);
           *v203 = v200;
-          tmp_pbDst = (unsigned int)(v203 + 1);
+          tmp_pbDst = v203 + 1;
         }
         if ( (32 - (_BYTE)v195) & 2 )
         {
           LOWORD(v200) = *(_WORD *)pdung_cels;
           pdung_cels += 4;
-          v204 = (_BYTE *)(tmp_pbDst + 1);
+          v204 = tmp_pbDst + 1;
           *v204 = __ROR4__(v200, 8);
-          tmp_pbDst = (unsigned int)(v204 + 1);
+          tmp_pbDst = v204 + 1;
         }
       }
       else
@@ -7595,33 +7592,33 @@ LABEL_326:
         {
           v206 = *(_DWORD *)pdung_cels;
           pdung_cels += 4;
-          *(_BYTE *)tmp_pbDst = v206;
-          v207 = (_BYTE *)(tmp_pbDst + 2);
+          *tmp_pbDst = v206;
+          v207 = tmp_pbDst + 2;
           *v207 = __ROR4__(v206, 16);
-          tmp_pbDst = (unsigned int)(v207 + 2);
+          tmp_pbDst = v207 + 2;
         }
         if ( (32 - (_BYTE)v195) & 2 )
         {
           v208 = *(_WORD *)pdung_cels;
           pdung_cels += 4;
-          *(_BYTE *)tmp_pbDst = v208;
+          *tmp_pbDst = v208;
           tmp_pbDst += 2;
         }
       }
-      tmp_pbDst = v195 + tmp_pbDst - 800;
+      tmp_pbDst = &tmp_pbDst[v195 - 800];
       v50 = __OFSUB__(v195, 2);
       v195 -= 2;
     }
     while ( !((v195 < 0) ^ v50) );
     goto LABEL_336;
   }
-  tmp_pbDst = (unsigned int)(pbDst - 12288);
+  tmp_pbDst = pbDst - 12288;
   pdung_cels += 288;
 LABEL_336:
   v209 = 2;
-  if ( tmp_pbDst >= (unsigned int)gpBufEnd )
+  if ( tmp_pbDst >= gpBufEnd )
   {
-    v210 = (tmp_pbDst - (unsigned int)gpBufEnd + 1023) >> 8;
+    v210 = (unsigned int)(tmp_pbDst - gpBufEnd + 1023) >> 8;
     if ( v210 > 42 )
       return;
     v211 = WorldTbl3x16[v210];
@@ -7643,21 +7640,21 @@ LABEL_336:
       {
         v216 = *(_DWORD *)pdung_cels;
         pdung_cels += 4;
-        v217 = (_BYTE *)(tmp_pbDst + 1);
+        v217 = tmp_pbDst + 1;
         v216 = __ROR4__(v216, 8);
         *v217 = v216;
         v217 += 2;
         v214 = __ROR4__(v216, 16);
         *v217 = v214;
-        tmp_pbDst = (unsigned int)(v217 + 1);
+        tmp_pbDst = v217 + 1;
       }
       if ( (32 - (_BYTE)v209) & 2 )
       {
         LOWORD(v214) = *(_WORD *)pdung_cels;
         pdung_cels += 4;
-        v218 = (_BYTE *)(tmp_pbDst + 1);
+        v218 = tmp_pbDst + 1;
         *v218 = __ROR4__(v214, 8);
-        tmp_pbDst = (unsigned int)(v218 + 1);
+        tmp_pbDst = v218 + 1;
       }
     }
     else
@@ -7666,36 +7663,36 @@ LABEL_336:
       {
         v220 = *(_DWORD *)pdung_cels;
         pdung_cels += 4;
-        *(_BYTE *)tmp_pbDst = v220;
-        v221 = (_BYTE *)(tmp_pbDst + 2);
+        *tmp_pbDst = v220;
+        v221 = tmp_pbDst + 2;
         *v221 = __ROR4__(v220, 16);
-        tmp_pbDst = (unsigned int)(v221 + 2);
+        tmp_pbDst = v221 + 2;
       }
       if ( (32 - (_BYTE)v209) & 2 )
       {
         v222 = *(_WORD *)pdung_cels;
         pdung_cels += 4;
-        *(_BYTE *)tmp_pbDst = v222;
+        *tmp_pbDst = v222;
         tmp_pbDst += 2;
       }
     }
-    tmp_pbDst = v209 + tmp_pbDst - 800;
+    tmp_pbDst = &tmp_pbDst[v209 - 800];
     v209 += 2;
   }
   while ( v209 != 32 );
 }
 
 //----- (004A4D75) --------------------------------------------------------
-void __fastcall drawBottomArchesLowerScreen(unsigned __int8 *pbDst, unsigned int *pMask)
+void __fastcall drawBottomArchesLowerScreen(BYTE *pbDst, unsigned int *pMask)
 {
-  unsigned __int8 *tmp_pbDst; // edi
+  BYTE *tmp_pbDst; // edi
   char *pdung_cels2; // esi
   __int16 v5; // ax
-  unsigned __int8 *pdung_cels3; // esi
+  BYTE *pdung_cels3; // esi
   __int16 v7; // ax
-  unsigned int v8; // eax
+  DWORD v8; // eax
   char *pdung_cels; // esi
-  unsigned int v10; // eax
+  DWORD v10; // eax
   int v11; // eax
   signed int v12; // ebp
   unsigned int v13; // edx
@@ -7709,13 +7706,13 @@ void __fastcall drawBottomArchesLowerScreen(unsigned __int8 *pbDst, unsigned int
   int v25; // edx
   signed int v26; // eax
   unsigned int v27; // ecx
-  unsigned __int8 *v28; // edi
+  BYTE *v28; // edi
   unsigned int v29; // ecx
   unsigned __int8 v32; // of
   int v33; // edx
   signed int v34; // eax
   unsigned int v35; // ecx
-  unsigned __int8 *v36; // edi
+  BYTE *v36; // edi
   unsigned int v37; // ecx
   int v40; // edx
   signed int v41; // eax
@@ -7728,7 +7725,7 @@ void __fastcall drawBottomArchesLowerScreen(unsigned __int8 *pbDst, unsigned int
   int v52; // edx
   signed int v53; // eax
   unsigned int v54; // ecx
-  unsigned __int8 *v55; // edi
+  BYTE *v55; // edi
   unsigned int v56; // ecx
   signed int v59; // edx
   unsigned int v60; // edx
@@ -7743,24 +7740,24 @@ void __fastcall drawBottomArchesLowerScreen(unsigned __int8 *pbDst, unsigned int
   signed int v75; // edx
   unsigned int v76; // edx
   signed int v77; // ecx
-  unsigned __int8 v78; // al
+  BYTE v78; // al
   int v79; // ecx
   signed int v80; // edx
   int v81; // eax
   int v82; // ecx
   int v83; // edx
-  unsigned __int8 v84; // al
+  BYTE v84; // al
   int v85; // edx
   signed int v86; // eax
   unsigned int v87; // ecx
-  unsigned __int8 *v88; // edi
+  BYTE *v88; // edi
   unsigned int v89; // ecx
   __int16 v90; // ax
   int v91; // eax
   int v92; // edx
   signed int v93; // eax
   unsigned int v94; // ecx
-  unsigned __int8 *v95; // edi
+  BYTE *v95; // edi
   unsigned int v96; // ecx
   __int16 v97; // ax
   int v98; // eax
@@ -7779,14 +7776,14 @@ void __fastcall drawBottomArchesLowerScreen(unsigned __int8 *pbDst, unsigned int
   int v111; // edx
   signed int v112; // eax
   unsigned int v113; // ecx
-  unsigned __int8 *v114; // edi
+  BYTE *v114; // edi
   unsigned int v115; // ecx
   __int16 v116; // ax
   int v117; // eax
   signed int v118; // edx
   unsigned int v119; // edx
   signed int v120; // ecx
-  unsigned __int8 v121; // al
+  BYTE v121; // al
   int v122; // edx
   signed int v123; // eax
   unsigned int v124; // ecx
@@ -7796,7 +7793,7 @@ void __fastcall drawBottomArchesLowerScreen(unsigned __int8 *pbDst, unsigned int
   signed int v128; // edx
   unsigned int v129; // edx
   signed int v130; // ecx
-  unsigned __int8 v131; // al
+  BYTE v131; // al
   signed int v132; // edx
   unsigned int v133; // edx
   signed int v134; // ecx
@@ -7806,25 +7803,25 @@ void __fastcall drawBottomArchesLowerScreen(unsigned __int8 *pbDst, unsigned int
   int v138; // ecx
   int v139; // edx
   signed int i; // edx
-  unsigned __int8 *v141; // edi
+  BYTE *v141; // edi
   unsigned int v142; // ecx
   signed int v143; // edx
-  unsigned __int8 *v144; // edi
+  BYTE *v144; // edi
   unsigned int v145; // ecx
   signed int j; // edx
   unsigned int v147; // ecx
-  unsigned __int8 *v148; // edi
+  BYTE *v148; // edi
   signed int v149; // edx
   unsigned int v150; // ecx
   signed int k; // edx
-  unsigned __int8 *v152; // edi
+  BYTE *v152; // edi
   unsigned int v153; // ecx
   signed int v154; // edx
   unsigned int v155; // edx
   signed int v156; // ecx
   signed int l; // edx
   unsigned int v158; // ecx
-  unsigned __int8 *v159; // edi
+  BYTE *v159; // edi
   signed int v160; // edx
   unsigned int v161; // edx
   signed int v162; // ecx
@@ -7843,7 +7840,7 @@ void __fastcall drawBottomArchesLowerScreen(unsigned __int8 *pbDst, unsigned int
   signed int v175; // [esp-4h] [ebp-10h]
   signed int v176; // [esp-4h] [ebp-10h]
 
-  gpCelFrame = (unsigned __int8 *)speed_cel_frame_num_from_light_index_frame_num;
+  gpCelFrame = (BYTE *)speed_cel_frame_num_from_light_index_frame_num;
   tmp_pbDst = pbDst;
   gpDrawMask = pMask;
   if ( (_BYTE)light_table_index )
@@ -8659,8 +8656,7 @@ LABEL_324:
       while ( !((v25 < 0) ^ v32) );
       goto LABEL_62;
     }
-    pdung_cels3 = (unsigned __int8 *)pSpeedCels
-                + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
+    pdung_cels3 = (BYTE *)pSpeedCels + *(_DWORD *)&gpCelFrame[4 * (light_table_index + 16 * (level_cel_block & 0xFFF))];
     v7 = (unsigned __int8)(BYTE1(level_cel_block) >> 4);
   }
   else
@@ -8668,7 +8664,7 @@ LABEL_324:
     if ( level_cel_block & 0x8000 )
       level_cel_block = *(_DWORD *)&gpCelFrame[64 * (level_cel_block & 0xFFF)]
                       + (unsigned __int16)(level_cel_block & 0xF000);
-    pdung_cels3 = (unsigned __int8 *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
+    pdung_cels3 = (BYTE *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
     v8 = level_cel_block;
     LOBYTE(v8) = BYTE1(v8);
     v7 = ((v8 >> 4) & 7) + 8;
@@ -9056,19 +9052,19 @@ LABEL_180:
 }
 
 //----- (004A5C97) --------------------------------------------------------
-void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
+void __fastcall drawLowerScreen(BYTE *pbDst)
 {
-  int v1; // edx
+  int cta; // edx
   char v2; // al
   char v3; // al
-  unsigned __int8 *tmp_pbDst; // edi
+  BYTE *tmp_pbDst; // edi
   _BYTE *pdung_cels2; // esi
   BYTE *l_tbl; // ebx
   __int16 v7; // ax
   unsigned __int8 *v8; // esi
   __int16 v9; // ax
   char *pdung_cels; // esi
-  unsigned int v11; // eax
+  DWORD v11; // eax
   int v12; // eax
   int v13; // edx
   int v14; // edx
@@ -9079,20 +9075,20 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
   int v19; // eax
   char m; // cl
   int v21; // eax
-  unsigned __int8 v22; // ch
-  unsigned __int8 v23; // ch
-  unsigned __int8 v24; // ch
+  BYTE v22; // ch
+  BYTE v23; // ch
+  BYTE v24; // ch
   int v25; // ebp
   signed int v26; // eax
   unsigned int v27; // ecx
-  unsigned __int8 *v28; // edi
+  BYTE *v28; // edi
   int v29; // ecx
   int v30; // edx
   unsigned __int8 v31; // of
   int v32; // ebp
   signed int v33; // eax
   unsigned int v34; // ecx
-  unsigned __int8 *v35; // edi
+  BYTE *v35; // edi
   int v36; // ecx
   int v37; // edx
   int v38; // ebp
@@ -9106,7 +9102,7 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
   int v46; // ebp
   signed int v47; // eax
   unsigned int v48; // ecx
-  unsigned __int8 *v49; // edi
+  BYTE *v49; // edi
   char v50; // cl
   int v51; // eax
   BYTE v52; // ch
@@ -9115,23 +9111,23 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
   signed int v55; // ebp
   char v56; // cl
   int v57; // eax
-  unsigned __int8 v58; // ch
-  unsigned __int8 v59; // ch
-  unsigned __int8 v60; // ch
+  BYTE v58; // ch
+  BYTE v59; // ch
+  BYTE v60; // ch
   int v61; // ebp
   signed int v62; // eax
   unsigned int v63; // ecx
   char n; // cl
   int v65; // eax
-  unsigned __int8 v66; // ch
-  unsigned __int8 v67; // ch
-  unsigned __int8 v68; // ch
+  BYTE v66; // ch
+  BYTE v67; // ch
+  BYTE v68; // ch
   signed int v69; // ebp
   char v70; // cl
   int v71; // eax
-  unsigned __int8 v72; // ch
-  unsigned __int8 v73; // ch
-  unsigned __int8 v74; // ch
+  BYTE v72; // ch
+  BYTE v73; // ch
+  BYTE v74; // ch
   signed int v75; // edx
   signed int v76; // ecx
   int v77; // eax
@@ -9139,7 +9135,7 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
   signed int v79; // edx
   unsigned int v80; // eax
   unsigned int v81; // ecx
-  unsigned __int8 v82; // al
+  BYTE v82; // al
   char v83; // cf
   unsigned int v84; // ecx
   __int16 v85; // ax
@@ -9147,14 +9143,14 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
   int v87; // edx
   signed int v88; // eax
   unsigned int v89; // ecx
-  unsigned __int8 *v90; // edi
+  BYTE *v90; // edi
   unsigned int v91; // ecx
   __int16 v92; // ax
   int v93; // eax
   int v94; // edx
   signed int v95; // eax
   unsigned int v96; // ecx
-  unsigned __int8 *v97; // edi
+  BYTE *v97; // edi
   unsigned int v98; // ecx
   __int16 v99; // ax
   int v100; // eax
@@ -9174,7 +9170,7 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
   int v114; // edx
   signed int v115; // eax
   unsigned int v116; // ecx
-  unsigned __int8 *v117; // edi
+  BYTE *v117; // edi
   unsigned int v118; // ecx
   __int16 v119; // ax
   int v120; // eax
@@ -9198,24 +9194,24 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
   unsigned int v138; // ecx
   unsigned int v139; // ecx
   signed int i; // edx
-  unsigned __int8 *v141; // edi
+  BYTE *v141; // edi
   unsigned int v142; // ecx
   signed int v143; // edx
-  unsigned __int8 *v144; // edi
+  BYTE *v144; // edi
   unsigned int v145; // ecx
   signed int j; // edx
   unsigned int v147; // ecx
-  unsigned __int8 *v148; // edi
+  BYTE *v148; // edi
   signed int v149; // edx
   unsigned int v150; // ecx
   signed int k; // edx
-  unsigned __int8 *v152; // edi
+  BYTE *v152; // edi
   unsigned int v153; // ecx
   signed int v154; // edx
   signed int v155; // ecx
   signed int l; // edx
   unsigned int v157; // ecx
-  unsigned __int8 *v158; // edi
+  BYTE *v158; // edi
   signed int v159; // edx
   signed int v160; // ecx
   int v161; // [esp-14h] [ebp-18h]
@@ -9223,7 +9219,7 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
   int v163; // [esp-10h] [ebp-14h]
   int v164; // [esp-10h] [ebp-14h]
 
-  v1 = cel_transparency_active;
+  cta = cel_transparency_active;
   if ( cel_transparency_active )
   {
     if ( !arch_draw_type )
@@ -9250,7 +9246,7 @@ void __fastcall drawLowerScreen(unsigned __int8 *pbDst)
       }
     }
   }
-  gpCelFrame = (unsigned __int8 *)speed_cel_frame_num_from_light_index_frame_num;
+  gpCelFrame = (BYTE *)speed_cel_frame_num_from_light_index_frame_num;
   tmp_pbDst = pbDst;
   if ( (_BYTE)light_table_index )
   {
@@ -9586,7 +9582,7 @@ LABEL_232:
               LOBYTE(v14) = BYTE1(v16);
               BYTE1(pbDst) = l_tbl[v14];
               v16 = __ROR4__(v16, 16);
-              pbDst = (unsigned __int8 *)((_DWORD)pbDst << 16);
+              pbDst = (BYTE *)((_DWORD)pbDst << 16);
               LOBYTE(v14) = v16;
               LOBYTE(pbDst) = l_tbl[v14];
               LOBYTE(v14) = BYTE1(v16);
@@ -9627,33 +9623,33 @@ LABEL_232:
                 {
                   v21 = *(_DWORD *)pdung_cels2;
                   pdung_cels2 += 4;
-                  LOBYTE(v1) = v21;
-                  v22 = l_tbl[v1];
-                  LOBYTE(v1) = BYTE1(v21);
+                  LOBYTE(cta) = v21;
+                  v22 = l_tbl[cta];
+                  LOBYTE(cta) = BYTE1(v21);
                   v21 = __ROR4__(v21, 16);
                   *tmp_pbDst = v22;
-                  v23 = l_tbl[v1];
-                  LOBYTE(v1) = v21;
+                  v23 = l_tbl[cta];
+                  LOBYTE(cta) = v21;
                   tmp_pbDst[1] = v23;
-                  v24 = l_tbl[v1];
-                  LOBYTE(v1) = BYTE1(v21);
+                  v24 = l_tbl[cta];
+                  LOBYTE(cta) = BYTE1(v21);
                   tmp_pbDst[2] = v24;
-                  tmp_pbDst[3] = l_tbl[v1];
+                  tmp_pbDst[3] = l_tbl[cta];
                   tmp_pbDst += 4;
                 }
                 if ( m >= 2 )
                 {
-                  LOBYTE(v1) = *pdung_cels2;
-                  *tmp_pbDst = l_tbl[v1];
-                  LOBYTE(v1) = pdung_cels2[1];
-                  tmp_pbDst[1] = l_tbl[v1];
+                  LOBYTE(cta) = *pdung_cels2;
+                  *tmp_pbDst = l_tbl[cta];
+                  LOBYTE(cta) = pdung_cels2[1];
+                  tmp_pbDst[1] = l_tbl[cta];
                   pdung_cels2 += 2;
                   tmp_pbDst += 2;
                 }
                 if ( m & 1 )
                 {
-                  LOBYTE(v1) = *pdung_cels2++;
-                  *tmp_pbDst++ = l_tbl[v1];
+                  LOBYTE(cta) = *pdung_cels2++;
+                  *tmp_pbDst++ = l_tbl[cta];
                 }
               }
               else
@@ -9701,18 +9697,18 @@ LABEL_116:
                     {
                       v71 = *(_DWORD *)pdung_cels2;
                       pdung_cels2 += 4;
-                      LOBYTE(v1) = v71;
-                      v72 = l_tbl[v1];
-                      LOBYTE(v1) = BYTE1(v71);
+                      LOBYTE(cta) = v71;
+                      v72 = l_tbl[cta];
+                      LOBYTE(cta) = BYTE1(v71);
                       v71 = __ROR4__(v71, 16);
                       *tmp_pbDst = v72;
-                      v73 = l_tbl[v1];
-                      LOBYTE(v1) = v71;
+                      v73 = l_tbl[cta];
+                      LOBYTE(cta) = v71;
                       tmp_pbDst[1] = v73;
-                      v74 = l_tbl[v1];
-                      LOBYTE(v1) = BYTE1(v71);
+                      v74 = l_tbl[cta];
+                      LOBYTE(cta) = BYTE1(v71);
                       tmp_pbDst[2] = v74;
-                      tmp_pbDst[3] = l_tbl[v1];
+                      tmp_pbDst[3] = l_tbl[cta];
                       tmp_pbDst += 4;
                       v70 -= 4;
                     }
@@ -9740,31 +9736,31 @@ LABEL_116:
               {
                 v65 = *(_DWORD *)pdung_cels2;
                 pdung_cels2 += 4;
-                LOBYTE(v1) = v65;
-                v66 = l_tbl[v1];
-                LOBYTE(v1) = BYTE1(v65);
+                LOBYTE(cta) = v65;
+                v66 = l_tbl[cta];
+                LOBYTE(cta) = BYTE1(v65);
                 v65 = __ROR4__(v65, 16);
                 *tmp_pbDst = v66;
-                v67 = l_tbl[v1];
-                LOBYTE(v1) = v65;
+                v67 = l_tbl[cta];
+                LOBYTE(cta) = v65;
                 tmp_pbDst[1] = v67;
-                v68 = l_tbl[v1];
-                LOBYTE(v1) = BYTE1(v65);
+                v68 = l_tbl[cta];
+                LOBYTE(cta) = BYTE1(v65);
                 tmp_pbDst[2] = v68;
-                tmp_pbDst[3] = l_tbl[v1];
+                tmp_pbDst[3] = l_tbl[cta];
                 tmp_pbDst += 4;
               }
               if ( n >= 2 )
               {
-                LOBYTE(v1) = *pdung_cels2;
-                *tmp_pbDst = l_tbl[v1];
-                LOBYTE(v1) = pdung_cels2[1];
-                tmp_pbDst[1] = l_tbl[v1];
+                LOBYTE(cta) = *pdung_cels2;
+                *tmp_pbDst = l_tbl[cta];
+                LOBYTE(cta) = pdung_cels2[1];
+                tmp_pbDst[1] = l_tbl[cta];
                 pdung_cels2 += 2;
                 tmp_pbDst += 2;
               }
-              v1 = (unsigned __int8)pdung_cels2 & 2;
-              pdung_cels2 += v1;
+              cta = (unsigned __int8)pdung_cels2 & 2;
+              pdung_cels2 += cta;
               tmp_pbDst = &tmp_pbDst[v61 - 800];
               v31 = __OFSUB__(v61, 2);
               v61 -= 2;
@@ -9791,18 +9787,18 @@ LABEL_100:
                   {
                     v57 = *(_DWORD *)pdung_cels2;
                     pdung_cels2 += 4;
-                    LOBYTE(v1) = v57;
-                    v58 = l_tbl[v1];
-                    LOBYTE(v1) = BYTE1(v57);
+                    LOBYTE(cta) = v57;
+                    v58 = l_tbl[cta];
+                    LOBYTE(cta) = BYTE1(v57);
                     v57 = __ROR4__(v57, 16);
                     *tmp_pbDst = v58;
-                    v59 = l_tbl[v1];
-                    LOBYTE(v1) = v57;
+                    v59 = l_tbl[cta];
+                    LOBYTE(cta) = v57;
                     tmp_pbDst[1] = v59;
-                    v60 = l_tbl[v1];
-                    LOBYTE(v1) = BYTE1(v57);
+                    v60 = l_tbl[cta];
+                    LOBYTE(cta) = BYTE1(v57);
                     tmp_pbDst[2] = v60;
-                    tmp_pbDst[3] = l_tbl[v1];
+                    tmp_pbDst[3] = l_tbl[cta];
                     tmp_pbDst += 4;
                     v56 -= 4;
                   }
@@ -9828,26 +9824,26 @@ LABEL_100:
           {
             v49 = &tmp_pbDst[v46];
             v50 = 32 - v46;
-            v1 = (32 - (_BYTE)v46) & 2;
-            pdung_cels2 += v1;
+            cta = (32 - (_BYTE)v46) & 2;
+            pdung_cels2 += cta;
             if ( (char)(32 - v46) >= 4 )
             {
               do
               {
                 v51 = *(_DWORD *)pdung_cels2;
                 pdung_cels2 += 4;
-                LOBYTE(v1) = v51;
-                v52 = l_tbl[v1];
-                LOBYTE(v1) = BYTE1(v51);
+                LOBYTE(cta) = v51;
+                v52 = l_tbl[cta];
+                LOBYTE(cta) = BYTE1(v51);
                 v51 = __ROR4__(v51, 16);
                 *v49 = v52;
-                v53 = l_tbl[v1];
-                LOBYTE(v1) = v51;
+                v53 = l_tbl[cta];
+                LOBYTE(cta) = v51;
                 v49[1] = v53;
-                v54 = l_tbl[v1];
-                LOBYTE(v1) = BYTE1(v51);
+                v54 = l_tbl[cta];
+                LOBYTE(cta) = BYTE1(v51);
                 v49[2] = v54;
-                v49[3] = l_tbl[v1];
+                v49[3] = l_tbl[cta];
                 v49 += 4;
                 v50 -= 4;
               }
@@ -9855,10 +9851,10 @@ LABEL_100:
             }
             if ( v50 >= 2 )
             {
-              LOBYTE(v1) = *pdung_cels2;
-              *v49 = l_tbl[v1];
-              LOBYTE(v1) = pdung_cels2[1];
-              v49[1] = l_tbl[v1];
+              LOBYTE(cta) = *pdung_cels2;
+              *v49 = l_tbl[cta];
+              LOBYTE(cta) = pdung_cels2[1];
+              v49[1] = l_tbl[cta];
               pdung_cels2 += 2;
               v49 += 2;
             }
@@ -9894,13 +9890,13 @@ LABEL_83:
               v45 = 32 - v42;
               do
               {
-                LOBYTE(v1) = *pdung_cels2++;
-                *tmp_pbDst++ = l_tbl[v1];
+                LOBYTE(cta) = *pdung_cels2++;
+                *tmp_pbDst++ = l_tbl[cta];
                 --v45;
               }
               while ( v45 );
-              v1 = (unsigned __int8)pdung_cels2 & 2;
-              pdung_cels2 += v1;
+              cta = (unsigned __int8)pdung_cels2 & 2;
+              pdung_cels2 += cta;
               tmp_pbDst = &tmp_pbDst[v42 - 800];
               v42 += 2;
             }
@@ -9917,13 +9913,13 @@ LABEL_83:
           v41 = 32 - v38;
           do
           {
-            LOBYTE(v1) = *pdung_cels2++;
-            *tmp_pbDst++ = l_tbl[v1];
+            LOBYTE(cta) = *pdung_cels2++;
+            *tmp_pbDst++ = l_tbl[cta];
             --v41;
           }
           while ( v41 );
-          v1 = (unsigned __int8)pdung_cels2 & 2;
-          pdung_cels2 += v1;
+          cta = (unsigned __int8)pdung_cels2 & 2;
+          pdung_cels2 += cta;
           tmp_pbDst = &tmp_pbDst[v38 - 800];
           v31 = __OFSUB__(v38, 2);
           v38 -= 2;
@@ -10005,7 +10001,7 @@ LABEL_68:
       level_cel_block = *(_DWORD *)&gpCelFrame[64 * (level_cel_block & 0xFFF)]
                       + (unsigned __int16)(level_cel_block & 0xF000);
     v8 = (unsigned __int8 *)pDungeonCels + *((_DWORD *)pDungeonCels + (level_cel_block & 0xFFF));
-    v9 = (((unsigned int)level_cel_block >> 12) & 7) + 8;
+    v9 = ((level_cel_block >> 12) & 7) + 8;
   }
   switch ( v9 )
   {
@@ -10359,59 +10355,57 @@ LABEL_171:
     }
     v113 = (int)&tmp_pbDst[v107];
     v107 += 2;
-    tmp_pbDst = (unsigned __int8 *)(v113 - 800);
+    tmp_pbDst = (BYTE *)(v113 - 800);
   }
   while ( v107 < 32 );
 }
 
 //----- (004A6AEA) --------------------------------------------------------
-void __fastcall world_draw_black_tile(char *dst_buf)
+void __fastcall world_draw_black_tile(BYTE *dst_buf)
 {
-  char *v1; // edi
-  signed int v2; // edx
+  BYTE *buf; // edi
+  signed int off; // edx
   signed int i; // ebx
-  char *v4; // edi
-  signed int v5; // ecx
-  signed int v6; // edx
-  signed int v7; // ebx
-  char *v8; // edi
-  signed int v9; // ecx
+  BYTE *buftmp; // edi MAPDST
+  signed int j; // ecx MAPDST
+  signed int off2; // edx
+  signed int i2; // ebx
 
-  v1 = dst_buf;
-  v2 = 30;
+  buf = dst_buf;
+  off = 30;
   for ( i = 1; ; ++i )
   {
-    v4 = &v1[v2];
-    v5 = i;
+    buftmp = &buf[off];
+    j = i;
     do
     {
-      *(_DWORD *)v4 = 0;
-      v4 += 4;
-      --v5;
+      *(_DWORD *)buftmp = 0;
+      buftmp += 4;
+      --j;
     }
-    while ( v5 );
-    v1 = &v4[v2 - 832];
-    if ( !v2 )
+    while ( j );
+    buf = &buftmp[off - 832];
+    if ( !off )
       break;
-    v2 -= 2;
+    off -= 2;
   }
-  v6 = 2;
-  v7 = 15;
+  off2 = 2;
+  i2 = 15;
   do
   {
-    v8 = &v1[v6];
-    v9 = v7;
+    buftmp = &buf[off2];
+    j = i2;
     do
     {
-      *(_DWORD *)v8 = 0;
-      v8 += 4;
-      --v9;
+      *(_DWORD *)buftmp = 0;
+      buftmp += 4;
+      --j;
     }
-    while ( v9 );
-    v1 = &v8[v6 - 832];
-    --v7;
-    v6 += 2;
+    while ( j );
+    buf = &buftmp[off2 - 832];
+    --i2;
+    off2 += 2;
   }
-  while ( v6 != 32 );
+  while ( off2 != 32 );
 }
 

@@ -4,7 +4,7 @@
 void __cdecl InitCursor()
 {
   assert(!pCursCels, "CURSOR.CPP", 121);
-  pCursCels = (char *)LoadFileInMem("Data\\Inv\\Objcurs.CEL", 0, 122, "CURSOR.CPP");
+  pCursCels = LoadFileInMem("Data\\Inv\\Objcurs.CEL", 0, 122, "CURSOR.CPP");
   cursor_dword_647724_buf1 = 0;
 }
 
@@ -599,14 +599,14 @@ void __cdecl scrollrt_draw_cursor_back_buffer()
 {
   char *v0; // [esp+Ch] [ebp-Ch]
   int i; // [esp+10h] [ebp-8h]
-  unsigned __int8 *v2; // [esp+14h] [ebp-4h]
+  BYTE *v2; // [esp+14h] [ebp-4h]
 
   if ( cursor_dword_647724_buf1 )
   {
-    v2 = (unsigned __int8 *)cursor_dword_647724_buf1;
+    v2 = cursor_dword_647724_buf1;
     v0 = sgSaveBack;
-    gpBufEnd = (unsigned __int8 *)&gpBuffer[screen_y_times_768[640] - 2 - cursW];
-    for ( i = 0; cursH + 2 > i && gpBufEnd > (unsigned __int8 *)v0 && gpBufEnd > v2; ++i )
+    gpBufEnd = &gpBuffer[screen_y_times_768[640] - 2 - cursW];
+    for ( i = 0; cursH + 2 > i && gpBufEnd > (BYTE *)v0 && gpBufEnd > v2; ++i )
     {
       memcpy(v2, v0, cursW + 2);
       v0 += cursW + 2;
@@ -619,17 +619,17 @@ void __cdecl scrollrt_draw_cursor_back_buffer()
 //----- (00487D71) --------------------------------------------------------
 void __cdecl scrollrt_draw_cursor_item()
 {
-  char *v0; // [esp+Ch] [ebp-20h]
+  BYTE *buf; // [esp+Ch] [ebp-20h]
   int i; // [esp+10h] [ebp-1Ch]
-  int v2; // [esp+14h] [ebp-18h]
+  int h; // [esp+14h] [ebp-18h]
   signed int colour; // [esp+18h] [ebp-14h]
-  int v4; // [esp+1Ch] [ebp-10h]
+  int w; // [esp+1Ch] [ebp-10h]
   char *v5; // [esp+20h] [ebp-Ch]
-  int v6; // [esp+24h] [ebp-8h]
-  int v7; // [esp+28h] [ebp-4h]
+  int y; // [esp+24h] [ebp-8h]
+  int x; // [esp+28h] [ebp-4h]
 
-  v4 = cursW + 2;
-  v2 = cursH + 2;
+  w = cursW + 2;
+  h = cursH + 2;
   sgdwCursX = MouseX - 1;
   if ( MouseX - 1 < 0 )
     sgdwCursX = 0;
@@ -637,7 +637,7 @@ void __cdecl scrollrt_draw_cursor_item()
   if ( MouseY - 1 < 0 )
     sgdwCursY = 0;
   cursor_dword_645768_W = 639 - sgdwCursX;
-  if ( 639 - sgdwCursX <= v4 )
+  if ( 639 - sgdwCursX <= w )
   {
     if ( cursor_dword_645768_W < 0 )
       cursor_dword_645768_W = 0;
@@ -647,7 +647,7 @@ void __cdecl scrollrt_draw_cursor_item()
     cursor_dword_645768_W = cursW + 2;
   }
   cursor_dword_64576C_H = 479 - sgdwCursY;
-  if ( 479 - sgdwCursY <= v2 )
+  if ( 479 - sgdwCursY <= h )
   {
     if ( cursor_dword_64576C_H < 0 )
       cursor_dword_64576C_H = 0;
@@ -656,22 +656,22 @@ void __cdecl scrollrt_draw_cursor_item()
   {
     cursor_dword_64576C_H = cursH + 2;
   }
-  cursor_dword_647724_buf1 = (int)&gpBuffer[768 * (sgdwCursY + 160) + 64 + sgdwCursX];
-  cursor_dword_645724_buf2 = (int)&gpBuffer[768 * (sgdwCursY + 160) + 64 + sgdwCursX];
-  v0 = &gpBuffer[768 * (sgdwCursY + 160) + 64 + sgdwCursX];
+  cursor_dword_647724_buf1 = &gpBuffer[768 * (sgdwCursY + 160) + 64 + sgdwCursX];
+  cursor_dword_645724_buf2 = &gpBuffer[768 * (sgdwCursY + 160) + 64 + sgdwCursX];
+  buf = &gpBuffer[768 * (sgdwCursY + 160) + 64 + sgdwCursX];
   v5 = sgSaveBack;
-  gpBufEnd = (unsigned __int8 *)&gpBuffer[screen_y_times_768[640] - v4];
-  for ( i = 0; v2 > i && v0 < (char *)gpBufEnd; ++i )
+  gpBufEnd = &gpBuffer[screen_y_times_768[640] - w];
+  for ( i = 0; h > i && buf < gpBufEnd; ++i )
   {
-    memcpy(v5, v0, v4);
-    v5 += v4;
-    v0 += 768;
+    memcpy(v5, buf, w);
+    v5 += w;
+    buf += 768;
   }
-  v7 = sgdwCursX + 1;
-  v6 = sgdwCursY + 1;
+  x = sgdwCursX + 1;
+  y = sgdwCursY + 1;
   if ( pcurs < 12 )
   {
-    Cel2DrawHdrOnly(sgdwCursX + 65, cursH + v6 + 159, pCursCels, pcurs, cursW, 0, 8);
+    Cel2DrawHdrOnly(sgdwCursX + 65, cursH + y + 159, pCursCels, pcurs, cursW, 0, 8);
   }
   else
   {
@@ -680,11 +680,11 @@ void __cdecl scrollrt_draw_cursor_item()
       colour = 181;
     if ( !plr[myplr].HoldItem._iStatFlag )
       colour = 229;
-    CelDrawHdrClrHL(colour, sgdwCursX + 65, v6 + cursH + 159, pCursCels, pcurs, cursW, 0, 8);
+    CelDrawHdrClrHL(colour, sgdwCursX + 65, y + cursH + 159, pCursCels, pcurs, cursW, 0, 8);
     if ( colour == 229 )
-      Cel2DrawHdrLightRed(v7 + 64, cursH + v6 + 159, pCursCels, pcurs, cursW, 0, 8, 1);
+      Cel2DrawHdrLightRed(x + 64, cursH + y + 159, pCursCels, pcurs, cursW, 0, 8, 1);
     else
-      Cel2DrawHdrOnly(v7 + 64, cursH + v6 + 159, pCursCels, pcurs, cursW, 0, 8);
+      Cel2DrawHdrOnly(x + 64, cursH + y + 159, pCursCels, pcurs, cursW, 0, 8);
     ClearPanel();
     if ( !plr[myplr].HoldItem._iStatFlag )
       AddPanelString("Requirements not met", 1);

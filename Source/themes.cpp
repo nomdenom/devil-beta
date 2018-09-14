@@ -684,7 +684,7 @@ void __fastcall Theme_PurifyingFountain(int t)
     else
     {
       AddObject(OBJ_L3LDOOR, ox + (v9 - ox) / 2 - 1, oy);
-      AddObject(OBJ_L3RDOOR, (v9 - ox) / 2 + ox, oy);
+      AddObject(OBJ_SOME_SHRINE_XXX, (v9 - ox) / 2 + ox, oy);
       AddObject(OBJ_L3LDOOR, ox + (v9 - ox) / 2 + 1, oy);
     }
     PlaceThemeMonsts(t, 6);

@@ -1,11 +1,11 @@
 #include "all.h"
 
 //----- (0048E700) --------------------------------------------------------
-void __fastcall CelDrawDatOnly(char *pDecodeTo, char *pRLEBytes, int dwRLESize, int dwRLEWdt)
+void __fastcall CelDrawDatOnly(BYTE *pDecodeTo, BYTE *pRLEBytes, int dwRLESize, int dwRLEWdt)
 {
-  char *src; // esi
-  char *dst; // edi
-  char *src_end; // ebx
+  BYTE *src; // esi
+  BYTE *dst; // edi
+  BYTE *src_end; // ebx
   int v7; // edx
   unsigned int v8; // eax
   unsigned int v9; // ecx
@@ -24,7 +24,7 @@ void __fastcall CelDrawDatOnly(char *pDecodeTo, char *pRLEBytes, int dwRLESize, 
     {
       while ( 1 )
       {
-        v8 = (unsigned __int8)*src++;
+        v8 = *src++;
         if ( (v8 & 0x80u) == 0 )
           break;
         LOBYTE(v8) = -(char)v8;
@@ -68,13 +68,13 @@ void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int fr
   assert(pCelBuff, "ENGINE.CPP", 107);
   CelDrawDatOnly(
     &gpBuffer[screen_x + screen_y_times_768[screen_y]],
-    (char *)pCelBuff + *((_DWORD *)pCelBuff + frame),
+    (BYTE *)pCelBuff + *((_DWORD *)pCelBuff + frame),
     *((_DWORD *)pCelBuff + frame + 1) - *((_DWORD *)pCelBuff + frame),
     frame_width);
 }
 
 //----- (0048E843) --------------------------------------------------------
-void __fastcall CelDecDatOnly(char *pBuff, char *pCelBuff, int frame, int frame_width)
+void __fastcall CelDecDatOnly(BYTE *pBuff, BYTE *pCelBuff, int frame, int frame_width)
 {
   assert(pCelBuff, "ENGINE.CPP", 128);
   assert(pBuff, "ENGINE.CPP", 129);
@@ -86,10 +86,10 @@ void __fastcall CelDecDatOnly(char *pBuff, char *pCelBuff, int frame, int frame_
 }
 
 //----- (0048E8D2) --------------------------------------------------------
-void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
+void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, BYTE *pCelBuff, int frame, int frame_width, int always_0, int direction)
 {
   unsigned __int16 v7; // dx
-  char *pRLEBytes; // [esp+1Ch] [ebp-Ch]
+  BYTE *pRLEBytes; // [esp+1Ch] [ebp-Ch]
   int dwRLESize; // [esp+20h] [ebp-8h]
   int v11; // [esp+24h] [ebp-4h]
 
@@ -115,10 +115,10 @@ void __fastcall CelDrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int f
 }
 
 //----- (0048E9CC) --------------------------------------------------------
-void __fastcall CelDecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
+void __fastcall CelDecodeHdrOnly(BYTE *pBuff, BYTE *pCelBuff, int frame, int frame_width, int always_0, int direction)
 {
   unsigned __int16 v6; // dx
-  char *pRLEBytes; // [esp+18h] [ebp-Ch]
+  BYTE *pRLEBytes; // [esp+18h] [ebp-Ch]
   int dwRLESize; // [esp+1Ch] [ebp-8h]
   int v10; // [esp+20h] [ebp-4h]
 
@@ -141,11 +141,11 @@ void __fastcall CelDecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int fra
 }
 
 //----- (0048EAC6) --------------------------------------------------------
-void __fastcall CelDecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void __fastcall CelDecDatLightOnly(BYTE *pDecodeTo, BYTE *pRLEBytes, int frame_content_size, int frame_width)
 {
-  char *src; // esi
-  char *dst; // edi
-  char *src_end; // ebx
+  BYTE *src; // esi
+  BYTE *dst; // edi
+  BYTE *src_end; // ebx
   int v7; // edx
   int v8; // eax
   int v9; // ST00_4
@@ -162,11 +162,11 @@ void __fastcall CelDecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_c
     {
       while ( 1 )
       {
-        v8 = (unsigned __int8)*src++;
+        v8 = *src++;
         if ( (v8 & 0x80u) != 0 )
           break;
         v9 = v7 - v8;
-        CelDecDatLightEntry(v8, (char *)(v7 - v8));
+        CelDecDatLightEntry(v8, (BYTE *)(v7 - v8));
         v7 = v9;
         if ( !v9 )
           goto LABEL_11;
@@ -183,31 +183,31 @@ LABEL_11:
 }
 
 //----- (0048EB7F) --------------------------------------------------------
-void __fastcall CelDecDatLightEntry(int a1, char *a2)
+void __fastcall CelDecDatLightEntry(int a1, BYTE *a2)
 {
   int v2; // ebx
-  char *v3; // edi
+  BYTE *v3; // edi
   _BYTE *v4; // esi
-  char v5; // cf
-  unsigned __int8 v6; // cl
+  char low_bit; // cf
+  unsigned __int8 high_bits; // cl
   char v7; // cl
   int v8; // eax
-  char v9; // ch
-  char v10; // ch
-  char v11; // ch
+  BYTE v9; // ch
+  BYTE v10; // ch
+  BYTE v11; // ch
 
-  v5 = a1 & 1;
-  v6 = (unsigned __int8)a1 >> 1;
-  if ( v5 )
+  low_bit = a1 & 1;
+  high_bits = (unsigned __int8)a1 >> 1;
+  if ( low_bit )
   {
     LOBYTE(a2) = *v4;
     *v3 = a2[v2];
     ++v4;
     ++v3;
   }
-  v5 = v6 & 1;
-  v7 = v6 >> 1;
-  if ( v5 )
+  low_bit = high_bits & 1;
+  v7 = high_bits >> 1;
+  if ( low_bit )
   {
     LOBYTE(a2) = *v4;
     *v3 = a2[v2];
@@ -237,22 +237,22 @@ void __fastcall CelDecDatLightEntry(int a1, char *a2)
 }
 
 //----- (0048EBF9) --------------------------------------------------------
-void __fastcall CelDecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void __fastcall CelDecDatLightTrans(BYTE *pDecodeTo, BYTE *pRLEBytes, int frame_content_size, int frame_width)
 {
-  char *src; // esi
+  BYTE *src; // esi
   char *dst; // edi
-  char *src_end; // ebx
+  BYTE *src_end; // ebx
   int v7; // edx
   unsigned int v8; // eax
   unsigned int v10; // ecx
   char v11; // cf
   unsigned int v12; // ecx
-  char *v13; // esi
+  _BYTE *v13; // esi
   char *v14; // edi
   char *v18; // edi
   unsigned int v21; // ecx
   char *v25; // edi
-  char *v26; // [esp-4h] [ebp-24h]
+  BYTE *v26; // [esp-4h] [ebp-24h]
   int v27; // [esp+14h] [ebp-Ch]
   BYTE *v28; // [esp+18h] [ebp-8h]
 
@@ -260,7 +260,7 @@ void __fastcall CelDecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_
   assert(pRLEBytes, "ENGINE.CPP", 321);
   v28 = &pLightTbl[256 * light_table_index];
   src = pRLEBytes;
-  dst = pDecodeTo;
+  dst = (char *)pDecodeTo;
   src_end = &pRLEBytes[frame_content_size];
   v27 = (unsigned __int8)pDecodeTo & 1;
   do
@@ -270,7 +270,7 @@ void __fastcall CelDecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_
     {
       while ( 1 )
       {
-        v8 = (unsigned __int8)*src++;
+        v8 = *src++;
         if ( (v8 & 0x80u) != 0 )
           break;
         v26 = src_end;
@@ -373,10 +373,10 @@ LABEL_25:
 }
 
 //----- (0048ED33) --------------------------------------------------------
-void __fastcall CelDecodeLightOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width)
+void __fastcall CelDecodeLightOnly(int screen_x, int screen_y, BYTE *pCelBuff, int frame, int frame_width)
 {
-  char *pDecodeTo; // [esp+14h] [ebp-Ch]
-  char *pRLEBytes; // [esp+18h] [ebp-8h]
+  BYTE *pDecodeTo; // [esp+14h] [ebp-Ch]
+  BYTE *pRLEBytes; // [esp+18h] [ebp-8h]
   int frame_content_size; // [esp+1Ch] [ebp-4h]
 
   assert(pCelBuff, "ENGINE.CPP", 444);
@@ -393,9 +393,9 @@ void __fastcall CelDecodeLightOnly(int screen_x, int screen_y, char *pCelBuff, i
 void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
 {
   unsigned __int16 v7; // dx
-  char *pDecodeTo; // [esp+18h] [ebp-10h]
+  BYTE *pDecodeTo; // [esp+18h] [ebp-10h]
   char *pRLEBytes; // [esp+1Ch] [ebp-Ch]
-  char *pRLEBytesa; // [esp+1Ch] [ebp-Ch]
+  BYTE *pRLEBytesa; // [esp+1Ch] [ebp-Ch]
   int frame_content_size; // [esp+20h] [ebp-8h]
   int v13; // [esp+24h] [ebp-4h]
 
@@ -412,7 +412,7 @@ void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff
       frame_content_size = v13 - v7;
     else
       frame_content_size = *(_DWORD *)&pCelBuff[4 * frame + 4] - *(_DWORD *)&pCelBuff[4 * frame] - v7;
-    pRLEBytesa = &pRLEBytes[v7];
+    pRLEBytesa = (BYTE *)&pRLEBytes[v7];
     pDecodeTo = &gpBuffer[screen_x + screen_y_times_768[screen_y - 16 * always_0]];
     if ( light_table_index )
       CelDecDatLightOnly(pDecodeTo, pRLEBytesa, frame_content_size, frame_width);
@@ -422,11 +422,11 @@ void __fastcall CelDecodeHdrLightOnly(int screen_x, int screen_y, char *pCelBuff
 }
 
 //----- (0048EEFE) --------------------------------------------------------
-void __fastcall CelDecodeHdrLightTrans(char *pBuff, char *pCelBuff, int frame, int frame_width, int always_0, int direction)
+void __fastcall CelDecodeHdrLightTrans(BYTE *pBuff, BYTE *pCelBuff, int frame, int frame_width, int always_0, int direction)
 {
   unsigned __int16 v6; // dx
-  char *pRLEBytes; // [esp+18h] [ebp-Ch]
-  char *pRLEBytesa; // [esp+18h] [ebp-Ch]
+  BYTE *pRLEBytes; // [esp+18h] [ebp-Ch]
+  BYTE *pRLEBytesa; // [esp+18h] [ebp-Ch]
   int frame_content_size; // [esp+1Ch] [ebp-8h]
   int v11; // [esp+20h] [ebp-4h]
 
@@ -465,7 +465,7 @@ void __fastcall CelDrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, i
 {
   unsigned __int16 v8; // dx
   _BYTE *v9; // esi
-  char *v10; // edi
+  BYTE *v10; // edi
   int v11; // edx
   int v12; // eax
   int v13; // ecx
@@ -537,11 +537,11 @@ LABEL_25:
 }
 
 //----- (0048F1EC) --------------------------------------------------------
-void __fastcall Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void __fastcall Cel2DecDatOnly(BYTE *pDecodeTo, BYTE *pRLEBytes, int frame_content_size, int frame_width)
 {
-  char *src; // esi
-  char *dst; // edi
-  char *src_end; // ebx
+  BYTE *src; // esi
+  BYTE *dst; // edi
+  BYTE *src_end; // ebx
   int v7; // edx
   unsigned int v8; // eax
   unsigned int v9; // ecx
@@ -560,7 +560,7 @@ void __fastcall Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_conte
     {
       while ( 1 )
       {
-        v8 = (unsigned __int8)*src++;
+        v8 = *src++;
         if ( (v8 & 0x80u) == 0 )
           break;
         LOBYTE(v8) = -(char)v8;
@@ -570,7 +570,7 @@ void __fastcall Cel2DecDatOnly(char *pDecodeTo, char *pRLEBytes, int frame_conte
           goto LABEL_18;
       }
       v7 -= v8;
-      if ( dst < (char *)gpBufEnd )
+      if ( dst < gpBufEnd )
       {
         v9 = v8 >> 1;
         if ( !(v8 & 1) || (*dst = *src, ++src, ++dst, v9) )
@@ -599,15 +599,13 @@ LABEL_18:
 }
 
 //----- (0048F2BD) --------------------------------------------------------
-void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a6, int direction)
+void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, BYTE *pCelBuff, int frame, int frame_width, int a6, int direction)
 {
   unsigned __int16 v7; // dx
-  int v8; // [esp+Ch] [ebp-1Ch]
-  char *pRLEBytes; // [esp+1Ch] [ebp-Ch]
+  BYTE *pRLEBytes; // [esp+1Ch] [ebp-Ch]
   int frame_content_size; // [esp+20h] [ebp-8h]
   int v11; // [esp+24h] [ebp-4h]
 
-  v8 = screen_y;
   assert(pCelBuff, "ENGINE.CPP", 735);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
   v7 = *(_WORD *)&pRLEBytes[a6];
@@ -622,7 +620,7 @@ void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int 
     else
       frame_content_size = *(_DWORD *)&pCelBuff[4 * frame + 4] - *(_DWORD *)&pCelBuff[4 * frame] - v7;
     Cel2DecDatOnly(
-      &gpBuffer[screen_x + screen_y_times_768[v8 - 16 * a6]],
+      &gpBuffer[screen_x + screen_y_times_768[screen_y - 16 * a6]],
       &pRLEBytes[v7],
       frame_content_size,
       frame_width);
@@ -630,15 +628,13 @@ void __fastcall Cel2DrawHdrOnly(int screen_x, int screen_y, char *pCelBuff, int 
 }
 
 //----- (0048F3B7) --------------------------------------------------------
-void __fastcall Cel2DecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int frame_width, int a5, int direction)
+void __fastcall Cel2DecodeHdrOnly(BYTE *pBuff, BYTE *pCelBuff, int frame, int frame_width, int a5, int direction)
 {
   unsigned __int16 v6; // dx
-  char *v7; // [esp+Ch] [ebp-18h]
-  char *pRLEBytes; // [esp+18h] [ebp-Ch]
+  BYTE *pRLEBytes; // [esp+18h] [ebp-Ch]
   int frame_content_size; // [esp+1Ch] [ebp-8h]
   int v10; // [esp+20h] [ebp-4h]
 
-  v7 = pCelBuff;
   assert(pCelBuff, "ENGINE.CPP", 762);
   assert(pBuff, "ENGINE.CPP", 763);
   pRLEBytes = &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]];
@@ -651,20 +647,20 @@ void __fastcall Cel2DecodeHdrOnly(char *pBuff, char *pCelBuff, int frame, int fr
     if ( v10 )
       frame_content_size = v10 - v6;
     else
-      frame_content_size = *(_DWORD *)&v7[4 * frame + 4] - *(_DWORD *)&v7[4 * frame] - v6;
+      frame_content_size = *(_DWORD *)&pCelBuff[4 * frame + 4] - *(_DWORD *)&pCelBuff[4 * frame] - v6;
     Cel2DecDatOnly(pBuff, &pRLEBytes[v6], frame_content_size, frame_width);
   }
 }
 
 //----- (0048F4AC) --------------------------------------------------------
-void __fastcall Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void __fastcall Cel2DecDatLightOnly(BYTE *pDecodeTo, BYTE *pRLEBytes, int frame_content_size, int frame_width)
 {
-  char *v4; // esi
-  char *v5; // edi
-  char *v6; // ebx
-  int v7; // edx
+  BYTE *v4; // esi
+  BYTE *v5; // edi
+  BYTE *v6; // ebx
+  BYTE *v7; // edx
   int v8; // eax
-  int v9; // ST00_4
+  BYTE *v9; // ST00_4
 
   assert(pDecodeTo, "ENGINE.CPP", 783);
   assert(pRLEBytes, "ENGINE.CPP", 784);
@@ -673,12 +669,12 @@ void __fastcall Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_
   v6 = &pRLEBytes[frame_content_size];
   do
   {
-    v7 = frame_width;
+    v7 = (BYTE *)frame_width;
     do
     {
       while ( 1 )
       {
-        v8 = (unsigned __int8)*v4++;
+        v8 = *v4++;
         if ( (v8 & 0x80u) == 0 )
           break;
         LOBYTE(v8) = -(char)v8;
@@ -688,7 +684,7 @@ void __fastcall Cel2DecDatLightOnly(char *pDecodeTo, char *pRLEBytes, int frame_
           goto LABEL_14;
       }
       v7 -= v8;
-      if ( v5 < (char *)gpBufEnd )
+      if ( v5 < gpBufEnd )
       {
         v9 = v7;
         Cel2DecDatLightEntry(v8, v7);
@@ -708,25 +704,25 @@ LABEL_14:
 }
 
 //----- (0048F57A) --------------------------------------------------------
-void __fastcall Cel2DecDatLightEntry(int a1, int a2)
+void __fastcall Cel2DecDatLightEntry(int a1, BYTE *a2)
 {
   int v2; // ebx
-  _BYTE *v3; // edi
+  BYTE *v3; // edi
   _BYTE *v4; // esi
   char v5; // cf
   unsigned __int8 v6; // cl
   char v7; // cl
   int v8; // eax
-  char v9; // ch
-  char v10; // ch
-  char v11; // ch
+  BYTE v9; // ch
+  BYTE v10; // ch
+  BYTE v11; // ch
 
   v5 = a1 & 1;
   v6 = (unsigned __int8)a1 >> 1;
   if ( v5 )
   {
     LOBYTE(a2) = *v4;
-    *v3 = *(_BYTE *)(v2 + a2);
+    *v3 = a2[v2];
     ++v4;
     ++v3;
   }
@@ -735,9 +731,9 @@ void __fastcall Cel2DecDatLightEntry(int a1, int a2)
   if ( v5 )
   {
     LOBYTE(a2) = *v4;
-    *v3 = *(_BYTE *)(v2 + a2);
+    *v3 = a2[v2];
     LOBYTE(a2) = v4[1];
-    v3[1] = *(_BYTE *)(v2 + a2);
+    v3[1] = a2[v2];
     v4 += 2;
     v3 += 2;
   }
@@ -746,38 +742,38 @@ void __fastcall Cel2DecDatLightEntry(int a1, int a2)
     v8 = *(_DWORD *)v4;
     v4 += 4;
     LOBYTE(a2) = v8;
-    v9 = *(_BYTE *)(v2 + a2);
+    v9 = a2[v2];
     LOBYTE(a2) = BYTE1(v8);
     v8 = __ROR4__(v8, 16);
     *v3 = v9;
-    v10 = *(_BYTE *)(v2 + a2);
+    v10 = a2[v2];
     LOBYTE(a2) = v8;
     v3[1] = v10;
-    v11 = *(_BYTE *)(v2 + a2);
+    v11 = a2[v2];
     LOBYTE(a2) = BYTE1(v8);
     v3[2] = v11;
-    v3[3] = *(_BYTE *)(v2 + a2);
+    v3[3] = a2[v2];
     v3 += 4;
   }
 }
 
 //----- (0048F5F4) --------------------------------------------------------
-void __fastcall Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame_content_size, int frame_width)
+void __fastcall Cel2DecDatLightTrans(BYTE *pDecodeTo, BYTE *pRLEBytes, int frame_content_size, int frame_width)
 {
-  char *v4; // esi
+  BYTE *v4; // esi
   unsigned int v5; // edi
-  char *v6; // ebx
+  BYTE *v6; // ebx
   int v7; // edx
   unsigned int v8; // eax
   unsigned int v10; // ecx
   char v11; // cf
   unsigned int v12; // ecx
-  char *v13; // esi
+  _BYTE *v13; // esi
   _BYTE *v14; // edi
   _BYTE *v18; // edi
   unsigned int v21; // ecx
   _BYTE *v25; // edi
-  char *v26; // [esp-4h] [ebp-24h]
+  BYTE *v26; // [esp-4h] [ebp-24h]
   int v27; // [esp+14h] [ebp-Ch]
   BYTE *v28; // [esp+18h] [ebp-8h]
 
@@ -795,7 +791,7 @@ void __fastcall Cel2DecDatLightTrans(char *pDecodeTo, char *pRLEBytes, int frame
     {
       while ( 1 )
       {
-        v8 = (unsigned __int8)*v4++;
+        v8 = *v4++;
         if ( (v8 & 0x80u) != 0 )
           break;
         v26 = v6;
@@ -906,12 +902,12 @@ LABEL_27:
 }
 
 //----- (0048F743) --------------------------------------------------------
-void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a6, int direction)
+void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, BYTE *pCelBuff, int frame, int frame_width, int a6, int direction)
 {
   unsigned __int16 v7; // dx
-  char *pDecodeTo; // [esp+18h] [ebp-10h]
-  char *pRLEBytes; // [esp+1Ch] [ebp-Ch]
-  char *pRLEBytesa; // [esp+1Ch] [ebp-Ch]
+  BYTE *pDecodeTo; // [esp+18h] [ebp-10h]
+  BYTE *pRLEBytes; // [esp+1Ch] [ebp-Ch]
+  BYTE *pRLEBytesa; // [esp+1Ch] [ebp-Ch]
   int frame_content_size; // [esp+20h] [ebp-8h]
   int v13; // [esp+24h] [ebp-4h]
 
@@ -937,11 +933,11 @@ void __fastcall Cel2DecodeHdrLight(int screen_x, int screen_y, char *pCelBuff, i
 }
 
 //----- (0048F85D) --------------------------------------------------------
-void __fastcall Cel2DecodeLightTrans(char *dst_buf, char *pCelBuff, int frame, int frame_width, int a5, int direction)
+void __fastcall Cel2DecodeLightTrans(BYTE *dst_buf, BYTE *pCelBuff, int frame, int frame_width, int a5, int direction)
 {
   unsigned __int16 v6; // dx
-  char *pRLEBytes; // [esp+18h] [ebp-Ch]
-  char *pRLEBytesa; // [esp+18h] [ebp-Ch]
+  BYTE *pRLEBytes; // [esp+18h] [ebp-Ch]
+  BYTE *pRLEBytesa; // [esp+18h] [ebp-Ch]
   int frame_content_size; // [esp+1Ch] [ebp-8h]
   int v11; // [esp+20h] [ebp-4h]
 
@@ -974,17 +970,17 @@ void __fastcall Cel2DecodeLightTrans(char *dst_buf, char *pCelBuff, int frame, i
 }
 
 //----- (0048F97E) --------------------------------------------------------
-void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int always_0, int direction, char always_1)
+void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, BYTE *pCelBuff, int frame, int frame_width, int always_0, int direction, char always_1)
 {
   unsigned __int16 v8; // dx
   _BYTE *v9; // esi
-  char *v10; // edi
+  BYTE *v10; // edi
   int v11; // ecx
   int v12; // edx
   int v13; // ecx
   int v14; // eax
   _BYTE *v15; // [esp-4h] [ebp-38h]
-  char *v17; // [esp+1Ch] [ebp-18h]
+  BYTE *v17; // [esp+1Ch] [ebp-18h]
   int v18; // [esp+1Ch] [ebp-18h]
   BYTE *v19; // [esp+20h] [ebp-14h]
   signed int v20; // [esp+24h] [ebp-10h]
@@ -1036,7 +1032,7 @@ void __fastcall Cel2DrawHdrLightRed(int screen_x, int screen_y, char *pCelBuff, 
             goto LABEL_26;
         }
         v12 -= v14;
-        if ( v10 < (char *)gpBufEnd )
+        if ( v10 < gpBufEnd )
         {
           do
           {
@@ -1063,11 +1059,11 @@ LABEL_26:
 }
 
 //----- (0048FB3E) --------------------------------------------------------
-void __fastcall CelDecodeRect(char *pBuff, int always_0, int dst_height, int dst_width, char *pCelBuff, int frame, int frame_width)
+void __fastcall CelDecodeRect(BYTE *pBuff, int always_0, int dst_height, int dst_width, char *pCelBuff, int frame, int frame_width)
 {
   char *v7; // ebx
   char *v8; // esi
-  char *v9; // edi
+  BYTE *v9; // edi
   int v10; // ebx
   int v11; // edx
   unsigned int v12; // eax
@@ -1129,17 +1125,17 @@ LABEL_16:
 }
 
 //----- (0048FC23) --------------------------------------------------------
-void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a7, int direction)
+void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, BYTE *pCelBuff, int frame, int frame_width, int a7, int direction)
 {
-  char *v8; // ebx
-  char *v9; // esi
-  char *v10; // edi
+  BYTE *v8; // ebx
+  BYTE *v9; // esi
+  BYTE *v10; // edi
   int v11; // edx
   int v12; // eax
   int v13; // ecx
   char v14; // al
   int v16; // [esp+14h] [ebp-18h]
-  char *v17; // [esp+1Ch] [ebp-10h]
+  BYTE *v17; // [esp+1Ch] [ebp-10h]
   int v18; // [esp+20h] [ebp-Ch]
   int v19; // [esp+24h] [ebp-8h]
 
@@ -1165,7 +1161,7 @@ void __fastcall CelDecodeClr(char colour, int screen_x, int screen_y, char *pCel
       {
         while ( 1 )
         {
-          v12 = (unsigned __int8)*v9++;
+          v12 = *v9++;
           if ( (v12 & 0x80u) == 0 )
             break;
           LOBYTE(v12) = -(char)v12;
@@ -1197,11 +1193,11 @@ LABEL_19:
 }
 
 //----- (0048FD5C) --------------------------------------------------------
-void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *pCelBuff, int frame, int frame_width, int a7, int direction)
+void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, BYTE *pCelBuff, int frame, int frame_width, int a7, int direction)
 {
-  char *v8; // ebx
-  char *v9; // esi
-  char *v10; // edi
+  BYTE *v8; // ebx
+  BYTE *v9; // esi
+  BYTE *v10; // edi
   int v11; // edx
   int v12; // eax
   int v13; // ecx
@@ -1209,7 +1205,7 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
   int v15; // ecx
   char v16; // al
   int v18; // [esp+14h] [ebp-18h]
-  char *v19; // [esp+1Ch] [ebp-10h]
+  BYTE *v19; // [esp+1Ch] [ebp-10h]
   int v20; // [esp+20h] [ebp-Ch]
   int v21; // [esp+24h] [ebp-8h]
 
@@ -1235,7 +1231,7 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
       {
         while ( 1 )
         {
-          v12 = (unsigned __int8)*v9++;
+          v12 = *v9++;
           if ( (v12 & 0x80u) == 0 )
             break;
           LOBYTE(v12) = -(char)v12;
@@ -1245,9 +1241,9 @@ void __fastcall CelDrawHdrClrHL(char colour, int screen_x, int screen_y, char *p
             goto LABEL_27;
         }
         v11 -= v12;
-        if ( v10 < (char *)gpBufEnd )
+        if ( v10 < gpBufEnd )
         {
-          if ( v10 >= (char *)gpBufEnd - 768 )
+          if ( v10 >= gpBufEnd - 768 )
           {
             for (v15 = v12; v15; --v15)
             {
@@ -1292,12 +1288,12 @@ LABEL_27:
 }
 
 //----- (0048FEDC) --------------------------------------------------------
-void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
+void __fastcall Cl2ApplyTrans(BYTE *p, char *ttbl, int last_frame)
 {
-  char *v3; // ebx
-  char *v4; // esi
+  BYTE *v3; // ebx
+  BYTE *v4; // esi
   int v5; // edx
-  char *v6; // edi
+  BYTE *v6; // edi
   int v8; // eax
   int v9; // ecx
   int i; // [esp+14h] [ebp-4h]
@@ -1313,7 +1309,7 @@ void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
     _EBX = ttbl;
     while ( 1 )
     {
-      v8 = (unsigned __int8)*v4++;
+      v8 = *v4++;
       *v6++ = v8;
       if ( !--v5 )
         break;
@@ -1336,12 +1332,12 @@ void __fastcall Cl2ApplyTrans(char *p, char *ttbl, int last_frame)
 //----- (0048FF98) --------------------------------------------------------
 void __fastcall ENG_set_pixel(int screen_x, int screen_y, char pixel)
 {
-  char *v3; // [esp+14h] [ebp-4h]
+  BYTE *v3; // [esp+14h] [ebp-4h]
 
   if ( screen_y >= 0 && screen_y < 640 && screen_x >= 64 && screen_x < 704 )
   {
     v3 = &gpBuffer[screen_x + screen_y_times_768[screen_y]];
-    if ( v3 < (char *)gpBufEnd )
+    if ( v3 < gpBufEnd )
       *v3 = pixel;
   }
 }
@@ -1349,7 +1345,7 @@ void __fastcall ENG_set_pixel(int screen_x, int screen_y, char pixel)
 //----- (00490016) --------------------------------------------------------
 void __fastcall engine_draw_pixel(int x, int y)
 {
-  char *v2; // [esp+14h] [ebp-4h]
+  BYTE *v2; // [esp+14h] [ebp-4h]
 
   if ( dword_649AFC )
   {
@@ -1357,7 +1353,7 @@ void __fastcall engine_draw_pixel(int x, int y)
       return;
     v2 = &gpBuffer[y + screen_y_times_768[x]];
 LABEL_18:
-    if ( v2 < (char *)gpBufEnd )
+    if ( v2 < gpBufEnd )
       *v2 = byte_649AF8;
     return;
   }

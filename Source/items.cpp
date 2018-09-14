@@ -2754,7 +2754,7 @@ void __fastcall PrintItemPower(char power, ItemStruct *item)
 //----- (00429759) --------------------------------------------------------
 void __cdecl DrawUBack()
 {
-  char *v0; // edi
+  BYTE *v0; // edi
   signed int v1; // edx
   signed int v2; // ecx
   int v3; // edi
@@ -2779,7 +2779,7 @@ void __cdecl DrawUBack()
       *v5 = 0;
       v3 = (int)(v5 + 1);
     }
-    v0 = (char *)(v3 - 1032);
+    v0 = (BYTE *)(v3 - 1032);
   }
   
   for (v6 = 132; v6; --v6)
@@ -2829,8 +2829,8 @@ void __fastcall PrintUString(int x, int y, int cjustflag, char *str, int col)
 //----- (0042990C) --------------------------------------------------------
 void __fastcall DrawULine(int y)
 {
-  char *v1; // esi
-  char *v2; // edi
+  BYTE *v1; // esi
+  BYTE *v2; // edi
   signed int v3; // edx
   _WORD *v4; // edi
   _WORD *v5; // esi
@@ -2843,8 +2843,8 @@ void __fastcall DrawULine(int y)
     v5 = v1 + 264;
     v4 = v2 + 264;
     *v4 = *v5;
-    v1 = (char *)(v5 + 252);
-    v2 = (char *)(v4 + 252);
+    v1 = (BYTE *)(v5 + 252);
+    v2 = (BYTE *)(v4 + 252);
   }
 }
 

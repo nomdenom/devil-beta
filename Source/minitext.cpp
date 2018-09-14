@@ -70,7 +70,7 @@ void __fastcall InitQTextMsg(int m)
 //----- (00412C1E) --------------------------------------------------------
 void __cdecl DrawQTextBack()
 {
-  char *v0; // edi
+  BYTE *v0; // edi
   signed int v1; // edx
   signed int v2; // ecx
   int v3; // edi
@@ -95,7 +95,7 @@ void __cdecl DrawQTextBack()
       *v5 = 0;
       v3 = (int)(v5 + 1);
     }
-    v0 = (char *)(v3 - 1352);
+    v0 = (BYTE *)(v3 - 1352);
   }
   
   for (v6 = 292; v6; --v6)
@@ -111,15 +111,15 @@ void __fastcall PrintQTextChr(int screen_x, int screen_y, char *cel_buf, int fra
 {
   char *v4; // ebx
   char *v5; // esi
-  char *v6; // edi
+  BYTE *v6; // edi
   int v7; // ebx
   signed int v8; // edx
   unsigned int v9; // eax
   unsigned int v10; // ecx
   char v11; // cf
   unsigned int v12; // ecx
-  char *v13; // [esp+1Ch] [ebp-8h]
-  char *v14; // [esp+20h] [ebp-4h]
+  BYTE *v13; // [esp+1Ch] [ebp-8h]
+  BYTE *v14; // [esp+20h] [ebp-4h]
 
   v14 = &gpBuffer[screen_y_times_768[209]];
   v13 = &gpBuffer[screen_y_times_768[469]];

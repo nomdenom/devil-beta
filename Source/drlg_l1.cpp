@@ -83,7 +83,7 @@ void __fastcall LoadL1Dungeon(char *sFileName, int vx, int vy)
   DRLG_L1Pass3();
   DRLG_InitL1Vals();
   SetMapMonsters((char *)pMap, 0, 0);
-  SetMapObjects((char *)pMap, 0, 0);
+  SetMapObjects(pMap, 0, 0);
   mem_free_dbg(pMap, 763, "DRLG_L1.CPP");
 }
 

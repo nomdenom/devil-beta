@@ -2056,7 +2056,7 @@ void __fastcall LoadL2Dungeon(char *sFileName, int vx, int vy)
   ViewX = v4;
   ViewY = vy;
   SetMapMonsters((char *)pMap, 0, 0);
-  SetMapObjects((char *)pMap, 0, 0);
+  SetMapObjects(pMap, 0, 0);
   mem_free_dbg(pMap, 3025, "DRLG_L2.CPP");
 }
 
@@ -2118,12 +2118,12 @@ void __fastcall LoadPreL2Dungeon(char *sFileName, int vx, int vy)
 void __fastcall unused_sub_482168(int a1, int a2)
 {
   BYTE (*v2)[40]; // esi
-  char *v3; // edi
+  BYTE *v3; // edi
   signed int v4; // edx
   signed int v5; // ecx
   char v6; // al
   char v7; // al
-  char *v8; // [esp-4h] [ebp-24h]
+  BYTE *v8; // [esp-4h] [ebp-24h]
   int v9; // [esp+14h] [ebp-Ch]
   int v10; // [esp+1Ch] [ebp-4h]
 

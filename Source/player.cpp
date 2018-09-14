@@ -1049,24 +1049,24 @@ void __fastcall PM_ChangeOffset(int pnum)
 //----- (0046DC66) --------------------------------------------------------
 void __fastcall StartWalk(int pnum, int xvel, int yvel, int xadd, int yadd, int EndDir, int sdir)
 {
-  int v9; // [esp+14h] [ebp-8h]
-  int v10; // [esp+18h] [ebp-4h]
+  int y; // [esp+14h] [ebp-8h]
+  int x; // [esp+18h] [ebp-4h]
 
   if ( !plr[pnum]._pInvincible || plr[pnum]._pHitPoints )
   {
     SetPlayerOld(pnum);
-    v10 = xadd + plr[pnum].WorldX;
-    v9 = yadd + plr[pnum].WorldY;
+    x = xadd + plr[pnum].WorldX;
+    y = yadd + plr[pnum].WorldY;
     if ( PlrDirOK(pnum, EndDir) )
     {
-      plr[pnum]._px = v10;
-      plr[pnum]._py = v9;
+      plr[pnum]._px = x;
+      plr[pnum]._py = y;
       if ( myplr == pnum )
       {
         Scrollinfo._sdx = plr[pnum].WorldX - ViewX;
         Scrollinfo._sdy = plr[pnum].WorldY - ViewY;
       }
-      dPlayer[v10][v9] = -1 - pnum;
+      dPlayer[x][y] = -1 - pnum;
       plr[pnum]._pmode = 1;
       plr[pnum]._pxvel = xvel;
       plr[pnum]._pyvel = yvel;

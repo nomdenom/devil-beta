@@ -52,7 +52,7 @@ void __cdecl gmenu_init_menu()
   gmenu_642C08 = 0;
   assert(!sgpLogo, "gmenu.cpp", 135);
   sgpLogo = LoadFileInMem("Data\\Diabsmal.CEL", 0, 136, "gmenu.cpp");
-  BigTGold_cel = (char *)LoadFileInMem("Data\\BigTGold.CEL", 0, 137, "gmenu.cpp");
+  BigTGold_cel = LoadFileInMem("Data\\BigTGold.CEL", 0, 137, "gmenu.cpp");
   PentSpin_cel = LoadFileInMem("Data\\PentSpin.CEL", 0, 138, "gmenu.cpp");
   option_cel = LoadFileInMem("Data\\option.CEL", 0, 139, "gmenu.cpp");
   optbar_cel = LoadFileInMem("Data\\optbar.CEL", 0, 140, "gmenu.cpp");
@@ -184,7 +184,7 @@ void __fastcall gmenu_draw_menu_item(TMenuItem *a1, int y)
 void __fastcall gmenu_clear_buffer(int x, int y, int width, int height)
 {
   int v4; // ST20_4
-  char *i; // [esp+18h] [ebp-4h]
+  BYTE *i; // [esp+18h] [ebp-4h]
 
   assert(gpBuffer, "gmenu.cpp", 204);
   for ( i = &gpBuffer[x + screen_y_times_768[y]]; ; i -= 768 )

@@ -33,11 +33,11 @@ void __cdecl InitInv()
 //----- (0044F060) --------------------------------------------------------
 void __fastcall InvDrawSlotBack(int X, int Y, int W, int H)
 {
-  char *v4; // edi
+  BYTE *v4; // edi
   int v5; // edx
   int v6; // ecx
-  char v7; // al
-  char v8; // al
+  BYTE v7; // al
+  BYTE v8; // al
 
   v4 = &gpBuffer[X + screen_y_times_768[Y]];
   for (v5 = (unsigned __int16)H; v5; --v5)
@@ -46,11 +46,11 @@ void __fastcall InvDrawSlotBack(int X, int Y, int W, int H)
     do
     {
       v7 = *v4;
-      if ( (unsigned __int8)*v4 < 0xB0u )
+      if ( *v4 < 0xB0u )
         goto LABEL_9;
-      if ( (unsigned __int8)v7 > 0xBFu )
+      if ( v7 > 0xBFu )
       {
-        if ( (unsigned __int8)v7 < 0xF0u )
+        if ( v7 < 0xF0u )
           goto LABEL_9;
         v8 = v7 - 80;
       }
@@ -104,7 +104,7 @@ void __cdecl DrawInv()
     }
     else
     {
-      CelDrawHdrLightRed(516, 219, pCursCels, frame, frame_width, 0, 8, 1);
+      CelDrawHdrLightRed(516, 219, (char *)pCursCels, frame, frame_width, 0, 8, 1);
     }
   }
   if ( plr[myplr].InvBody[1]._itype != -1 )
@@ -128,7 +128,7 @@ void __cdecl DrawInv()
     }
     else
     {
-      CelDrawHdrLightRed(429, 365, pCursCels, frame, frame_width, 0, 8, 1);
+      CelDrawHdrLightRed(429, 365, (char *)pCursCels, frame, frame_width, 0, 8, 1);
     }
   }
   if ( plr[myplr].InvBody[2]._itype != -1 )
@@ -152,7 +152,7 @@ void __cdecl DrawInv()
     }
     else
     {
-      CelDrawHdrLightRed(631, 365, pCursCels, frame, frame_width, 0, 8, 1);
+      CelDrawHdrLightRed(631, 365, (char *)pCursCels, frame, frame_width, 0, 8, 1);
     }
   }
   if ( plr[myplr].InvBody[3]._itype != -1 )
@@ -176,7 +176,7 @@ void __cdecl DrawInv()
     }
     else
     {
-      CelDrawHdrLightRed(588, 220, pCursCels, frame, frame_width, 0, 8, 1);
+      CelDrawHdrLightRed(588, 220, (char *)pCursCels, frame, frame_width, 0, 8, 1);
     }
   }
   if ( plr[myplr].InvBody[4]._itype != -1 )
@@ -208,7 +208,7 @@ void __cdecl DrawInv()
     }
     else
     {
-      CelDrawHdrLightRed(screen_x, screen_y, pCursCels, frame, frame_width, 0, 8, 1);
+      CelDrawHdrLightRed(screen_x, screen_y, (char *)pCursCels, frame, frame_width, 0, 8, 1);
     }
     if ( plr[myplr].InvBody[4]._iLoc == 2 )
     {
@@ -251,7 +251,7 @@ void __cdecl DrawInv()
     }
     else
     {
-      CelDrawHdrLightRed(screen_xa, screen_y, pCursCels, frame, frame_width, 0, 8, 1);
+      CelDrawHdrLightRed(screen_xa, screen_y, (char *)pCursCels, frame, frame_width, 0, 8, 1);
     }
   }
   if ( plr[myplr].InvBody[6]._itype != -1 )
@@ -275,7 +275,7 @@ void __cdecl DrawInv()
     }
     else
     {
-      CelDrawHdrLightRed(516, 320, pCursCels, frame, frame_width, 0, 8, 1);
+      CelDrawHdrLightRed(516, 320, (char *)pCursCels, frame, frame_width, 0, 8, 1);
     }
   }
   for ( i = 0; i < 40; ++i )
@@ -310,7 +310,15 @@ void __cdecl DrawInv()
       }
       else
       {
-        CelDrawHdrLightRed(InvRect[j + 25].X + 64, InvRect[j + 25].Y + 159, pCursCels, frame, frame_width, 0, 8, 1);
+        CelDrawHdrLightRed(
+          InvRect[j + 25].X + 64,
+          InvRect[j + 25].Y + 159,
+          (char *)pCursCels,
+          frame,
+          frame_width,
+          0,
+          8,
+          1);
       }
     }
   }
@@ -350,7 +358,15 @@ void __cdecl DrawInvBelt()
         }
         else
         {
-          CelDrawHdrLightRed(InvRect[i + 65].X + 64, InvRect[i + 65].Y + 159, pCursCels, frame, frame_width, 0, 8, 1);
+          CelDrawHdrLightRed(
+            InvRect[i + 65].X + 64,
+            InvRect[i + 65].Y + 159,
+            (char *)pCursCels,
+            frame,
+            frame_width,
+            0,
+            8,
+            1);
         }
         if ( AllItemsList[plr[myplr].SpdList[i].IDidx].iUsable
           && plr[myplr].SpdList[i]._iStatFlag

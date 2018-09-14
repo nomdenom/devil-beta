@@ -23,10 +23,7 @@ void __fastcall InitMonsterTRN(int monst, int special)
   for ( i = 0; v7 > i; ++i )
   {
     for ( j = 0; j < 8; ++j )
-      Cl2ApplyTrans(
-        (char *)Monsters[monst].Anims[i].Frames[j],
-        Monsters[monst].trans_file,
-        Monsters[monst].Anims[i].Rate);
+      Cl2ApplyTrans(Monsters[monst].Anims[i].Frames[j], Monsters[monst].trans_file, Monsters[monst].Anims[i].Rate);
   }
 }
 
@@ -828,17 +825,17 @@ int __fastcall M_GetDir(int i, int enemy)
 //----- (00403FCA) --------------------------------------------------------
 void __fastcall M_CheckEFlag(int i)
 {
-  int v1; // [esp+10h] [ebp-14h]
+  int x; // [esp+10h] [ebp-14h]
   int v2; // [esp+18h] [ebp-Ch]
   signed int j; // [esp+1Ch] [ebp-8h]
-  int v4; // [esp+20h] [ebp-4h]
+  int y; // [esp+20h] [ebp-4h]
 
-  v1 = monster[i]._mx - 1;
-  v4 = monster[i]._my + 1;
+  x = monster[i]._mx - 1;
+  y = monster[i]._my + 1;
   v2 = 0;
   for ( j = 2; j < 10; ++j )
-    v2 |= dpiece_defs_map_2[v1][v4][j];
-  if ( dArch[v1][v4] | v2 )
+    v2 |= dpiece_defs_map_2[x][y][j];
+  if ( dArch[x][y] | v2 )
     monster[i]._meflag = 1;
   else
     monster[i]._meflag = 0;

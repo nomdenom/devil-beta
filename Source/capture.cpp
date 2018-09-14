@@ -21,7 +21,7 @@ void __cdecl CaptureScreen()
     RedPalette(&pal);
     v2 = CaptureHdr(hObject, 640, 480);
     if ( v2 )
-      v2 = CapturePix(hObject, 0x280u, 0x1E0u, 0x300u, (BYTE *)gpBuffer + 122944);
+      v2 = CapturePix(hObject, 0x280u, 0x1E0u, 0x300u, gpBuffer + 122944);
     if ( v2 )
       v2 = CapturePal(hObject, &pal);
     CloseHandle(hObject);

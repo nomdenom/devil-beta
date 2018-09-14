@@ -364,7 +364,7 @@ void __fastcall unused_sub_45D6FE_lever(int a1, int a2, int a3, int a4, int x1, 
 }
 
 //----- (0045D88D) --------------------------------------------------------
-void __fastcall objects_45D88D(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, int msg)
+void __fastcall objects_45D88D_add_books(int x1, int y1, int x2, int y2, int x3, int y3, int x4, int y4, int msg)
 {
   int i; // ST28_4
   int yp; // [esp+14h] [ebp-Ch]
@@ -471,7 +471,7 @@ void __fastcall AddL1Objs(int x1, int y1, int x2, int y2)
     {
       v7 = dPiece[ox][oy];
       if ( v7 == 270 )
-        AddObject(0, ox, oy);
+        AddObject(OBJ_L1LIGHT, ox, oy);
       if ( v7 == 44 || v7 == 51 || v7 == 214 )
         AddObject(OBJ_L1LDOOR, ox, oy);
       if ( v7 == 46 || v7 == 56 )
@@ -651,7 +651,7 @@ void __fastcall InitObjects(int a1)
     InitRndLocBigObj(10, 15, OBJ_SARC);
     AddL1Objs(0, 0, 112, 112);
     if ( quests[4]._qlevel == currlevel )
-      objects_45D88D(0, 0, 112, 112, setpc_x, setpc_y, setpc_x + setpc_w + 1, setpc_y + setpc_h + 1, 11);
+      objects_45D88D_add_books(0, 0, 112, 112, setpc_x, setpc_y, setpc_x + setpc_w + 1, setpc_y + setpc_h + 1, 11);
     InitRndBarrels();
   }
   if ( leveltype == 2 )
@@ -659,9 +659,9 @@ void __fastcall InitObjects(int a1)
     AddL2Objs(0, 0, 112, 112);
     AddL2Torches();
     if ( quests[8]._qlevel == currlevel )
-      objects_45D88D(0, 0, 112, 112, setpc_x, setpc_y, setpc_x + setpc_w + 1, setpc_y + setpc_h + 1, 23);
+      objects_45D88D_add_books(0, 0, 112, 112, setpc_x, setpc_y, setpc_x + setpc_w + 1, setpc_y + setpc_h + 1, 23);
     if ( quests[9]._qlevel == currlevel )
-      objects_45D88D(0, 0, 112, 112, setpc_x, setpc_y, setpc_x + setpc_w + 1, setpc_y + setpc_h + 1, 24);
+      objects_45D88D_add_books(0, 0, 112, 112, setpc_x, setpc_y, setpc_x + setpc_w + 1, setpc_y + setpc_h + 1, 24);
     InitRndBarrels();
   }
   if ( quests[2]._qlevel == currlevel )
@@ -679,7 +679,7 @@ void __fastcall InitObjects(int a1)
 }
 
 //----- (0045E691) --------------------------------------------------------
-void __fastcall SetMapObjects(char *pMap, int startx, int starty)
+void __fastcall SetMapObjects(BYTE *pMap, int startx, int starty)
 {
   int v3; // ST38_4
   int v4; // ST34_4
@@ -693,8 +693,8 @@ void __fastcall SetMapObjects(char *pMap, int startx, int starty)
   int ii; // [esp+20h] [ebp-ECh]
   int v15; // [esp+28h] [ebp-E4h]
   int v16; // [esp+2Ch] [ebp-E0h]
-  char *v17; // [esp+34h] [ebp-D8h]
-  char *v18; // [esp+34h] [ebp-D8h]
+  BYTE *v17; // [esp+34h] [ebp-D8h]
+  BYTE *v18; // [esp+34h] [ebp-D8h]
   int v19; // [esp+38h] [ebp-D4h]
   int fileload[44]; // [esp+3Ch] [ebp-D0h]
   char pszName[32]; // [esp+ECh] [ebp-20h]
@@ -708,8 +708,8 @@ void __fastcall SetMapObjects(char *pMap, int startx, int starty)
     if ( AllObjects[j].oload == 1 && AllObjects[j].olvltype == (unsigned __int8)leveltype )
       fileload[AllObjects[j].ofindex] = 1;
   }
-  v3 = (unsigned __int8)*pMap;
-  v4 = (unsigned __int8)pMap[2];
+  v3 = *pMap;
+  v4 = pMap[2];
   v5 = 2 * v3 * v4 + 2;
   v16 = 2 * v3;
   v15 = 2 * v4;
@@ -720,7 +720,7 @@ void __fastcall SetMapObjects(char *pMap, int startx, int starty)
     for ( l = 0; v16 > l; ++l )
     {
       if ( *v17 )
-        fileload[AllObjects[ObjTypeConv[(unsigned __int8)*v17]].ofindex] = 1;
+        fileload[AllObjects[ObjTypeConv[*v17]].ofindex] = 1;
       v17 += 2;
     }
   }
@@ -741,7 +741,7 @@ void __fastcall SetMapObjects(char *pMap, int startx, int starty)
     for ( ii = 0; v16 > ii; ++ii )
     {
       if ( *v18 )
-        AddObject(ObjTypeConv[(unsigned __int8)*v18], startx + ii + 16, starty + n + 16);
+        AddObject(ObjTypeConv[*v18], startx + ii + 16, starty + n + 16);
       v18 += 2;
     }
   }
@@ -844,59 +844,48 @@ void __fastcall AddSCambBook(int i)
 //----- (0045F01C) --------------------------------------------------------
 void __fastcall AddChest(int i, int t)
 {
-  int v2; // [esp+10h] [ebp-8h]
-  int v3; // [esp+14h] [ebp-4h]
-
-  v2 = t;
-  v3 = i;
   if ( !random(147, 2) )
-    object[v3]._oAnimFrame += 3;
-  object[v3]._oRndSeed = GetRndSeed();
-  switch ( v2 )
+    object[i]._oAnimFrame += 3;
+  object[i]._oRndSeed = GetRndSeed();
+  switch ( t )
   {
     case 5:
     case 68:
-      object[v3]._oVar1 = random(147, 2);
+      object[i]._oVar1 = random(147, 2);
       break;
     case 6:
     case 69:
-      object[v3]._oVar1 = random(147, 3);
+      object[i]._oVar1 = random(147, 3);
       break;
     case 7:
     case 70:
-      object[v3]._oVar1 = random(147, 4);
+      object[i]._oVar1 = random(147, 4);
       break;
     default:
       break;
   }
-  object[v3]._oVar2 = random(147, 8);
+  object[i]._oVar2 = random(147, 8);
 }
 
 //----- (0045F18B) --------------------------------------------------------
 void __fastcall AddL2Door(int i, int x, int y, _object_id ot)
 {
-  int v4; // [esp+10h] [ebp-4h]
-
-  v4 = i;
   object[i]._oDoorFlag = 1;
   if ( ot == 42 )
     ObjSetMicro(x, y, 538);
   else
     ObjSetMicro(x, y, 540);
-  object[v4]._oVar4 = 0;
+  object[i]._oVar4 = 0;
 }
 
 //----- (0045F1FD) --------------------------------------------------------
 void __fastcall AddSarc(int i)
 {
-  int v1; // [esp+Ch] [ebp-Ch]
-
-  v1 = i;
   dObject[object[i]._ox][object[i]._oy - 1] = -1 - i;
   object[i]._oVar1 = random(153, 10);
-  object[v1]._oRndSeed = GetRndSeed();
-  if ( object[v1]._oVar1 >= 8 )
-    object[v1]._oVar2 = PreSpawnSkeleton();
+  object[i]._oRndSeed = GetRndSeed();
+  if ( object[i]._oVar1 >= 8 )
+    object[i]._oVar2 = PreSpawnSkeleton();
 }
 
 //----- (0045F2BC) --------------------------------------------------------
@@ -918,30 +907,25 @@ void __fastcall AddFlameLvr(int i)
 //----- (0045F363) --------------------------------------------------------
 void __fastcall AddTrap(int i)
 {
-  int v1; // [esp+10h] [ebp-Ch]
   int v2; // [esp+14h] [ebp-8h]
 
-  v1 = i;
   v2 = random(148, currlevel / 3 + 1);
   if ( !v2 )
-    object[v1]._oVar3 = 0;
+    object[i]._oVar3 = 0;
   if ( v2 == 1 )
-    object[v1]._oVar3 = 1;
+    object[i]._oVar3 = 1;
   if ( v2 == 2 )
-    object[v1]._oVar3 = 7;
-  object[v1]._oVar4 = 0;
+    object[i]._oVar3 = 7;
+  object[i]._oVar4 = 0;
 }
 
 //----- (0045F40D) --------------------------------------------------------
 void __fastcall AddObjLight(int i, int r)
 {
-  int v2; // [esp+10h] [ebp-4h]
-
-  v2 = i;
   if ( InitObjFlag )
   {
     DoLighting(object[i]._ox, object[i]._oy, r, -1);
-    object[v2]._oVar1 = -1;
+    object[i]._oVar1 = -1;
   }
   else
   {
@@ -952,34 +936,27 @@ void __fastcall AddObjLight(int i, int r)
 //----- (0045F48B) --------------------------------------------------------
 void __fastcall AddBarrel(int i)
 {
-  int v1; // [esp+10h] [ebp-4h]
-
-  v1 = i;
   object[i]._oVar1 = random(149, 5) + 5;
-  object[v1]._oRndSeed = GetRndSeed();
-  object[v1]._oVar2 = random(149, 5);
-  object[v1]._oVar3 = random(149, 3);
-  if ( object[v1]._oVar2 == 4 )
-    object[v1]._oVar4 = PreSpawnSkeleton();
+  object[i]._oRndSeed = GetRndSeed();
+  object[i]._oVar2 = random(149, 5);
+  object[i]._oVar3 = random(149, 3);
+  if ( object[i]._oVar2 == 4 )
+    object[i]._oVar4 = PreSpawnSkeleton();
 }
 
 //----- (0045F545) --------------------------------------------------------
-int __fastcall objects_45F545(int a1)
+void __fastcall AddShrines_45F545(int i)
 {
-  int result; // eax
-  int v2; // [esp+Ch] [ebp-8h]
+  int v2; // [esp+10h] [ebp-4h]
 
-  v2 = a1;
-  object[a1]._oPreFlag = 1;
-  result = random(150, 13);
-  object[v2]._oVar1 = result;
-  if ( result == 3 || result == 7 || result == 9 )
+  object[i]._oPreFlag = 1;
+  v2 = random(150, 13);
+  object[i]._oVar1 = v2;
+  if ( v2 == 3 || v2 == 7 || v2 == 9 )
   {
-    object[v2]._oAnimFrame = 12;
-    result = 24 * v2;
-    object[v2]._oAnimLen = 22;
+    object[i]._oAnimFrame = 12;
+    object[i]._oAnimLen = 22;
   }
-  return result;
 }
 
 //----- (0045F5DA) --------------------------------------------------------
@@ -993,28 +970,22 @@ void __fastcall AddBookcase(int i)
 }
 
 //----- (0045F619) --------------------------------------------------------
-int __fastcall objects_45F619(int a1)
+void __fastcall AddBook_45F619(int i)
 {
-  int v1; // ST0C_4
-  int result; // eax
-
-  v1 = a1;
-  result = GetRndSeed();
-  object[v1]._oRndSeed = result;
-  return result;
+  object[i]._oRndSeed = GetRndSeed();
 }
 
 //----- (0045F644) --------------------------------------------------------
-void __fastcall AddPurifyingFountain(int i)
+void __fastcall AddBloodFtn_45F644(int i)
 {
-  int v1; // ST10_4
-  int v2; // ebx
+  int y; // ST10_4
+  int x; // ebx
 
-  v1 = object[i]._oy;
-  v2 = object[i]._ox;
-  dObject[v2][v1 - 1] = -1 - i;
-  dObject[v2 - 1][v1] = -1 - i;
-  dObject[v2 - 1 - 1][v1 + 111] = -1 - i;
+  y = object[i]._oy;
+  x = object[i]._ox;
+  dObject[x][y - 1] = -1 - i;
+  dObject[x - 1][y] = -1 - i;
+  dObject[x - 1 - 1][y + 111] = -1 - i;
 }
 
 //----- (0045F6E8) --------------------------------------------------------
@@ -1031,12 +1002,8 @@ void __fastcall AddDecap(int i)
 //----- (0045F747) --------------------------------------------------------
 void __fastcall AddObject(_object_id ot, int ox, int oy)
 {
-  int x; // [esp+10h] [ebp-Ch]
-  int ota; // [esp+14h] [ebp-8h]
   int i; // [esp+18h] [ebp-4h]
 
-  x = ox;
-  ota = ot;
   if ( nobjects < 127 )
   {
     i = objectavail[0];
@@ -1044,7 +1011,7 @@ void __fastcall AddObject(_object_id ot, int ox, int oy)
     objectactive[nobjects] = i;
     dObject[ox][oy] = i + 1;
     SetupObject(i, ox, oy, ot);
-    switch ( ota )
+    switch ( ot )
     {
       case OBJ_L1LIGHT:
       case OBJ_BCROSS:
@@ -1052,7 +1019,7 @@ void __fastcall AddObject(_object_id ot, int ox, int oy)
         break;
       case OBJ_L1LDOOR:
       case OBJ_L1RDOOR:
-        AddL1Door(i, x, oy, (_object_id)ota);
+        AddL1Door(i, ox, oy, ot);
         break;
       case OBJ_SKFIRE:
       case OBJ_CANDLE2:
@@ -1066,14 +1033,14 @@ void __fastcall AddObject(_object_id ot, int ox, int oy)
       case OBJ_TCHEST1:
       case OBJ_TCHEST2:
       case OBJ_TCHEST3:
-        AddChest(i, ota);
+        AddChest(i, ot);
         break;
       case OBJ_BOOK2R:
         AddSCambBook(i);
         break;
       case OBJ_L2LDOOR:
       case OBJ_L2RDOOR:
-        AddL2Door(i, x, oy, (_object_id)ota);
+        AddL2Door(i, ox, oy, ot);
         break;
       case OBJ_TORCHL:
       case OBJ_TORCHR:
@@ -1103,13 +1070,13 @@ void __fastcall AddObject(_object_id ot, int ox, int oy)
         break;
       case OBJ_SHRINEL:
       case OBJ_SHRINER:
-      case OBJ_L3RDOOR:
+      case OBJ_SOME_SHRINE_XXX:
       case OBJ_PURIFYINGFTN:
-        objects_45F545(i);
+        AddShrines_45F545(i);
         break;
       case OBJ_SKELBOOK:
       case OBJ_BOOKSTAND:
-        objects_45F619(i);
+        AddBook_45F619(i);
         break;
       case OBJ_BOOKCASEL:
       case OBJ_BOOKCASER:
@@ -1118,7 +1085,7 @@ void __fastcall AddObject(_object_id ot, int ox, int oy)
         AddBookcase(i);
         break;
       case OBJ_BLOODFTN:
-        AddPurifyingFountain(i);
+        AddBloodFtn_45F644(i);
         break;
       case OBJ_DECAP:
         AddDecap(i);
@@ -1192,30 +1159,30 @@ void __fastcall Obj_StopAnim(int i)
 //----- (0045FC73) --------------------------------------------------------
 void __fastcall Obj_Door(int i)
 {
-  int v1; // [esp+10h] [ebp-Ch]
-  bool v2; // [esp+14h] [ebp-8h]
-  bool v3; // [esp+14h] [ebp-8h]
-  int v4; // [esp+14h] [ebp-8h]
-  int v5; // [esp+18h] [ebp-4h]
+  int y; // [esp+10h] [ebp-Ch]
+  bool free; // [esp+14h] [ebp-8h]
+  bool freea; // [esp+14h] [ebp-8h]
+  int freeb; // [esp+14h] [ebp-8h]
+  int x; // [esp+18h] [ebp-4h]
 
   if ( object[i]._oVar4 )
   {
-    v5 = object[i]._ox;
-    v1 = object[i]._oy;
-    if ( dItem[v5][v1] )
-      v2 = 0;
+    x = object[i]._ox;
+    y = object[i]._oy;
+    if ( dItem[x][y] )
+      free = 0;
     else
-      v2 = dMonster[v5][v1] == 0;
-    if ( dDead[v5][v1] )
-      v3 = 0;
+      free = dMonster[x][y] == 0;
+    if ( dDead[x][y] )
+      freea = 0;
     else
-      v3 = v2;
-    if ( dPlayer[v5][v1] )
-      v4 = 0;
+      freea = free;
+    if ( dPlayer[x][y] )
+      freeb = 0;
     else
-      v4 = v3;
+      freeb = freea;
     object[i]._oSelFlag = 2;
-    if ( v4 )
+    if ( freeb )
       object[i]._oVar4 = 1;
     else
       object[i]._oVar4 = 2;
@@ -1238,18 +1205,18 @@ void __fastcall Obj_Sarc(int i)
 //----- (0045FE5D) --------------------------------------------------------
 void __fastcall ActivateTrapLine(_object_id ttype, int tid)
 {
-  int v4; // [esp+14h] [ebp-8h]
+  int oi; // [esp+14h] [ebp-8h]
   int i; // [esp+18h] [ebp-4h]
 
   for ( i = 0; nobjects > i; ++i )
   {
-    v4 = objectactive[i];
-    if ( object[v4]._otype == ttype && object[v4]._oVar1 == tid )
+    oi = objectactive[i];
+    if ( object[oi]._otype == ttype && object[oi]._oVar1 == tid )
     {
-      object[v4]._oVar4 = 1;
-      object[v4]._oAnimFlag = 1;
-      object[v4]._oAnimDelay = 1;
-      object[v4]._olid = AddLight(object[v4]._ox, object[v4]._oy, 1);
+      object[oi]._oVar4 = 1;
+      object[oi]._oAnimFlag = 1;
+      object[oi]._oAnimDelay = 1;
+      object[oi]._olid = AddLight(object[oi]._ox, object[oi]._oy, 1);
     }
   }
 }
@@ -1257,12 +1224,10 @@ void __fastcall ActivateTrapLine(_object_id ttype, int tid)
 //----- (0045FF4B) --------------------------------------------------------
 void __fastcall Obj_FlameTrap(int i)
 {
-  int v1; // [esp+10h] [ebp-Ch]
-  int v2; // [esp+10h] [ebp-Ch]
+  int y; // [esp+10h] [ebp-Ch] MAPDST
   signed int j; // [esp+14h] [ebp-8h]
   signed int k; // [esp+14h] [ebp-8h]
-  int v5; // [esp+18h] [ebp-4h]
-  int v6; // [esp+18h] [ebp-4h]
+  int x; // [esp+18h] [ebp-4h] MAPDST
 
   if ( object[i]._oVar2 )
   {
@@ -1290,24 +1255,24 @@ void __fastcall Obj_FlameTrap(int i)
   {
     if ( object[i]._oVar3 == 2 )
     {
-      v5 = object[i]._ox - 2;
-      v1 = object[i]._oy;
+      x = object[i]._ox - 2;
+      y = object[i]._oy;
       for ( j = 0; j < 5; ++j )
       {
-        if ( dPlayer[v5][v1] || dMonster[v5][v1] )
+        if ( dPlayer[x][y] || dMonster[x][y] )
           object[i]._oVar4 = 1;
-        ++v5;
+        ++x;
       }
     }
     else
     {
-      v6 = object[i]._ox;
-      v2 = object[i]._oy - 2;
+      x = object[i]._ox;
+      y = object[i]._oy - 2;
       for ( k = 0; k < 5; ++k )
       {
-        if ( dPlayer[v6][v2] || dMonster[v6][v2] )
+        if ( dPlayer[x][y] || dMonster[x][y] )
           object[i]._oVar4 = 1;
-        ++v2;
+        ++y;
       }
     }
     if ( object[i]._oVar4 )
@@ -1318,40 +1283,38 @@ void __fastcall Obj_FlameTrap(int i)
 //----- (00460247) --------------------------------------------------------
 void __fastcall Obj_Trap(int i)
 {
-  int v1; // ST08_4
-  int v2; // [esp+10h] [ebp-30h]
+  int dir; // ST08_4
   int y2; // [esp+14h] [ebp-2Ch]
   signed int v4; // [esp+18h] [ebp-28h]
   int x2; // [esp+1Ch] [ebp-24h]
   int y1; // [esp+20h] [ebp-20h]
   int x1; // [esp+24h] [ebp-1Ch]
-  int j; // [esp+2Ch] [ebp-14h]
-  int k; // [esp+30h] [ebp-10h]
-  int v10; // [esp+34h] [ebp-Ch]
-  int v11; // [esp+38h] [ebp-8h]
-  int v12; // [esp+3Ch] [ebp-4h]
+  int y; // [esp+2Ch] [ebp-14h]
+  int x; // [esp+30h] [ebp-10h]
+  int oi2; // [esp+34h] [ebp-Ch]
+  int maxy; // [esp+38h] [ebp-8h]
+  int maxx; // [esp+3Ch] [ebp-4h]
 
-  v2 = i;
   v4 = 0;
   if ( !object[i]._oVar4 )
   {
-    v10 = dObject[object[i]._oVar1][object[i]._oVar2] - 1;
-    switch ( object[v10]._otype )
+    oi2 = dObject[object[i]._oVar1][object[i]._oVar2] - 1;
+    switch ( object[oi2]._otype )
     {
-      case 1:
-      case 2:
-      case 0x2A:
-      case 0x2B:
-        if ( object[v10]._oVar4 )
+      case OBJ_L1LDOOR:
+      case OBJ_L1RDOOR:
+      case OBJ_L2LDOOR:
+      case OBJ_L2RDOOR:
+        if ( object[oi2]._oVar4 )
           v4 = 1;
         break;
-      case 4:
-      case 5:
-      case 6:
-      case 7:
-      case 0x1C:
-      case 0x30:
-        if ( !object[v10]._oSelFlag )
+      case OBJ_LEVER:
+      case OBJ_CHEST1:
+      case OBJ_CHEST2:
+      case OBJ_CHEST3:
+      case OBJ_SWITCHSKL:
+      case OBJ_SARC:
+        if ( !object[oi2]._oSelFlag )
           v4 = 1;
         break;
       default:
@@ -1362,28 +1325,28 @@ void __fastcall Obj_Trap(int i)
       object[i]._oVar4 = 1;
       x1 = object[i]._ox;
       y1 = object[i]._oy;
-      x2 = object[v10]._ox;
-      y2 = object[v10]._oy;
-      v12 = object[v10]._ox;
-      v11 = y2;
-      for ( j = y2 - 1; v11 + 1 >= j; ++j )
+      x2 = object[oi2]._ox;
+      y2 = object[oi2]._oy;
+      maxx = object[oi2]._ox;
+      maxy = y2;
+      for ( y = y2 - 1; maxy + 1 >= y; ++y )
       {
-        for ( k = v12 - 1; v12 + 1 >= k; ++k )
+        for ( x = maxx - 1; maxx + 1 >= x; ++x )
         {
-          if ( dPlayer[k][j] )
+          if ( dPlayer[x][y] )
           {
-            x2 = k;
-            y2 = j;
+            x2 = x;
+            y2 = y;
           }
         }
       }
       if ( !deltaload )
       {
-        v1 = GetDirection(x1, y1, x2, y2);
-        AddMissile(x1, y1, x2, y2, v1, object[v2]._oVar3, 1, -1, 0);
-        PlaySfxLoc(43, object[v10]._ox, object[v10]._oy);
+        dir = GetDirection(x1, y1, x2, y2);
+        AddMissile(x1, y1, x2, y2, dir, object[i]._oVar3, 1, -1, 0);
+        PlaySfxLoc(43, object[oi2]._ox, object[oi2]._oy);
       }
-      object[v10]._oTrapFlag = 0;
+      object[oi2]._oTrapFlag = 0;
     }
   }
 }
@@ -1422,7 +1385,7 @@ void __cdecl ProcessObjects()
       case OBJ_BARRELEX:
       case OBJ_SHRINEL:
       case OBJ_SHRINER:
-      case OBJ_L3RDOOR:
+      case OBJ_SOME_SHRINE_XXX:
       case OBJ_PURIFYINGFTN:
         Obj_StopAnim(i);
         break;
@@ -1477,15 +1440,15 @@ void __cdecl ProcessObjects()
 //----- (00460783) --------------------------------------------------------
 void __fastcall ObjSetMicro(int dx, int dy, int pn)
 {
-  SHORT *v3; // [esp+14h] [ebp-Ch]
+  SHORT *defs; // [esp+14h] [ebp-Ch]
   signed int i; // [esp+18h] [ebp-8h]
   char *v5; // [esp+1Ch] [ebp-4h]
 
   dPiece[dx][dy] = pn;
-  v3 = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(dx, dy)];
+  defs = dpiece_defs_map_1[gendung_get_dpiece_num_from_coord(dx, dy)];
   v5 = (char *)pLevelPieces + 20 * (pn - 1);
   for ( i = 0; i < 10; ++i )
-    v3[i] = *(_WORD *)&v5[2 * ((i & 1) + 8 - (i & 0xE))];
+    defs[i] = *(_WORD *)&v5[2 * ((i & 1) + 8 - (i & 0xE))];
 }
 
 //----- (00460827) --------------------------------------------------------
@@ -1628,42 +1591,42 @@ void __fastcall ObjL2Special(int x1, int y1, int x2, int y2)
 //----- (00460FE9) --------------------------------------------------------
 void __fastcall DoorSet(int oi, int dx, int dy)
 {
-  int v5; // [esp+14h] [ebp-4h]
+  int piece; // [esp+14h] [ebp-4h]
 
-  v5 = dPiece[dx][dy];
-  if ( v5 == 43 )
+  piece = dPiece[dx][dy];
+  if ( piece == 43 )
     ObjSetMicro(dx, dy, 392);
-  if ( v5 == 45 )
+  if ( piece == 45 )
     ObjSetMicro(dx, dy, 394);
-  if ( v5 == 50 && object[oi]._otype == 1 )
+  if ( piece == 50 && object[oi]._otype == 1 )
     ObjSetMicro(dx, dy, 411);
-  if ( v5 == 50 && object[oi]._otype == 2 )
+  if ( piece == 50 && object[oi]._otype == 2 )
     ObjSetMicro(dx, dy, 412);
-  if ( v5 == 54 )
+  if ( piece == 54 )
     ObjSetMicro(dx, dy, 397);
-  if ( v5 == 55 )
+  if ( piece == 55 )
     ObjSetMicro(dx, dy, 398);
-  if ( v5 == 61 )
+  if ( piece == 61 )
     ObjSetMicro(dx, dy, 399);
-  if ( v5 == 67 )
+  if ( piece == 67 )
     ObjSetMicro(dx, dy, 400);
-  if ( v5 == 68 )
+  if ( piece == 68 )
     ObjSetMicro(dx, dy, 401);
-  if ( v5 == 69 )
+  if ( piece == 69 )
     ObjSetMicro(dx, dy, 403);
-  if ( v5 == 70 )
+  if ( piece == 70 )
     ObjSetMicro(dx, dy, 404);
-  if ( v5 == 72 )
+  if ( piece == 72 )
     ObjSetMicro(dx, dy, 406);
-  if ( v5 == 212 )
+  if ( piece == 212 )
     ObjSetMicro(dx, dy, 407);
-  if ( v5 == 354 )
+  if ( piece == 354 )
     ObjSetMicro(dx, dy, 409);
-  if ( v5 == 355 )
+  if ( piece == 355 )
     ObjSetMicro(dx, dy, 410);
-  if ( v5 == 411 )
+  if ( piece == 411 )
     ObjSetMicro(dx, dy, 396);
-  if ( v5 == 412 )
+  if ( piece == 412 )
     ObjSetMicro(dx, dy, 396);
 }
 
@@ -1685,7 +1648,7 @@ void __cdecl RedoPlayerVision()
 //----- (004612FF) --------------------------------------------------------
 void __fastcall OperateL1RDoor(int pnum, int oi, unsigned __int8 sendflag)
 {
-  int dy; // [esp+14h] [ebp-Ch]
+  int y; // [esp+14h] [ebp-Ch]
   bool v6; // [esp+18h] [ebp-8h]
   int v7; // [esp+18h] [ebp-8h]
   int x; // [esp+1Ch] [ebp-4h]
@@ -1698,16 +1661,16 @@ void __fastcall OperateL1RDoor(int pnum, int oi, unsigned __int8 sendflag)
   else
   {
     x = object[oi]._ox;
-    dy = object[oi]._oy;
+    y = object[oi]._oy;
     if ( object[oi]._oVar4 )
     {
       if ( !deltaload )
         PlaySfxLoc(6, object[oi]._ox, object[oi]._oy);
-      if ( dItem[x][dy] )
+      if ( dItem[x][y] )
         v6 = 0;
       else
-        v6 = dMonster[x][dy] == 0;
-      if ( dDead[x][dy] )
+        v6 = dMonster[x][y] == 0;
+      if ( dDead[x][y] )
         v7 = 0;
       else
         v7 = v6;
@@ -1717,17 +1680,17 @@ void __fastcall OperateL1RDoor(int pnum, int oi, unsigned __int8 sendflag)
           NetSendCmdParam1(1u, CMD_CLOSEDOOR, oi);
         object[oi]._oVar4 = 0;
         object[oi]._oSelFlag = 3;
-        ObjSetMicro(x, dy, object[oi]._oVar1);
+        ObjSetMicro(x, y, object[oi]._oVar1);
         if ( object[oi]._oVar2 == 50 )
         {
-          if ( dPiece[x - 1][dy] == 396 )
-            ObjSetMicro(x - 1, dy, 411);
+          if ( dPiece[x - 1][y] == 396 )
+            ObjSetMicro(x - 1, y, 411);
           else
-            ObjSetMicro(x - 1, dy, object[oi]._oVar2);
+            ObjSetMicro(x - 1, y, object[oi]._oVar2);
         }
         else
         {
-          ObjSetMicro(x - 1, dy, object[oi]._oVar2);
+          ObjSetMicro(x - 1, y, object[oi]._oVar2);
         }
         object[oi]._oAnimFrame -= 2;
         object[oi]._oPreFlag = 0;
@@ -1744,12 +1707,12 @@ void __fastcall OperateL1RDoor(int pnum, int oi, unsigned __int8 sendflag)
         NetSendCmdParam1(1u, CMD_OPENDOOR, oi);
       if ( !deltaload )
         PlaySfxLoc(7, object[oi]._ox, object[oi]._oy);
-      ObjSetMicro(x, dy, 395);
-      dArch[x][dy] = 8;
-      objects_set_door_piece(x, dy - 1);
+      ObjSetMicro(x, y, 395);
+      dArch[x][y] = 8;
+      objects_set_door_piece(x, y - 1);
       object[oi]._oAnimFrame += 2;
       object[oi]._oPreFlag = 1;
-      DoorSet(oi, x - 1, dy);
+      DoorSet(oi, x - 1, y);
       object[oi]._oVar4 = 1;
       object[oi]._oSelFlag = 2;
       RedoPlayerVision();
@@ -1760,10 +1723,10 @@ void __fastcall OperateL1RDoor(int pnum, int oi, unsigned __int8 sendflag)
 //----- (004616BA) --------------------------------------------------------
 void __fastcall OperateL1LDoor(int pnum, int oi, unsigned __int8 sendflag)
 {
-  int dy; // [esp+14h] [ebp-Ch]
+  int y; // [esp+14h] [ebp-Ch]
   bool v6; // [esp+18h] [ebp-8h]
   int v7; // [esp+18h] [ebp-8h]
-  int v8; // [esp+1Ch] [ebp-4h]
+  int x; // [esp+1Ch] [ebp-4h]
 
   if ( object[oi]._oVar4 == 2 )
   {
@@ -1772,17 +1735,17 @@ void __fastcall OperateL1LDoor(int pnum, int oi, unsigned __int8 sendflag)
   }
   else
   {
-    v8 = object[oi]._ox;
-    dy = object[oi]._oy;
+    x = object[oi]._ox;
+    y = object[oi]._oy;
     if ( object[oi]._oVar4 )
     {
       if ( !deltaload )
         PlaySfxLoc(6, object[oi]._ox, object[oi]._oy);
-      if ( dItem[v8][dy] )
+      if ( dItem[x][y] )
         v6 = 0;
       else
-        v6 = dMonster[v8][dy] == 0;
-      if ( dDead[v8][dy] )
+        v6 = dMonster[x][y] == 0;
+      if ( dDead[x][y] )
         v7 = 0;
       else
         v7 = v6;
@@ -1792,17 +1755,17 @@ void __fastcall OperateL1LDoor(int pnum, int oi, unsigned __int8 sendflag)
           NetSendCmdParam1(1u, 0x2Fu, oi);
         object[oi]._oVar4 = 0;
         object[oi]._oSelFlag = 3;
-        ObjSetMicro(v8, dy, object[oi]._oVar1);
+        ObjSetMicro(x, y, object[oi]._oVar1);
         if ( object[oi]._oVar2 == 50 )
         {
-          if ( dPiece[v8][dy - 1] == 396 )
-            ObjSetMicro(v8, dy - 1, 412);
+          if ( dPiece[x][y - 1] == 396 )
+            ObjSetMicro(x, y - 1, 412);
           else
-            ObjSetMicro(v8, dy - 1, object[oi]._oVar2);
+            ObjSetMicro(x, y - 1, object[oi]._oVar2);
         }
         else
         {
-          ObjSetMicro(v8, dy - 1, object[oi]._oVar2);
+          ObjSetMicro(x, y - 1, object[oi]._oVar2);
         }
         object[oi]._oAnimFrame -= 2;
         object[oi]._oPreFlag = 0;
@@ -1820,14 +1783,14 @@ void __fastcall OperateL1LDoor(int pnum, int oi, unsigned __int8 sendflag)
       if ( !deltaload )
         PlaySfxLoc(7, object[oi]._ox, object[oi]._oy);
       if ( object[oi]._oVar1 == 214 )
-        ObjSetMicro(v8, dy, 408);
+        ObjSetMicro(x, y, 408);
       else
-        ObjSetMicro(v8, dy, 393);
-      dArch[v8][dy] = 7;
-      objects_set_door_piece(v8 - 1, dy);
+        ObjSetMicro(x, y, 393);
+      dArch[x][y] = 7;
+      objects_set_door_piece(x - 1, y);
       object[oi]._oAnimFrame += 2;
       object[oi]._oPreFlag = 1;
-      DoorSet(oi, v8, dy - 1);
+      DoorSet(oi, x, y - 1);
       object[oi]._oVar4 = 1;
       object[oi]._oSelFlag = 2;
       RedoPlayerVision();
@@ -1838,10 +1801,10 @@ void __fastcall OperateL1LDoor(int pnum, int oi, unsigned __int8 sendflag)
 //----- (00461AA3) --------------------------------------------------------
 void __fastcall OperateL2RDoor(int pnum, int oi, unsigned __int8 sendflag)
 {
-  int dy; // [esp+14h] [ebp-Ch]
+  int y; // [esp+14h] [ebp-Ch]
   bool v6; // [esp+18h] [ebp-8h]
   int v7; // [esp+18h] [ebp-8h]
-  int v8; // [esp+1Ch] [ebp-4h]
+  int x; // [esp+1Ch] [ebp-4h]
 
   if ( object[oi]._oVar4 == 2 )
   {
@@ -1850,17 +1813,17 @@ void __fastcall OperateL2RDoor(int pnum, int oi, unsigned __int8 sendflag)
   }
   else
   {
-    v8 = object[oi]._ox;
-    dy = object[oi]._oy;
+    x = object[oi]._ox;
+    y = object[oi]._oy;
     if ( object[oi]._oVar4 )
     {
       if ( !deltaload )
         PlaySfxLoc(6, object[oi]._ox, object[oi]._oy);
-      if ( dItem[v8][dy] )
+      if ( dItem[x][y] )
         v6 = 0;
       else
-        v6 = dMonster[v8][dy] == 0;
-      if ( dDead[v8][dy] )
+        v6 = dMonster[x][y] == 0;
+      if ( dDead[x][y] )
         v7 = 0;
       else
         v7 = v6;
@@ -1870,7 +1833,7 @@ void __fastcall OperateL2RDoor(int pnum, int oi, unsigned __int8 sendflag)
           NetSendCmdParam1(1u, 0x2Fu, oi);
         object[oi]._oVar4 = 0;
         object[oi]._oSelFlag = 3;
-        ObjSetMicro(v8, dy, 540);
+        ObjSetMicro(x, y, 540);
         object[oi]._oAnimFrame -= 2;
         object[oi]._oPreFlag = 0;
         RedoPlayerVision();
@@ -1886,7 +1849,7 @@ void __fastcall OperateL2RDoor(int pnum, int oi, unsigned __int8 sendflag)
         NetSendCmdParam1(1u, 0x2Eu, oi);
       if ( !deltaload )
         PlaySfxLoc(7, object[oi]._ox, object[oi]._oy);
-      ObjSetMicro(v8, dy, 17);
+      ObjSetMicro(x, y, 17);
       object[oi]._oAnimFrame += 2;
       object[oi]._oPreFlag = 1;
       object[oi]._oVar4 = 1;
@@ -1899,10 +1862,10 @@ void __fastcall OperateL2RDoor(int pnum, int oi, unsigned __int8 sendflag)
 //----- (00461D8B) --------------------------------------------------------
 void __fastcall OperateL2LDoor(int pnum, int oi, unsigned __int8 sendflag)
 {
-  int dy; // [esp+14h] [ebp-Ch]
+  int y; // [esp+14h] [ebp-Ch]
   bool v6; // [esp+18h] [ebp-8h]
   int v7; // [esp+18h] [ebp-8h]
-  int v8; // [esp+1Ch] [ebp-4h]
+  int x; // [esp+1Ch] [ebp-4h]
 
   if ( object[oi]._oVar4 == 2 )
   {
@@ -1911,17 +1874,17 @@ void __fastcall OperateL2LDoor(int pnum, int oi, unsigned __int8 sendflag)
   }
   else
   {
-    v8 = object[oi]._ox;
-    dy = object[oi]._oy;
+    x = object[oi]._ox;
+    y = object[oi]._oy;
     if ( object[oi]._oVar4 )
     {
       if ( !deltaload )
         PlaySfxLoc(6, object[oi]._ox, object[oi]._oy);
-      if ( dItem[v8][dy] )
+      if ( dItem[x][y] )
         v6 = 0;
       else
-        v6 = dMonster[v8][dy] == 0;
-      if ( dDead[v8][dy] )
+        v6 = dMonster[x][y] == 0;
+      if ( dDead[x][y] )
         v7 = 0;
       else
         v7 = v6;
@@ -1931,7 +1894,7 @@ void __fastcall OperateL2LDoor(int pnum, int oi, unsigned __int8 sendflag)
           NetSendCmdParam1(1u, 0x2Fu, oi);
         object[oi]._oVar4 = 0;
         object[oi]._oSelFlag = 3;
-        ObjSetMicro(v8, dy, 538);
+        ObjSetMicro(x, y, 538);
         object[oi]._oAnimFrame -= 2;
         object[oi]._oPreFlag = 0;
         RedoPlayerVision();
@@ -1947,7 +1910,7 @@ void __fastcall OperateL2LDoor(int pnum, int oi, unsigned __int8 sendflag)
         NetSendCmdParam1(1u, 0x2Eu, oi);
       if ( !deltaload )
         PlaySfxLoc(7, object[oi]._ox, object[oi]._oy);
-      ObjSetMicro(v8, dy, 13);
+      ObjSetMicro(x, y, 13);
       object[oi]._oAnimFrame += 2;
       object[oi]._oPreFlag = 1;
       object[oi]._oVar4 = 1;
@@ -1960,56 +1923,54 @@ void __fastcall OperateL2LDoor(int pnum, int oi, unsigned __int8 sendflag)
 //----- (00462073) --------------------------------------------------------
 void __fastcall MonstCheckDoors(int m)
 {
-  signed int v1; // [esp+10h] [ebp-1Ch]
+  signed int hasobj; // [esp+10h] [ebp-1Ch]
   int oi; // [esp+14h] [ebp-18h]
   int i; // [esp+18h] [ebp-14h]
-  int v4; // [esp+1Ch] [ebp-10h]
-  int v5; // [esp+20h] [ebp-Ch]
-  int v6; // [esp+24h] [ebp-8h]
-  int v7; // [esp+24h] [ebp-8h]
-  int v8; // [esp+28h] [ebp-4h]
-  int v9; // [esp+28h] [ebp-4h]
+  int y; // [esp+1Ch] [ebp-10h]
+  int x; // [esp+20h] [ebp-Ch]
+  int yd; // [esp+24h] [ebp-8h] MAPDST
+  int xd; // [esp+28h] [ebp-4h] MAPDST
 
-  v5 = monster[m]._mx;
-  v4 = monster[m]._my;
-  v1 = 0;
-  if ( dObject[v5 - 1 - 1][v4 + 111] )
-    v1 = 1;
-  if ( !v1 && dObject[v5][v4 - 1] )
-    v1 = 1;
-  if ( !v1 && dObject[v5 + 1 - 1][v4 + 111] )
-    v1 = 1;
-  if ( !v1 && dObject[v5 - 1][v4] )
-    v1 = 1;
-  if ( !v1 && dObject[v5 + 1][v4] )
-    v1 = 1;
-  if ( !v1 && dObject[v5 - 1][v4 + 1] )
-    v1 = 1;
-  if ( !v1 && dObject[v5][v4 + 1] )
-    v1 = 1;
-  if ( !v1 && dObject[v5 + 1][v4 + 1] )
-    v1 = 1;
-  if ( v1 )
+  x = monster[m]._mx;
+  y = monster[m]._my;
+  hasobj = 0;
+  if ( dObject[x - 1 - 1][y + 111] )
+    hasobj = 1;
+  if ( !hasobj && dObject[x][y - 1] )
+    hasobj = 1;
+  if ( !hasobj && dObject[x + 1 - 1][y + 111] )
+    hasobj = 1;
+  if ( !hasobj && dObject[x - 1][y] )
+    hasobj = 1;
+  if ( !hasobj && dObject[x + 1][y] )
+    hasobj = 1;
+  if ( !hasobj && dObject[x - 1][y + 1] )
+    hasobj = 1;
+  if ( !hasobj && dObject[x][y + 1] )
+    hasobj = 1;
+  if ( !hasobj && dObject[x + 1][y + 1] )
+    hasobj = 1;
+  if ( hasobj )
   {
     for ( i = 0; i < nobjects; ++i )
     {
       oi = objectactive[i];
       if ( (object[oi]._otype == OBJ_L1LDOOR || object[oi]._otype == OBJ_L1RDOOR) && !object[oi]._oVar4 )
       {
-        v8 = abs(object[oi]._ox - v5);
-        v6 = abs(object[oi]._oy - v4);
-        if ( v8 == 1 && v6 <= 1 && object[oi]._otype == OBJ_L1LDOOR )
+        xd = abs(object[oi]._ox - x);
+        yd = abs(object[oi]._oy - y);
+        if ( xd == 1 && yd <= 1 && object[oi]._otype == OBJ_L1LDOOR )
           OperateL1LDoor(myplr, oi, 1u);
-        if ( v8 <= 1 && v6 == 1 && object[oi]._otype == OBJ_L1RDOOR )
+        if ( xd <= 1 && yd == 1 && object[oi]._otype == OBJ_L1RDOOR )
           OperateL1RDoor(myplr, oi, 1u);
       }
       if ( (object[oi]._otype == OBJ_L2LDOOR || object[oi]._otype == OBJ_L2RDOOR) && !object[oi]._oVar4 )
       {
-        v9 = abs(object[oi]._ox - v5);
-        v7 = abs(object[oi]._oy - v4);
-        if ( v9 == 1 && v7 <= 1 && object[oi]._otype == OBJ_L2LDOOR )
+        xd = abs(object[oi]._ox - x);
+        yd = abs(object[oi]._oy - y);
+        if ( xd == 1 && yd <= 1 && object[oi]._otype == OBJ_L2LDOOR )
           OperateL2LDoor(myplr, oi, 1u);
-        if ( v9 <= 1 && v7 == 1 && object[oi]._otype == OBJ_L2RDOOR )
+        if ( xd <= 1 && yd == 1 && object[oi]._otype == OBJ_L2RDOOR )
           OperateL2RDoor(myplr, oi, 1u);
       }
     }
@@ -2042,14 +2003,14 @@ void __fastcall ObjChangeMap(int x1, int y1, int x2, int y2)
 //----- (004625C5) --------------------------------------------------------
 void __fastcall OperateL1Door(int pnum, int i, unsigned __int8 sendflag)
 {
-  int v5; // [esp+14h] [ebp-8h]
-  int v6; // [esp+18h] [ebp-4h]
+  int yd; // [esp+14h] [ebp-8h]
+  int xd; // [esp+18h] [ebp-4h]
 
-  v6 = abs(object[i]._ox - plr[pnum].WorldX);
-  v5 = abs(object[i]._oy - plr[pnum].WorldY);
-  if ( v6 == 1 && v5 <= 1 && object[i]._otype == 1 )
+  xd = abs(object[i]._ox - plr[pnum].WorldX);
+  yd = abs(object[i]._oy - plr[pnum].WorldY);
+  if ( xd == 1 && yd <= 1 && object[i]._otype == 1 )
     OperateL1LDoor(pnum, i, sendflag);
-  if ( v6 <= 1 && v5 == 1 && object[i]._otype == 2 )
+  if ( xd <= 1 && yd == 1 && object[i]._otype == 2 )
     OperateL1RDoor(pnum, i, sendflag);
 }
 
@@ -2185,8 +2146,7 @@ void __fastcall OperateChest(int pnum, int i, unsigned __int8 sendmsg)
 //----- (00462DA0) --------------------------------------------------------
 void __fastcall OperateTrapLvr(int i)
 {
-  int v1; // [esp+10h] [ebp-8h]
-  int v2; // [esp+10h] [ebp-8h]
+  int oi2; // [esp+10h] [ebp-8h] MAPDST
   int j; // [esp+14h] [ebp-4h]
   int k; // [esp+14h] [ebp-4h]
 
@@ -2195,11 +2155,11 @@ void __fastcall OperateTrapLvr(int i)
     ++object[i]._oAnimFrame;
     for ( j = 0; j < nobjects; ++j )
     {
-      v1 = objectactive[j];
-      if ( object[i]._oVar2 == object[v1]._otype && object[v1]._oVar1 == object[i]._oVar1 )
+      oi2 = objectactive[j];
+      if ( object[i]._oVar2 == object[oi2]._otype && object[oi2]._oVar1 == object[i]._oVar1 )
       {
-        object[v1]._oVar2 = 1;
-        object[v1]._oAnimFlag = 0;
+        object[oi2]._oVar2 = 1;
+        object[oi2]._oAnimFlag = 0;
       }
     }
   }
@@ -2208,12 +2168,12 @@ void __fastcall OperateTrapLvr(int i)
     --object[i]._oAnimFrame;
     for ( k = 0; k < nobjects; ++k )
     {
-      v2 = objectactive[k];
-      if ( object[i]._oVar2 == object[v2]._otype && object[v2]._oVar1 == object[i]._oVar1 )
+      oi2 = objectactive[k];
+      if ( object[i]._oVar2 == object[oi2]._otype && object[oi2]._oVar1 == object[i]._oVar1 )
       {
-        object[v2]._oVar2 = 0;
-        if ( object[v2]._oVar4 )
-          object[v2]._oAnimFlag = 1;
+        object[oi2]._oVar2 = 0;
+        if ( object[oi2]._oVar4 )
+          object[oi2]._oAnimFlag = 1;
       }
     }
   }
@@ -2250,14 +2210,14 @@ void __fastcall OperateSarc(int pnum, int i, unsigned __int8 sendmsg)
 //----- (00463106) --------------------------------------------------------
 void __fastcall OperateL2Door(int pnum, int i, unsigned __int8 sendflag)
 {
-  int v5; // [esp+14h] [ebp-8h]
-  int v6; // [esp+18h] [ebp-4h]
+  int yd; // [esp+14h] [ebp-8h]
+  int xd; // [esp+18h] [ebp-4h]
 
-  v6 = abs(object[i]._ox - plr[pnum].WorldX);
-  v5 = abs(object[i]._oy - plr[pnum].WorldY);
-  if ( v6 == 1 && v5 <= 1 && object[i]._otype == 42 )
+  xd = abs(object[i]._ox - plr[pnum].WorldX);
+  yd = abs(object[i]._oy - plr[pnum].WorldY);
+  if ( xd == 1 && yd <= 1 && object[i]._otype == 42 )
     OperateL2LDoor(pnum, i, sendflag);
-  if ( v6 <= 1 && v5 == 1 && object[i]._otype == 43 )
+  if ( xd <= 1 && yd == 1 && object[i]._otype == 43 )
     OperateL2RDoor(pnum, i, sendflag);
 }
 
@@ -2265,7 +2225,7 @@ void __fastcall OperateL2Door(int pnum, int i, unsigned __int8 sendflag)
 void __fastcall TryDisarm(int pnum, int i)
 {
   int v2; // ST1C_4
-  int v5; // [esp+14h] [ebp-14h]
+  int oi; // [esp+14h] [ebp-14h]
   int j; // [esp+18h] [ebp-10h]
   signed int v7; // [esp+20h] [ebp-8h]
 
@@ -2278,17 +2238,17 @@ void __fastcall TryDisarm(int pnum, int i)
     {
       for ( j = 0; j < nobjects; ++j )
       {
-        v5 = objectactive[j];
+        oi = objectactive[j];
         v7 = 0;
-        if ( object[v5]._otype == 53 )
+        if ( object[oi]._otype == 53 )
           v7 = 1;
-        if ( object[v5]._otype == 54 )
+        if ( object[oi]._otype == 54 )
           v7 = 1;
         if ( v7 )
         {
-          if ( dObject[object[v5]._oVar1][object[v5]._oVar2] - 1 == i )
+          if ( dObject[object[oi]._oVar1][object[oi]._oVar2] - 1 == i )
           {
-            object[v5]._oVar4 = 1;
+            object[oi]._oVar4 = 1;
             object[i]._oTrapFlag = 0;
           }
         }
@@ -2743,7 +2703,7 @@ void __fastcall OperateBookCase(int pnum, int i, unsigned __int8 sendmsg)
 }
 
 //----- (00464C82) --------------------------------------------------------
-void __fastcall objects_464C82_OperateBloodftn(int pnum, int i)
+void __fastcall OperateBloodftn_464C82(int pnum, int i)
 {
   if ( !deltaload )
   {
@@ -2854,7 +2814,7 @@ void __fastcall OperateObject(int pnum, int i, unsigned __int8 TeleFlag)
       break;
     case OBJ_SHRINEL:
     case OBJ_SHRINER:
-    case OBJ_L3RDOOR:
+    case OBJ_SOME_SHRINE_XXX:
     case OBJ_PURIFYINGFTN:
       OperateShrine(pnum, i, v3);
       break;
@@ -2869,7 +2829,7 @@ void __fastcall OperateObject(int pnum, int i, unsigned __int8 TeleFlag)
       OperateBookCase(pnum, i, sendmsg);
       break;
     case OBJ_BLOODFTN:
-      objects_464C82_OperateBloodftn(pnum, i);
+      OperateBloodftn_464C82(pnum, i);
       break;
     case OBJ_DECAP:
       OperateDecap(pnum, i, sendmsg);
@@ -2893,9 +2853,9 @@ void __fastcall SyncOpL1Door(int pnum, int cmd, int i)
       v3 = 1;
     if ( v3 )
     {
-      if ( object[i]._otype == 1 )
+      if ( object[i]._otype == OBJ_L1LDOOR )
         OperateL1LDoor(-1, i, 0);
-      if ( object[i]._otype == 2 )
+      if ( object[i]._otype == OBJ_L1RDOOR )
         OperateL1RDoor(-1, i, 0);
     }
   }
@@ -2915,9 +2875,9 @@ void __fastcall SyncOpL2Door(int pnum, int cmd, int i)
       v3 = 1;
     if ( v3 )
     {
-      if ( object[i]._otype == 42 )
+      if ( object[i]._otype == OBJ_L2LDOOR )
         OperateL2LDoor(-1, i, 0);
-      if ( object[i]._otype == 43 )
+      if ( object[i]._otype == OBJ_L2RDOOR )
         OperateL2RDoor(-1, i, 0);
     }
   }
@@ -2960,7 +2920,7 @@ void __fastcall SyncOpObject(int pnum, int cmd, int i)
       break;
     case OBJ_SHRINEL:
     case OBJ_SHRINER:
-    case OBJ_L3RDOOR:
+    case OBJ_SOME_SHRINE_XXX:
     case OBJ_PURIFYINGFTN:
       OperateShrine(pnum, i, v3);
       break;
@@ -2985,10 +2945,10 @@ void __fastcall SyncOpObject(int pnum, int cmd, int i)
 //----- (004655B7) --------------------------------------------------------
 void __fastcall BreakCrux(int i)
 {
-  int v1; // [esp+10h] [ebp-10h]
+  int oi; // [esp+10h] [ebp-10h]
   signed int v2; // [esp+14h] [ebp-Ch]
   int j; // [esp+18h] [ebp-8h]
-  _object_id v4; // [esp+1Ch] [ebp-4h]
+  _object_id ot; // [esp+1Ch] [ebp-4h]
 
   object[i]._oAnimFlag = 1;
   object[i]._oAnimFrame = 1;
@@ -3000,11 +2960,11 @@ void __fastcall BreakCrux(int i)
   v2 = 1;
   for ( j = 0; j < nobjects; ++j )
   {
-    v1 = objectactive[j];
-    v4 = object[v1]._otype;
-    if ( (v4 == OBJ_CRUX1 || v4 == OBJ_CRUX2 || v4 == OBJ_CRUX3)
-      && object[i]._oVar8 == object[v1]._oVar8
-      && object[v1]._oBreak != -1 )
+    oi = objectactive[j];
+    ot = object[oi]._otype;
+    if ( (ot == OBJ_CRUX1 || ot == OBJ_CRUX2 || ot == OBJ_CRUX3)
+      && object[i]._oVar8 == object[oi]._oVar8
+      && object[oi]._oBreak != -1 )
     {
       v2 = 0;
     }
@@ -3050,7 +3010,7 @@ void __fastcall BreakBarrel(int pnum, int i, int dam, unsigned __int8 forcebreak
       }
       else
       {
-        if ( object[i]._otype == 58 )
+        if ( object[i]._otype == OBJ_BARRELEX )
         {
           PlaySfxLoc(2, object[i]._ox, object[i]._oy);
           for ( j = object[i]._oy - 1; object[i]._oy + 1 >= j; ++j )
@@ -3064,7 +3024,7 @@ void __fastcall BreakBarrel(int pnum, int i, int dam, unsigned __int8 forcebreak
               if ( dObject[k][j] > 0 )
               {
                 ia = dObject[k][j] - 1;
-                if ( object[ia]._otype == 58 && object[ia]._oBreak != -1 )
+                if ( object[ia]._otype == OBJ_BARRELEX && object[ia]._oBreak != -1 )
                   BreakBarrel(pnum, ia, dam, 1u, sendmsg);
               }
             }
@@ -3134,7 +3094,7 @@ void __fastcall SyncBreakObj(int pnum, int oi)
   _object_id v2; // [esp+Ch] [ebp-Ch]
 
   v2 = object[oi]._otype;
-  if ( (signed int)v2 >= 57 && (signed int)v2 <= 58 )
+  if ( v2 >= OBJ_BARREL && v2 <= OBJ_BARRELEX )
     BreakBarrel(pnum, oi, 0, 1u, 0);
 }
 
@@ -3150,7 +3110,7 @@ void __fastcall SyncL1Doors(int i)
     x = object[i]._ox;
     dy = object[i]._oy;
     object[i]._oSelFlag = 2;
-    if ( object[i]._otype == 1 )
+    if ( object[i]._otype == OBJ_L1LDOOR )
     {
       if ( object[i]._oVar1 == 214 )
         ObjSetMicro(x, dy, 408);
@@ -3179,15 +3139,19 @@ void __fastcall SyncCrux(int i)
   int v1; // [esp+10h] [ebp-10h]
   signed int v2; // [esp+14h] [ebp-Ch]
   int j; // [esp+18h] [ebp-8h]
-  _object_id v4; // [esp+1Ch] [ebp-4h]
+  _object_id ot; // [esp+1Ch] [ebp-4h]
 
   v2 = 1;
   for ( j = 0; j < nobjects; ++j )
   {
     v1 = objectactive[j];
-    v4 = object[v1]._otype;
-    if ( (v4 == 20 || v4 == 21 || v4 == 22) && object[v1]._oVar8 == object[i]._oVar8 && object[v1]._oBreak != -1 )
+    ot = object[v1]._otype;
+    if ( (ot == OBJ_CRUX1 || ot == OBJ_CRUX2 || ot == OBJ_CRUX3)
+      && object[v1]._oVar8 == object[i]._oVar8
+      && object[v1]._oBreak != -1 )
+    {
       v2 = 0;
+    }
   }
   if ( v2 )
     ObjChangeMap(object[i]._oVar1, object[i]._oVar2, object[i]._oVar3, object[i]._oVar4);
@@ -3203,19 +3167,19 @@ void __fastcall SyncLever(int i)
 //----- (00466130) --------------------------------------------------------
 void __fastcall SyncL2Doors(int i)
 {
-  int dy; // [esp+10h] [ebp-8h]
-  int v2; // [esp+14h] [ebp-4h]
+  int y; // [esp+10h] [ebp-8h]
+  int x; // [esp+14h] [ebp-4h]
 
   if ( object[i]._oVar4 )
   {
     object[i]._oMissFlag = 1;
-    v2 = object[i]._ox;
-    dy = object[i]._oy;
+    x = object[i]._ox;
+    y = object[i]._oy;
     object[i]._oSelFlag = 2;
     if ( object[i]._otype == 1 )
-      ObjSetMicro(v2, dy, 13);
+      ObjSetMicro(x, y, 13);
     else
-      ObjSetMicro(v2, dy, 17);
+      ObjSetMicro(x, y, 17);
   }
   else
   {
@@ -3284,7 +3248,7 @@ void __fastcall GetObjectStr(int i)
       break;
     case OBJ_SHRINEL:
     case OBJ_SHRINER:
-    case OBJ_L3RDOOR:
+    case OBJ_SOME_SHRINE_XXX:
     case OBJ_PURIFYINGFTN:
       sprintf(tempstr, "%s Shrine", shrinestrs[object[i]._oVar1]);
       strcpy(infostr, tempstr);

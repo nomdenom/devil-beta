@@ -1070,7 +1070,7 @@ void __cdecl LoadLvlGFX()
       pDungeonCels = LoadFileInMem("Levels\\L1Data\\L1.CEL", 0, 1457, "DIABLO.CPP");
       pMegaTiles = (WORD *)LoadFileInMem("Levels\\L1Data\\L1.TIL", 0, 1458, "DIABLO.CPP");
       pLevelPieces = LoadFileInMem("Levels\\L1Data\\L1.MIN", 0, 1459, "DIABLO.CPP");
-      level_special_cel = (char *)LoadFileInMem("Levels\\L1Data\\L1S.CEL", 0, 1460, "DIABLO.CPP");
+      level_special_cel = LoadFileInMem("Levels\\L1Data\\L1S.CEL", 0, 1460, "DIABLO.CPP");
     }
     else
     {
@@ -1079,7 +1079,7 @@ void __cdecl LoadLvlGFX()
       pDungeonCels = LoadFileInMem("Levels\\L2Data\\L2.CEL", 0, 1465, "DIABLO.CPP");
       pMegaTiles = (WORD *)LoadFileInMem("Levels\\L2Data\\L2.TIL", 0, 1466, "DIABLO.CPP");
       pLevelPieces = LoadFileInMem("Levels\\L2Data\\L2.MIN", 0, 1467, "DIABLO.CPP");
-      level_special_cel = (char *)LoadFileInMem("Levels\\L2Data\\L2S.CEL", 0, 1468, "DIABLO.CPP");
+      level_special_cel = LoadFileInMem("Levels\\L2Data\\L2S.CEL", 0, 1468, "DIABLO.CPP");
     }
   }
   else
@@ -1087,7 +1087,7 @@ void __cdecl LoadLvlGFX()
     pDungeonCels = LoadFileInMem("Levels\\TownData\\Town.CEL", 0, 1450, "DIABLO.CPP");
     pMegaTiles = (WORD *)LoadFileInMem("Levels\\TownData\\Town.TIL", 0, 1451, "DIABLO.CPP");
     pLevelPieces = LoadFileInMem("Levels\\TownData\\Town.MIN", 0, 1452, "DIABLO.CPP");
-    level_special_cel = (char *)LoadFileInMem("Levels\\TownData\\TownS.CEL", 0, 1453, "DIABLO.CPP");
+    level_special_cel = LoadFileInMem("Levels\\TownData\\TownS.CEL", 0, 1453, "DIABLO.CPP");
   }
 }
 

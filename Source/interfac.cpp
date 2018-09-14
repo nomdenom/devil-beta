@@ -30,7 +30,7 @@ void __cdecl DrawCutscene()
 //----- (0041E426) --------------------------------------------------------
 void __fastcall DrawProgress(int screen_x, int screen_y, int progress_id)
 {
-  char *v3; // [esp+14h] [ebp-8h]
+  BYTE *v3; // [esp+14h] [ebp-8h]
   signed int i; // [esp+18h] [ebp-4h]
 
   assert(gpBuffer, "Interfac.cpp", 192);
