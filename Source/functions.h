@@ -1445,7 +1445,7 @@ void __fastcall world_draw_black_tile(BYTE *dst_buf);
 // int __cdecl isdigit(int);
 // int __cdecl tolower(int);
 // char *__cdecl _strrev(char *);
-// int __cdecl sub_4A7F40(double a1);
+// double __cdecl sqrt(double a1);
 // int __cdecl toupper(int);
 // void __cdecl srand(unsigned int);
 // int __cdecl rand();
@@ -1454,7 +1454,9 @@ void __fastcall world_draw_black_tile(BYTE *dst_buf);
 // int _ms_p5_mp_test_fdiv(void); weak
 // void __cdecl free(void *);
 // int sub_4AA020();
+// int ctranexit(void); weak
 // int __cdecl _ctrandisp1(double);
+// int __cdecl _fload(double);
 // void *__cdecl malloc(size_t);
 // _DWORD __cdecl _ld12cvt(_DWORD, _DWORD, _DWORD); weak
 // int __cdecl sub_4AC0E0(int a1, int a2);
@@ -1467,6 +1469,7 @@ void __fastcall world_draw_black_tile(BYTE *dst_buf);
 // _DWORD __cdecl cvtdate(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD); weak
 // signed int sub_4AE300();
 // int sub_4AE5B0();
+// int __usercall _trandisp1@<eax>(int a1@<edx>, __int16 a2@<cx>, int a3@<ebp>, __int16 a4@<fpstat>, double _ST7@<st0>);
 // void sub_4AE78D();
 // double __usercall sub_4AE7BF@<st0>(int a1@<ebp>, double a2@<st1>, double a3@<st0>);
 // _DWORD __cdecl __strgtold12(_DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD, _DWORD); weak

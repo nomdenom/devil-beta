@@ -351,7 +351,7 @@ void __cdecl FreeLightTable()
 void __cdecl MakeLightTable()
 {
   _BYTE *v0; // ST7C_4
-  double v1; // st7
+  signed __int64 v1; // ST30_8
   char v3; // c0
   signed int k; // [esp+44h] [ebp-48h]
   signed int m; // [esp+44h] [ebp-48h]
@@ -528,9 +528,9 @@ void __cdecl MakeLightTable()
       {
         for ( i10 = 0; i10 < 16; ++i10 )
         {
-          v1 = (double)((8 * i10 - i8) * (8 * i10 - i8) + (8 * i9 - i7) * (8 * i9 - i7));
-          sub_4A7F40(v1);
-          v35 = (double)(unsigned __int8)(signed __int64)v1;
+          v1 = (unsigned __int8)(signed __int64)sqrt((double)((8 * i10 - i8) * (8 * i10 - i8)
+                                                            + (8 * i9 - i7) * (8 * i9 - i7)));
+          v35 = (double)v1;
           if ( v3 )
             v36 = v35 + -0.5;
           else

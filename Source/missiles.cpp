@@ -66,1183 +66,641 @@ void __fastcall missiles_43AFC2(int a1, int a2, int a3, int a4, int a5)
 //----- (0043B031) --------------------------------------------------------
 BOOL __fastcall CheckBlock(int fx, int fy, int tx, int ty)
 {
-  int v4; // ST1C_4
-  int y1a; // [esp+Ch] [ebp-14h]
-  int x1a; // [esp+10h] [ebp-10h]
-  BOOL v8; // [esp+1Ch] [ebp-4h]
+  int dir; // ST1C_4
+  int y; // [esp+Ch] [ebp-14h]
+  int x; // [esp+10h] [ebp-10h]
+  BOOL result; // [esp+1Ch] [ebp-4h]
 
-  y1a = fy;
-  x1a = fx;
-  v8 = 0;
-  while ( tx != x1a || ty != y1a )
+  y = fy;
+  x = fx;
+  result = 0;
+  while ( tx != x || ty != y )
   {
-    v4 = GetDirection(x1a, y1a, tx, ty);
-    x1a += XDirAdd[v4];
-    y1a += YDirAdd[v4];
-    if ( nSolidTable[dPiece[x1a][y1a]] )
-      v8 = 1;
+    dir = GetDirection(x, y, tx, ty);
+    x += XDirAdd[dir];
+    y += YDirAdd[dir];
+    if ( nSolidTable[dPiece[x][y]] )
+      result = 1;
   }
-  return v8;
+  return result;
 }
 
 //----- (0043B0D7) --------------------------------------------------------
 int __fastcall GetDirection8(int x1, int y1, int x2, int y2)
 {
-  int v5; // [esp+Ch] [ebp-124h]
-  int v6; // [esp+10h] [ebp-120h]
-  char v7; // [esp+14h] [ebp-11Ch]
-  char v8; // [esp+15h] [ebp-11Bh]
-  char v9; // [esp+16h] [ebp-11Ah]
-  char v10; // [esp+17h] [ebp-119h]
-  char v11; // [esp+18h] [ebp-118h]
-  char v12; // [esp+19h] [ebp-117h]
-  char v13; // [esp+1Ah] [ebp-116h]
-  char v14; // [esp+1Bh] [ebp-115h]
-  char v15; // [esp+1Ch] [ebp-114h]
-  char v16; // [esp+1Dh] [ebp-113h]
-  char v17; // [esp+1Eh] [ebp-112h]
-  char v18; // [esp+1Fh] [ebp-111h]
-  char v19; // [esp+20h] [ebp-110h]
-  char v20; // [esp+21h] [ebp-10Fh]
-  char v21; // [esp+22h] [ebp-10Eh]
-  char v22; // [esp+23h] [ebp-10Dh]
-  char v23; // [esp+24h] [ebp-10Ch]
-  char v24; // [esp+25h] [ebp-10Bh]
-  char v25; // [esp+26h] [ebp-10Ah]
-  char v26; // [esp+27h] [ebp-109h]
-  char v27; // [esp+28h] [ebp-108h]
-  char v28; // [esp+29h] [ebp-107h]
-  char v29; // [esp+2Ah] [ebp-106h]
-  char v30; // [esp+2Bh] [ebp-105h]
-  char v31; // [esp+2Ch] [ebp-104h]
-  char v32; // [esp+2Dh] [ebp-103h]
-  char v33; // [esp+2Eh] [ebp-102h]
-  char v34; // [esp+2Fh] [ebp-101h]
-  char v35; // [esp+30h] [ebp-100h]
-  char v36; // [esp+31h] [ebp-FFh]
-  char v37; // [esp+32h] [ebp-FEh]
-  char v38; // [esp+33h] [ebp-FDh]
-  char v39; // [esp+34h] [ebp-FCh]
-  char v40; // [esp+35h] [ebp-FBh]
-  char v41; // [esp+36h] [ebp-FAh]
-  char v42; // [esp+37h] [ebp-F9h]
-  char v43; // [esp+38h] [ebp-F8h]
-  char v44; // [esp+39h] [ebp-F7h]
-  char v45; // [esp+3Ah] [ebp-F6h]
-  char v46; // [esp+3Bh] [ebp-F5h]
-  char v47; // [esp+3Ch] [ebp-F4h]
-  char v48; // [esp+3Dh] [ebp-F3h]
-  char v49; // [esp+3Eh] [ebp-F2h]
-  char v50; // [esp+3Fh] [ebp-F1h]
-  char v51; // [esp+40h] [ebp-F0h]
-  char v52; // [esp+41h] [ebp-EFh]
-  char v53; // [esp+42h] [ebp-EEh]
-  char v54; // [esp+43h] [ebp-EDh]
-  char v55; // [esp+44h] [ebp-ECh]
-  char v56; // [esp+45h] [ebp-EBh]
-  char v57; // [esp+46h] [ebp-EAh]
-  char v58; // [esp+47h] [ebp-E9h]
-  char v59; // [esp+48h] [ebp-E8h]
-  char v60; // [esp+49h] [ebp-E7h]
-  char v61; // [esp+4Ah] [ebp-E6h]
-  char v62; // [esp+4Bh] [ebp-E5h]
-  char v63; // [esp+4Ch] [ebp-E4h]
-  char v64; // [esp+4Dh] [ebp-E3h]
-  char v65; // [esp+4Eh] [ebp-E2h]
-  char v66; // [esp+4Fh] [ebp-E1h]
-  char v67; // [esp+50h] [ebp-E0h]
-  char v68; // [esp+51h] [ebp-DFh]
-  char v69; // [esp+52h] [ebp-DEh]
-  char v70; // [esp+53h] [ebp-DDh]
-  char v71; // [esp+54h] [ebp-DCh]
-  char v72; // [esp+55h] [ebp-DBh]
-  char v73; // [esp+56h] [ebp-DAh]
-  char v74; // [esp+57h] [ebp-D9h]
-  char v75; // [esp+58h] [ebp-D8h]
-  char v76; // [esp+59h] [ebp-D7h]
-  char v77; // [esp+5Ah] [ebp-D6h]
-  char v78; // [esp+5Bh] [ebp-D5h]
-  char v79; // [esp+5Ch] [ebp-D4h]
-  char v80; // [esp+5Dh] [ebp-D3h]
-  char v81; // [esp+5Eh] [ebp-D2h]
-  char v82; // [esp+5Fh] [ebp-D1h]
-  char v83; // [esp+60h] [ebp-D0h]
-  char v84; // [esp+61h] [ebp-CFh]
-  char v85; // [esp+62h] [ebp-CEh]
-  char v86; // [esp+63h] [ebp-CDh]
-  char v87; // [esp+64h] [ebp-CCh]
-  char v88; // [esp+65h] [ebp-CBh]
-  char v89; // [esp+66h] [ebp-CAh]
-  char v90; // [esp+67h] [ebp-C9h]
-  char v91; // [esp+68h] [ebp-C8h]
-  char v92; // [esp+69h] [ebp-C7h]
-  char v93; // [esp+6Ah] [ebp-C6h]
-  char v94; // [esp+6Bh] [ebp-C5h]
-  char v95; // [esp+6Ch] [ebp-C4h]
-  char v96; // [esp+6Dh] [ebp-C3h]
-  char v97; // [esp+6Eh] [ebp-C2h]
-  char v98; // [esp+6Fh] [ebp-C1h]
-  char v99; // [esp+70h] [ebp-C0h]
-  char v100; // [esp+71h] [ebp-BFh]
-  char v101; // [esp+72h] [ebp-BEh]
-  char v102; // [esp+73h] [ebp-BDh]
-  char v103; // [esp+74h] [ebp-BCh]
-  char v104; // [esp+75h] [ebp-BBh]
-  char v105; // [esp+76h] [ebp-BAh]
-  char v106; // [esp+77h] [ebp-B9h]
-  char v107; // [esp+78h] [ebp-B8h]
-  char v108; // [esp+79h] [ebp-B7h]
-  char v109; // [esp+7Ah] [ebp-B6h]
-  char v110; // [esp+7Bh] [ebp-B5h]
-  char v111; // [esp+7Ch] [ebp-B4h]
-  char v112; // [esp+7Dh] [ebp-B3h]
-  char v113; // [esp+7Eh] [ebp-B2h]
-  char v114; // [esp+7Fh] [ebp-B1h]
-  char v115; // [esp+80h] [ebp-B0h]
-  char v116; // [esp+81h] [ebp-AFh]
-  char v117; // [esp+82h] [ebp-AEh]
-  char v118; // [esp+83h] [ebp-ADh]
-  char v119; // [esp+84h] [ebp-ACh]
-  char v120; // [esp+85h] [ebp-ABh]
-  char v121; // [esp+86h] [ebp-AAh]
-  char v122; // [esp+87h] [ebp-A9h]
-  char v123; // [esp+88h] [ebp-A8h]
-  char v124; // [esp+89h] [ebp-A7h]
-  char v125; // [esp+8Ah] [ebp-A6h]
-  char v126; // [esp+8Bh] [ebp-A5h]
-  char v127; // [esp+8Ch] [ebp-A4h]
-  char v128; // [esp+8Dh] [ebp-A3h]
-  char v129; // [esp+8Eh] [ebp-A2h]
-  char v130; // [esp+8Fh] [ebp-A1h]
-  char v131; // [esp+90h] [ebp-A0h]
-  char v132; // [esp+91h] [ebp-9Fh]
-  char v133; // [esp+92h] [ebp-9Eh]
-  char v134; // [esp+93h] [ebp-9Dh]
-  char v135; // [esp+94h] [ebp-9Ch]
-  char v136; // [esp+95h] [ebp-9Bh]
-  char v137; // [esp+96h] [ebp-9Ah]
-  char v138; // [esp+97h] [ebp-99h]
-  char v139; // [esp+98h] [ebp-98h]
-  char v140; // [esp+99h] [ebp-97h]
-  char v141; // [esp+9Ah] [ebp-96h]
-  char v142; // [esp+9Bh] [ebp-95h]
-  char v143; // [esp+9Ch] [ebp-94h]
-  char v144; // [esp+9Dh] [ebp-93h]
-  char v145; // [esp+9Eh] [ebp-92h]
-  char v146; // [esp+9Fh] [ebp-91h]
-  char v147; // [esp+A0h] [ebp-90h]
-  char v148; // [esp+A1h] [ebp-8Fh]
-  char v149; // [esp+A2h] [ebp-8Eh]
-  char v150; // [esp+A3h] [ebp-8Dh]
-  char v151; // [esp+A4h] [ebp-8Ch]
-  char v152; // [esp+A5h] [ebp-8Bh]
-  char v153; // [esp+A6h] [ebp-8Ah]
-  char v154; // [esp+A7h] [ebp-89h]
-  char v155; // [esp+A8h] [ebp-88h]
-  char v156; // [esp+A9h] [ebp-87h]
-  char v157; // [esp+AAh] [ebp-86h]
-  char v158; // [esp+ABh] [ebp-85h]
-  char v159; // [esp+ACh] [ebp-84h]
-  char v160; // [esp+ADh] [ebp-83h]
-  char v161; // [esp+AEh] [ebp-82h]
-  char v162; // [esp+AFh] [ebp-81h]
-  char v163; // [esp+B0h] [ebp-80h]
-  char v164; // [esp+B1h] [ebp-7Fh]
-  char v165; // [esp+B2h] [ebp-7Eh]
-  char v166; // [esp+B3h] [ebp-7Dh]
-  char v167; // [esp+B4h] [ebp-7Ch]
-  char v168; // [esp+B5h] [ebp-7Bh]
-  char v169; // [esp+B6h] [ebp-7Ah]
-  char v170; // [esp+B7h] [ebp-79h]
-  char v171; // [esp+B8h] [ebp-78h]
-  char v172; // [esp+B9h] [ebp-77h]
-  char v173; // [esp+BAh] [ebp-76h]
-  char v174; // [esp+BBh] [ebp-75h]
-  char v175; // [esp+BCh] [ebp-74h]
-  char v176; // [esp+BDh] [ebp-73h]
-  char v177; // [esp+BEh] [ebp-72h]
-  char v178; // [esp+BFh] [ebp-71h]
-  char v179; // [esp+C0h] [ebp-70h]
-  char v180; // [esp+C1h] [ebp-6Fh]
-  char v181; // [esp+C2h] [ebp-6Eh]
-  char v182; // [esp+C3h] [ebp-6Dh]
-  char v183; // [esp+C4h] [ebp-6Ch]
-  char v184; // [esp+C5h] [ebp-6Bh]
-  char v185; // [esp+C6h] [ebp-6Ah]
-  char v186; // [esp+C7h] [ebp-69h]
-  char v187; // [esp+C8h] [ebp-68h]
-  char v188; // [esp+C9h] [ebp-67h]
-  char v189; // [esp+CAh] [ebp-66h]
-  char v190; // [esp+CBh] [ebp-65h]
-  char v191; // [esp+CCh] [ebp-64h]
-  char v192; // [esp+CDh] [ebp-63h]
-  char v193; // [esp+CEh] [ebp-62h]
-  char v194; // [esp+CFh] [ebp-61h]
-  char v195; // [esp+D0h] [ebp-60h]
-  char v196; // [esp+D1h] [ebp-5Fh]
-  char v197; // [esp+D2h] [ebp-5Eh]
-  char v198; // [esp+D3h] [ebp-5Dh]
-  char v199; // [esp+D4h] [ebp-5Ch]
-  char v200; // [esp+D5h] [ebp-5Bh]
-  char v201; // [esp+D6h] [ebp-5Ah]
-  char v202; // [esp+D7h] [ebp-59h]
-  char v203; // [esp+D8h] [ebp-58h]
-  char v204; // [esp+D9h] [ebp-57h]
-  char v205; // [esp+DAh] [ebp-56h]
-  char v206; // [esp+DBh] [ebp-55h]
-  char v207; // [esp+DCh] [ebp-54h]
-  char v208; // [esp+DDh] [ebp-53h]
-  char v209; // [esp+DEh] [ebp-52h]
-  char v210; // [esp+DFh] [ebp-51h]
-  char v211; // [esp+E0h] [ebp-50h]
-  char v212; // [esp+E1h] [ebp-4Fh]
-  char v213; // [esp+E2h] [ebp-4Eh]
-  char v214; // [esp+E3h] [ebp-4Dh]
-  char v215; // [esp+E4h] [ebp-4Ch]
-  char v216; // [esp+E5h] [ebp-4Bh]
-  char v217; // [esp+E6h] [ebp-4Ah]
-  char v218; // [esp+E7h] [ebp-49h]
-  char v219; // [esp+E8h] [ebp-48h]
-  char v220; // [esp+E9h] [ebp-47h]
-  char v221; // [esp+EAh] [ebp-46h]
-  char v222; // [esp+EBh] [ebp-45h]
-  char v223; // [esp+ECh] [ebp-44h]
-  char v224; // [esp+EDh] [ebp-43h]
-  char v225; // [esp+EEh] [ebp-42h]
-  char v226; // [esp+EFh] [ebp-41h]
-  char v227; // [esp+F0h] [ebp-40h]
-  char v228; // [esp+F1h] [ebp-3Fh]
-  char v229; // [esp+F2h] [ebp-3Eh]
-  char v230; // [esp+F3h] [ebp-3Dh]
-  char v231; // [esp+F4h] [ebp-3Ch]
-  char v232; // [esp+F5h] [ebp-3Bh]
-  char v233; // [esp+F6h] [ebp-3Ah]
-  char v234; // [esp+F7h] [ebp-39h]
-  char v235; // [esp+F8h] [ebp-38h]
-  char v236; // [esp+F9h] [ebp-37h]
-  char v237; // [esp+FAh] [ebp-36h]
-  char v238; // [esp+FBh] [ebp-35h]
-  char v239; // [esp+FCh] [ebp-34h]
-  char v240; // [esp+FDh] [ebp-33h]
-  char v241; // [esp+FEh] [ebp-32h]
-  char v242; // [esp+FFh] [ebp-31h]
-  char v243; // [esp+100h] [ebp-30h]
-  char v244; // [esp+101h] [ebp-2Fh]
-  char v245; // [esp+102h] [ebp-2Eh]
-  char v246; // [esp+103h] [ebp-2Dh]
-  char v247; // [esp+104h] [ebp-2Ch]
-  char v248; // [esp+105h] [ebp-2Bh]
-  char v249; // [esp+106h] [ebp-2Ah]
-  char v250; // [esp+107h] [ebp-29h]
-  char v251; // [esp+108h] [ebp-28h]
-  char v252; // [esp+109h] [ebp-27h]
-  char v253; // [esp+10Ah] [ebp-26h]
-  char v254; // [esp+10Bh] [ebp-25h]
-  char v255; // [esp+10Ch] [ebp-24h]
-  char v256; // [esp+10Dh] [ebp-23h]
-  char v257; // [esp+10Eh] [ebp-22h]
-  char v258; // [esp+10Fh] [ebp-21h]
-  char v259; // [esp+110h] [ebp-20h]
-  char v260; // [esp+111h] [ebp-1Fh]
-  char v261; // [esp+112h] [ebp-1Eh]
-  char v262; // [esp+113h] [ebp-1Dh]
-  char v263; // [esp+114h] [ebp-1Ch]
-  char v264; // [esp+115h] [ebp-1Bh]
-  char v265; // [esp+116h] [ebp-1Ah]
-  int v266; // [esp+118h] [ebp-18h]
-  char v267; // [esp+11Ch] [ebp-14h]
-  char v268; // [esp+11Dh] [ebp-13h]
-  char v269; // [esp+11Eh] [ebp-12h]
-  char v270; // [esp+120h] [ebp-10h]
-  char v271; // [esp+121h] [ebp-Fh]
-  char v272; // [esp+122h] [ebp-Eh]
-  char v273; // [esp+124h] [ebp-Ch]
-  char v274; // [esp+125h] [ebp-Bh]
-  char v275; // [esp+126h] [ebp-Ah]
-  int v276; // [esp+128h] [ebp-8h]
-  int v277; // [esp+12Ch] [ebp-4h]
+  unsigned __int8 Dirs[256]; // [esp+14h] [ebp-11Ch]
+  unsigned __int8 ultolr[3]; // [esp+114h] [ebp-1Ch]
+  int off; // [esp+118h] [ebp-18h]
+  unsigned __int8 lltour[3]; // [esp+11Ch] [ebp-14h]
+  unsigned __int8 urtoll[3]; // [esp+120h] [ebp-10h]
+  unsigned __int8 lrtoul[3]; // [esp+124h] [ebp-Ch]
+  int yd; // [esp+128h] [ebp-8h]
+  int xd; // [esp+12Ch] [ebp-4h]
 
-  v5 = y1;
-  v6 = x1;
-  v7 = 99;
-  v8 = 0;
-  v9 = 0;
-  v10 = 0;
-  v11 = 0;
-  v12 = 0;
-  v13 = 0;
-  v14 = 0;
-  v15 = 0;
-  v16 = 0;
-  v17 = 0;
-  v18 = 0;
-  v19 = 0;
-  v20 = 0;
-  v21 = 0;
-  v22 = 0;
-  v23 = 2;
-  v24 = 1;
-  v25 = 1;
-  v26 = 1;
-  v27 = 0;
-  v28 = 0;
-  v29 = 0;
-  v30 = 0;
-  v31 = 0;
-  v32 = 0;
-  v33 = 0;
-  v34 = 0;
-  v35 = 0;
-  v36 = 0;
-  v37 = 0;
-  v38 = 0;
-  v39 = 2;
-  v40 = 1;
-  v41 = 1;
-  v42 = 1;
-  v43 = 1;
-  v44 = 1;
-  v45 = 1;
-  v46 = 0;
-  v47 = 0;
-  v48 = 0;
-  v49 = 0;
-  v50 = 0;
-  v51 = 0;
-  v52 = 0;
-  v53 = 0;
-  v54 = 0;
-  v55 = 2;
-  v56 = 1;
-  v57 = 1;
-  v58 = 1;
-  v59 = 1;
-  v60 = 1;
-  v61 = 1;
-  v62 = 1;
-  v63 = 1;
-  v64 = 0;
-  v65 = 0;
-  v66 = 0;
-  v67 = 0;
-  v68 = 0;
-  v69 = 0;
-  v70 = 0;
-  v71 = 2;
-  v72 = 2;
-  v73 = 1;
-  v74 = 1;
-  v75 = 1;
-  v76 = 1;
-  v77 = 1;
-  v78 = 1;
-  v79 = 1;
-  v80 = 1;
-  v81 = 1;
-  v82 = 1;
-  v83 = 0;
-  v84 = 0;
-  v85 = 0;
-  v86 = 0;
-  v87 = 2;
-  v88 = 2;
-  v89 = 1;
-  v90 = 1;
-  v91 = 1;
-  v92 = 1;
-  v93 = 1;
-  v94 = 1;
-  v95 = 1;
-  v96 = 1;
-  v97 = 1;
-  v98 = 1;
-  v99 = 1;
-  v100 = 1;
-  v101 = 0;
-  v102 = 0;
-  v103 = 2;
-  v104 = 2;
-  v105 = 1;
-  v106 = 1;
-  v107 = 1;
-  v108 = 1;
-  v109 = 1;
-  v110 = 1;
-  v111 = 1;
-  v112 = 1;
-  v113 = 1;
-  v114 = 1;
-  v115 = 1;
-  v116 = 1;
-  v117 = 1;
-  v118 = 1;
-  v119 = 2;
-  v120 = 2;
-  v121 = 2;
-  v122 = 1;
-  v123 = 1;
-  v124 = 1;
-  v125 = 1;
-  v126 = 1;
-  v127 = 1;
-  v128 = 1;
-  v129 = 1;
-  v130 = 1;
-  v131 = 1;
-  v132 = 1;
-  v133 = 1;
-  v134 = 1;
-  v135 = 2;
-  v136 = 2;
-  v137 = 2;
-  v138 = 1;
-  v139 = 1;
-  v140 = 1;
-  v141 = 1;
-  v142 = 1;
-  v143 = 1;
-  v144 = 1;
-  v145 = 1;
-  v146 = 1;
-  v147 = 1;
-  v148 = 1;
-  v149 = 1;
-  v150 = 1;
-  v151 = 2;
-  v152 = 2;
-  v153 = 2;
-  v154 = 2;
-  v155 = 1;
-  v156 = 1;
-  v157 = 1;
-  v158 = 1;
-  v159 = 1;
-  v160 = 1;
-  v161 = 1;
-  v162 = 1;
-  v163 = 1;
-  v164 = 1;
-  v165 = 1;
-  v166 = 1;
-  v167 = 2;
-  v168 = 2;
-  v169 = 2;
-  v170 = 2;
-  v171 = 1;
-  v172 = 1;
-  v173 = 1;
-  v174 = 1;
-  v175 = 1;
-  v176 = 1;
-  v177 = 1;
-  v178 = 1;
-  v179 = 1;
-  v180 = 1;
-  v181 = 1;
-  v182 = 1;
-  v183 = 2;
-  v184 = 2;
-  v185 = 2;
-  v186 = 2;
-  v187 = 1;
-  v188 = 1;
-  v189 = 1;
-  v190 = 1;
-  v191 = 1;
-  v192 = 1;
-  v193 = 1;
-  v194 = 1;
-  v195 = 1;
-  v196 = 1;
-  v197 = 1;
-  v198 = 1;
-  v199 = 2;
-  v200 = 2;
-  v201 = 2;
-  v202 = 2;
-  v203 = 2;
-  v204 = 1;
-  v205 = 1;
-  v206 = 1;
-  v207 = 1;
-  v208 = 1;
-  v209 = 1;
-  v210 = 1;
-  v211 = 1;
-  v212 = 1;
-  v213 = 1;
-  v214 = 1;
-  v215 = 2;
-  v216 = 2;
-  v217 = 2;
-  v218 = 2;
-  v219 = 2;
-  v220 = 1;
-  v221 = 1;
-  v222 = 1;
-  v223 = 1;
-  v224 = 1;
-  v225 = 1;
-  v226 = 1;
-  v227 = 1;
-  v228 = 1;
-  v229 = 1;
-  v230 = 1;
-  v231 = 2;
-  v232 = 2;
-  v233 = 2;
-  v234 = 2;
-  v235 = 2;
-  v236 = 2;
-  v237 = 1;
-  v238 = 1;
-  v239 = 1;
-  v240 = 1;
-  v241 = 1;
-  v242 = 1;
-  v243 = 1;
-  v244 = 1;
-  v245 = 1;
-  v246 = 1;
-  v247 = 2;
-  v248 = 2;
-  v249 = 2;
-  v250 = 2;
-  v251 = 2;
-  v252 = 2;
-  v253 = 1;
-  v254 = 1;
-  v255 = 1;
-  v256 = 1;
-  v257 = 1;
-  v258 = 1;
-  v259 = 1;
-  v260 = 1;
-  v261 = 1;
-  v262 = 1;
-  v273 = 3;
-  v274 = 4;
-  v275 = 5;
-  v270 = 3;
-  v271 = 2;
-  v272 = 1;
-  v263 = 7;
-  v264 = 6;
-  v265 = 5;
-  v267 = 7;
-  v268 = 0;
-  v269 = 1;
-  v277 = abs(x2 - x1);
-  if ( v277 > 15 )
-    v277 = 15;
-  v276 = abs(y2 - v5);
-  if ( v276 > 15 )
-    v276 = 15;
-  v266 = (unsigned __int8)*(&v7 + 16 * v276 + v277);
-  if ( x2 >= v6 )
+  Dirs[0] = 99;
+  Dirs[1] = 0;
+  Dirs[2] = 0;
+  Dirs[3] = 0;
+  Dirs[4] = 0;
+  Dirs[5] = 0;
+  Dirs[6] = 0;
+  Dirs[7] = 0;
+  Dirs[8] = 0;
+  Dirs[9] = 0;
+  Dirs[10] = 0;
+  Dirs[11] = 0;
+  Dirs[12] = 0;
+  Dirs[13] = 0;
+  Dirs[14] = 0;
+  Dirs[15] = 0;
+  Dirs[16] = 2;
+  Dirs[17] = 1;
+  Dirs[18] = 1;
+  Dirs[19] = 1;
+  Dirs[20] = 0;
+  Dirs[21] = 0;
+  Dirs[22] = 0;
+  Dirs[23] = 0;
+  Dirs[24] = 0;
+  Dirs[25] = 0;
+  Dirs[26] = 0;
+  Dirs[27] = 0;
+  Dirs[28] = 0;
+  Dirs[29] = 0;
+  Dirs[30] = 0;
+  Dirs[31] = 0;
+  Dirs[32] = 2;
+  Dirs[33] = 1;
+  Dirs[34] = 1;
+  Dirs[35] = 1;
+  Dirs[36] = 1;
+  Dirs[37] = 1;
+  Dirs[38] = 1;
+  Dirs[39] = 0;
+  Dirs[40] = 0;
+  Dirs[41] = 0;
+  Dirs[42] = 0;
+  Dirs[43] = 0;
+  Dirs[44] = 0;
+  Dirs[45] = 0;
+  Dirs[46] = 0;
+  Dirs[47] = 0;
+  Dirs[48] = 2;
+  Dirs[49] = 1;
+  Dirs[50] = 1;
+  Dirs[51] = 1;
+  Dirs[52] = 1;
+  Dirs[53] = 1;
+  Dirs[54] = 1;
+  Dirs[55] = 1;
+  Dirs[56] = 1;
+  Dirs[57] = 0;
+  Dirs[58] = 0;
+  Dirs[59] = 0;
+  Dirs[60] = 0;
+  Dirs[61] = 0;
+  Dirs[62] = 0;
+  Dirs[63] = 0;
+  Dirs[64] = 2;
+  Dirs[65] = 2;
+  Dirs[66] = 1;
+  Dirs[67] = 1;
+  Dirs[68] = 1;
+  Dirs[69] = 1;
+  Dirs[70] = 1;
+  Dirs[71] = 1;
+  Dirs[72] = 1;
+  Dirs[73] = 1;
+  Dirs[74] = 1;
+  Dirs[75] = 1;
+  Dirs[76] = 0;
+  Dirs[77] = 0;
+  Dirs[78] = 0;
+  Dirs[79] = 0;
+  Dirs[80] = 2;
+  Dirs[81] = 2;
+  Dirs[82] = 1;
+  Dirs[83] = 1;
+  Dirs[84] = 1;
+  Dirs[85] = 1;
+  Dirs[86] = 1;
+  Dirs[87] = 1;
+  Dirs[88] = 1;
+  Dirs[89] = 1;
+  Dirs[90] = 1;
+  Dirs[91] = 1;
+  Dirs[92] = 1;
+  Dirs[93] = 1;
+  Dirs[94] = 0;
+  Dirs[95] = 0;
+  Dirs[96] = 2;
+  Dirs[97] = 2;
+  Dirs[98] = 1;
+  Dirs[99] = 1;
+  Dirs[100] = 1;
+  Dirs[101] = 1;
+  Dirs[102] = 1;
+  Dirs[103] = 1;
+  Dirs[104] = 1;
+  Dirs[105] = 1;
+  Dirs[106] = 1;
+  Dirs[107] = 1;
+  Dirs[108] = 1;
+  Dirs[109] = 1;
+  Dirs[110] = 1;
+  Dirs[111] = 1;
+  Dirs[112] = 2;
+  Dirs[113] = 2;
+  Dirs[114] = 2;
+  Dirs[115] = 1;
+  Dirs[116] = 1;
+  Dirs[117] = 1;
+  Dirs[118] = 1;
+  Dirs[119] = 1;
+  Dirs[120] = 1;
+  Dirs[121] = 1;
+  Dirs[122] = 1;
+  Dirs[123] = 1;
+  Dirs[124] = 1;
+  Dirs[125] = 1;
+  Dirs[126] = 1;
+  Dirs[127] = 1;
+  Dirs[128] = 2;
+  Dirs[129] = 2;
+  Dirs[130] = 2;
+  Dirs[131] = 1;
+  Dirs[132] = 1;
+  Dirs[133] = 1;
+  Dirs[134] = 1;
+  Dirs[135] = 1;
+  Dirs[136] = 1;
+  Dirs[137] = 1;
+  Dirs[138] = 1;
+  Dirs[139] = 1;
+  Dirs[140] = 1;
+  Dirs[141] = 1;
+  Dirs[142] = 1;
+  Dirs[143] = 1;
+  Dirs[144] = 2;
+  Dirs[145] = 2;
+  Dirs[146] = 2;
+  Dirs[147] = 2;
+  Dirs[148] = 1;
+  Dirs[149] = 1;
+  Dirs[150] = 1;
+  Dirs[151] = 1;
+  Dirs[152] = 1;
+  Dirs[153] = 1;
+  Dirs[154] = 1;
+  Dirs[155] = 1;
+  Dirs[156] = 1;
+  Dirs[157] = 1;
+  Dirs[158] = 1;
+  Dirs[159] = 1;
+  Dirs[160] = 2;
+  Dirs[161] = 2;
+  Dirs[162] = 2;
+  Dirs[163] = 2;
+  Dirs[164] = 1;
+  Dirs[165] = 1;
+  Dirs[166] = 1;
+  Dirs[167] = 1;
+  Dirs[168] = 1;
+  Dirs[169] = 1;
+  Dirs[170] = 1;
+  Dirs[171] = 1;
+  Dirs[172] = 1;
+  Dirs[173] = 1;
+  Dirs[174] = 1;
+  Dirs[175] = 1;
+  Dirs[176] = 2;
+  Dirs[177] = 2;
+  Dirs[178] = 2;
+  Dirs[179] = 2;
+  Dirs[180] = 1;
+  Dirs[181] = 1;
+  Dirs[182] = 1;
+  Dirs[183] = 1;
+  Dirs[184] = 1;
+  Dirs[185] = 1;
+  Dirs[186] = 1;
+  Dirs[187] = 1;
+  Dirs[188] = 1;
+  Dirs[189] = 1;
+  Dirs[190] = 1;
+  Dirs[191] = 1;
+  Dirs[192] = 2;
+  Dirs[193] = 2;
+  Dirs[194] = 2;
+  Dirs[195] = 2;
+  Dirs[196] = 2;
+  Dirs[197] = 1;
+  Dirs[198] = 1;
+  Dirs[199] = 1;
+  Dirs[200] = 1;
+  Dirs[201] = 1;
+  Dirs[202] = 1;
+  Dirs[203] = 1;
+  Dirs[204] = 1;
+  Dirs[205] = 1;
+  Dirs[206] = 1;
+  Dirs[207] = 1;
+  Dirs[208] = 2;
+  Dirs[209] = 2;
+  Dirs[210] = 2;
+  Dirs[211] = 2;
+  Dirs[212] = 2;
+  Dirs[213] = 1;
+  Dirs[214] = 1;
+  Dirs[215] = 1;
+  Dirs[216] = 1;
+  Dirs[217] = 1;
+  Dirs[218] = 1;
+  Dirs[219] = 1;
+  Dirs[220] = 1;
+  Dirs[221] = 1;
+  Dirs[222] = 1;
+  Dirs[223] = 1;
+  Dirs[224] = 2;
+  Dirs[225] = 2;
+  Dirs[226] = 2;
+  Dirs[227] = 2;
+  Dirs[228] = 2;
+  Dirs[229] = 2;
+  Dirs[230] = 1;
+  Dirs[231] = 1;
+  Dirs[232] = 1;
+  Dirs[233] = 1;
+  Dirs[234] = 1;
+  Dirs[235] = 1;
+  Dirs[236] = 1;
+  Dirs[237] = 1;
+  Dirs[238] = 1;
+  Dirs[239] = 1;
+  Dirs[240] = 2;
+  Dirs[241] = 2;
+  Dirs[242] = 2;
+  Dirs[243] = 2;
+  Dirs[244] = 2;
+  Dirs[245] = 2;
+  Dirs[246] = 1;
+  Dirs[247] = 1;
+  Dirs[248] = 1;
+  Dirs[249] = 1;
+  Dirs[250] = 1;
+  Dirs[251] = 1;
+  Dirs[252] = 1;
+  Dirs[253] = 1;
+  Dirs[254] = 1;
+  Dirs[255] = 1;
+  lrtoul[0] = 3;
+  lrtoul[1] = 4;
+  lrtoul[2] = 5;
+  urtoll[0] = 3;
+  urtoll[1] = 2;
+  urtoll[2] = 1;
+  ultolr[0] = 7;
+  ultolr[1] = 6;
+  ultolr[2] = 5;
+  lltour[0] = 7;
+  lltour[1] = 0;
+  lltour[2] = 1;
+  xd = abs(x2 - x1);
+  if ( xd > 15 )
+    xd = 15;
+  yd = abs(y2 - y1);
+  if ( yd > 15 )
+    yd = 15;
+  off = Dirs[16 * yd + xd];
+  if ( x2 >= x1 )
   {
-    if ( v5 <= y2 )
-      v266 = (unsigned __int8)*(&v267 + v266);
+    if ( y1 <= y2 )
+      off = lltour[off];
     else
-      v266 = (unsigned __int8)*(&v263 + v266);
+      off = ultolr[off];
   }
-  else if ( v5 <= y2 )
+  else if ( y1 <= y2 )
   {
-    v266 = (unsigned __int8)*(&v270 + v266);
+    off = urtoll[off];
   }
   else
   {
-    v266 = (unsigned __int8)*(&v273 + v266);
+    off = lrtoul[off];
   }
-  return v266;
+  return off;
 }
 
 //----- (0043B7CF) --------------------------------------------------------
 int __fastcall GetDirection16(int x1, int y1, int x2, int y2)
 {
-  int v5; // [esp+Ch] [ebp-134h]
-  int v6; // [esp+10h] [ebp-130h]
-  char v7; // [esp+14h] [ebp-12Ch]
-  char v8; // [esp+15h] [ebp-12Bh]
-  char v9; // [esp+16h] [ebp-12Ah]
-  char v10; // [esp+17h] [ebp-129h]
-  char v11; // [esp+18h] [ebp-128h]
-  char v12; // [esp+19h] [ebp-127h]
-  char v13; // [esp+1Ah] [ebp-126h]
-  char v14; // [esp+1Bh] [ebp-125h]
-  char v15; // [esp+1Ch] [ebp-124h]
-  char v16; // [esp+1Dh] [ebp-123h]
-  char v17; // [esp+1Eh] [ebp-122h]
-  char v18; // [esp+1Fh] [ebp-121h]
-  char v19; // [esp+20h] [ebp-120h]
-  char v20; // [esp+21h] [ebp-11Fh]
-  char v21; // [esp+22h] [ebp-11Eh]
-  char v22; // [esp+23h] [ebp-11Dh]
-  char v23; // [esp+24h] [ebp-11Ch]
-  char v24; // [esp+25h] [ebp-11Bh]
-  char v25; // [esp+26h] [ebp-11Ah]
-  char v26; // [esp+27h] [ebp-119h]
-  char v27; // [esp+28h] [ebp-118h]
-  char v28; // [esp+29h] [ebp-117h]
-  char v29; // [esp+2Ah] [ebp-116h]
-  char v30; // [esp+2Bh] [ebp-115h]
-  char v31; // [esp+2Ch] [ebp-114h]
-  char v32; // [esp+2Dh] [ebp-113h]
-  char v33; // [esp+2Eh] [ebp-112h]
-  char v34; // [esp+2Fh] [ebp-111h]
-  char v35; // [esp+30h] [ebp-110h]
-  char v36; // [esp+31h] [ebp-10Fh]
-  char v37; // [esp+32h] [ebp-10Eh]
-  char v38; // [esp+33h] [ebp-10Dh]
-  char v39; // [esp+34h] [ebp-10Ch]
-  char v40; // [esp+35h] [ebp-10Bh]
-  char v41; // [esp+36h] [ebp-10Ah]
-  char v42; // [esp+37h] [ebp-109h]
-  char v43; // [esp+38h] [ebp-108h]
-  char v44; // [esp+39h] [ebp-107h]
-  char v45; // [esp+3Ah] [ebp-106h]
-  char v46; // [esp+3Bh] [ebp-105h]
-  char v47; // [esp+3Ch] [ebp-104h]
-  char v48; // [esp+3Dh] [ebp-103h]
-  char v49; // [esp+3Eh] [ebp-102h]
-  char v50; // [esp+3Fh] [ebp-101h]
-  char v51; // [esp+40h] [ebp-100h]
-  char v52; // [esp+41h] [ebp-FFh]
-  char v53; // [esp+42h] [ebp-FEh]
-  char v54; // [esp+43h] [ebp-FDh]
-  char v55; // [esp+44h] [ebp-FCh]
-  char v56; // [esp+45h] [ebp-FBh]
-  char v57; // [esp+46h] [ebp-FAh]
-  char v58; // [esp+47h] [ebp-F9h]
-  char v59; // [esp+48h] [ebp-F8h]
-  char v60; // [esp+49h] [ebp-F7h]
-  char v61; // [esp+4Ah] [ebp-F6h]
-  char v62; // [esp+4Bh] [ebp-F5h]
-  char v63; // [esp+4Ch] [ebp-F4h]
-  char v64; // [esp+4Dh] [ebp-F3h]
-  char v65; // [esp+4Eh] [ebp-F2h]
-  char v66; // [esp+4Fh] [ebp-F1h]
-  char v67; // [esp+50h] [ebp-F0h]
-  char v68; // [esp+51h] [ebp-EFh]
-  char v69; // [esp+52h] [ebp-EEh]
-  char v70; // [esp+53h] [ebp-EDh]
-  char v71; // [esp+54h] [ebp-ECh]
-  char v72; // [esp+55h] [ebp-EBh]
-  char v73; // [esp+56h] [ebp-EAh]
-  char v74; // [esp+57h] [ebp-E9h]
-  char v75; // [esp+58h] [ebp-E8h]
-  char v76; // [esp+59h] [ebp-E7h]
-  char v77; // [esp+5Ah] [ebp-E6h]
-  char v78; // [esp+5Bh] [ebp-E5h]
-  char v79; // [esp+5Ch] [ebp-E4h]
-  char v80; // [esp+5Dh] [ebp-E3h]
-  char v81; // [esp+5Eh] [ebp-E2h]
-  char v82; // [esp+5Fh] [ebp-E1h]
-  char v83; // [esp+60h] [ebp-E0h]
-  char v84; // [esp+61h] [ebp-DFh]
-  char v85; // [esp+62h] [ebp-DEh]
-  char v86; // [esp+63h] [ebp-DDh]
-  char v87; // [esp+64h] [ebp-DCh]
-  char v88; // [esp+65h] [ebp-DBh]
-  char v89; // [esp+66h] [ebp-DAh]
-  char v90; // [esp+67h] [ebp-D9h]
-  char v91; // [esp+68h] [ebp-D8h]
-  char v92; // [esp+69h] [ebp-D7h]
-  char v93; // [esp+6Ah] [ebp-D6h]
-  char v94; // [esp+6Bh] [ebp-D5h]
-  char v95; // [esp+6Ch] [ebp-D4h]
-  char v96; // [esp+6Dh] [ebp-D3h]
-  char v97; // [esp+6Eh] [ebp-D2h]
-  char v98; // [esp+6Fh] [ebp-D1h]
-  char v99; // [esp+70h] [ebp-D0h]
-  char v100; // [esp+71h] [ebp-CFh]
-  char v101; // [esp+72h] [ebp-CEh]
-  char v102; // [esp+73h] [ebp-CDh]
-  char v103; // [esp+74h] [ebp-CCh]
-  char v104; // [esp+75h] [ebp-CBh]
-  char v105; // [esp+76h] [ebp-CAh]
-  char v106; // [esp+77h] [ebp-C9h]
-  char v107; // [esp+78h] [ebp-C8h]
-  char v108; // [esp+79h] [ebp-C7h]
-  char v109; // [esp+7Ah] [ebp-C6h]
-  char v110; // [esp+7Bh] [ebp-C5h]
-  char v111; // [esp+7Ch] [ebp-C4h]
-  char v112; // [esp+7Dh] [ebp-C3h]
-  char v113; // [esp+7Eh] [ebp-C2h]
-  char v114; // [esp+7Fh] [ebp-C1h]
-  char v115; // [esp+80h] [ebp-C0h]
-  char v116; // [esp+81h] [ebp-BFh]
-  char v117; // [esp+82h] [ebp-BEh]
-  char v118; // [esp+83h] [ebp-BDh]
-  char v119; // [esp+84h] [ebp-BCh]
-  char v120; // [esp+85h] [ebp-BBh]
-  char v121; // [esp+86h] [ebp-BAh]
-  char v122; // [esp+87h] [ebp-B9h]
-  char v123; // [esp+88h] [ebp-B8h]
-  char v124; // [esp+89h] [ebp-B7h]
-  char v125; // [esp+8Ah] [ebp-B6h]
-  char v126; // [esp+8Bh] [ebp-B5h]
-  char v127; // [esp+8Ch] [ebp-B4h]
-  char v128; // [esp+8Dh] [ebp-B3h]
-  char v129; // [esp+8Eh] [ebp-B2h]
-  char v130; // [esp+8Fh] [ebp-B1h]
-  char v131; // [esp+90h] [ebp-B0h]
-  char v132; // [esp+91h] [ebp-AFh]
-  char v133; // [esp+92h] [ebp-AEh]
-  char v134; // [esp+93h] [ebp-ADh]
-  char v135; // [esp+94h] [ebp-ACh]
-  char v136; // [esp+95h] [ebp-ABh]
-  char v137; // [esp+96h] [ebp-AAh]
-  char v138; // [esp+97h] [ebp-A9h]
-  char v139; // [esp+98h] [ebp-A8h]
-  char v140; // [esp+99h] [ebp-A7h]
-  char v141; // [esp+9Ah] [ebp-A6h]
-  char v142; // [esp+9Bh] [ebp-A5h]
-  char v143; // [esp+9Ch] [ebp-A4h]
-  char v144; // [esp+9Dh] [ebp-A3h]
-  char v145; // [esp+9Eh] [ebp-A2h]
-  char v146; // [esp+9Fh] [ebp-A1h]
-  char v147; // [esp+A0h] [ebp-A0h]
-  char v148; // [esp+A1h] [ebp-9Fh]
-  char v149; // [esp+A2h] [ebp-9Eh]
-  char v150; // [esp+A3h] [ebp-9Dh]
-  char v151; // [esp+A4h] [ebp-9Ch]
-  char v152; // [esp+A5h] [ebp-9Bh]
-  char v153; // [esp+A6h] [ebp-9Ah]
-  char v154; // [esp+A7h] [ebp-99h]
-  char v155; // [esp+A8h] [ebp-98h]
-  char v156; // [esp+A9h] [ebp-97h]
-  char v157; // [esp+AAh] [ebp-96h]
-  char v158; // [esp+ABh] [ebp-95h]
-  char v159; // [esp+ACh] [ebp-94h]
-  char v160; // [esp+ADh] [ebp-93h]
-  char v161; // [esp+AEh] [ebp-92h]
-  char v162; // [esp+AFh] [ebp-91h]
-  char v163; // [esp+B0h] [ebp-90h]
-  char v164; // [esp+B1h] [ebp-8Fh]
-  char v165; // [esp+B2h] [ebp-8Eh]
-  char v166; // [esp+B3h] [ebp-8Dh]
-  char v167; // [esp+B4h] [ebp-8Ch]
-  char v168; // [esp+B5h] [ebp-8Bh]
-  char v169; // [esp+B6h] [ebp-8Ah]
-  char v170; // [esp+B7h] [ebp-89h]
-  char v171; // [esp+B8h] [ebp-88h]
-  char v172; // [esp+B9h] [ebp-87h]
-  char v173; // [esp+BAh] [ebp-86h]
-  char v174; // [esp+BBh] [ebp-85h]
-  char v175; // [esp+BCh] [ebp-84h]
-  char v176; // [esp+BDh] [ebp-83h]
-  char v177; // [esp+BEh] [ebp-82h]
-  char v178; // [esp+BFh] [ebp-81h]
-  char v179; // [esp+C0h] [ebp-80h]
-  char v180; // [esp+C1h] [ebp-7Fh]
-  char v181; // [esp+C2h] [ebp-7Eh]
-  char v182; // [esp+C3h] [ebp-7Dh]
-  char v183; // [esp+C4h] [ebp-7Ch]
-  char v184; // [esp+C5h] [ebp-7Bh]
-  char v185; // [esp+C6h] [ebp-7Ah]
-  char v186; // [esp+C7h] [ebp-79h]
-  char v187; // [esp+C8h] [ebp-78h]
-  char v188; // [esp+C9h] [ebp-77h]
-  char v189; // [esp+CAh] [ebp-76h]
-  char v190; // [esp+CBh] [ebp-75h]
-  char v191; // [esp+CCh] [ebp-74h]
-  char v192; // [esp+CDh] [ebp-73h]
-  char v193; // [esp+CEh] [ebp-72h]
-  char v194; // [esp+CFh] [ebp-71h]
-  char v195; // [esp+D0h] [ebp-70h]
-  char v196; // [esp+D1h] [ebp-6Fh]
-  char v197; // [esp+D2h] [ebp-6Eh]
-  char v198; // [esp+D3h] [ebp-6Dh]
-  char v199; // [esp+D4h] [ebp-6Ch]
-  char v200; // [esp+D5h] [ebp-6Bh]
-  char v201; // [esp+D6h] [ebp-6Ah]
-  char v202; // [esp+D7h] [ebp-69h]
-  char v203; // [esp+D8h] [ebp-68h]
-  char v204; // [esp+D9h] [ebp-67h]
-  char v205; // [esp+DAh] [ebp-66h]
-  char v206; // [esp+DBh] [ebp-65h]
-  char v207; // [esp+DCh] [ebp-64h]
-  char v208; // [esp+DDh] [ebp-63h]
-  char v209; // [esp+DEh] [ebp-62h]
-  char v210; // [esp+DFh] [ebp-61h]
-  char v211; // [esp+E0h] [ebp-60h]
-  char v212; // [esp+E1h] [ebp-5Fh]
-  char v213; // [esp+E2h] [ebp-5Eh]
-  char v214; // [esp+E3h] [ebp-5Dh]
-  char v215; // [esp+E4h] [ebp-5Ch]
-  char v216; // [esp+E5h] [ebp-5Bh]
-  char v217; // [esp+E6h] [ebp-5Ah]
-  char v218; // [esp+E7h] [ebp-59h]
-  char v219; // [esp+E8h] [ebp-58h]
-  char v220; // [esp+E9h] [ebp-57h]
-  char v221; // [esp+EAh] [ebp-56h]
-  char v222; // [esp+EBh] [ebp-55h]
-  char v223; // [esp+ECh] [ebp-54h]
-  char v224; // [esp+EDh] [ebp-53h]
-  char v225; // [esp+EEh] [ebp-52h]
-  char v226; // [esp+EFh] [ebp-51h]
-  char v227; // [esp+F0h] [ebp-50h]
-  char v228; // [esp+F1h] [ebp-4Fh]
-  char v229; // [esp+F2h] [ebp-4Eh]
-  char v230; // [esp+F3h] [ebp-4Dh]
-  char v231; // [esp+F4h] [ebp-4Ch]
-  char v232; // [esp+F5h] [ebp-4Bh]
-  char v233; // [esp+F6h] [ebp-4Ah]
-  char v234; // [esp+F7h] [ebp-49h]
-  char v235; // [esp+F8h] [ebp-48h]
-  char v236; // [esp+F9h] [ebp-47h]
-  char v237; // [esp+FAh] [ebp-46h]
-  char v238; // [esp+FBh] [ebp-45h]
-  char v239; // [esp+FCh] [ebp-44h]
-  char v240; // [esp+FDh] [ebp-43h]
-  char v241; // [esp+FEh] [ebp-42h]
-  char v242; // [esp+FFh] [ebp-41h]
-  char v243; // [esp+100h] [ebp-40h]
-  char v244; // [esp+101h] [ebp-3Fh]
-  char v245; // [esp+102h] [ebp-3Eh]
-  char v246; // [esp+103h] [ebp-3Dh]
-  char v247; // [esp+104h] [ebp-3Ch]
-  char v248; // [esp+105h] [ebp-3Bh]
-  char v249; // [esp+106h] [ebp-3Ah]
-  char v250; // [esp+107h] [ebp-39h]
-  char v251; // [esp+108h] [ebp-38h]
-  char v252; // [esp+109h] [ebp-37h]
-  char v253; // [esp+10Ah] [ebp-36h]
-  char v254; // [esp+10Bh] [ebp-35h]
-  char v255; // [esp+10Ch] [ebp-34h]
-  char v256; // [esp+10Dh] [ebp-33h]
-  char v257; // [esp+10Eh] [ebp-32h]
-  char v258; // [esp+10Fh] [ebp-31h]
-  char v259; // [esp+110h] [ebp-30h]
-  char v260; // [esp+111h] [ebp-2Fh]
-  char v261; // [esp+112h] [ebp-2Eh]
-  char v262; // [esp+113h] [ebp-2Dh]
-  char v263; // [esp+114h] [ebp-2Ch]
-  char v264; // [esp+115h] [ebp-2Bh]
-  char v265; // [esp+116h] [ebp-2Ah]
-  char v266; // [esp+117h] [ebp-29h]
-  char v267; // [esp+118h] [ebp-28h]
-  int v268; // [esp+11Ch] [ebp-24h]
-  char v269; // [esp+120h] [ebp-20h]
-  char v270; // [esp+121h] [ebp-1Fh]
-  char v271; // [esp+122h] [ebp-1Eh]
-  char v272; // [esp+123h] [ebp-1Dh]
-  char v273; // [esp+124h] [ebp-1Ch]
-  char v274; // [esp+128h] [ebp-18h]
-  char v275; // [esp+129h] [ebp-17h]
-  char v276; // [esp+12Ah] [ebp-16h]
-  char v277; // [esp+12Bh] [ebp-15h]
-  char v278; // [esp+12Ch] [ebp-14h]
-  char v279; // [esp+130h] [ebp-10h]
-  char v280; // [esp+131h] [ebp-Fh]
-  char v281; // [esp+132h] [ebp-Eh]
-  char v282; // [esp+133h] [ebp-Dh]
-  char v283; // [esp+134h] [ebp-Ch]
-  int v284; // [esp+138h] [ebp-8h]
-  int v285; // [esp+13Ch] [ebp-4h]
+  BYTE Dirs[256]; // [esp+14h] [ebp-12Ch]
+  BYTE lltour[5]; // [esp+114h] [ebp-2Ch]
+  int off; // [esp+11Ch] [ebp-24h]
+  BYTE lrtoul[5]; // [esp+120h] [ebp-20h]
+  BYTE ultolr[5]; // [esp+128h] [ebp-18h]
+  BYTE urtoll[5]; // [esp+130h] [ebp-10h]
+  int yd; // [esp+138h] [ebp-8h]
+  int xd; // [esp+13Ch] [ebp-4h]
 
-  v5 = y1;
-  v6 = x1;
-  v7 = 99;
-  v8 = 0;
-  v9 = 0;
-  v10 = 0;
-  v11 = 0;
-  v12 = 0;
-  v13 = 0;
-  v14 = 0;
-  v15 = 0;
-  v16 = 0;
-  v17 = 0;
-  v18 = 0;
-  v19 = 0;
-  v20 = 0;
-  v21 = 0;
-  v22 = 0;
-  v23 = 4;
-  v24 = 2;
-  v25 = 1;
-  v26 = 1;
-  v27 = 0;
-  v28 = 0;
-  v29 = 0;
-  v30 = 0;
-  v31 = 0;
-  v32 = 0;
-  v33 = 0;
-  v34 = 0;
-  v35 = 0;
-  v36 = 0;
-  v37 = 0;
-  v38 = 0;
-  v39 = 4;
-  v40 = 3;
-  v41 = 2;
-  v42 = 1;
-  v43 = 1;
-  v44 = 1;
-  v45 = 1;
-  v46 = 1;
-  v47 = 0;
-  v48 = 0;
-  v49 = 0;
-  v50 = 0;
-  v51 = 0;
-  v52 = 0;
-  v53 = 0;
-  v54 = 0;
-  v55 = 4;
-  v56 = 3;
-  v57 = 3;
-  v58 = 2;
-  v59 = 2;
-  v60 = 1;
-  v61 = 1;
-  v62 = 1;
-  v63 = 1;
-  v64 = 1;
-  v65 = 1;
-  v66 = 1;
-  v67 = 0;
-  v68 = 0;
-  v69 = 0;
-  v70 = 0;
-  v71 = 4;
-  v72 = 4;
-  v73 = 3;
-  v74 = 2;
-  v75 = 2;
-  v76 = 1;
-  v77 = 1;
-  v78 = 1;
-  v79 = 1;
-  v80 = 1;
-  v81 = 1;
-  v82 = 1;
-  v83 = 1;
-  v84 = 1;
-  v85 = 1;
-  v86 = 1;
-  v87 = 4;
-  v88 = 4;
-  v89 = 3;
-  v90 = 3;
-  v91 = 2;
-  v92 = 2;
-  v93 = 2;
-  v94 = 1;
-  v95 = 1;
-  v96 = 1;
-  v97 = 1;
-  v98 = 1;
-  v99 = 1;
-  v100 = 1;
-  v101 = 1;
-  v102 = 1;
-  v103 = 4;
-  v104 = 4;
-  v105 = 3;
-  v106 = 3;
-  v107 = 2;
-  v108 = 2;
-  v109 = 2;
-  v110 = 2;
-  v111 = 2;
-  v112 = 1;
-  v113 = 1;
-  v114 = 1;
-  v115 = 1;
-  v116 = 1;
-  v117 = 1;
-  v118 = 1;
-  v119 = 4;
-  v120 = 4;
-  v121 = 3;
-  v122 = 3;
-  v123 = 3;
-  v124 = 3;
-  v125 = 2;
-  v126 = 2;
-  v127 = 2;
-  v128 = 2;
-  v129 = 1;
-  v130 = 1;
-  v131 = 1;
-  v132 = 1;
-  v133 = 1;
-  v134 = 1;
-  v135 = 4;
-  v136 = 4;
-  v137 = 4;
-  v138 = 3;
-  v139 = 3;
-  v140 = 3;
-  v141 = 2;
-  v142 = 2;
-  v143 = 2;
-  v144 = 2;
-  v145 = 2;
-  v146 = 1;
-  v147 = 1;
-  v148 = 1;
-  v149 = 1;
-  v150 = 1;
-  v151 = 4;
-  v152 = 4;
-  v153 = 4;
-  v154 = 3;
-  v155 = 3;
-  v156 = 3;
-  v157 = 3;
-  v158 = 2;
-  v159 = 2;
-  v160 = 2;
-  v161 = 2;
-  v162 = 2;
-  v163 = 1;
-  v164 = 1;
-  v165 = 1;
-  v166 = 1;
-  v167 = 4;
-  v168 = 4;
-  v169 = 4;
-  v170 = 3;
-  v171 = 3;
-  v172 = 3;
-  v173 = 3;
-  v174 = 3;
-  v175 = 2;
-  v176 = 2;
-  v177 = 2;
-  v178 = 2;
-  v179 = 2;
-  v180 = 2;
-  v181 = 1;
-  v182 = 1;
-  v183 = 4;
-  v184 = 4;
-  v185 = 4;
-  v186 = 3;
-  v187 = 3;
-  v188 = 3;
-  v189 = 3;
-  v190 = 3;
-  v191 = 3;
-  v192 = 2;
-  v193 = 2;
-  v194 = 2;
-  v195 = 2;
-  v196 = 2;
-  v197 = 2;
-  v198 = 1;
-  v199 = 4;
-  v200 = 4;
-  v201 = 4;
-  v202 = 4;
-  v203 = 3;
-  v204 = 3;
-  v205 = 3;
-  v206 = 3;
-  v207 = 3;
-  v208 = 3;
-  v209 = 2;
-  v210 = 2;
-  v211 = 2;
-  v212 = 2;
-  v213 = 2;
-  v214 = 2;
-  v215 = 4;
-  v216 = 4;
-  v217 = 4;
-  v218 = 4;
-  v219 = 3;
-  v220 = 3;
-  v221 = 3;
-  v222 = 3;
-  v223 = 3;
-  v224 = 3;
-  v225 = 2;
-  v226 = 2;
-  v227 = 2;
-  v228 = 2;
-  v229 = 2;
-  v230 = 2;
-  v231 = 4;
-  v232 = 4;
-  v233 = 4;
-  v234 = 4;
-  v235 = 3;
-  v236 = 3;
-  v237 = 3;
-  v238 = 3;
-  v239 = 3;
-  v240 = 3;
-  v241 = 3;
-  v242 = 2;
-  v243 = 2;
-  v244 = 2;
-  v245 = 2;
-  v246 = 2;
-  v247 = 4;
-  v248 = 4;
-  v249 = 4;
-  v250 = 4;
-  v251 = 3;
-  v252 = 3;
-  v253 = 3;
-  v254 = 3;
-  v255 = 3;
-  v256 = 3;
-  v257 = 3;
-  v258 = 3;
-  v259 = 2;
-  v260 = 2;
-  v261 = 2;
-  v262 = 2;
-  v279 = 6;
-  v280 = 7;
-  v281 = 8;
-  v282 = 9;
-  v283 = 10;
-  v274 = 6;
-  v275 = 5;
-  v276 = 4;
-  v277 = 3;
-  v278 = 2;
-  v263 = 14;
-  v264 = 13;
-  v265 = 12;
-  v266 = 11;
-  v267 = 10;
-  v269 = 14;
-  v270 = 15;
-  v271 = 0;
-  v272 = 1;
-  v273 = 2;
-  v285 = abs(x2 - x1);
-  if ( v285 > 15 )
-    v285 = 15;
-  v284 = abs(y2 - v5);
-  if ( v284 > 15 )
-    v284 = 15;
-  v268 = (unsigned __int8)*(&v7 + 16 * v284 + v285);
-  if ( x2 >= v6 )
+  Dirs[0] = 99;
+  Dirs[1] = 0;
+  Dirs[2] = 0;
+  Dirs[3] = 0;
+  Dirs[4] = 0;
+  Dirs[5] = 0;
+  Dirs[6] = 0;
+  Dirs[7] = 0;
+  Dirs[8] = 0;
+  Dirs[9] = 0;
+  Dirs[10] = 0;
+  Dirs[11] = 0;
+  Dirs[12] = 0;
+  Dirs[13] = 0;
+  Dirs[14] = 0;
+  Dirs[15] = 0;
+  Dirs[16] = 4;
+  Dirs[17] = 2;
+  Dirs[18] = 1;
+  Dirs[19] = 1;
+  Dirs[20] = 0;
+  Dirs[21] = 0;
+  Dirs[22] = 0;
+  Dirs[23] = 0;
+  Dirs[24] = 0;
+  Dirs[25] = 0;
+  Dirs[26] = 0;
+  Dirs[27] = 0;
+  Dirs[28] = 0;
+  Dirs[29] = 0;
+  Dirs[30] = 0;
+  Dirs[31] = 0;
+  Dirs[32] = 4;
+  Dirs[33] = 3;
+  Dirs[34] = 2;
+  Dirs[35] = 1;
+  Dirs[36] = 1;
+  Dirs[37] = 1;
+  Dirs[38] = 1;
+  Dirs[39] = 1;
+  Dirs[40] = 0;
+  Dirs[41] = 0;
+  Dirs[42] = 0;
+  Dirs[43] = 0;
+  Dirs[44] = 0;
+  Dirs[45] = 0;
+  Dirs[46] = 0;
+  Dirs[47] = 0;
+  Dirs[48] = 4;
+  Dirs[49] = 3;
+  Dirs[50] = 3;
+  Dirs[51] = 2;
+  Dirs[52] = 2;
+  Dirs[53] = 1;
+  Dirs[54] = 1;
+  Dirs[55] = 1;
+  Dirs[56] = 1;
+  Dirs[57] = 1;
+  Dirs[58] = 1;
+  Dirs[59] = 1;
+  Dirs[60] = 0;
+  Dirs[61] = 0;
+  Dirs[62] = 0;
+  Dirs[63] = 0;
+  Dirs[64] = 4;
+  Dirs[65] = 4;
+  Dirs[66] = 3;
+  Dirs[67] = 2;
+  Dirs[68] = 2;
+  Dirs[69] = 1;
+  Dirs[70] = 1;
+  Dirs[71] = 1;
+  Dirs[72] = 1;
+  Dirs[73] = 1;
+  Dirs[74] = 1;
+  Dirs[75] = 1;
+  Dirs[76] = 1;
+  Dirs[77] = 1;
+  Dirs[78] = 1;
+  Dirs[79] = 1;
+  Dirs[80] = 4;
+  Dirs[81] = 4;
+  Dirs[82] = 3;
+  Dirs[83] = 3;
+  Dirs[84] = 2;
+  Dirs[85] = 2;
+  Dirs[86] = 2;
+  Dirs[87] = 1;
+  Dirs[88] = 1;
+  Dirs[89] = 1;
+  Dirs[90] = 1;
+  Dirs[91] = 1;
+  Dirs[92] = 1;
+  Dirs[93] = 1;
+  Dirs[94] = 1;
+  Dirs[95] = 1;
+  Dirs[96] = 4;
+  Dirs[97] = 4;
+  Dirs[98] = 3;
+  Dirs[99] = 3;
+  Dirs[100] = 2;
+  Dirs[101] = 2;
+  Dirs[102] = 2;
+  Dirs[103] = 2;
+  Dirs[104] = 2;
+  Dirs[105] = 1;
+  Dirs[106] = 1;
+  Dirs[107] = 1;
+  Dirs[108] = 1;
+  Dirs[109] = 1;
+  Dirs[110] = 1;
+  Dirs[111] = 1;
+  Dirs[112] = 4;
+  Dirs[113] = 4;
+  Dirs[114] = 3;
+  Dirs[115] = 3;
+  Dirs[116] = 3;
+  Dirs[117] = 3;
+  Dirs[118] = 2;
+  Dirs[119] = 2;
+  Dirs[120] = 2;
+  Dirs[121] = 2;
+  Dirs[122] = 1;
+  Dirs[123] = 1;
+  Dirs[124] = 1;
+  Dirs[125] = 1;
+  Dirs[126] = 1;
+  Dirs[127] = 1;
+  Dirs[128] = 4;
+  Dirs[129] = 4;
+  Dirs[130] = 4;
+  Dirs[131] = 3;
+  Dirs[132] = 3;
+  Dirs[133] = 3;
+  Dirs[134] = 2;
+  Dirs[135] = 2;
+  Dirs[136] = 2;
+  Dirs[137] = 2;
+  Dirs[138] = 2;
+  Dirs[139] = 1;
+  Dirs[140] = 1;
+  Dirs[141] = 1;
+  Dirs[142] = 1;
+  Dirs[143] = 1;
+  Dirs[144] = 4;
+  Dirs[145] = 4;
+  Dirs[146] = 4;
+  Dirs[147] = 3;
+  Dirs[148] = 3;
+  Dirs[149] = 3;
+  Dirs[150] = 3;
+  Dirs[151] = 2;
+  Dirs[152] = 2;
+  Dirs[153] = 2;
+  Dirs[154] = 2;
+  Dirs[155] = 2;
+  Dirs[156] = 1;
+  Dirs[157] = 1;
+  Dirs[158] = 1;
+  Dirs[159] = 1;
+  Dirs[160] = 4;
+  Dirs[161] = 4;
+  Dirs[162] = 4;
+  Dirs[163] = 3;
+  Dirs[164] = 3;
+  Dirs[165] = 3;
+  Dirs[166] = 3;
+  Dirs[167] = 3;
+  Dirs[168] = 2;
+  Dirs[169] = 2;
+  Dirs[170] = 2;
+  Dirs[171] = 2;
+  Dirs[172] = 2;
+  Dirs[173] = 2;
+  Dirs[174] = 1;
+  Dirs[175] = 1;
+  Dirs[176] = 4;
+  Dirs[177] = 4;
+  Dirs[178] = 4;
+  Dirs[179] = 3;
+  Dirs[180] = 3;
+  Dirs[181] = 3;
+  Dirs[182] = 3;
+  Dirs[183] = 3;
+  Dirs[184] = 3;
+  Dirs[185] = 2;
+  Dirs[186] = 2;
+  Dirs[187] = 2;
+  Dirs[188] = 2;
+  Dirs[189] = 2;
+  Dirs[190] = 2;
+  Dirs[191] = 1;
+  Dirs[192] = 4;
+  Dirs[193] = 4;
+  Dirs[194] = 4;
+  Dirs[195] = 4;
+  Dirs[196] = 3;
+  Dirs[197] = 3;
+  Dirs[198] = 3;
+  Dirs[199] = 3;
+  Dirs[200] = 3;
+  Dirs[201] = 3;
+  Dirs[202] = 2;
+  Dirs[203] = 2;
+  Dirs[204] = 2;
+  Dirs[205] = 2;
+  Dirs[206] = 2;
+  Dirs[207] = 2;
+  Dirs[208] = 4;
+  Dirs[209] = 4;
+  Dirs[210] = 4;
+  Dirs[211] = 4;
+  Dirs[212] = 3;
+  Dirs[213] = 3;
+  Dirs[214] = 3;
+  Dirs[215] = 3;
+  Dirs[216] = 3;
+  Dirs[217] = 3;
+  Dirs[218] = 2;
+  Dirs[219] = 2;
+  Dirs[220] = 2;
+  Dirs[221] = 2;
+  Dirs[222] = 2;
+  Dirs[223] = 2;
+  Dirs[224] = 4;
+  Dirs[225] = 4;
+  Dirs[226] = 4;
+  Dirs[227] = 4;
+  Dirs[228] = 3;
+  Dirs[229] = 3;
+  Dirs[230] = 3;
+  Dirs[231] = 3;
+  Dirs[232] = 3;
+  Dirs[233] = 3;
+  Dirs[234] = 3;
+  Dirs[235] = 2;
+  Dirs[236] = 2;
+  Dirs[237] = 2;
+  Dirs[238] = 2;
+  Dirs[239] = 2;
+  Dirs[240] = 4;
+  Dirs[241] = 4;
+  Dirs[242] = 4;
+  Dirs[243] = 4;
+  Dirs[244] = 3;
+  Dirs[245] = 3;
+  Dirs[246] = 3;
+  Dirs[247] = 3;
+  Dirs[248] = 3;
+  Dirs[249] = 3;
+  Dirs[250] = 3;
+  Dirs[251] = 3;
+  Dirs[252] = 2;
+  Dirs[253] = 2;
+  Dirs[254] = 2;
+  Dirs[255] = 2;
+  urtoll[0] = 6;
+  urtoll[1] = 7;
+  urtoll[2] = 8;
+  urtoll[3] = 9;
+  urtoll[4] = 10;
+  ultolr[0] = 6;
+  ultolr[1] = 5;
+  ultolr[2] = 4;
+  ultolr[3] = 3;
+  ultolr[4] = 2;
+  lltour[0] = 14;
+  lltour[1] = 13;
+  lltour[2] = 12;
+  lltour[3] = 11;
+  lltour[4] = 10;
+  lrtoul[0] = 14;
+  lrtoul[1] = 15;
+  lrtoul[2] = 0;
+  lrtoul[3] = 1;
+  lrtoul[4] = 2;
+  xd = abs(x2 - x1);
+  if ( xd > 15 )
+    xd = 15;
+  yd = abs(y2 - y1);
+  if ( yd > 15 )
+    yd = 15;
+  off = Dirs[16 * yd + xd];
+  if ( x2 >= x1 )
   {
-    if ( y2 >= v5 )
-      v268 = (unsigned __int8)*(&v269 + v268);
+    if ( y2 >= y1 )
+      off = lrtoul[off];
     else
-      v268 = (unsigned __int8)*(&v263 + v268);
+      off = lltour[off];
   }
-  else if ( y2 >= v5 )
+  else if ( y2 >= y1 )
   {
-    v268 = (unsigned __int8)*(&v274 + v268);
+    off = ultolr[off];
   }
   else
   {
-    v268 = (unsigned __int8)*(&v279 + v268);
+    off = urtoll[off];
   }
-  return v268;
+  return off;
 }
 
 //----- (0043BF17) --------------------------------------------------------
@@ -1256,37 +714,32 @@ void __fastcall DeleteMissile(int mi, int i)
 //----- (0043BF7C) --------------------------------------------------------
 void __fastcall GetMissileVel(int i, int sx, int sy, int dx, int dy, int v)
 {
-  int v6; // ST28_4
   double v7; // ST34_8
-  double v8; // st7
-  double v9; // ST2C_8
-  double v10; // st7
+  double v8; // ST2C_8
+  double v9; // ST3C_8
 
-  v6 = i;
   v7 = (double)((32 * (dx - sx) - 32 * (dy - sy)) << 16);
   v8 = (double)((32 * (dx - sx) + 32 * (dy - sy)) << 16);
-  v9 = v8;
-  v10 = v8 * v8 + v7 * v7;
-  sub_4A7F40(v10);
-  missile[v6]._mixvel = (signed __int64)((double)(v << 16) * v7 / v10);
-  missile[v6]._miyvel = (signed __int64)((double)(v << 15) * v9 / v10);
+  v9 = sqrt(v8 * v8 + v7 * v7);
+  missile[i]._mixvel = (signed __int64)((double)(v << 16) * v7 / v9);
+  missile[i]._miyvel = (signed __int64)((double)(v << 15) * v8 / v9);
 }
 
 //----- (0043C04B) --------------------------------------------------------
 void __fastcall PutMissile(int i)
 {
-  int v1; // [esp+10h] [ebp-8h]
-  int v2; // [esp+14h] [ebp-4h]
+  int y; // [esp+10h] [ebp-8h]
+  int x; // [esp+14h] [ebp-4h]
 
   if ( !missile[i]._miDelFlag )
   {
-    v2 = missile[i]._mix;
-    v1 = missile[i]._miy;
-    dFlags[v2][v1] |= 1u;
-    if ( dMissile[v2][v1] )
-      dMissile[v2][v1] = -1;
+    x = missile[i]._mix;
+    y = missile[i]._miy;
+    dFlags[x][y] |= 1u;
+    if ( dMissile[x][y] )
+      dMissile[x][y] = -1;
     else
-      dMissile[v2][v1] = i + 1;
+      dMissile[x][y] = i + 1;
     if ( missile[i]._miPreFlag )
       MissilePreFlag = 1;
   }
@@ -1301,13 +754,13 @@ void __fastcall GetMissilePos(int i)
   int v4; // [esp+18h] [ebp-10h]
   int v5; // [esp+18h] [ebp-10h]
   int v6; // [esp+1Ch] [ebp-Ch]
-  int v7; // [esp+20h] [ebp-8h]
-  int v8; // [esp+24h] [ebp-4h]
+  int yoff; // [esp+20h] [ebp-8h]
+  int xoff; // [esp+24h] [ebp-4h]
 
-  v8 = missile[i]._mitxoff >> 16;
-  v7 = missile[i]._mityoff >> 16;
-  v4 = v8 + 2 * v7;
-  v1 = 2 * v7 - v8;
+  xoff = missile[i]._mitxoff >> 16;
+  yoff = missile[i]._mityoff >> 16;
+  v4 = xoff + 2 * yoff;
+  v1 = 2 * yoff - xoff;
   if ( v4 >= 0 )
   {
     v6 = v4 >> 3;
@@ -1325,67 +778,66 @@ void __fastcall GetMissilePos(int i)
   }
   else
   {
-    v3 = -((v8 - 2 * v7) >> 3);
-    v2 = -((v8 - 2 * v7) >> 6);
+    v3 = -((xoff - 2 * yoff) >> 3);
+    v2 = -((xoff - 2 * yoff) >> 6);
   }
   missile[i]._mix = v5 + missile[i]._misx;
   missile[i]._miy = v2 + missile[i]._misy;
-  missile[i]._mixoff = v8 - 32 * (v5 - v2);
-  missile[i]._miyoff = v7 - 16 * (v5 + v2);
+  missile[i]._mixoff = xoff - 32 * (v5 - v2);
+  missile[i]._miyoff = yoff - 16 * (v5 + v2);
   ChangeLightOff(missile[i]._mlid, v6 - 8 * v5, v3 - 8 * v2);
 }
 
 //----- (0043C370) --------------------------------------------------------
+// PSX
 void __fastcall MoveMissilePos(int i)
 {
-  int v1; // [esp+10h] [ebp-14h]
-  signed int v2; // [esp+14h] [ebp-10h]
-  signed int v3; // [esp+18h] [ebp-Ch]
+  signed int dy_; // [esp+14h] [ebp-10h]
+  signed int dx_; // [esp+18h] [ebp-Ch]
 
-  v1 = i;
   switch ( missile[i]._mimfnum )
   {
     case 0:
-      v3 = 1;
-      v2 = 1;
+      dx_ = 1;
+      dy_ = 1;
       break;
     case 1:
-      v3 = 1;
-      v2 = 1;
+      dx_ = 1;
+      dy_ = 1;
       break;
     case 2:
-      v3 = 0;
-      v2 = 1;
+      dx_ = 0;
+      dy_ = 1;
       break;
     case 3:
-      v3 = 0;
-      v2 = 0;
+      dx_ = 0;
+      dy_ = 0;
       break;
     case 4:
-      v3 = 0;
-      v2 = 0;
+      dx_ = 0;
+      dy_ = 0;
       break;
     case 5:
-      v3 = 0;
-      v2 = 0;
+      dx_ = 0;
+      dy_ = 0;
       break;
     case 6:
-      v3 = 1;
-      v2 = 0;
+      dx_ = 1;
+      dy_ = 0;
       break;
     case 7:
-      v3 = 1;
-      v2 = 1;
+      dx_ = 1;
+      dy_ = 1;
       break;
     default:
       break;
   }
-  if ( PosOkMonst(missile[i]._misource, v3 + missile[i]._mix, v2 + missile[i]._miy) )
+  if ( PosOkMonst(missile[i]._misource, dx_ + missile[i]._mix, dy_ + missile[i]._miy) )
   {
-    missile[v1]._mix += v3;
-    missile[v1]._miy += v2;
-    missile[v1]._mixoff -= 32 * (v3 - v2);
-    missile[v1]._miyoff -= 16 * (v3 + v2);
+    missile[i]._mix += dx_;
+    missile[i]._miy += dy_;
+    missile[i]._mixoff -= 32 * (dx_ - dy_);
+    missile[i]._miyoff -= 16 * (dx_ + dy_);
   }
 }
 
