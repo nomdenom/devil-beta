@@ -335,7 +335,7 @@ void __cdecl DrawAutomapPlr()
     v0 = plr[myplr].WorldX;
     v3 = plr[myplr].WorldY;
   }
-  x1 = (Scrollinfo._sxoff * AutoMapScale / 100 >> 1)
+  x1 = (ScrollInfo._sxoff * AutoMapScale / 100 >> 1)
      + (AutoMapScale * plr[myplr]._pxoff / 100 >> 1)
      + AutoMapYPos * (v0 - ViewX - 2 * AutoMapXOfs)
      + 384
@@ -344,7 +344,7 @@ void __cdecl DrawAutomapPlr()
     x1 -= 160;
   if ( chrflag || questlog )
     x1 += 160;
-  y1 = (AutoMapScale * Scrollinfo._syoff / 100 >> 1)
+  y1 = (AutoMapScale * ScrollInfo._syoff / 100 >> 1)
      + (AutoMapScale * plr[myplr]._pyoff / 100 >> 1)
      + (v3 - ViewY - 2 * AutoMapYOfs) * AMPlayerX
      + (v0 - ViewX - 2 * AutoMapXOfs) * AMPlayerX
@@ -360,14 +360,14 @@ void __cdecl DrawAutomapPlr()
     case 1:
       engine_draw_automap_pixels(
         x1,
-        (AutoMapScale * Scrollinfo._syoff / 100 >> 1)
+        (AutoMapScale * ScrollInfo._syoff / 100 >> 1)
       + (AutoMapScale * plr[myplr]._pyoff / 100 >> 1)
       + (v3 - ViewY - 2 * AutoMapYOfs) * AMPlayerX
       + (v0 - ViewX - 2 * AutoMapXOfs) * AMPlayerX
       + 336
       - AMPlayerX,
         x1 - AutoMapYPos,
-        (AutoMapScale * Scrollinfo._syoff / 100 >> 1)
+        (AutoMapScale * ScrollInfo._syoff / 100 >> 1)
       + (AutoMapScale * plr[myplr]._pyoff / 100 >> 1)
       + (v3 - ViewY - 2 * AutoMapYOfs) * AMPlayerX
       + (v0 - ViewX - 2 * AutoMapXOfs) * AMPlayerX
@@ -404,14 +404,14 @@ void __cdecl DrawAutomapPlr()
     case 7:
       engine_draw_automap_pixels(
         x1,
-        (AutoMapScale * Scrollinfo._syoff / 100 >> 1)
+        (AutoMapScale * ScrollInfo._syoff / 100 >> 1)
       + (AutoMapScale * plr[myplr]._pyoff / 100 >> 1)
       + (v3 - ViewY - 2 * AutoMapYOfs) * AMPlayerX
       + (v0 - ViewX - 2 * AutoMapXOfs) * AMPlayerX
       + 336
       - AMPlayerX,
         AutoMapYPos + x1,
-        (AutoMapScale * Scrollinfo._syoff / 100 >> 1)
+        (AutoMapScale * ScrollInfo._syoff / 100 >> 1)
       + (AutoMapScale * plr[myplr]._pyoff / 100 >> 1)
       + (v3 - ViewY - 2 * AutoMapYOfs) * AMPlayerX
       + (v0 - ViewX - 2 * AutoMapXOfs) * AMPlayerX
@@ -512,7 +512,7 @@ void __cdecl DrawAutomap()
       --AutoMapYOfs;
     automap_628B3C_y += AutoMapYOfs;
     v2 = automap_628B48_xoff[(AutoMapScale - 50) / 5];
-    if ( Scrollinfo._sxoff + Scrollinfo._syoff )
+    if ( ScrollInfo._sxoff + ScrollInfo._syoff )
       ++v2;
     v14 = automap_628B38_x - v2;
     v11 = automap_628B3C_y - 1;
@@ -536,8 +536,8 @@ void __cdecl DrawAutomap()
       v4 += AutoMapYPos;
       v0 -= AMPlayerX;
     }
-    v5 = (Scrollinfo._sxoff * AutoMapScale / 100 >> 1) + v4;
-    v1 = (AutoMapScale * Scrollinfo._syoff / 100 >> 1) + v0;
+    v5 = (ScrollInfo._sxoff * AutoMapScale / 100 >> 1) + v4;
+    v1 = (AutoMapScale * ScrollInfo._syoff / 100 >> 1) + v0;
     if ( invflag || sbookflag )
       v5 -= 160;
     if ( chrflag || questlog )

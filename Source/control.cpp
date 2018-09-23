@@ -608,7 +608,7 @@ void __cdecl ClearPanel()
 //----- (00415C1E) --------------------------------------------------------
 void __fastcall DrawPanelBox(int x, int y, WORD w, WORD h, int sx, int sy)
 {
-  char *v6; // esi
+  BYTE *v6; // esi
   BYTE *v7; // edi
   int v8; // edx
   unsigned int v9; // ecx
@@ -660,13 +660,13 @@ void __fastcall SetFlaskHeight(char *buf, int min, int max, int c, int r)
 }
 
 //----- (00415D26) --------------------------------------------------------
-void __fastcall DrawFlask(char *Xbuf, int a2, int Xbufof, char *Xgbuf, int Xgbufoffset, int a6)
+void __fastcall DrawFlask(BYTE *Xbuf, int a2, int Xbufof, BYTE *Xgbuf, int Xgbufoffset, int a6)
 {
-  char *v6; // esi
-  char *v7; // edi
+  BYTE *v6; // esi
+  BYTE *v7; // edi
   int v8; // edx
   signed int v9; // ecx
-  char v10; // al
+  BYTE v10; // al
 
   v6 = &Xbuf[Xbufof];
   v7 = &Xgbuf[Xgbufoffset];
@@ -694,9 +694,9 @@ void __cdecl DrawLifeFlask()
   if ( a6 > 11 )
     a6 = 11;
   a6a = a6 + 2;
-  DrawFlask((char *)pLifeBuff, 88, 277, (char *)gpBuffer, 383405, a6a);
+  DrawFlask(pLifeBuff, 88, 277, gpBuffer, 383405, a6a);
   if ( a6a != 13 )
-    DrawFlask(pBtmBuff, 640, 640 * a6a + 2029, (char *)gpBuffer, 768 * a6a + 383405, 13 - a6a);
+    DrawFlask(pBtmBuff, 640, 640 * a6a + 2029, gpBuffer, 768 * a6a + 383405, 13 - a6a);
 }
 
 //----- (00415E31) --------------------------------------------------------
@@ -724,9 +724,9 @@ void __cdecl DrawManaFlask()
   if ( a6 > 11 )
     a6 = 11;
   a6a = a6 + 2;
-  DrawFlask((char *)pManaBuff, 88, 277, (char *)gpBuffer, 383771, a6a);
+  DrawFlask(pManaBuff, 88, 277, gpBuffer, 383771, a6a);
   if ( a6a != 13 )
-    DrawFlask(pBtmBuff, 640, 640 * a6a + 2395, (char *)gpBuffer, 768 * a6a + 383771, 13 - a6a);
+    DrawFlask(pBtmBuff, 640, 640 * a6a + 2395, gpBuffer, 768 * a6a + 383771, 13 - a6a);
 }
 
 //----- (00415FEF) --------------------------------------------------------
@@ -787,12 +787,12 @@ void __cdecl InitControlPan()
   assert(!pBtmBuff, "CONTROL.CPP", 1016);
   if ( gbMaxPlayers == 1 )
   {
-    pBtmBuff = (char *)DiabloAllocPtr(0x16800, 1018, "CONTROL.CPP");
+    pBtmBuff = (BYTE *)DiabloAllocPtr(0x16800, 1018, "CONTROL.CPP");
     memset(pBtmBuff, 0, 0x16800u);
   }
   else
   {
-    pBtmBuff = (char *)DiabloAllocPtr(0x2D000, 1021, "CONTROL.CPP");
+    pBtmBuff = (BYTE *)DiabloAllocPtr(0x2D000, 1021, "CONTROL.CPP");
     memset(pBtmBuff, 0, 0x2D000u);
   }
   pManaBuff = (BYTE *)DiabloAllocPtr(0x1E40, 1024, "CONTROL.CPP");
@@ -804,7 +804,7 @@ void __cdecl InitControlPan()
   Trans = (char *)LoadFileInMem("CtrlPan\\SpelIcon.CEL", 0, 1030, "CONTROL.CPP");
   SetSpellTrans(0);
   pStatusPanel = (char *)LoadFileInMem("CtrlPan\\Panel8.CEL", 0, 1034, "CONTROL.CPP");
-  CelDecodeRect((BYTE *)pBtmBuff, 0, 143, 640, pStatusPanel, 1, 640);
+  CelDecodeRect(pBtmBuff, 0, 143, 640, pStatusPanel, 1, 640);
   mem_free_dbg(pStatusPanel, 1036, "CONTROL.CPP");
   pStatusPanel = (char *)LoadFileInMem("CtrlPan\\P8Bulbs.CEL", 0, 1037, "CONTROL.CPP");
   CelDecodeRect(pLifeBuff, 0, 87, 88, pStatusPanel, 1, 88);
@@ -813,7 +813,7 @@ void __cdecl InitControlPan()
   if ( gbMaxPlayers != 1 )
   {
     pTalkPanel = (char *)LoadFileInMem("CtrlPan\\TalkPanl.CEL", 0, 1042, "CONTROL.CPP");
-    CelDecodeRect((BYTE *)pBtmBuff, 0, 287, 640, pTalkPanel, 1, 640);
+    CelDecodeRect(pBtmBuff, 0, 287, 640, pTalkPanel, 1, 640);
     mem_free_dbg(pTalkPanel, 1044, "CONTROL.CPP");
     pMultiBtns = LoadFileInMem("CtrlPan\\P8But2.CEL", 0, 1045, "CONTROL.CPP");
     talkflag = 0;

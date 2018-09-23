@@ -963,8 +963,8 @@ void __fastcall T_DrawGame(int x, int y)
   scr_pix_height = 352;
   gendung_5847D0_unused = 10;
   gendung_5847D4_unused = 11;
-  sx = Scrollinfo._sxoff + 64;
-  sy = Scrollinfo._syoff + 175;
+  sx = ScrollInfo._sxoff + 64;
+  sy = ScrollInfo._syoff + 175;
   xa = x - 10;
   ya = y - 1;
   a5 = 10;
@@ -973,7 +973,7 @@ void __fastcall T_DrawGame(int x, int y)
   {
     xa += 2;
     ya = y - 3;
-    sx = Scrollinfo._sxoff + 352;
+    sx = ScrollInfo._sxoff + 352;
     a5 = 6;
   }
   if ( invflag || sbookflag )
@@ -983,18 +983,18 @@ void __fastcall T_DrawGame(int x, int y)
     sx -= 32;
     a5 = 6;
   }
-  switch ( Scrollinfo._sdir )
+  switch ( ScrollInfo._sdir )
   {
     case 0:
       break;
     case 1:
-      sy = Scrollinfo._syoff + 143;
+      sy = ScrollInfo._syoff + 143;
       --xa;
       --ya;
       v10 = 6;
       break;
     case 2:
-      sy = Scrollinfo._syoff + 143;
+      sy = ScrollInfo._syoff + 143;
       --xa;
       --ya;
       ++a5;
@@ -1025,7 +1025,7 @@ void __fastcall T_DrawGame(int x, int y)
       break;
     case 8:
       sx -= 64;
-      sy = Scrollinfo._syoff + 143;
+      sy = ScrollInfo._syoff + 143;
       xa -= 2;
       ++a5;
       v10 = 6;
@@ -1095,24 +1095,24 @@ void __fastcall T_DrawZoom(int x, int y)
   scr_pix_height = 192;
   gendung_5847D0_unused = 6;
   gendung_5847D4_unused = 6;
-  sx = Scrollinfo._sxoff + 64;
-  sy = Scrollinfo._syoff + 143;
+  sx = ScrollInfo._sxoff + 64;
+  sy = ScrollInfo._syoff + 143;
   xa = x - 6;
   ya = y - 1;
   a5 = 6;
   v17 = 0;
-  switch ( Scrollinfo._sdir )
+  switch ( ScrollInfo._sdir )
   {
     case 0:
       break;
     case 1:
-      sy = Scrollinfo._syoff + 111;
+      sy = ScrollInfo._syoff + 111;
       xa = x - 7;
       ya = y - 2;
       v17 = 1;
       break;
     case 2:
-      sy = Scrollinfo._syoff + 111;
+      sy = ScrollInfo._syoff + 111;
       xa = x - 7;
       ya = y - 2;
       a5 = 7;
@@ -1129,21 +1129,21 @@ void __fastcall T_DrawZoom(int x, int y)
       v17 = 1;
       break;
     case 6:
-      sx = Scrollinfo._sxoff;
+      sx = ScrollInfo._sxoff;
       xa = x - 7;
       ya = y;
       a5 = 7;
       v17 = 1;
       break;
     case 7:
-      sx = Scrollinfo._sxoff;
+      sx = ScrollInfo._sxoff;
       xa = x - 7;
       ya = y;
       a5 = 7;
       break;
     case 8:
-      sx = Scrollinfo._sxoff;
-      sy = Scrollinfo._syoff + 111;
+      sx = ScrollInfo._sxoff;
+      sy = ScrollInfo._syoff + 111;
       xa = x - 8;
       a5 = 7;
       v17 = 1;

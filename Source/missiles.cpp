@@ -4170,8 +4170,8 @@ void __fastcall MI_Teleport(int i)
       }
       if ( myplr == v2 )
       {
-        ViewX = plr[v2].WorldX - Scrollinfo._sdx;
-        ViewY = plr[v2].WorldY - Scrollinfo._sdy;
+        ViewX = plr[v2].WorldX - ScrollInfo._sdx;
+        ViewY = plr[v2].WorldY - ScrollInfo._sdy;
       }
     }
   }

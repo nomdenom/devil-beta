@@ -196,7 +196,7 @@ void __fastcall multi_msg_countdown()
 //----- (0041C824) --------------------------------------------------------
 void __fastcall multi_parse_turn(int pnum)
 {
-  RemovePlrFromMap(pnum);
+  FixPlrWalkTags(pnum);
   RemovePortalMissile(pnum);
   DeactivatePortal(pnum);
   EventPlrMsg("Player '%s' just left the game", plr[pnum]._pName);
@@ -411,10 +411,10 @@ void __cdecl multi_process_network_packets()
             v3 = abs(plr[pnum].WorldY - v4[1]);
             if ( v0 > 3 || v3 > 3 )
             {
-              RemovePlrFromMap(pnum);
+              FixPlrWalkTags(pnum);
               plr[pnum]._poldx = plr[pnum].WorldX;
               plr[pnum]._poldy = plr[pnum].WorldY;
-              RemovePlrFromMap(pnum);
+              FixPlrWalkTags(pnum);
               plr[pnum].WorldX = *v4;
               plr[pnum].WorldY = v4[1];
               dPlayer[plr[pnum].WorldX][plr[pnum].WorldY] = pnum + 1;

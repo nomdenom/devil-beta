@@ -2754,40 +2754,35 @@ void __fastcall PrintItemPower(char power, ItemStruct *item)
 //----- (00429759) --------------------------------------------------------
 void __cdecl DrawUBack()
 {
-  BYTE *v0; // edi
-  signed int v1; // edx
-  signed int v2; // ecx
-  int v3; // edi
-  signed int v4; // ecx
-  _BYTE *v5; // edi
-  signed int v6; // ecx
+  BYTE *buf; // edi MAPDST
+  signed int i; // edx MAPDST
+  signed int j; // ecx MAPDST
 
   CelDecodeOnly(88, 487, pSTextBoxCels, 1, 271);
-  v0 = gpBuffer + 371803;
-  for (v1 = 148; v1; --v1)
+  buf = gpBuffer + 371803;
+  for (i = 148; i; --i)
   {
-    for (v2 = 132; v2; --v2)
+    for (j = 132; j; --j)
     {
-      *v0 = 0;
-      v0 += 2;
+      *buf = 0;
+      buf += 2;
     }
-    *v0 = 0;
-    v3 = (int)(v0 - 1032);
-    for (v4 = 132; v4; --v4)
+    *buf = 0;
+    buf -= 1032;
+    for (j = 132; j; --j)
     {
-      v5 = (_BYTE *)(v3 + 1);
-      *v5 = 0;
-      v3 = (int)(v5 + 1);
+      *++buf = 0;
+      ++buf;
     }
-    v0 = (BYTE *)(v3 - 1032);
+    buf -= 1032;
   }
   
-  for (v6 = 132; v6; --v6)
+  for (i = 132; i; --i)
   {
-    *v0 = 0;
-    v0 += 2;
+    *buf = 0;
+    buf += 2;
   }
-  *v0 = 0;
+  *buf = 0;
 }
 
 //----- (004297C8) --------------------------------------------------------

@@ -742,9 +742,9 @@ void __fastcall InitPlayer(int pnum, BOOL FirstTime)
   {
     deathdelay = 0;
     deathflag = 0;
-    Scrollinfo._sxoff = 0;
-    Scrollinfo._syoff = 0;
-    Scrollinfo._sdir = 0;
+    ScrollInfo._sxoff = 0;
+    ScrollInfo._syoff = 0;
+    ScrollInfo._sdir = 0;
     if ( currlevel == 1 && !plr[pnum]._pLvlVisited[1] && gbMaxPlayers == 1 )
     {
       sfxdelay = 40;
@@ -932,9 +932,9 @@ void __fastcall FixPlayerLocation(int pnum, int dir)
   plr[pnum]._pdir = dir;
   if ( pnum == myplr )
   {
-    Scrollinfo._sxoff = 0;
-    Scrollinfo._syoff = 0;
-    Scrollinfo._sdir = 0;
+    ScrollInfo._sxoff = 0;
+    ScrollInfo._syoff = 0;
+    ScrollInfo._sdir = 0;
     ViewX = plr[pnum].WorldX;
     ViewY = plr[pnum].WorldY;
   }
@@ -950,7 +950,7 @@ void __fastcall StartStand(int pnum, int dir)
     NewPlrAnim(pnum, plr[pnum]._pNAnim[dir], plr[pnum]._pNFrames, 3, plr[pnum]._pNWidth);
     plr[pnum]._pmode = 0;
     FixPlayerLocation(pnum, dir);
-    RemovePlrFromMap(pnum);
+    FixPlrWalkTags(pnum);
     dPlayer[plr[pnum].WorldX][plr[pnum].WorldY] = pnum + 1;
     SetPlayerOld(pnum);
   }
@@ -971,9 +971,9 @@ void __fastcall StartWalkStand(int pnum)
   InitPlayerLoc(pnum, 0);
   if ( myplr == pnum )
   {
-    Scrollinfo._sxoff = 0;
-    Scrollinfo._syoff = 0;
-    Scrollinfo._sdir = 0;
+    ScrollInfo._sxoff = 0;
+    ScrollInfo._syoff = 0;
+    ScrollInfo._sdir = 0;
     ViewX = plr[pnum].WorldX;
     ViewY = plr[pnum].WorldY;
   }
@@ -1038,10 +1038,10 @@ void __fastcall PM_ChangeOffset(int pnum)
   plr[pnum]._pyoff = plr[pnum]._pVar7 >> 8;
   v5 = v2 - (plr[pnum]._pVar6 >> 8);
   v4 = v3 - (plr[pnum]._pVar7 >> 8);
-  if ( pnum == myplr && Scrollinfo._sdir )
+  if ( pnum == myplr && ScrollInfo._sdir )
   {
-    Scrollinfo._sxoff += v5;
-    Scrollinfo._syoff += v4;
+    ScrollInfo._sxoff += v5;
+    ScrollInfo._syoff += v4;
   }
   PM_ChangeLightOff(pnum);
 }
@@ -1063,8 +1063,8 @@ void __fastcall StartWalk(int pnum, int xvel, int yvel, int xadd, int yadd, int 
       plr[pnum]._py = y;
       if ( myplr == pnum )
       {
-        Scrollinfo._sdx = plr[pnum].WorldX - ViewX;
-        Scrollinfo._sdy = plr[pnum].WorldY - ViewY;
+        ScrollInfo._sdx = plr[pnum].WorldX - ViewX;
+        ScrollInfo._sdy = plr[pnum].WorldY - ViewY;
       }
       dPlayer[x][y] = -1 - pnum;
       plr[pnum]._pmode = 1;
@@ -1087,18 +1087,18 @@ void __fastcall StartWalk(int pnum, int xvel, int yvel, int xadd, int yadd, int 
       {
         if ( zoomflag )
         {
-          if ( abs(Scrollinfo._sdx) >= 3 || abs(Scrollinfo._sdy) >= 3 )
-            Scrollinfo._sdir = 0;
+          if ( abs(ScrollInfo._sdx) >= 3 || abs(ScrollInfo._sdy) >= 3 )
+            ScrollInfo._sdir = 0;
           else
-            Scrollinfo._sdir = sdir;
+            ScrollInfo._sdir = sdir;
         }
-        else if ( abs(Scrollinfo._sdx) >= 2 || abs(Scrollinfo._sdy) >= 2 )
+        else if ( abs(ScrollInfo._sdx) >= 2 || abs(ScrollInfo._sdy) >= 2 )
         {
-          Scrollinfo._sdir = 0;
+          ScrollInfo._sdir = 0;
         }
         else
         {
-          Scrollinfo._sdir = sdir;
+          ScrollInfo._sdir = sdir;
         }
       }
     }
@@ -1126,8 +1126,8 @@ void __fastcall StartWalk2(int pnum, int xvel, int yvel, int xoff, int yoff, int
       plr[pnum]._py = v11;
       if ( myplr == pnum )
       {
-        Scrollinfo._sdx = plr[pnum].WorldX - ViewX;
-        Scrollinfo._sdy = plr[pnum].WorldY - ViewY;
+        ScrollInfo._sdx = plr[pnum].WorldX - ViewX;
+        ScrollInfo._sdy = plr[pnum].WorldY - ViewY;
       }
       dPlayer[plr[pnum].WorldX][plr[pnum].WorldY] = -1 - pnum;
       plr[pnum]._pVar1 = plr[pnum].WorldX;
@@ -1158,18 +1158,18 @@ void __fastcall StartWalk2(int pnum, int xvel, int yvel, int xoff, int yoff, int
       {
         if ( zoomflag )
         {
-          if ( abs(Scrollinfo._sdx) >= 3 || abs(Scrollinfo._sdy) >= 3 )
-            Scrollinfo._sdir = 0;
+          if ( abs(ScrollInfo._sdx) >= 3 || abs(ScrollInfo._sdy) >= 3 )
+            ScrollInfo._sdir = 0;
           else
-            Scrollinfo._sdir = sdir;
+            ScrollInfo._sdir = sdir;
         }
-        else if ( abs(Scrollinfo._sdx) >= 2 || abs(Scrollinfo._sdy) >= 2 )
+        else if ( abs(ScrollInfo._sdx) >= 2 || abs(ScrollInfo._sdy) >= 2 )
         {
-          Scrollinfo._sdir = 0;
+          ScrollInfo._sdir = 0;
         }
         else
         {
-          Scrollinfo._sdir = sdir;
+          ScrollInfo._sdir = sdir;
         }
       }
     }
@@ -1201,8 +1201,8 @@ void __fastcall StartWalk3(int pnum, int xvel, int yvel, int xoff, int yoff, int
       plr[pnum]._py = v14;
       if ( myplr == pnum )
       {
-        Scrollinfo._sdx = plr[pnum].WorldX - ViewX;
-        Scrollinfo._sdy = plr[pnum].WorldY - ViewY;
+        ScrollInfo._sdx = plr[pnum].WorldX - ViewX;
+        ScrollInfo._sdy = plr[pnum].WorldY - ViewY;
       }
       dPlayer[plr[pnum].WorldX][plr[pnum].WorldY] = -1 - pnum;
       dPlayer[v15][v14] = -1 - pnum;
@@ -1234,18 +1234,18 @@ void __fastcall StartWalk3(int pnum, int xvel, int yvel, int xoff, int yoff, int
       {
         if ( zoomflag )
         {
-          if ( abs(Scrollinfo._sdx) >= 3 || abs(Scrollinfo._sdy) >= 3 )
-            Scrollinfo._sdir = 0;
+          if ( abs(ScrollInfo._sdx) >= 3 || abs(ScrollInfo._sdy) >= 3 )
+            ScrollInfo._sdir = 0;
           else
-            Scrollinfo._sdir = sdir;
+            ScrollInfo._sdir = sdir;
         }
-        else if ( abs(Scrollinfo._sdx) >= 2 || abs(Scrollinfo._sdy) >= 2 )
+        else if ( abs(ScrollInfo._sdx) >= 2 || abs(ScrollInfo._sdy) >= 2 )
         {
-          Scrollinfo._sdir = 0;
+          ScrollInfo._sdir = 0;
         }
         else
         {
-          Scrollinfo._sdir = sdir;
+          ScrollInfo._sdir = sdir;
         }
       }
     }
@@ -1357,27 +1357,27 @@ void __fastcall StartSpell(int pnum, int d, int cx, int cy)
 }
 
 //----- (0046F45B) --------------------------------------------------------
-void __fastcall RemovePlrFromMap(int pnum)
+void __fastcall FixPlrWalkTags(int pnum)
 {
   int j; // [esp+10h] [ebp-18h]
-  int v2; // [esp+14h] [ebp-14h]
+  int ox; // [esp+14h] [ebp-14h]
   int i; // [esp+18h] [ebp-10h]
-  int v4; // [esp+24h] [ebp-4h]
+  int oy; // [esp+24h] [ebp-4h]
 
-  v2 = plr[pnum]._poldx;
-  v4 = plr[pnum]._poldy;
-  for ( i = v4 - 1; v4 + 1 >= i; ++i )
+  ox = plr[pnum]._poldx;
+  oy = plr[pnum]._poldy;
+  for ( i = oy - 1; oy + 1 >= i; ++i )
   {
-    for ( j = v2 - 1; v2 + 1 >= j; ++j )
+    for ( j = ox - 1; ox + 1 >= j; ++j )
     {
       if ( j >= 0 && j < 112 && i >= 0 && i < 112 && (dPlayer[j][i] == pnum + 1 || dPlayer[j][i] == -1 - pnum) )
         dPlayer[j][i] = 0;
     }
   }
-  if ( v2 >= 0 && v2 < 111 && v4 >= 0 && v4 < 111 )
+  if ( ox >= 0 && ox < 111 && oy >= 0 && oy < 111 )
   {
-    dFlags[v2 + 1][v4] &= 0xDFu;
-    dFlags[v2][v4 + 1] &= 0xDFu;
+    dFlags[ox + 1][oy] &= 0xDFu;
+    dFlags[ox][oy + 1] &= 0xDFu;
   }
 }
 
@@ -1399,7 +1399,7 @@ void __fastcall StartPlrHit(int pnum, int dam)
       plr[pnum]._pmode = 7;
       FixPlayerLocation(pnum, dir);
       plr[pnum]._pVar8 = 1;
-      RemovePlrFromMap(pnum);
+      FixPlrWalkTags(pnum);
       dPlayer[plr[pnum].WorldX][plr[pnum].WorldY] = pnum + 1;
       SetPlayerOld(pnum);
     }
@@ -1475,7 +1475,7 @@ void __fastcall StartPlayerKill(int pnum)
   if ( plr[pnum].plrlevel == currlevel )
   {
     FixPlayerLocation(pnum, v9->_pdir);
-    RemovePlrFromMap(pnum);
+    FixPlrWalkTags(pnum);
     dPlayer[v9->WorldX][v9->WorldY] = pnum + 1;
     SetPlayerOld(pnum);
     if ( myplr == pnum )
@@ -1688,9 +1688,9 @@ void __fastcall RemovePlrMissiles(int pnum)
 //----- (00470A8E) --------------------------------------------------------
 void __fastcall InitLevelChange(int pnum)
 {
-  RemovePlrFromMap(pnum);
+  FixPlrWalkTags(pnum);
   SetPlayerOld(pnum);
-  RemovePlrFromMap(pnum);
+  FixPlrWalkTags(pnum);
   if ( pnum == myplr )
     dPlayer[plr[myplr].WorldX][plr[myplr].WorldY] = myplr + 1;
   else
@@ -1798,10 +1798,10 @@ int __fastcall PM_DoWalk(int pnum)
       ChangeLightXY(plr[pnum]._plid, plr[pnum].WorldX, plr[pnum].WorldY);
       ChangeVisionXY(plr[pnum]._pvid, plr[pnum].WorldX, plr[pnum].WorldY);
     }
-    if ( myplr == pnum && Scrollinfo._sdir )
+    if ( myplr == pnum && ScrollInfo._sdir )
     {
-      ViewX = plr[pnum].WorldX - Scrollinfo._sdx;
-      ViewY = plr[pnum].WorldY - Scrollinfo._sdy;
+      ViewX = plr[pnum].WorldX - ScrollInfo._sdx;
+      ViewY = plr[pnum].WorldY - ScrollInfo._sdy;
     }
     if ( plr[pnum].walkpath[0] == -1 )
       StartStand(pnum, plr[pnum]._pVar3);
@@ -1843,10 +1843,10 @@ int __fastcall PM_DoWalk2(int pnum)
       ChangeLightXY(plr[pnum]._plid, plr[pnum].WorldX, plr[pnum].WorldY);
       ChangeVisionXY(plr[pnum]._pvid, plr[pnum].WorldX, plr[pnum].WorldY);
     }
-    if ( myplr == pnum && Scrollinfo._sdir )
+    if ( myplr == pnum && ScrollInfo._sdir )
     {
-      ViewX = plr[pnum].WorldX - Scrollinfo._sdx;
-      ViewY = plr[pnum].WorldY - Scrollinfo._sdy;
+      ViewX = plr[pnum].WorldX - ScrollInfo._sdx;
+      ViewY = plr[pnum].WorldY - ScrollInfo._sdy;
     }
     if ( plr[pnum].walkpath[0] == -1 )
       StartStand(pnum, plr[pnum]._pVar3);
@@ -1892,10 +1892,10 @@ int __fastcall PM_DoWalk3(int pnum)
       ChangeLightXY(plr[pnum]._plid, plr[pnum].WorldX, plr[pnum].WorldY);
       ChangeVisionXY(plr[pnum]._pvid, plr[pnum].WorldX, plr[pnum].WorldY);
     }
-    if ( myplr == pnum && Scrollinfo._sdir )
+    if ( myplr == pnum && ScrollInfo._sdir )
     {
-      ViewX = plr[pnum].WorldX - Scrollinfo._sdx;
-      ViewY = plr[pnum].WorldY - Scrollinfo._sdy;
+      ViewX = plr[pnum].WorldX - ScrollInfo._sdx;
+      ViewY = plr[pnum].WorldY - ScrollInfo._sdy;
     }
     if ( plr[pnum].walkpath[0] == -1 )
       StartStand(pnum, plr[pnum]._pVar3);

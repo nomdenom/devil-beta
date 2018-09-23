@@ -167,11 +167,11 @@ void __cdecl diablo_init_screen()
 
   MouseX = 320;
   MouseY = 240;
-  Scrollinfo._sdx = 0;
-  Scrollinfo._sdy = 0;
-  Scrollinfo._sxoff = 0;
-  Scrollinfo._syoff = 0;
-  Scrollinfo._sdir = 0;
+  ScrollInfo._sdx = 0;
+  ScrollInfo._sdy = 0;
+  ScrollInfo._sxoff = 0;
+  ScrollInfo._syoff = 0;
+  ScrollInfo._sdir = 0;
   for ( i = 0; i < 1024; ++i )
     screen_y_times_768[i] = 768 * i;
   ClrDiabloMsg();

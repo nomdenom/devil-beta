@@ -517,10 +517,10 @@ LRESULT __stdcall WindowProc(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lParam)
 //----- (0042E2FF) --------------------------------------------------------
 WNDPROC __fastcall SetWindowProc(WNDPROC func)
 {
-  WNDPROC v1; // ST10_4
+  WNDPROC old; // ST10_4
 
-  v1 = CurrentProc;
+  old = CurrentProc;
   CurrentProc = func;
-  return v1;
+  return old;
 }
 

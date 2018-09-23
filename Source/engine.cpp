@@ -63,13 +63,13 @@ LABEL_16:
 }
 
 //----- (0048E7BC) --------------------------------------------------------
-void __fastcall CelDecodeOnly(int screen_x, int screen_y, void *pCelBuff, int frame, int frame_width)
+void __fastcall CelDecodeOnly(int screen_x, int screen_y, BYTE *pCelBuff, int frame, int frame_width)
 {
   assert(pCelBuff, "ENGINE.CPP", 107);
   CelDrawDatOnly(
     &gpBuffer[screen_x + screen_y_times_768[screen_y]],
-    (BYTE *)pCelBuff + *((_DWORD *)pCelBuff + frame),
-    *((_DWORD *)pCelBuff + frame + 1) - *((_DWORD *)pCelBuff + frame),
+    &pCelBuff[*(_DWORD *)&pCelBuff[4 * frame]],
+    *(_DWORD *)&pCelBuff[4 * frame + 4] - *(_DWORD *)&pCelBuff[4 * frame],
     frame_width);
 }
 
