@@ -486,7 +486,7 @@ extern char sgszTalkMsg[80];
 extern int sbooktab;
 extern int pSplType;
 extern int frame;
-extern int gold_index;
+extern int initialDropGoldIndex;
 extern int talkflag;
 extern char *pSBkIconCels;
 extern int sbookflag;

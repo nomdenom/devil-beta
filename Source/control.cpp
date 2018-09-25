@@ -868,7 +868,7 @@ void __cdecl InitControlPan()
   dropGoldFlag = 0;
   dropGoldValue = 0;
   initialDropGoldValue = 0;
-  gold_index = 0;
+  initialDropGoldIndex = 0;
   frame_gold = 1;
 }
 
@@ -1392,7 +1392,7 @@ void __cdecl DrawInfoBox()
   {
     infoclr = 0;
   }
-  else if ( pcurs < 12 )
+  else if ( pcurs < CURSOR_FIRSTITEM )
   {
     if ( pcursitem != -1 )
       GetItemStr(pcursitem);
@@ -1436,7 +1436,7 @@ void __cdecl DrawInfoBox()
     if ( plr[myplr].HoldItem._iMagical == 2 )
       infoclr = 3;
   }
-  if ( pinfoflag && pcursmonst == -1 && pcursinvitem == -1 && pcurs < 12 )
+  if ( pinfoflag && pcursmonst == -1 && pcursinvitem == -1 && pcurs < CURSOR_FIRSTITEM )
     ClearPanel();
   if ( infostr[0] || pnumlines )
     control_418275();
@@ -2104,7 +2104,7 @@ int __cdecl control_41A64E()
   {
     plr[myplr]._pTSpell = sn;
     plr[myplr]._pTSplType = st;
-    j_SetCursor(9);
+    j_SetCursor(CURSOR_TELEPORT);
   }
   else
   {
@@ -2161,7 +2161,7 @@ void __cdecl control_drop_gold(int n)
   {
     case 13:
       if ( dropGoldValue > 0 )
-        control_remove_gold(myplr, gold_index);
+        control_remove_gold(myplr, initialDropGoldIndex);
       dropGoldFlag = 0;
       break;
     case 27:
@@ -2243,7 +2243,7 @@ void __fastcall control_set_gold_curs(int pnum)
   {
     plr[pnum].HoldItem._iCurs = 6;
   }
-  j_SetCursor(plr[pnum].HoldItem._iCurs + 12);
+  j_SetCursor(plr[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
 }
 
 //----- (0041AF7D) --------------------------------------------------------

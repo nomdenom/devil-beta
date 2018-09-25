@@ -293,15 +293,11 @@ int __stdcall GM_Game(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 }
 
 //----- (00491497) --------------------------------------------------------
-bool __fastcall LeftMouseDown(int wParam)
+void __fastcall LeftMouseDown(int wParam)
 {
-  int v1; // eax
-
   track_repeat_walk(0);
-  v1 = gmenu_left_mouse(1);
-  if ( !v1 && !sgnTimeoutCurs )
+  if ( !gmenu_left_mouse(1) && !sgnTimeoutCurs )
   {
-    LOBYTE(v1) = 38 * myplr;
     if ( plr[myplr]._pInvincible && deathflag )
     {
       control_check_btn_press();
@@ -321,53 +317,43 @@ bool __fastcall LeftMouseDown(int wParam)
         if ( !talkflag && !dropGoldFlag )
           CheckInvScrn();
         DoPanBtn();
-        if ( pcurs > 1 && pcurs < 12 )
-          j_SetCursor(1);
+        if ( pcurs > CURSOR_HAND && pcurs < CURSOR_FIRSTITEM )
+          j_SetCursor(CURSOR_HAND);
       }
-      else
+      else if ( !TryIconCurs() )
       {
-        v1 = TryIconCurs();
-        if ( !v1 )
+        if ( questlog && MouseX > 32 && MouseX < 288 && MouseY > 32 && MouseY < 308 )
         {
-          if ( questlog && MouseX > 32 && MouseX < 288 && MouseY > 32 && MouseY < 308 )
-          {
-            QuestlogESC();
-          }
-          else if ( chrflag && MouseX < 320 )
-          {
-            CheckChrBtns();
-          }
-          else if ( invflag && MouseX > 320 )
-          {
-            if ( !dropGoldFlag )
-              CheckInvItem();
-          }
-          else if ( sbookflag && MouseX > 320 )
-          {
-            CheckSBook();
-          }
-          else if ( pcurs < 12 )
-          {
-            LOBYTE(v1) = 38 * myplr;
-            if ( plr[myplr]._pStatPts && !spselflag )
-              CheckLvlBtn();
-            if ( !lvlbtndown )
-              diablo_491753(wParam == (MK_SHIFT|MK_LBUTTON));// This function is inlined in 1.09
-          }
-          else
-          {
-            v1 = TryInvPut();
-            if ( v1 )
-            {
-              NetSendCmdPItem(1u, 0xCu, cursmx, cursmy);
-              j_SetCursor(1);
-            }
-          }
+          QuestlogESC();
+        }
+        else if ( chrflag && MouseX < 320 )
+        {
+          CheckChrBtns();
+        }
+        else if ( invflag && MouseX > 320 )
+        {
+          if ( !dropGoldFlag )
+            CheckInvItem();
+        }
+        else if ( sbookflag && MouseX > 320 )
+        {
+          CheckSBook();
+        }
+        else if ( pcurs < 12 )
+        {
+          if ( plr[myplr]._pStatPts && !spselflag )
+            CheckLvlBtn();
+          if ( !lvlbtndown )
+            diablo_491753(wParam == (MK_SHIFT|MK_LBUTTON));// This function is inlined in 1.09
+        }
+        else if ( TryInvPut() )
+        {
+          NetSendCmdPItem(1u, 0xCu, cursmx, cursmy);
+          j_SetCursor(CURSOR_HAND);
         }
       }
     }
   }
-  return v1;
 }
 
 //----- (00491753) --------------------------------------------------------
@@ -454,47 +440,47 @@ BOOL __cdecl TryIconCurs()
 
   switch ( pcurs )
   {
-    case 8:
+    case CURSOR_RESURRECT:
       NetSendCmdParam1(1u, CMD_RESURRECT, pcursplr);
       result = 1;
       break;
-    case 10:
+    case CURSOR_HEALOTHER:
       NetSendCmdParam1(1u, CMD_HEALOTHER, pcursplr);
       result = 1;
       break;
-    case 7:
+    case CURSOR_TELEKINESIS:
       DoTelekinesis();
       result = 1;
       break;
-    case 2:
+    case CURSOR_IDENTIFY:
       if ( pcursinvitem == -1 )
-        j_SetCursor(1);
+        j_SetCursor(CURSOR_HAND);
       else
         CheckIdentify(myplr, pcursinvitem);
       result = 1;
       break;
-    case 3:
+    case CURSOR_REPAIR:
       if ( pcursinvitem == -1 )
-        j_SetCursor(1);
+        j_SetCursor(CURSOR_HAND);
       else
         DoRepair(myplr, pcursinvitem);
       result = 1;
       break;
-    case 4:
+    case CURSOR_RECHARGE:
       if ( pcursinvitem == -1 )
         j_SetCursor(1);
       else
         DoRecharge(myplr, pcursinvitem);
       result = 1;
       break;
-    case 6:
+    case CURSOR_OIL:
       if ( pcursinvitem == -1 )
-        j_SetCursor(1);
+        j_SetCursor(CURSOR_HAND);
       else
         DoOil(myplr, pcursinvitem);
       result = 1;
       break;
-    case 9:
+    case CURSOR_TELEPORT:
       if ( pcursmonst == -1 )
       {
         if ( pcursplr == -1 )
@@ -506,17 +492,17 @@ BOOL __cdecl TryIconCurs()
       {
         NetSendCmdParam2(1u, CMD_TSPELLID, pcursmonst, plr[myplr]._pTSpell);
       }
-      j_SetCursor(1);
+      j_SetCursor(CURSOR_HAND);
       result = 1;
       break;
     default:
-      if ( pcurs != 5 || pcursobj != -1 )
+      if ( pcurs != CURSOR_DISARM || pcursobj != -1 )
       {
         result = 0;
       }
       else
       {
-        j_SetCursor(1);
+        j_SetCursor(CURSOR_HAND);
         result = 1;
       }
       break;
@@ -555,23 +541,23 @@ void __cdecl RightMouseDown()
         goto LABEL_26;
       if ( TryIconCurs() )
         return;
-      if ( pcursinvitem != -1 && UseInvItem(myplr, pcursinvitem) )
+      if ( pcursinvitem != -1 && inv_456FD0(myplr, pcursinvitem) )
       {
-        inv_4571FD(myplr, pcursinvitem);
+        UseInvItem(myplr, pcursinvitem);
       }
       else
       {
 LABEL_26:
         if ( pcurs == 1 )
         {
-          if ( pcursinvitem != -1 && UseInvItem(myplr, pcursinvitem) )
-            inv_4571FD(myplr, pcursinvitem);
+          if ( pcursinvitem != -1 && inv_456FD0(myplr, pcursinvitem) )
+            UseInvItem(myplr, pcursinvitem);
           else
             CheckPlrSpell();
         }
         else if ( pcurs > 1 && pcurs < 12 )
         {
-          j_SetCursor(1);
+          j_SetCursor(CURSOR_HAND);
         }
       }
     }
@@ -867,8 +853,8 @@ LABEL_143:
                     automapflag = 0;
                     msgdelay = 0;
                     gamemenu_off();
-                    if ( pcurs != 1 && pcurs < 12 )
-                      j_SetCursor(1);
+                    if ( pcurs != CURSOR_HAND && pcurs < CURSOR_FIRSTITEM )
+                      j_SetCursor(CURSOR_HAND);
                     break;
                 }
               }
@@ -908,32 +894,32 @@ void __fastcall PressChar(char vkey)
               case VK_PRIOR:
               case VK_PRIOR|VK_SHIFT:
                 if ( plr[myplr].SpdList[0]._itype != -1 && plr[myplr].SpdList[0]._itype != 11 )
-                  inv_4571FD(myplr, 47);
+                  UseInvItem(myplr, 47);
                 break;
               case VK_END:
               case VK_END|VK_SHIFT:
                 if ( plr[myplr].SpdList[2]._itype != -1 && plr[myplr].SpdList[2]._itype != 11 )
-                  inv_4571FD(myplr, 49);
+                  UseInvItem(myplr, 49);
                 break;
               case VK_HOME:
               case VK_HOME|VK_SHIFT:
                 if ( plr[myplr].SpdList[3]._itype != -1 && plr[myplr].SpdList[3]._itype != 11 )
-                  inv_4571FD(myplr, 50);
+                  UseInvItem(myplr, 50);
                 break;
               case VK_LEFT:
               case VK_LEFT|VK_SHIFT:
                 if ( plr[myplr].SpdList[4]._itype != -1 && plr[myplr].SpdList[4]._itype != 11 )
-                  inv_4571FD(myplr, 51);
+                  UseInvItem(myplr, 51);
                 break;
               case VK_UP:
               case VK_RIGHT|VK_SHIFT:
                 if ( plr[myplr].SpdList[6]._itype != -1 && plr[myplr].SpdList[6]._itype != 11 )
-                  inv_4571FD(myplr, 53);
+                  UseInvItem(myplr, 53);
                 break;
               case VK_PRINT:
               case VK_DOWN|VK_SHIFT:
                 if ( plr[myplr].SpdList[7]._itype != -1 && plr[myplr].SpdList[7]._itype != 11 )
-                  inv_4571FD(myplr, 54);
+                  UseInvItem(myplr, 54);
                 break;
               case VK_EXECUTE:
               case VK_INSERT|VK_SHIFT:
@@ -948,12 +934,12 @@ void __fastcall PressChar(char vkey)
               case VK_NEXT|VK_SHIFT:
               case 0x40:
                 if ( plr[myplr].SpdList[1]._itype != -1 && plr[myplr].SpdList[1]._itype != 11 )
-                  inv_4571FD(myplr, 48);
+                  UseInvItem(myplr, 48);
                 break;
               case VK_UP|VK_SHIFT:
               case VK_RWIN|VK_RBUTTON:
                 if ( plr[myplr].SpdList[5]._itype != -1 && plr[myplr].SpdList[5]._itype != 11 )
-                  inv_4571FD(myplr, 52);
+                  UseInvItem(myplr, 52);
                 break;
               case 0x42:
               case VK_NUMPAD2:
@@ -1147,7 +1133,7 @@ void __fastcall LoadGameLevel(BOOL firstflag, int lvldir)
   if ( setseed )
     glSeedTbl[currlevel] = setseed;
   music_stop();
-  SetCursor(1);
+  SetCursor(CURSOR_HAND);
   SetRndSeed(glSeedTbl[currlevel]);
   IncProgress();
   LoadLvlGFX();
@@ -1421,7 +1407,7 @@ void __fastcall timeout_cursor(bool timeout)
       DrawCtrlPan();
       DrawInvBelt();
       DrawTalkPan();
-      j_SetCursor(11);
+      j_SetCursor(CURSOR_HOURGLASS);
       drawpanflag = 255;
       scrollrt_draw_game_screen(1);
     }

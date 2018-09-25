@@ -2202,7 +2202,7 @@ void __fastcall CheckIdentify(int pnum, int cii)
   v2->_iIdentified = 1;
   CalcPlrInv(pnum, 1);
   if ( myplr == pnum )
-    j_SetCursor(1);
+    j_SetCursor(CURSOR_HAND);
 }
 
 //----- (00428099) --------------------------------------------------------
@@ -2220,7 +2220,7 @@ void __fastcall DoRepair(int pnum, int cii)
   RepairItem(v2, v5->_pLevel);
   CalcPlrInv(pnum, 1);
   if ( pnum == myplr )
-    j_SetCursor(1);
+    j_SetCursor(CURSOR_HAND);
 }
 
 //----- (00428168) --------------------------------------------------------
@@ -2255,22 +2255,20 @@ void __fastcall RepairItem(ItemStruct *i, int lvl)
 //----- (00428260) --------------------------------------------------------
 void __fastcall DoRecharge(int pnum, int cii)
 {
-  ItemStruct *v2; // eax
-  ItemStruct *i; // ST20_4
+  ItemStruct *item; // eax MAPDST
   int v4; // eax
   PlayerStruct *v6; // [esp+1Ch] [ebp-8h]
 
   v6 = &plr[pnum];
   if ( cii >= 7 )
-    v2 = &v6->InvList[cii - 7];
+    item = &v6->InvList[cii - 7];
   else
-    v2 = &v6->InvBody[cii];
-  i = v2;
-  v4 = random(38, v6->_pLevel / spelldata[v2->_iSpell].sBookLvl);
-  RechargeItem(i, v4 + 1);
+    item = &v6->InvBody[cii];
+  v4 = random(38, v6->_pLevel / spelldata[item->_iSpell].sBookLvl);
+  RechargeItem(item, v4 + 1);
   CalcPlrInv(pnum, 1);
   if ( pnum == myplr )
-    j_SetCursor(1);
+    j_SetCursor(CURSOR_HAND);
 }
 
 //----- (0042834B) --------------------------------------------------------
@@ -2316,7 +2314,7 @@ void __fastcall DoOil(int pnum, int i)
   {
     CalcPlrInv(pnum, 1);
     if ( myplr == pnum )
-      j_SetCursor(1);
+      j_SetCursor(CURSOR_HAND);
   }
 }
 
@@ -3070,13 +3068,13 @@ void __fastcall UseItem(int p, int Mid, int spl)
 
   switch ( Mid )
   {
-    case 2:
+    case IMISC_FULLHEAL:
       plr[p]._pHitPoints = plr[p]._pMaxHP;
       plr[p]._pHPBase = plr[p]._pMaxHPBase;
       drawhpflag = 1;
       break;
-    case 3:
-    case 28:
+    case IMISC_HEAL:
+    case IMISC_HEAL_1C:
       v3 = plr[p]._pMaxHP >> 8;
       v = ((v3 >> 1) + random(39, v3)) << 6;
       if ( !plr[p]._pClass )
@@ -3091,7 +3089,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
         plr[p]._pHPBase = plr[p]._pMaxHPBase;
       drawhpflag = 1;
       break;
-    case 6:
+    case IMISC_MANA:
       v4 = plr[p]._pMaxMana >> 8;
       va = ((v4 >> 1) + random(40, v4)) << 6;
       if ( plr[p]._pClass == 2 )
@@ -3109,7 +3107,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
         drawmanaflag = 1;
       }
       break;
-    case 7:
+    case IMISC_FULLMANA:
       if ( !(plr[p]._pIFlags & 0x8000000) )
       {
         plr[p]._pMana = plr[p]._pMaxMana;
@@ -3117,50 +3115,50 @@ void __fastcall UseItem(int p, int Mid, int spl)
         drawmanaflag = 1;
       }
       break;
-    case 8:
+    case IMISC_POTEXP:
       AddPlrExperience(p, plr[p]._pLevel, plr[p]._pExperience >> 3);
       break;
-    case 10:
+    case IMISC_ELIXSTR:
       v5 = random(41, 3);
       plr[p]._pStrength += (char)(v5 + 1);
       plr[p]._pBaseStr += (char)(v5 + 1);
       break;
-    case 11:
+    case IMISC_ELIXMAG:
       v6 = random(42, 3);
       plr[p]._pMagic += (char)(v6 + 1);
       plr[p]._pBaseMag += (char)(v6 + 1);
       break;
-    case 12:
+    case IMISC_ELIXDEX:
       v7 = random(43, 3);
       plr[p]._pDexterity += (char)(v7 + 1);
       plr[p]._pBaseDex += (char)(v7 + 1);
       break;
-    case 13:
+    case IMISC_ELIXVIT:
       v8 = random(44, 3);
       plr[p]._pVitality += (char)(v8 + 1);
       plr[p]._pBaseVit += (char)(v8 + 1);
       break;
-    case 14:
+    case IMISC_ELIXWEAK:
       v9 = random(45, 3);
       plr[p]._pStrength -= (char)(v9 + 1);
       plr[p]._pBaseStr -= (char)(v9 + 1);
       break;
-    case 15:
+    case IMISC_ELIXDIS:
       v10 = random(46, 3);
       plr[p]._pMagic -= (char)(v10 + 1);
       plr[p]._pBaseMag -= (char)(v10 + 1);
       break;
-    case 16:
+    case IMISC_ELIXCLUM:
       v11 = random(47, 3);
       plr[p]._pDexterity -= (char)(v11 + 1);
       plr[p]._pBaseDex -= (char)(v11 + 1);
       break;
-    case 17:
+    case IMISC_ELIXSICK:
       v12 = random(48, 3);
       plr[p]._pVitality -= (char)(v12 + 1);
       plr[p]._pBaseVit -= (char)(v12 + 1);
       break;
-    case 18:
+    case IMISC_REJUV:
       v13 = plr[p]._pMaxHP >> 8;
       vb = ((v13 >> 1) + random(39, v13)) << 6;
       if ( !plr[p]._pClass )
@@ -3191,7 +3189,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
         drawmanaflag = 1;
       }
       break;
-    case 19:
+    case IMISC_FULLREJUV:
       plr[p]._pHitPoints = plr[p]._pMaxHP;
       plr[p]._pHPBase = plr[p]._pMaxHPBase;
       drawhpflag = 1;
@@ -3202,13 +3200,13 @@ void __fastcall UseItem(int p, int Mid, int spl)
         drawmanaflag = 1;
       }
       break;
-    case 21:
+    case IMISC_SCROLL:
       if ( spelldata[spl].sTargeted )
       {
         plr[p]._pTSpell = spl;
         plr[p]._pTSplType = 2;
         if ( p == myplr )
-          j_SetCursor(9);
+          j_SetCursor(CURSOR_TELEPORT);
       }
       else
       {
@@ -3221,13 +3219,13 @@ void __fastcall UseItem(int p, int Mid, int spl)
         plr[p].destParam2 = cursmy;
       }
       break;
-    case 22:
+    case IMISC_SCROLLT:
       if ( spelldata[spl].sTargeted )
       {
         plr[p]._pTSpell = spl;
         plr[p]._pTSplType = 2;
         if ( p == myplr )
-          j_SetCursor(9);
+          j_SetCursor(CURSOR_TELEPORT);
       }
       else
       {
@@ -3240,7 +3238,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
         plr[p].destParam2 = cursmy;
       }
       break;
-    case 24:
+    case IMISC_BOOK:
       plr[p]._pMemSpells |= 1i64 << ((unsigned __int8)spl - 1);
       ++plr[p]._pSplLvl[spl];
       plr[p]._pMana += spelldata[spl].sManaCost << 6;
@@ -3251,16 +3249,16 @@ void __fastcall UseItem(int p, int Mid, int spl)
         plr[p]._pManaBase = plr[p]._pMaxManaBase;
       drawmanaflag = 1;
       break;
-    case 31:
-    case 32:
-    case 33:
-    case 34:
-    case 35:
-    case 36:
-    case 37:
-    case 38:
-    case 39:
-    case 40:
+    case IMISC_OILACC:
+    case IMISC_OILMAST:
+    case IMISC_OILSHARP:
+    case IMISC_OILDEATH:
+    case IMISC_OILSKILL:
+    case IMISC_OILBSMTH:
+    case IMISC_OILFORT:
+    case IMISC_OILPERM:
+    case IMISC_OILHARD:
+    case IMISC_OILIMP:
       plr[p]._pOilType = Mid;
       if ( p == myplr )
       {
@@ -3268,7 +3266,7 @@ void __fastcall UseItem(int p, int Mid, int spl)
           sbookflag = 0;
         if ( !invflag )
           invflag = 1;
-        j_SetCursor(6);
+        j_SetCursor(CURSOR_OIL);
       }
       break;
     default:

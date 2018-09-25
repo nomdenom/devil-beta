@@ -2686,7 +2686,7 @@ void __fastcall CheckNewPath(int pnum)
               ie = plr[pnum].destParam1;
               v15 = abs(plr[pnum].WorldX - item[ie]._ix);
               v39 = abs(plr[pnum].WorldY - item[ie]._iy);
-              if ( v15 <= 1 && v39 <= 1 && pcurs == 1 )
+              if ( v15 <= 1 && v39 <= 1 && pcurs == CURSOR_HAND )
                 NetSendCmdGItem(1u, 0x2Au, myplr, myplr, ie);
             }
             break;
@@ -2696,7 +2696,7 @@ void __fastcall CheckNewPath(int pnum)
               ig = plr[pnum].destParam1;
               v16 = abs(plr[pnum].WorldX - item[ig]._ix);
               v40 = abs(plr[pnum].WorldY - item[ig]._iy);
-              if ( v16 <= 1 && v40 <= 1 && pcurs == 1 )
+              if ( v16 <= 1 && v40 <= 1 && pcurs == CURSOR_HAND )
                 NetSendCmdGItem(1u, 0x2Bu, myplr, myplr, ig);
             }
             break;
@@ -3055,7 +3055,7 @@ void __fastcall CheckPlrSpell()
   v1 = 0;
   v0 = plr[myplr]._pRSpell;
   if ( leveltype
-    && pcurs == 1
+    && pcurs == CURSOR_HAND
     && (MouseY < 352 && (!chrflag || MouseX >= 320) && (!invflag || MouseX <= 320)
      || v0 == 2
      || v0 == 5

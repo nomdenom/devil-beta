@@ -828,17 +828,17 @@ void __fastcall CheckInvPaste(int pnum, int mx, int my)
           else
             qmemcpy(&plr[pnum].HoldItem, &plr[pnum].InvBody[4], sizeof(plr[pnum].HoldItem));
           if ( myplr == pnum )
-            SetCursor(plr[pnum].HoldItem._iCurs + 12);
+            SetCursor(plr[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
           else
-            SetICursor(plr[pnum].HoldItem._iCurs + 12);
+            SetICursor(plr[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
           v30 = 0;
           for ( iia = 0; iia < 40 && !v30; ++iia )
             v30 = AutoPlace(pnum, iia, icursW28, icursH28, 1);
           qmemcpy(&plr[pnum].HoldItem, &v26, sizeof(plr[pnum].HoldItem));
           if ( myplr == pnum )
-            SetCursor(plr[pnum].HoldItem._iCurs + 12);
+            SetCursor(plr[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
           else
-            SetICursor(plr[pnum].HoldItem._iCurs + 12);
+            SetICursor(plr[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
           if ( v30 )
           {
             if ( plr[pnum].InvBody[5]._itype == 5 )
@@ -1302,7 +1302,7 @@ void __fastcall RemoveSpdBarItem(int pnum, int iv)
 //----- (00454956) --------------------------------------------------------
 void __cdecl CheckInvItem()
 {
-  if ( pcurs < 12 )
+  if ( pcurs < CURSOR_FIRSTITEM )
     CheckInvCut(myplr, MouseX, MouseY);
   else
     CheckInvPaste(myplr, MouseX, MouseY);
@@ -1341,7 +1341,7 @@ void __fastcall InvGetItem(int pnum, int ii)
     item[ii]._isin = 1;
     dItem[item[ii]._ix][item[ii]._iy] = 0;
     pcursitem = -1;
-    j_SetCursor(plr[pnum].HoldItem._iCurs + 12);
+    j_SetCursor(plr[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
   }
 }
 
@@ -1378,7 +1378,7 @@ void __fastcall AutoGetItem(int pnum, int ii)
     item[ii]._iCreateInfo &= 0x7FFFu;
     qmemcpy(&plr[pnum].HoldItem, &item[ii], sizeof(plr[pnum].HoldItem));
     CheckItemStats(pnum);
-    SetICursor(plr[pnum].HoldItem._iCurs + 12);
+    SetICursor(plr[pnum].HoldItem._iCurs + CURSOR_FIRSTITEM);
     if ( plr[pnum].HoldItem._itype == 11 )
     {
       v25 = GoldAutoPlace(pnum);
@@ -1599,40 +1599,38 @@ int __cdecl TryInvPut()
 //----- (00455C02) --------------------------------------------------------
 int __fastcall InvPutItem(int pnum, int x, int y)
 {
-  int v3; // ST30_4
+  int xd; // ST30_4
   int v4; // ST38_4
-  int v5; // ST40_4
-  int x2; // [esp+Ch] [ebp-30h]
+  int ii; // ST40_4
   int m; // [esp+14h] [ebp-28h]
   int l; // [esp+18h] [ebp-24h]
   signed int k; // [esp+1Ch] [ebp-20h]
-  int v12; // [esp+20h] [ebp-1Ch]
+  int yd; // [esp+20h] [ebp-1Ch]
   int i; // [esp+24h] [ebp-18h]
   signed int v14; // [esp+2Ch] [ebp-10h]
-  int v15; // [esp+30h] [ebp-Ch]
-  int v16; // [esp+30h] [ebp-Ch]
+  int dir; // [esp+30h] [ebp-Ch]
+  int dira; // [esp+30h] [ebp-Ch]
   int j; // [esp+34h] [ebp-8h]
 
-  x2 = x;
-  v3 = abs(x - plr[pnum].WorldX);
-  v12 = abs(y - plr[pnum].WorldY);
-  if ( v3 > 1 || v12 > 1 )
+  xd = abs(x - plr[pnum].WorldX);
+  yd = abs(y - plr[pnum].WorldY);
+  if ( xd > 1 || yd > 1 )
   {
-    v15 = GetDirection(plr[pnum].WorldX, plr[pnum].WorldY, x2, y);
-    x2 = offset_x[v15] + plr[pnum].WorldX;
-    y = offset_y[v15] + plr[pnum].WorldY;
+    dir = GetDirection(plr[pnum].WorldX, plr[pnum].WorldY, x, y);
+    x = offset_x[dir] + plr[pnum].WorldX;
+    y = offset_y[dir] + plr[pnum].WorldY;
   }
-  if ( !CanPut(x2, y) )
+  if ( !CanPut(x, y) )
   {
-    v16 = ((_BYTE)v15 - 1) & 7;
-    x2 = offset_x[v16] + plr[pnum].WorldX;
-    y = offset_y[v16] + plr[pnum].WorldY;
-    if ( !CanPut(x2, y) )
+    dira = ((_BYTE)dir - 1) & 7;
+    x = offset_x[dira] + plr[pnum].WorldX;
+    y = offset_y[dira] + plr[pnum].WorldY;
+    if ( !CanPut(x, y) )
     {
-      v4 = ((_BYTE)v16 + 2) & 7;
-      x2 = offset_x[v4] + plr[pnum].WorldX;
+      v4 = ((_BYTE)dira + 2) & 7;
+      x = offset_x[v4] + plr[pnum].WorldX;
       y = offset_y[v4] + plr[pnum].WorldY;
-      if ( !CanPut(x2, y) )
+      if ( !CanPut(x, y) )
       {
         v14 = 0;
         for ( k = 1; k < 50 && !v14; ++k )
@@ -1646,7 +1644,7 @@ int __fastcall InvPutItem(int pnum, int x, int y)
               if ( CanPut(m + plr[pnum].WorldX, j) )
               {
                 v14 = 1;
-                x2 = i;
+                x = i;
                 y = j;
               }
             }
@@ -1655,19 +1653,19 @@ int __fastcall InvPutItem(int pnum, int x, int y)
       }
     }
   }
-  if ( numitems >= 127 || !CanPut(x2, y) )
+  if ( numitems >= 127 || !CanPut(x, y) )
     return -1;
-  v5 = itemavail[0];
-  dItem[x2][y] = LOBYTE(itemavail[0]) + 1;
+  ii = itemavail[0];
+  dItem[x][y] = LOBYTE(itemavail[0]) + 1;
   itemavail[0] = itemavail[127 - numitems - 1];
-  itemactive[numitems] = v5;
-  qmemcpy(&item[v5], &plr[pnum].HoldItem, sizeof(ItemStruct));
-  item[v5]._ix = x2;
-  item[v5]._iy = y;
-  RespawnItem(v5, 1);
+  itemactive[numitems] = ii;
+  qmemcpy(&item[ii], &plr[pnum].HoldItem, sizeof(ItemStruct));
+  item[ii]._ix = x;
+  item[ii]._iy = y;
+  RespawnItem(ii, 1);
   ++numitems;
-  j_SetCursor(1);
-  return v5;
+  j_SetCursor(CURSOR_HAND);
+  return ii;
 }
 
 //----- (0045600E) --------------------------------------------------------
@@ -1919,7 +1917,7 @@ BOOL __cdecl UseScroll()
   int i; // [esp+Ch] [ebp-4h]
   signed int j; // [esp+Ch] [ebp-4h]
 
-  if ( pcurs != 1 )
+  if ( pcurs != CURSOR_HAND )
     return 0;
   if ( !leveltype )
     return 0;
@@ -1960,7 +1958,7 @@ void __fastcall UseStaffCharge(int pnum)
 //----- (00456E19) --------------------------------------------------------
 BOOL __cdecl UseStaff()
 {
-  if ( pcurs != 1 )
+  if ( pcurs != CURSOR_HAND )
     return 0;
   if ( plr[myplr].InvBody[4]._itype == -1
     || plr[myplr].InvBody[4]._iMiscId != 23
@@ -1988,30 +1986,31 @@ BOOL __fastcall inv_456F00(int sn)
 }
 
 //----- (00456FD0) --------------------------------------------------------
-int __fastcall UseInvItem(int pnum, int cii)
+// Looks like this has been inlined into UseInvItem() in 1.09
+BOOL __fastcall inv_456FD0(int pnum, int cii)
 {
-  int v3; // [esp+18h] [ebp-8h]
+  BOOL result; // [esp+18h] [ebp-8h]
 
-  v3 = 0;
+  result = 0;
   if ( cii <= 5 )
     return 0;
   if ( cii > 46 )
   {
     if ( plr[pnum].SpdList[cii - 47]._iStatFlag && AllItemsList[plr[pnum].SpdList[cii - 47].IDidx].iUsable )
-      v3 = 1;
+      result = 1;
   }
   else if ( plr[pnum].InvList[cii - 7]._iStatFlag )
   {
     if ( AllItemsList[plr[pnum].InvList[cii - 7].IDidx].iUsable )
-      v3 = 1;
+      result = 1;
   }
-  return v3;
+  return result;
 }
 
 //----- (0045712E) --------------------------------------------------------
-void __cdecl inv_45712E()
+void __cdecl StartGoldDrop()
 {
-  gold_index = pcursinvitem;
+  initialDropGoldIndex = pcursinvitem;
   if ( pcursinvitem > 46 )
     initialDropGoldValue = plr[myplr].SpdList[pcursinvitem - 47]._ivalue;
   else
@@ -2023,7 +2022,7 @@ void __cdecl inv_45712E()
 }
 
 //----- (004571FD) --------------------------------------------------------
-void __fastcall inv_4571FD(int pnum, int ii)
+void __fastcall UseInvItem(int pnum, int ii)
 {
   int iv; // [esp+1Ch] [ebp-4h]
   int iva; // [esp+1Ch] [ebp-4h]
@@ -2041,8 +2040,8 @@ void __fastcall inv_4571FD(int pnum, int ii)
           {
             if ( plr[pnum].SpdList[iva]._iMiscId || plr[pnum].SpdList[iva]._itype != 11 )
             {
-              if ( (plr[pnum].SpdList[iva]._iMiscId != 21 || currlevel)
-                && (plr[pnum].SpdList[iva]._iMiscId != 22 || currlevel) )
+              if ( (plr[pnum].SpdList[iva]._iMiscId != IMISC_SCROLL || currlevel)
+                && (plr[pnum].SpdList[iva]._iMiscId != IMISC_SCROLLT || currlevel) )
               {
                 if ( pnum == myplr )
                   PlaySFX(psfx[ItemCAnimTbl[plr[pnum].SpdList[iva]._iCurs]]);
@@ -2052,7 +2051,7 @@ void __fastcall inv_4571FD(int pnum, int ii)
             }
             else
             {
-              inv_45712E();
+              StartGoldDrop();
             }
           }
         }
@@ -2076,8 +2075,8 @@ void __fastcall inv_4571FD(int pnum, int ii)
         {
           if ( plr[pnum].InvList[iv]._iMiscId || plr[pnum].InvList[iv]._itype != 11 )
           {
-            if ( (plr[pnum].InvList[iv]._iMiscId != 21 || currlevel)
-              && (plr[pnum].InvList[iv]._iMiscId != 22 || currlevel) )
+            if ( (plr[pnum].InvList[iv]._iMiscId != IMISC_SCROLL || currlevel)
+              && (plr[pnum].InvList[iv]._iMiscId != IMISC_SCROLLT || currlevel) )
             {
               if ( pnum == myplr )
                 PlaySFX(psfx[ItemCAnimTbl[plr[pnum].InvList[iv]._iCurs]]);
@@ -2087,7 +2086,7 @@ void __fastcall inv_4571FD(int pnum, int ii)
           }
           else
           {
-            inv_45712E();
+            StartGoldDrop();
           }
         }
       }
@@ -2113,7 +2112,7 @@ void __cdecl DoTelekinesis()
     NetSendCmdGItem(1u, CMD_REQUESTAGITEM, myplr, myplr, pcursitem);
   if ( pcursmonst != -1 )
     NetSendCmdParam1(1u, CMD_KNOCKBACK, pcursmonst);
-  j_SetCursor(1);
+  j_SetCursor(CURSOR_HAND);
 }
 
 //----- (0045789F) --------------------------------------------------------

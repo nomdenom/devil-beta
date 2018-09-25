@@ -2327,7 +2327,7 @@ void __fastcall AddHealOther(int mi, int sx, int sy, int dx, int dy, int midir, 
   missile[mi]._miDelFlag = 1;
   UseMana(id, 34);
   if ( myplr == id )
-    j_SetCursor(10);
+    j_SetCursor(CURSOR_HEALOTHER);
 }
 
 //----- (004420BA) --------------------------------------------------------
@@ -2371,7 +2371,7 @@ void __fastcall AddIdentify(int mi, int sx, int sy, int dx, int dy, int midir, i
       sbookflag = 0;
     if ( !invflag )
       invflag = 1;
-    j_SetCursor(2);
+    j_SetCursor(CURSOR_IDENTIFY);
   }
 }
 
@@ -2472,7 +2472,7 @@ void __fastcall AddRepair(int mi, int sx, int sy, int dx, int dy, int midir, int
       sbookflag = 0;
     if ( !invflag )
       invflag = 1;
-    j_SetCursor(3);
+    j_SetCursor(CURSOR_REPAIR);
   }
 }
 
@@ -2487,7 +2487,7 @@ void __fastcall AddRecharge(int mi, int sx, int sy, int dx, int dy, int midir, i
       sbookflag = 0;
     if ( !invflag )
       invflag = 1;
-    j_SetCursor(4);
+    j_SetCursor(CURSOR_RECHARGE);
   }
 }
 
@@ -2497,7 +2497,7 @@ void __fastcall AddDisarm(int mi, int sx, int sy, int dx, int dy, int midir, int
   missile[mi]._miDelFlag = 1;
   UseMana(id, 28);
   if ( myplr == id )
-    j_SetCursor(5);
+    j_SetCursor(CURSOR_DISARM);
 }
 
 //----- (00442972) --------------------------------------------------------
@@ -2608,7 +2608,7 @@ void __fastcall AddResurrect(int mi, int sx, int sy, int dx, int dy, int midir, 
 {
   UseMana(id, 32);
   if ( myplr == id )
-    j_SetCursor(8);
+    j_SetCursor(CURSOR_RESURRECT);
   missile[mi]._miDelFlag = 1;
 }
 
@@ -2630,7 +2630,7 @@ void __fastcall AddTelekinesis(int mi, int sx, int sy, int dx, int dy, int midir
   missile[mi]._miDelFlag = 1;
   UseMana(id, 33);
   if ( myplr == id )
-    j_SetCursor(7);
+    j_SetCursor(CURSOR_TELEKINESIS);
 }
 
 //----- (0044323E) --------------------------------------------------------

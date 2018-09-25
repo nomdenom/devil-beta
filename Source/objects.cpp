@@ -2227,10 +2227,10 @@ void __fastcall TryDisarm(int pnum, int i)
   int v2; // ST1C_4
   int oi; // [esp+14h] [ebp-14h]
   int j; // [esp+18h] [ebp-10h]
-  signed int v7; // [esp+20h] [ebp-8h]
+  BOOL is_trap; // [esp+20h] [ebp-8h]
 
   if ( myplr == pnum )
-    j_SetCursor(1);
+    j_SetCursor(CURSOR_HAND);
   if ( object[i]._oTrapFlag )
   {
     v2 = 2 * plr[pnum]._pDexterity - 5 * currlevel;
@@ -2239,12 +2239,12 @@ void __fastcall TryDisarm(int pnum, int i)
       for ( j = 0; j < nobjects; ++j )
       {
         oi = objectactive[j];
-        v7 = 0;
-        if ( object[oi]._otype == 53 )
-          v7 = 1;
-        if ( object[oi]._otype == 54 )
-          v7 = 1;
-        if ( v7 )
+        is_trap = 0;
+        if ( object[oi]._otype == OBJ_TRAPL )
+          is_trap = 1;
+        if ( object[oi]._otype == OBJ_TRAPR )
+          is_trap = 1;
+        if ( is_trap )
         {
           if ( dObject[object[oi]._oVar1][object[oi]._oVar2] - 1 == i )
           {

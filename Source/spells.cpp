@@ -83,7 +83,7 @@ void __fastcall UseMana(int id, int sn)
 //----- (0045BAA1) --------------------------------------------------------
 BOOL __fastcall CheckSpell(int id, int sn, char st, bool manaonly)
 {
-  if ( !manaonly && pcurs != 1 )
+  if ( !manaonly && pcurs != CURSOR_HAND )
     return 0;
   if ( !st )
     return 1;
@@ -127,7 +127,7 @@ void __fastcall DoResurrect(int pnum, int rid)
   if ( (char)rid != -1 )
     AddMissile(plr[rid].WorldX, plr[rid].WorldY, plr[rid].WorldX, plr[rid].WorldY, 0, 62, 0, pnum, 0);
   if ( myplr == pnum )
-    j_SetCursor(1);
+    j_SetCursor(CURSOR_HAND);
   if ( (char)rid != -1 && !plr[rid]._pHitPoints )
   {
     if ( rid == myplr )
@@ -158,7 +158,7 @@ void __fastcall DoHealOther(int pnum, int rid)
   int j; // [esp+18h] [ebp-4h]
 
   if ( myplr == pnum )
-    j_SetCursor(1);
+    j_SetCursor(CURSOR_HAND);
   if ( (char)rid != -1 && (signed int)(plr[rid]._pHitPoints & 0xFFFFFFC0) > 0 )
   {
     v4 = (random(57, 10) + 1) << 6;

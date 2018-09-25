@@ -1706,13 +1706,13 @@ void __cdecl SmithBuyItem()
   int v2; // [esp+14h] [ebp-4h]
 
   TakePlrsMoney(plr[myplr].HoldItem._iIvalue);
-  SetCursor(plr[myplr].HoldItem._iCurs + 12);
+  SetCursor(plr[myplr].HoldItem._iCurs + CURSOR_FIRSTITEM);
   if ( !plr[myplr].HoldItem._iMagical )
     plr[myplr].HoldItem._iIdentified = 0;
   v1 = 0;
   for ( ii = 0; ii < 40 && !v1; ++ii )
     v1 = AutoPlace(myplr, ii, cursW / 28, cursH / 28, 1);
-  SetCursor(1);
+  SetCursor(CURSOR_HAND);
   v2 = stextvhold + ((stextlhold - stextup) >> 2);
   if ( v2 == 19 )
   {

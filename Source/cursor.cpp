@@ -45,7 +45,7 @@ void __fastcall j_SetCursor(int hCursor)
 //----- (00485AE4) --------------------------------------------------------
 void __cdecl InitLevelCursor()
 {
-  SetCursor(1);
+  SetCursor(CURSOR_HAND);
   cursmx = ViewX;
   cursmy = ViewY;
   cursor_647720_last_pcursmont = -1;
