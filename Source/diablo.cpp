@@ -893,32 +893,32 @@ void __fastcall PressChar(char vkey)
             {
               case VK_PRIOR:
               case VK_PRIOR|VK_SHIFT:
-                if ( plr[myplr].SpdList[0]._itype != -1 && plr[myplr].SpdList[0]._itype != 11 )
+                if ( plr[myplr].SpdList[0]._itype != ITYPE_NONE && plr[myplr].SpdList[0]._itype != ITYPE_GOLD )
                   UseInvItem(myplr, 47);
                 break;
               case VK_END:
               case VK_END|VK_SHIFT:
-                if ( plr[myplr].SpdList[2]._itype != -1 && plr[myplr].SpdList[2]._itype != 11 )
+                if ( plr[myplr].SpdList[2]._itype != ITYPE_NONE && plr[myplr].SpdList[2]._itype != ITYPE_GOLD )
                   UseInvItem(myplr, 49);
                 break;
               case VK_HOME:
               case VK_HOME|VK_SHIFT:
-                if ( plr[myplr].SpdList[3]._itype != -1 && plr[myplr].SpdList[3]._itype != 11 )
+                if ( plr[myplr].SpdList[3]._itype != ITYPE_NONE && plr[myplr].SpdList[3]._itype != ITYPE_GOLD )
                   UseInvItem(myplr, 50);
                 break;
               case VK_LEFT:
               case VK_LEFT|VK_SHIFT:
-                if ( plr[myplr].SpdList[4]._itype != -1 && plr[myplr].SpdList[4]._itype != 11 )
+                if ( plr[myplr].SpdList[4]._itype != ITYPE_NONE && plr[myplr].SpdList[4]._itype != ITYPE_GOLD )
                   UseInvItem(myplr, 51);
                 break;
               case VK_UP:
               case VK_RIGHT|VK_SHIFT:
-                if ( plr[myplr].SpdList[6]._itype != -1 && plr[myplr].SpdList[6]._itype != 11 )
+                if ( plr[myplr].SpdList[6]._itype != ITYPE_NONE && plr[myplr].SpdList[6]._itype != ITYPE_GOLD )
                   UseInvItem(myplr, 53);
                 break;
               case VK_PRINT:
               case VK_DOWN|VK_SHIFT:
-                if ( plr[myplr].SpdList[7]._itype != -1 && plr[myplr].SpdList[7]._itype != 11 )
+                if ( plr[myplr].SpdList[7]._itype != ITYPE_NONE && plr[myplr].SpdList[7]._itype != ITYPE_GOLD )
                   UseInvItem(myplr, 54);
                 break;
               case VK_EXECUTE:
@@ -933,12 +933,12 @@ void __fastcall PressChar(char vkey)
                 break;
               case VK_NEXT|VK_SHIFT:
               case 0x40:
-                if ( plr[myplr].SpdList[1]._itype != -1 && plr[myplr].SpdList[1]._itype != 11 )
+                if ( plr[myplr].SpdList[1]._itype != ITYPE_NONE && plr[myplr].SpdList[1]._itype != ITYPE_GOLD )
                   UseInvItem(myplr, 48);
                 break;
               case VK_UP|VK_SHIFT:
               case VK_RWIN|VK_RBUTTON:
-                if ( plr[myplr].SpdList[5]._itype != -1 && plr[myplr].SpdList[5]._itype != 11 )
+                if ( plr[myplr].SpdList[5]._itype != ITYPE_NONE && plr[myplr].SpdList[5]._itype != ITYPE_GOLD )
                   UseInvItem(myplr, 52);
                 break;
               case 0x42:
@@ -1007,9 +1007,9 @@ void __fastcall PressChar(char vkey)
                 ClearPanel();
                 sprintf(tempstr, "seed0 = %i", glSeedTbl[0]);
                 AddPanelString(tempstr, 0);
-                sprintf(tempstr, "seed1 = %i", dword_649C0C);
+                sprintf(tempstr, "seed1 = %i", glSeedTbl[1]);
                 AddPanelString(tempstr, 0);
-                sprintf(tempstr, "seed2 = %i", dword_649C10);
+                sprintf(tempstr, "seed2 = %i", glSeedTbl[2]);
                 AddPanelString(tempstr, 0);
                 break;
               case VK_PAUSE|0x40:

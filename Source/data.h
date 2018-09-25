@@ -796,8 +796,6 @@ extern int gnLevelTypeTbl[17];
 extern int MouseY;
 extern int MouseX;
 extern int glSeedTbl[17];
-extern int dword_649C0C;
-extern int dword_649C10;
 extern int gbRunGame;
 extern int gbRunGameResult;
 extern int zoomflag;

@@ -2406,131 +2406,131 @@ void __fastcall PrintItemOil(char IDidx)
 {
   switch ( IDidx )
   {
-    case 2:
+    case IMISC_FULLHEAL:
       strcpy(tempstr, "fully recover life");
       AddPanelString(tempstr, 1);
       break;
-    case 3:
+    case IMISC_HEAL:
       strcpy(tempstr, "recover partial life");
       AddPanelString(tempstr, 1);
       break;
-    case 4:
+    case IMISC_OLDHEAL:
       strcpy(tempstr, "recover life");
       AddPanelString(tempstr, 1);
       break;
-    case 5:
+    case IMISC_DEADHEAL:
       strcpy(tempstr, "deadly heal");
       AddPanelString(tempstr, 1);
       break;
-    case 6:
+    case IMISC_MANA:
       strcpy(tempstr, "recover mana");
       AddPanelString(tempstr, 1);
       break;
-    case 7:
+    case IMISC_FULLMANA:
       strcpy(tempstr, "fully recover mana");
       AddPanelString(tempstr, 1);
       break;
-    case 8:
+    case IMISC_POTEXP:
       strcpy(tempstr, "increase experience");
       AddPanelString(tempstr, 1);
       break;
-    case 9:
+    case IMISC_POTFORG:
       strcpy(tempstr, "decrease experience");
       AddPanelString(tempstr, 1);
       break;
-    case 10:
+    case IMISC_ELIXSTR:
       strcpy(tempstr, "increase strength");
       AddPanelString(tempstr, 1);
       break;
-    case 11:
+    case IMISC_ELIXMAG:
       strcpy(tempstr, "increase magic");
       AddPanelString(tempstr, 1);
       break;
-    case 12:
+    case IMISC_ELIXDEX:
       strcpy(tempstr, "increase dexterity");
       AddPanelString(tempstr, 1);
       break;
-    case 13:
+    case IMISC_ELIXVIT:
       strcpy(tempstr, "increase vitality");
       AddPanelString(tempstr, 1);
       break;
-    case 14:
+    case IMISC_ELIXWEAK:
       strcpy(tempstr, "decrease strength");
       AddPanelString(tempstr, 1);
       break;
-    case 15:
+    case IMISC_ELIXDIS:
       strcpy(tempstr, "decrease strength");
       AddPanelString(tempstr, 1);
       break;
-    case 16:
+    case IMISC_ELIXCLUM:
       strcpy(tempstr, "decrease dexterity");
       AddPanelString(tempstr, 1);
       break;
-    case 17:
+    case IMISC_ELIXSICK:
       strcpy(tempstr, "decrease vitality");
       AddPanelString(tempstr, 1);
       break;
-    case 18:
+    case IMISC_REJUV:
       strcpy(tempstr, "recover life and mana");
       AddPanelString(tempstr, 1);
       break;
-    case 19:
+    case IMISC_FULLREJUV:
       strcpy(tempstr, "fully recover life and mana");
       AddPanelString(tempstr, 1);
       break;
-    case 31:
+    case IMISC_OILACC:
       strcpy(tempstr, "increases a weapon's");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "chance to hit");
       AddPanelString(tempstr, 1);
       break;
-    case 32:
+    case IMISC_OILMAST:
       strcpy(tempstr, "greatly increases a");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "weapon's chance to hit");
       AddPanelString(tempstr, 1);
       break;
-    case 33:
+    case IMISC_OILSHARP:
       strcpy(tempstr, "increases a weapon's damage");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "potential - not bows");
       AddPanelString(tempstr, 1);
       break;
-    case 34:
+    case IMISC_OILDEATH:
       strcpy(tempstr, "greatly increases a weapon's");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "damage potential - not bows");
       AddPanelString(tempstr, 1);
       break;
-    case 35:
+    case IMISC_OILSKILL:
       strcpy(tempstr, "reduces attributes needed");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "to use armor or weapons");
       AddPanelString(tempstr, 1);
       break;
-    case 36:
+    case IMISC_OILBSMTH:
       strcpy(tempstr, "adds 20% to an item's");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "current and max durability");
       AddPanelString(tempstr, 1);
       break;
-    case 37:
+    case IMISC_OILFORT:
       strcpy(tempstr, "increases an item's");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "current and max durability");
       AddPanelString(tempstr, 1);
       break;
-    case 38:
+    case IMISC_OILPERM:
       strcpy(tempstr, "makes an item indestructible");
       AddPanelString(tempstr, 1);
       break;
-    case 39:
+    case IMISC_OILHARD:
       strcpy(tempstr, "increases the armor class");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "of armor and shields");
       AddPanelString(tempstr, 1);
       break;
-    case 40:
+    case IMISC_OILIMP:
       strcpy(tempstr, "greatly increases the armor");
       AddPanelString(tempstr, 1);
       strcpy(tempstr, "class of armor and shields");
@@ -2887,7 +2887,7 @@ void __cdecl DrawUniqueInfo()
 //----- (00429BB7) --------------------------------------------------------
 void __fastcall PrintItemMisc(ItemStruct *x)
 {
-  if ( x->_iMiscId >= 29 && x->_iMiscId <= 41 )
+  if ( x->_iMiscId >= (signed int)IMISC_OILFIRST && x->_iMiscId <= (signed int)IMISC_OILLAST )
   {
     PrintItemOil(x->_iMiscId);
     strcpy(tempstr, "Right click to open, then");
@@ -2895,25 +2895,25 @@ void __fastcall PrintItemMisc(ItemStruct *x)
     strcpy(tempstr, "left-click to apply");
     AddPanelString(tempstr, 1);
   }
-  if ( x->_iMiscId == 21 )
+  if ( x->_iMiscId == IMISC_SCROLL )
   {
     strcpy(tempstr, "Right-click to read");
     AddPanelString(tempstr, 1);
   }
-  if ( x->_iMiscId == 22 )
+  if ( x->_iMiscId == IMISC_SCROLLT )
   {
     strcpy(tempstr, "Right-click to read, then");
     AddPanelString(tempstr, 1);
     strcpy(tempstr, "left-click to target");
     AddPanelString(tempstr, 1);
   }
-  if ( x->_iMiscId >= 1 && x->_iMiscId <= 20 )
+  if ( x->_iMiscId >= (signed int)IMISC_USEFIRST && x->_iMiscId <= (signed int)IMISC_USELAST )
   {
     PrintItemOil(x->_iMiscId);
     strcpy(tempstr, "Right click to use");
     AddPanelString(tempstr, 1);
   }
-  if ( x->_iMiscId == 24 )
+  if ( x->_iMiscId == IMISC_BOOK )
   {
     strcpy(tempstr, "Right click to read");
     AddPanelString(tempstr, 1);
@@ -2949,7 +2949,7 @@ void __fastcall PrintItemDetails(ItemStruct *x)
     }
     AddPanelString(tempstr, 1);
   }
-  if ( x->_iMiscId == 23 && x->_iMaxCharges )
+  if ( x->_iMiscId == IMISC_STAFF && x->_iMaxCharges )
   {
     sprintf(tempstr, "dam: %i-%i  Dur: %i/%i", x->_iMinDam, x->_iMaxDam, x->_iDurability, x->_iMaxDur);
     sprintf(tempstr, "Charges: %i/%i", x->_iCharges, x->_iMaxCharges);
@@ -3029,7 +3029,7 @@ void __fastcall PrintItemDur(ItemStruct *x)
       AddPanelString(tempstr, 1);
     }
   }
-  if ( x->_itype == 12 || x->_itype == 13 )
+  if ( x->_itype == ITYPE_RING || x->_itype == ITYPE_AMULET )
     AddPanelString("Not Identified", 1);
   PrintItemMisc(x);
   if ( x->_iMinDex + (char)x->_iMinMag + x->_iMinStr )

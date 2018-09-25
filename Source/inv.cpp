@@ -1751,12 +1751,12 @@ int __fastcall SyncPutItem(int pnum, int x, int y, int idx, int icreateinfo, int
 char __cdecl CheckInvHLight()
 {
   int v1; // ST1C_4
-  char v2; // [esp+Ch] [ebp-10h]
+  char result; // [esp+Ch] [ebp-10h]
   signed int i; // [esp+10h] [ebp-Ch]
   int v4; // [esp+10h] [ebp-Ch]
   int v5; // [esp+10h] [ebp-Ch]
-  ItemStruct *x; // [esp+14h] [ebp-8h]
-  PlayerStruct *v7; // [esp+18h] [ebp-4h]
+  ItemStruct *item; // [esp+14h] [ebp-8h]
+  PlayerStruct *p; // [esp+18h] [ebp-4h]
 
   for ( i = 0;
         (unsigned int)i < 0x49
@@ -1767,26 +1767,26 @@ char __cdecl CheckInvHLight()
   }
   if ( (unsigned int)i >= 0x49 )
     return -1;
-  v2 = -1;
+  result = -1;
   infoclr = 0;
-  x = 0;
-  v7 = &plr[myplr];
+  item = 0;
+  p = &plr[myplr];
   ClearPanel();
   if ( i < 0 || i > 3 )
   {
     switch ( i )
     {
       case 4:
-        v2 = 1;
-        x = &v7->InvBody[1];
+        result = 1;
+        item = &p->InvBody[1];
         break;
       case 5:
-        v2 = 2;
-        x = &v7->InvBody[2];
+        result = 2;
+        item = &p->InvBody[2];
         break;
       case 6:
-        v2 = 3;
-        x = &v7->InvBody[3];
+        result = 3;
+        item = &p->InvBody[3];
         break;
       default:
         if ( i < 7 || i > 12 )
@@ -1800,85 +1800,85 @@ char __cdecl CheckInvHLight()
                 if ( i >= 65 )
                 {
                   v5 = i - 65;
-                  x = &v7->SpdList[v5];
-                  if ( v7->SpdList[v5]._itype == -1 )
+                  item = &p->SpdList[v5];
+                  if ( p->SpdList[v5]._itype == ITYPE_NONE )
                     return -1;
-                  v2 = v5 + 47;
+                  result = v5 + 47;
                   draw_btn = 1;
                 }
               }
               else
               {
-                v4 = abs(*((char *)&v7->InvList[39]._iVAdd2 + i + 3));
+                v4 = abs(*((char *)&p->InvList[39]._iVAdd2 + i + 3));// Should reference InvGrid
                 if ( !v4 )
                   return -1;
                 v1 = v4 - 1;
-                v2 = v1 + 7;
-                x = &v7->InvList[v1];
+                result = v1 + 7;
+                item = &p->InvList[v1];
               }
             }
             else
             {
-              v2 = 6;
-              x = &v7->InvBody[6];
+              result = 6;
+              item = &p->InvBody[6];
             }
           }
           else
           {
-            x = &v7->InvBody[4];
-            if ( v7->InvBody[4]._itype == -1 || v7->InvBody[4]._iLoc != 2 )
+            item = &p->InvBody[4];
+            if ( p->InvBody[4]._itype == ITYPE_NONE || p->InvBody[4]._iLoc != 2 )
             {
-              v2 = 5;
-              x = &v7->InvBody[5];
+              result = 5;
+              item = &p->InvBody[5];
             }
             else
             {
-              v2 = 4;
+              result = 4;
             }
           }
         }
         else
         {
-          v2 = 4;
-          x = &v7->InvBody[4];
+          result = 4;
+          item = &p->InvBody[4];
         }
         break;
     }
   }
   else
   {
-    v2 = 0;
-    x = v7->InvBody;
+    result = 0;
+    item = p->InvBody;
   }
-  assert(x, "inv.cpp", 1515);
-  if ( x->_itype == -1 )
+  assert(item, "inv.cpp", 1515);
+  if ( item->_itype == ITYPE_NONE )
     return -1;
-  if ( x->_itype == 11 )
+  if ( item->_itype == ITYPE_GOLD )
   {
-    sprintf(infostr, "%i Gold Pieces", x->_ivalue);
+    sprintf(infostr, "%i Gold Pieces", item->_ivalue);
   }
   else
   {
-    if ( x->_iMagical == 1 )
+    if ( item->_iMagical == 1 )
     {
       infoclr = 1;
     }
-    else if ( x->_iMagical == 2 )
+    else if ( item->_iMagical == 2 )
     {
       infoclr = 3;
     }
-    strcpy(infostr, x->_iName);
-    if ( x->_iIdentified )
+    strcpy(infostr, item->_iName);
+    if ( item->_iIdentified )
     {
-      strcpy(infostr, x->_iIName);
-      PrintItemDetails(x);
+      strcpy(infostr, item->_iIName);
+      PrintItemDetails(item);
     }
     else
     {
-      PrintItemDur(x);
+      PrintItemDur(item);
     }
   }
-  return v2;
+  return result;
 }
 
 //----- (00456814) --------------------------------------------------------
@@ -2038,7 +2038,7 @@ void __fastcall UseInvItem(int pnum, int ii)
         {
           if ( AllItemsList[plr[pnum].SpdList[ii - 47].IDidx].iUsable )
           {
-            if ( plr[pnum].SpdList[iva]._iMiscId || plr[pnum].SpdList[iva]._itype != 11 )
+            if ( plr[pnum].SpdList[iva]._iMiscId || plr[pnum].SpdList[iva]._itype != ITYPE_GOLD )
             {
               if ( (plr[pnum].SpdList[iva]._iMiscId != IMISC_SCROLL || currlevel)
                 && (plr[pnum].SpdList[iva]._iMiscId != IMISC_SCROLLT || currlevel) )
@@ -2073,7 +2073,7 @@ void __fastcall UseInvItem(int pnum, int ii)
       {
         if ( AllItemsList[plr[pnum].InvList[ii - 7].IDidx].iUsable )
         {
-          if ( plr[pnum].InvList[iv]._iMiscId || plr[pnum].InvList[iv]._itype != 11 )
+          if ( plr[pnum].InvList[iv]._iMiscId || plr[pnum].InvList[iv]._itype != ITYPE_GOLD )
           {
             if ( (plr[pnum].InvList[iv]._iMiscId != IMISC_SCROLL || currlevel)
               && (plr[pnum].InvList[iv]._iMiscId != IMISC_SCROLLT || currlevel) )

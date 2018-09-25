@@ -65,6 +65,8 @@ struct XHelpStruct;
 struct XHelpStruct2;
 enum cursor_id;
 enum item_misc_id;
+enum item_type;
+enum dungeon_type;
 // Types
 struct MonsterStruct
 {
@@ -1583,5 +1585,35 @@ enum item_misc_id
   IMISC_EAR = 0x2B,
   IMISC_SPECELIX = 0x2C,
   IMISC_INVALID = 0xFFFFFFFF,
+};
+
+enum item_type
+{
+  ITYPE_MISC = 0x0,
+  ITYPE_SWORD = 0x1,
+  ITYPE_AXE = 0x2,
+  ITYPE_BOW = 0x3,
+  ITYPE_MACE = 0x4,
+  ITYPE_SHIELD = 0x5,
+  ITYPE_LARMOR = 0x6,
+  ITYPE_HELM = 0x7,
+  ITYPE_MARMOR = 0x8,
+  ITYPE_HARMOR = 0x9,
+  ITYPE_STAFF = 0xA,
+  ITYPE_GOLD = 0xB,
+  ITYPE_RING = 0xC,
+  ITYPE_AMULET = 0xD,
+  ITYPE_0E = 0xE,
+  ITYPE_NONE = 0xFFFFFFFF,
+};
+
+enum dungeon_type
+{
+  DTYPE_TOWN = 0x0,
+  DTYPE_CATHEDRAL = 0x1,
+  DTYPE_CATACOMBS = 0x2,
+  DTYPE_CAVES = 0x3,
+  DTYPE_HELL = 0x4,
+  DTYPE_NONE = 0xFF,
 };
 

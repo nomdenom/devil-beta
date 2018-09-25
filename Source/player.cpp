@@ -2293,21 +2293,21 @@ void __fastcall ShieldDur(int pnum)
 {
   if ( pnum == myplr )
   {
-    if ( plr[pnum].InvBody[4]._itype == 5 )
+    if ( plr[pnum].InvBody[4]._itype == ITYPE_SHIELD )
     {
       if ( plr[pnum].InvBody[4]._iDurability == 1000 )
         return;
       if ( !--plr[pnum].InvBody[4]._iDurability )
       {
-        plr[pnum].InvBody[4]._itype = -1;
+        plr[pnum].InvBody[4]._itype = ITYPE_NONE;
         CalcPlrInv(pnum, 1);
       }
     }
-    if ( plr[pnum].InvBody[5]._itype == 5
+    if ( plr[pnum].InvBody[5]._itype == ITYPE_SHIELD
       && plr[pnum].InvBody[5]._iDurability != 1000
       && !--plr[pnum].InvBody[5]._iDurability )
     {
-      plr[pnum].InvBody[5]._itype = -1;
+      plr[pnum].InvBody[5]._itype = ITYPE_NONE;
       CalcPlrInv(pnum, 1);
     }
   }
